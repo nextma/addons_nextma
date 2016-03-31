@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="product_normal_form_view2">
+			<field name="name">product.normal.form.inherit</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_normal_form_view"/>
+			<field name="arch" type="xml">
+				<field name="categ_id" position="after" >
+					<div name="tms_options" groups="">
+					<field name="trajet_ok" on_change="onchange_trajet_ok(trajet_ok)" groups="" />
+                                	<label for="trajet_ok"/>
+					<field name="gasoil_ok" on_change="onchange_gasoil_ok(gasoil_ok)" groups="" />
+                                	<label for="gasoil_ok"/>
+					<field name="picking_product_ok" on_change="onchange_picking_product_ok(picking_product_ok)" groups="" />
+                                	<label for="picking_product_ok"/>
+					</div>
+				</field>
+				<field  name="lst_price" position="after">
+				    <field name="cout" />
+				</field>
+ 			</field>
+		</record>
+<!--		
+		<record model="ir.ui.view" id="product_normal_form_view_type">
+			<field name="name">product.normal.form.inherit_type</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_normal_form_view"/>
+			<field name="arch" type="xml">
+				<field name="type" position="attributes" >
+					<attribute name="attrs">{'readonly':['|',('trajet_ok','=',True),('gasoil_ok','=',True)]}</attribute>
+				</field>
+			</field>
+		</record>
+-->
+		<record model="ir.ui.view" id="product_search_form_view_inherit">
+			<field name="name">product.search.form.view.inherit</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_search_form_view"/>
+			<field name="arch" type="xml">
+				<filter name="filter_to_sell" position="after" >
+					<filter name="filter_to_traject" string="Trajet" icon="terp-accessories-archiver+" domain="[('trajet_ok', '=', True)]" />
+					<filter name="filter_to_gasoil" string="carburant" icon="terp-accessories-archiver+" domain="[('gasoil_ok', '=', True)]" />
+				</filter>
+			</field>
+		</record>
+		
+		<record id="product_search_form_tms_view" model="ir.ui.view">
+            <field name="name">product.search.tms.form</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <search string="Recherche Trajet">
+                   <field name="name"
+                        filter_domain="['|', ('name','ilike',self),('default_code','ilike',self)]"/>
+                   <field name="categ_id" widget="selection" operator="child_of" groups="base.group_extended"/>
+                   <newline/>
+                   <group expand="0" string="Context..." groups="base.group_extended">
+                       <field name="pricelist_id" widget="selection" context="{'pricelist': self}" />
+                       <separator orientation="vertical" groups="base.group_multi_company" />
+                       <field name="company_id" widget="selection" groups="base.group_multi_company" />
+                   </group>
+                   <newline/>
+                   <group  expand='0' string='Group by...' groups="base.group_extended">
+                       <filter string='Catégorie' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'categ_id'}" groups="base.group_extended"/>
+                       <separator orientation="vertical"/>
+                       <filter string='UdM par défaut' icon="terp-mrp" domain="[]" context="{'group_by' : 'uom_id'}" />
+                       <separator orientation="vertical"/>
+                       <filter string='Type' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'type'}" />
+                       <separator orientation="vertical" groups="base.group_multi_company"/>
+                       <filter string='Compagnie' icon="terp-go-home" domain="[]" context="{'group_by' : 'company_id'}" groups="base.group_multi_company" />
+                   </group>
+                </search>
+            </field>
+        </record>
+
+		<record model="ir.ui.view" id="product_normal_form_view3">
+			<field name="name">product.normal.form.inherit2</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_normal_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/notebook" position="inside">
+					<page string="Informations trajet" attrs="{'invisible':[('trajet_ok','=',False)]}" >
+						<group colspan="4" >
+							<field name="km_estimated"/>
+							<field name="freeway_estimated"/>
+							<field name="gasoil_estimated"/>
+							<label string="" />
+							<separator string="Conducteur" colspan="4"/>
+							<field name="driver_travel_costs" />
+							<field name="percent_commission_ok" on_change="onchange_percent_commission_ok(percent_commission_ok)" />
+							<field name="fixed_commission_ok" on_change="onchange_fixed_commission_ok(fixed_commission_ok)" />
+							<newline />
+							<group colspan="4">
+								<group attrs="{'invisible':[('percent_commission_ok','=',False)]}" >
+									<field name="percent_rate_commission"  on_change="onchange_percent_rate_commission(percent_rate_commission)"  />
+								</group>
+								<group attrs="{'invisible':[('fixed_commission_ok','=',False)]}" >
+									<field name="rate_commission"  />
+		 						</group>
+	 						</group>
+ 						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+		
+		<record id="product_product_tree_tms_view" model="ir.ui.view">
+            <field name="name">product.product.tms.tree</field>
+            <field name="model">product.product</field>
+            <field eval="7" name="priority"/>
+            <field name="arch" type="xml">
+                <tree  string="Products">
+                    <field name="default_code"/>
+                    <field name="name"/>
+                    <field name="categ_id" invisible="1"/>
+                   <!--  <field name="variants" groups="product.group_product_variant"/> -->
+                    <field name="uom_id" string="UdM"/>
+                    <field name="type" invisible="True" />
+                    <field name="km_estimated"/>
+                    <field name="freeway_estimated"/>
+                    <field name="list_price"/>
+                    <field name="price" invisible="not context.get('pricelist', False)"/>
+                    <field name="standard_price" groups="base.group_extended"/>
+                    <field name="driver_travel_costs" />
+                    <field name="state" groups="base.group_extended"/>
+                    <field name="company_id" groups="base.group_multi_company" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+		
+		<record id="action_tms_traject" model="ir.actions.act_window">
+            <field name="name">Trajets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="product_search_form_tms_view"/>
+            <field name="context">{'default_trajet_ok': True, 'default_type': 'service'}</field>
+            <field name="domain">[('trajet_ok','=',True)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+Les trajets sont des données représentant le parcours effectué lors d'un voyage de camion. Ils peuvent être vus comme des produits (services) et influencent donc la décision de facturation. Vous pouvez définir des trajets (i.e: Casablanca-Mohammedia ) avec un prix fixe et les informations propres au trajet comme la commission et le kilométrage estimé. Veillez à cocher la case trajet dans le formulaire lors de la création d'un trajet.
+		</p>
+	    </field>
+        </record>
+        
+        <record id="act_tms_traject_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="product_product_tree_tms_view"/>
+            <field name="act_window_id" ref="action_tms_traject"/>
+        </record>
+        
+        <record id="act_tms_traject_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="product.product_normal_form_view"/>
+            <field name="act_window_id" ref="action_tms_traject"/>
+        </record>
+        
+        <!-- ============================carburant=============================================================== -->
+        
+        <record id="product_search_form_tms_gasoil_view" model="ir.ui.view">
+            <field name="name">product.search.tms.gasoil.form</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <search string="Recherche Carburant">
+                   <field name="name"
+                        filter_domain="['|', ('name','ilike',self),('default_code','ilike',self)]"/>
+                   <field name="categ_id" widget="selection" operator="child_of" groups="base.group_extended"/>
+                   <newline/>
+                   <group expand="0" string="Context..." groups="base.group_extended">
+                       <field name="pricelist_id" widget="selection" context="{'pricelist': self}" />
+                       <separator orientation="vertical" groups="base.group_multi_company" />
+                       <field name="company_id" widget="selection" groups="base.group_multi_company" />
+                   </group>
+                   <newline/>
+                   <group  expand='0' string='Group by...' groups="base.group_extended">
+                       <filter string='Category' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'categ_id'}" groups="base.group_extended"/>
+                       <separator orientation="vertical"/>
+                       <filter string='Default UOM' icon="terp-mrp" domain="[]" context="{'group_by' : 'uom_id'}" />
+                       <separator orientation="vertical"/>
+                       <filter string='Type' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'type'}" />
+                       <separator orientation="vertical" groups="base.group_multi_company"/>
+                       <filter string='Company' icon="terp-go-home" domain="[]" context="{'group_by' : 'company_id'}" groups="base.group_multi_company" />
+                   </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="product_normal_action_gasoil" model="ir.actions.act_window">
+            <field name="name">Carburant</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="product.product_product_tree_view"/>
+            <field name="search_view_id" ref="product_search_form_tms_gasoil_view"/>
+            <field name="context">{'default_gasoil_ok':True}</field>
+            <field name="domain">[('gasoil_ok','=',True)]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+Les carburants représentent les types de ressources carburant existantes comme produit au sein de l'entreprise. Veuillez à cocher la case gasoil dans le forumlaire lors de la création d'un carburant
+	        </p>
+	    </field>
+        </record>
+        
+        <!-- product.uom -->
+        
+        <record id="tms_product_uom_tree_view_inherit" model="ir.ui.view">
+            <field name="name">tms.product.uom.tree.inherit</field>
+            <field name="model">product.uom</field>
+            <field name="inherit_id" ref="product.product_uom_tree_view"/>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <field name="category_id" position="after" >
+                    <field name="travel_ok"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tms_product_uom_form_view_inherit" model="ir.ui.view">
+            <field name="name">tms.product.uom.form.inherit</field>
+            <field name="model">product.uom</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_uom_form_view"/>
+            <field name="arch" type="xml">
+                <field name="factor" position="after">
+                    <field name="travel_ok" />
+                </field>
+            </field>
+        </record>
+		
+	</data>
+</openerp>

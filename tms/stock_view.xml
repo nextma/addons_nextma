@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+        <!-- ============================= stock_location ================================ -->
+        
+        	<record model="ir.ui.view" id="view_stock_location_search_inherit_tms">
+			<field name="name">tms.stock.location.search.inherit.tms</field>
+			<field name="model">stock.location</field>
+			<field name="inherit_id" ref="stock.view_location_search"/>
+			<field name="arch" type="xml">
+				<filter name="supplier" position="after" >
+					<filter name="filter_cistern" string="Citernes" icon="terp-accessories-archiver+" domain="[('cistern_ok', '=', 1)]" />
+				</filter>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="view_stock_location_form_inherit_tms">
+			<field name="name">view.stock.location.form.inherit.tms</field>
+			<field name="model">stock.location</field>
+			<field name="inherit_id" ref="stock.view_location_form"/>
+			<field name="arch" type="xml">
+				<field name="active" position="after">
+					<field name="cistern_ok"/>
+				</field>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="view_stock_location_tree_inherit_tms">
+			<field name="name">view.stock.location.tree.inherit.tms</field>
+			<field name="model">stock.location</field>
+			<field name="inherit_id" ref="stock.view_location_tree2"/>
+			<field name="arch" type="xml">
+<!-- 		  <field name="stock_virtual" position="after">
+					<field name="cistern_ok" invisible="True" />
+				</field> -->
+				<field name="usage" position="after">
+					<field name="cistern_ok" invisible="True" />
+				</field>
+			</field>
+		</record>
+		
+	<record id="action_tms_stock_location" model="ir.actions.act_window">
+            <field name="name">Citernes</field>
+            <field name="res_model">stock.location</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="stock.view_location_tree2"/>
+            <field name="search_view_id" ref="stock.view_location_search"/>
+            <field name="domain">[('cistern_ok','=',True)]</field>
+            <field name="context">{'search_default_in_location': 1, 'default_cistern_ok': True, 'default_usage': 'internal', 'default_chained_location_type': 'none'}</field>
+            <field name="help" type="html">
+		<p class="oe_view_nocontent_create">
+Les citernes ou cuves sont des emplacements ou sont stockés votre réserve interne de carburant. Pour créer une cuve, veillez à cocher l'option citerne.
+		</p>
+	    </field>
+        </record>
+ 											
+	</data>
+</openerp>

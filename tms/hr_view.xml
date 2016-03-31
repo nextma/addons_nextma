@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+        <record id="open_view_licence_categ_act" model="ir.actions.act_window">
+            <field name="name">Catégorie de permis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee.licence_category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="open_view_licence_categ_act" id="menu_view_employee_licence_category_form"
+            parent="hr.menu_hr_configuration" />
+		<record model="ir.ui.view" id="hr_driver_employee_licence_category_tree">
+			<field name="name">hr.employee.licence_category.tree</field>
+			<field name="model">hr.employee.licence_category</field>
+			<field name="arch" type="xml">
+			   <tree>
+			       <field name="name" />
+			   </tree>
+			</field>
+		</record>
+		<!--Modified HR Tree/Form view  -->
+		<record model="ir.ui.view" id="hr_driver_employee_form">
+			<field name="name">hr.employee.form.tms</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_form" />
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/notebook" position="inside">
+					<page string="Informations Chauffeur" attrs="{'invisible': [('driver_ok','=',False)]}" >
+					<group col="4" colspan="4">
+					 	<separator colspan="4" string="Informations Chauffeur"/>
+						<field name="point_driving"  colspan="2" />
+						<field name="accident_qty" colspan="2" />
+<!--
+						<field name="travels_qty" colspan="2" /> 
+-->
+						<field name="date_hiring"  colspan="2" />
+						<field name="date_of_expiry"  colspan="2" />
+					 </group>
+					<group col="4" colspan="4">
+					    <separator colspan="4" string="Informations sur le permis"/>
+					    <field name="license_no" colspan="2" />
+					    <field name="car_licence_category" colspan="2" widget='many2many_tags'/>
+					    <field name="date_delivery_car_licence" colspan="2" /> 
+        			 </group>
+					</page>
+<!--
+					<page string="Voyages effectués" colspan="6" attrs="{'invisible':[('driver_ok','!=',1)]}" groups="tms.group_tms_travel_user"  >
+        			 	<field name="effective_travels" widget="one2many_list" nolabel="1" mode="tree,graph" >
+        			 	<tree string="planing"  colors="green:state == 'free';blue:state == 'assigned';grey:state == 'cancel';" >
+								    <field name="name"/>
+								    <field name="gasoil_order"/>
+								    <field name="trailer"/>
+								    <field name="commission_driver" groups="tms.group_tms_travel_picking_manager,analytic.group_analytic_accounting" />
+								    <field name="km_total"/>
+								    <field name="freeway_total"/>
+								    <field name="travel_return"/>
+								    <field name="date"/>
+								    <field name="state"/>
+							</tree>
+							<graph  string="voyages et commissions" type="bar" >
+					        	<field name="month"/>
+					           	<field name="commission_driver" operator="+" groups="tms.group_tms_travel_picking_manager,analytic.group_analytic_accounting" />
+					       </graph>
+						</field>
+						</page>
+-->
+				</xpath>
+			</field>
+		</record>
+<!--
+		<record model="ir.ui.view" id="hr_employee_form_tms_2">
+			<field name="name">hr.employee.form.tms2</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_form" />
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<field name="company_id" position="after">
+					<field name="post" />
+                    <field name="contract"/>
+				</field>
+			</field>
+		</record>
+-->
+        <record model="ir.ui.view" id="hr_employee_form_tms_3">
+			<field name="name">hr.employee.form.tms3</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_form" />
+			<field name="arch" type="xml">
+				<field name="category_ids" position="after">
+					<div name="business_options" groups="">
+						<field name="driver_ok" />
+                                		<label for="driver_ok"/>
+						<field name="attendant_ok"/>
+                                		<label for="attendant_ok"/>
+					</div>
+				</field>
+			</field>
+		</record>
+<!--
+		<record model="ir.ui.view" id="hr_driver_employee_calendar">
+			<field name="name">hr.employee.calendar</field>
+			<field name="model">hr.employee</field>
+			<field name="type">calendar</field>
+			<field name="arch" type="xml">
+				<calendar string="Expiration du permis" date_start="date_of_expiry" color="name">
+					<field name="name" />
+				</calendar>
+			</field>
+		</record>
+-->
+		<record model="ir.ui.view" id="hr_driver_tree">
+			<field name="name">hr.employee.license.tree</field>
+			<field name="model">hr.employee</field>
+			<field name="arch" type="xml">
+				<tree string="Gestion des chauffeurs">
+					<field name="name" string="Chauffeur" select="1"/>
+					<field name="license_no"  select="1"/>
+                   <field name="car_licence_category" colspan="2"  select="1"/>
+                    <field name="work_phone"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+<!--
+                   <field name="travels_qty" select="1"/>
+-->
+                   <field name="date_hiring" select="2" colspan="2" />
+					<field name="date_of_expiry" select="2"/>
+					<field name="disponibility" />
+					<field name="current_travel" />
+					<field name="department_id" invisible="1" />
+                    <field name="job_id" invisible="1" />
+                    <field name="parent_id" invisible="1" />
+                    <field name="coach_id" invisible="1" />
+				</tree>
+			</field>
+		</record>
+		
+	<record id="hr_driver_employee_search" model="ir.ui.view">
+            <field name="name">hr.driver.employee.search</field>
+            <field name="model">hr.employee</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Recherche chauffeurs">
+                    <filter icon="terp-personal+" domain="[('active','=',True)]" name="active" string="Actif" />
+                    <separator orientation="vertical" />
+                    <field name="name" string="Chauffeur" />
+                    <field name="parent_id"/>
+                    <field name="license_no" string="Numéro permis"/>
+                    <newline />
+                    <group expand="0" string="Group By...">
+                    <filter string="Manager" icon="terp-personal" domain="[]" context="{'group_by':'parent_id'}"/>
+                    <filter string="Coach" icon="terp-personal" domain="[]" context="{'group_by':'coach_id'}" />
+                    <separator orientation="vertical" />
+                    <filter string="Départment" icon="terp-personal+" domain="[]" context="{'group_by':'department_id'}"/>
+                    <filter string="Job" icon="terp-gtk-select-all" domain="[]" context="{'group_by':'job_id'}"/>
+                    <filter string="Compagnie" icon="terp-go-home" domain="[]" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+        
+        <record id="hr_attendant_employee_search" model="ir.ui.view">
+            <field name="name">hr.driver.employee.search</field>
+            <field name="model">hr.employee</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Recherche pompiste">
+                    <filter icon="terp-personal+" domain="[('active','=',True)]" name="active" string="Actif" />
+                    <separator orientation="vertical" />
+                    <field name="name" string="pompiste" />
+                    <field name="parent_id"/>
+                    <newline />
+                    <group expand="0" string="Group By...">
+                    <filter string="Manager" icon="terp-personal" domain="[]" context="{'group_by':'parent_id'}"/>
+                    <filter string="Coach" icon="terp-personal" domain="[]" context="{'group_by':'coach_id'}" />
+                    <separator orientation="vertical" />
+                    <filter string="Départment" icon="terp-personal+" domain="[]" context="{'group_by':'department_id'}"/>
+                    <filter string="Job" icon="terp-gtk-select-all" domain="[]" context="{'group_by':'job_id'}"/>
+                    <filter string="Compagnie" icon="terp-go-home" domain="[]" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+		
+			<!-- ============ action driver ========================== -->
+		
+		<record id="action_driver_employee" model="ir.actions.act_window">
+			<field name="name">Chauffeurs</field>
+			<field name="res_model">hr.employee</field>
+			<!-- <field name="src_model">tms.truck.vehicle</field> -->
+			<field name="type">ir.actions.act_window</field>        
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="context">{'default_driver_ok': True, "search_default_active": 1}</field>
+			<field name="domain">[('driver_ok','=',True)]</field>
+			<field name="search_view_id" ref="hr_driver_employee_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer un nouveau chauffeur. 
+              </p><p>
+Les chauffeurs sont des employés avec le statut de conducteur. Pour créer un chauffeur, veillez à cocher la case chauffeur, pour qu'il soit considéré comme tel et donc être affecté à un véhicule donné.
+		</p>
+		</field>
+		</record>
+		
+		<record id="action_attendant_employee" model="ir.actions.act_window">
+			<field name="name">Pompistes</field>
+			<field name="res_model">hr.employee</field>
+			<!-- <field name="src_model">tms.truck.vehicle</field> -->
+			<field name="type">ir.actions.act_window</field>        
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="context">{'default_attendant_ok':True, "search_default_active": 1}</field>
+			<field name="domain">[('attendant_ok','=',True)]</field>
+			<field name="search_view_id" ref="hr_attendant_employee_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer un nouveau pompiste. 
+              </p><p>
+Les pompistes sont des employés qui ont pour rôle d'effectuer l'approvisionnement des véhicules en carburant. Pour créer un pompiste, veillez à cocher la case pompiste, pour qu'il soit considéré comme tel.
+		</p>
+		</field>
+		</record>
+
+        <record id="act_hr_driver_employee_tree" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="hr_driver_tree"/>
+            <field name="act_window_id" ref="action_driver_employee"/>
+        </record>
+        
+        <record id="act_hr_driver_employee_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="hr_driver_employee_form"/>
+            <field name="act_window_id" ref="action_driver_employee"/>
+        </record>
+<!--
+        <record id="act_hr_driver_employee_calendar" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">calendar</field>
+            <field name="view_id" ref="hr_driver_employee_calendar"/>
+            <field name="act_window_id" ref="act_driver_employee"/>
+        </record>
+-->
+        <record id="act_hr_driver_employee_kaban" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="hr.hr_kanban_view_employees"/>
+            <field name="act_window_id" ref="action_driver_employee"/>
+        </record>
+        
+        <record id="act_hr_attendant_employee_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="hr_driver_employee_form"/>
+            <field name="act_window_id" ref="action_attendant_employee"/>
+        </record>
+        
+        <record id="act_hr_attendant_employee_kaban" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="hr.hr_kanban_view_employees"/>
+            <field name="act_window_id" ref="action_attendant_employee"/>
+        </record>
+		
+	</data>
+</openerp>

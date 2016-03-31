@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!-- QWeb Reports -->
+
+        <report 
+            id="account.account_invoices"
+            model="account.invoice"
+            string="Invoices"
+            report_type="qweb-pdf"
+            name="tms.report_invoice"
+            file="tms.report_invoice"
+            attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        />
+
+        <report 
+            id="picking_report"
+            model="tms.picking"
+            string="Bon de livraison"
+            report_type="qweb-pdf"
+            name="tms.report_tms_picking_document"
+            file="tms.report_tms_picking_document"
+        />
+        <report 
+            id="picking_report22"
+            model="tms.picking.report2"
+            string="Rapport Journalier"
+            report_type="qweb-pdf"
+            name="tms.picking_report2"
+            file="tms.picking_report2"
+        />
+
+        <report 
+            id="picking_report24"
+            model="tms.picking.report.driver"
+            string="Rapport déplacement"
+            report_type="qweb-pdf"
+            name="tms.picking_report_driver"
+            file="tms.picking_report_driver"
+        />
+    </data>
+</openerp>
