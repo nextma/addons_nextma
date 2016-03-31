@@ -29,3 +29,5 @@ compte par défault changer 514001 par 516110
 12/ Dans catégories mettre compte de dépense 611100 au lieu de fournisseurs d'immobilisation
 
 13/ journal d'ouverture débit et crédit compte :8600 Résultat avant impôt 
+14/ grisé le compte client quand on crée un fournisseur et vice-versa 
+pour d'autres suggestions de modifications info@nextma.com
