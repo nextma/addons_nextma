@@ -1,0 +1,1574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+<!-- graph -->
+        <record model="ir.ui.view" id="view_fleet_vehicle_graph11">
+            <field name="name">fleet.vehicle.graph</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="arch" type="xml">
+                <graph string="FLEET VEHICLE" type="pivot" stacked="True">
+                    <field name="license_plate" type="col"/>
+                    <field name="partner_id" type="mesure"/>
+                    <field name="product_id" type="mesure"/>
+                    <field name="date" type="row" />
+                </graph>
+            </field>
+        </record>
+
+        <record model='ir.actions.act_window' id='fleet.fleet_vehicle_act'>
+            <field name="name">Vehicles</field>
+            <field name="res_model">fleet.vehicle</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,graph</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new vehicle.
+              </p><p>
+                You will be able to manage your fleet by keeping track of the
+                contracts, services, fixed and recurring costs, odometers and
+                fuel logs associated to each vehicle.
+            </p><p>
+                Odoo will warn you when services or contract have to be
+                renewed.
+              </p>
+            </field>
+        </record>
+
+  	<!-- ========================== fleet_park =============================== -->
+  	
+  	<record model="ir.ui.view" id="fleet_park_form">
+  		<field name="name">fleet.park.form</field>
+		<field name="model">fleet.park</field>
+		<field name="arch" type="xml">
+		     <form string="Parc">
+			<group colspan="4">
+                	     <group  col="2"> 
+				<field name="name"  string="Nom du parc" />	
+                       	     </group>
+                       	     <group  col="2"> 
+				<field name="note"  string="Description" />	
+                       	     </group>
+                   	</group>
+                       	     <group  col="6" colspan="4"> 
+				<field name="all_vehicle_ok" />	
+				<field name="all_traject_ok" />	
+				<field name="all_partner_ok" />	
+                       	     </group>
+                   	<newline/>
+                  	<group attrs="{'invisible' : [('all_partner_ok','=',True),('all_traject_ok','=',True),('all_vehicle_ok','=',True)]}" colspan="5">
+                  	<notebook colspan="5" >
+                  	     <page string="Véhicules" attrs="{'invisible' : [('all_vehicle_ok','=',True)]}" >
+                  		<field name="vehicle_ids" nolabel="1" widget="one2many_list">
+                  			<tree>
+                  				<field name="name"/>
+                  				<field name="default_code"/>
+                  				<field name="hr_driver_id"/>
+                  				<field name="trailer_id"/>
+                  				<field name="category_id"/>
+                  				<field name="brand_id"/>
+                  				<field name="model_id"/>
+                  				<field name="merchandise_id"/>
+                  			</tree>
+                  		</field>
+                  	     </page>
+                  	     <page string="Trajets" attrs="{'invisible' : [('all_traject_ok','=',True)]}"> 
+                  		<field name="traject_ids" nolabel="1" >
+                  			<tree>
+                  				<field name="name"/>
+                  				<field name="default_code"/>
+                  				<field name="freeway_estimated"/>
+                  			</tree>
+                  		</field>
+                  	     </page>
+                  	     <page string="Clients" attrs="{'invisible' : [('all_partner_ok','=',True)]}" >
+                  		<field name="partner_ids" nolabel="1"/>
+                  	     </page>
+                  	     <page string="Utilisateurs" groups="" > 
+                  		<field name="user_ids" nolabel="1" >
+                  			<tree>
+                  				<field name="name"/>
+                  			</tree>
+                  		</field>
+                  	     </page>
+                  	</notebook>
+                  	</group>
+		     </form>
+ 		</field>
+  	</record>
+  		
+  	<record model="ir.ui.view" id="fleet_park_tree">
+  		<field name="name">fleet.park.tree</field>
+		<field name="model">fleet.park</field>
+		<field name="arch" type="xml">
+			<tree string="Parc">
+			     <field name="name"  string="Nom du parc" />	
+              		     <field name="note"  string="Description" />	
+         		</tree>
+ 		</field>
+  	</record>
+  		
+  	<record id="fleet_park_search" model="ir.ui.view">
+            <field name="name">fleet.park.search</field>
+            <field name="model">fleet.park</field>
+            <field name="arch" type="xml">
+                <search string="Recherche Parc">
+			<field name="name" string="Parc"/>
+               </search>
+            </field>
+    </record>
+  		
+  	<record id="action_fleet_park" model="ir.actions.act_window">
+		<field name="name">Parcs</field>
+		<field name="res_model">fleet.park</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<!-- <field name="view_id" ref="tms_truck_trailer_tree" /> -->
+		<field name="search_view_id" ref="fleet_park_search"/>
+		<field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+Un parc est un regroupement de ressources concernant le voyage, à savoir les véhicules, les clients et le trajet. Chaque utilisateur a un parc par défaut qui lui permet d'encoder des bons de livraison voyage, des bons carburants externes et autres, tout en ayant une visibilité que sur les véhicules, les clients et les trajets définis dans son parc. Ainsi l'encodage des bons de livraison voyage s'avère rapide et aisé.
+		</p>
+		</field>
+	</record>
+	
+  	<!-- ========================== fleet_vehicle =============================== -->
+
+        <record model='ir.ui.view' id='tms_fleet_vehicle_form_inherit'>
+            <field name="name">tms.fleet.vehicle.form.inherit</field>
+            <field name="model">fleet.vehicle</field>
+	    <field name='inherit_id' ref="fleet.fleet_vehicle_form"/>
+            <field name="arch" type="xml">
+		<field name="model_id" position="before">
+		    <field name="vehicle_ok"/>
+		    <field name="trailer_ok"/>
+		</field>
+		<field name="color" position="after">
+		  		<field name="partner_id"/>
+		  		<field name="product_id" />
+		       <field name="bl_ids" invisible="1" />
+		  
+		</field>
+<!--
+		<field name="model_id" position="replace">
+		    <field name="model_id" class="oe_inline" on_change="on_change_model(model_id)" />
+		</field>
+-->
+
+		<field name="driver_id" position="replace">
+		    <field name="driver_id" invisible="1" />
+		    <field name="hr_driver_id" class="oe_inline"/>
+		    <field name="imprimer_rapport" />
+		</field>
+
+	    </field>
+	</record>
+
+  	<!-- ========================== TMS Vehicle =============================== -->
+
+	<!-- views -->
+
+	<record model="ir.ui.view" id="tms_fleet_vehicle_form">
+	    <field name="name">tms.fleet.vehicle.form</field>
+	    <field name="model">fleet.vehicle</field>
+	    <field name="priority" eval="1"/>
+	    <field name="arch" type="xml">
+		<form string="Véhicule">
+                    <header>
+                        <field name="state_id"  widget="statusbar" clickable="True" />
+                    </header>
+                    <sheet> 
+                    	<field name="vehicle_in_park" />
+                        <field name="image_medium" widget='image' class="oe_left oe_avatar"/> 
+                        <div class="oe_title">
+                            <label for="license_plate" class="oe_edit_only"/>
+                            <h2>
+                                <field name="license_plate" class="oe_inline"/>
+                            </h2>
+                            <label for="tag_ids" class="oe_edit_only"/>
+                            <field name="tag_ids" widget="many2many_tags" />
+                        </div>
+                        <div class="oe_right oe_button_box">
+                            <button name="return_action_to_open" type="object" context="{'xml_id':'fleet_vehicle_log_contract_act'}" string="Contracts" help="show the contract for this vehicle" />
+                            <button name="act_show_log_cost" type="object" string="Costs" help="show all the costs for this vehicle" groups="fleet.group_fleet_manager"/>
+                            <button name="return_action_to_open" type="object" context="{'xml_id':'fleet_vehicle_log_services_act'}" string="Services" help="show the services logs for this vehicle" />
+                            <button name="return_action_to_open" type="object" context="{'xml_id':'action_fleet_vehicle_log_fuel_tms','tms':True}" string="Bons de carburant" help="show the fuel logs for this vehicle" />
+                        </div>
+			<group colspan="4" col="6">
+			    <group col="2">
+                            <!-- <field name="company_id" colspan="1" string="Entreprise" /> -->
+				<field name="name" invisible="1"/>
+                            	<field name="default_code" string="Référence" />
+                            	<field name="odometer" readonly="1" string="Compteur voyage" colspan="1"  />
+                            	<field name="fuel_odometer" readonly="1" colspan="1"  />
+		    		<field name="vehicle_ok" on_change="onchange_vehicle_ok(vehicle_ok)" invisible="1"/>
+		    		<field name="trailer_ok" invisible="1"/>
+                     	    </group>
+                       	    <group colspan="1" col="2">
+                       		<field name="hr_driver_id" colspan="1" context="{'default_driver_ok': True}" domain="[('driver_ok','=',True)]" />
+                       		    <field name="imprimer_rapport" />
+                       	    	<field name="location_id" colspan="1" readonly="True" />
+                       	    	<field name="account_id" colspan="1" readonly="True" />
+<!--
+                            <field name="current_travel" colspan="1"  />
+-->
+			    </group>                  
+                    	</group>
+			<group colspan="4">
+			    <notebook colspan="4">
+				<page string="Informations Générales">
+				    <group colspan="4" col="4">
+					<group colspan="2" col="2">
+					    <field name="brand_id" domain="[('vehicle_ok','=',True)]" colspan="1" />
+					    <field name="model_id"  colspan="1" domain="[('brand_id','=',brand_id)]" context="{'default_brand_id': brand_id}" />
+					    <field name="category_id" colspan="1" on_change="onchange_vehicle_category_id(category_id)" context="{'default_hook_ok' : True}" domain="[('vehicle_ok','=',True)]"/>
+                       	    		    <field name="merchandise_id" colspan="1" string="Type de transport" />
+					    <field name="required_vin" invisible="1"/>
+					    <field name="vin_sn"  colspan="1" attrs="{'required':[('required_vin','=',True)]}"/>
+					    <field name="car_value"  colspan="1" groups="" />
+					</group>
+					<group colspan="2" col="2">
+					    <field name="owner" colspan="1"/>
+					    <field name="manager" colspan="1"/>
+	                            	    <field name="acquisition_date" colspan="1" />
+					    <field name="date_start_circulation" colspan="1" />
+<!--
+	                            	    <field name="driver_id" string="Partenaire" colspan="1" />
+-->
+<!--
+	                            	    <field name="partner_id" colspan="1" />
+-->
+				    	    <field name="counter_basic" colspan="1"/>
+					</group>
+				    </group>
+				</page>
+				<page string="Spécification physique">
+				    <group colspan="6" col="6">						     
+					<field name="volume" colspan="1"/>
+					<field name="gross_weight" colspan="1"/>
+					<field name="length" colspan="1"/>
+	 				<field name="width" colspan="1"/>
+					<field name="height" colspan="1"/> 
+					<field name="consumption_gasoil" colspan="1"/> 
+					<field name="total_axle" colspan="1"/>
+					<field name="hook_ok" invisible="1"/>
+		                       	<field name="capacity" colspan="1" attrs="{'invisible': [('hook_ok','=',False)]}"/>   
+				    </group>
+	                            <group colspan="4" col="4" attrs="{'invisible': [('hook_ok','=',False)]}">
+					<separator string="Semi-remorque accrochée" colspan="4"/>
+		                        <field  name="trailer_id" string="Matricule Semi-remorque" readonly="1" />
+					<field  name="pv_trailer" colspan="1" readonly="1"/>
+		                        <field name="capacity_global" colspan="1"/>
+					<field  name="ptc_trailer" colspan="1" readonly="1" invisible="1"/>
+	                            </group> 
+				</page>
+				<page string="Parcs" groups="" >
+				    <field colspan="4" name="park_ids" nolabel="1" widget="many2many"/>
+				</page>
+				<page string="Historique remorques" groups="">
+				    <field colspan="4" name="vehicle_modification_ids" nolabel="1" widget="one2many_list" readonly="True" >
+					<tree colors="green:state == 'unhooked'; blue:state == 'hooked';">
+					    <field name="name"/>
+					    <field name="date_hook"/>
+					    <field name="date_unhook"/>
+					    <field name="trailer_id"/>
+					    <field name="state"/>
+					</tree>
+				    </field>
+				</page>
+<!--
+							<page  string="Historique voyages" groups="tms.group_tms_travel_user" >
+							    <field colspan="4" name="travel_ids" nolabel="1" widget="one2many_list" view_mode="tree,graph,form" mode="tree,graph" >
+									<tree string="voyages"  colors="green:state == 'free';blue:state == 'assigned';grey:state == 'cancel';" >
+									    <field name="name"/>
+									    <field name="gasoil_order"/>
+									    <field name="driver"/>
+									    <field name="trailer"/>
+									    <field name="km_total" sum="Total km"/>
+									    <field name="freeway_total" sum="Total Frais autoroute" />
+									    <field name="travel_return"/>
+									    <field name="date"/>
+									    <field name="date_expected"/>
+									    <field name="state"/>
+									</tree>
+									<graph  string="voyages" type="bar" >
+					                    <field name="month"/>
+					                    <field name="qty" operator="+" />
+					                </graph>
+									
+							    </field>
+							</page>
+							<page  string="Compteurs carburants" groups="tms.group_tms_gasoil_user" >
+							    <field colspan="4" name="counter_ids" nolabel="1" widget="one2many_list" >
+									<tree string="compteurs sur base du carburant" >
+										<field name="name" select="1" />
+										<field name="counter_start" sum="Total compteur début" />
+										<field name="counter_end" select="1" sum="Total compteur fin" />
+										<field name="counter_end_estimated" sum="Total compteur fin estimé" />
+										<field name="km_estimated_driven" sum="Total km parcourus estimé" />
+										<field name="km_real_driven" sum="Total km parcourus réels" />
+										<field name="gasoil_order" /> 
+										<field name="date" />  
+									</tree>
+							    </field>
+							</page>
+							<page  string="Compte analytique" groups="analytic.group_analytic_accounting" >
+							    <field colspan="4" name="account_line_ids" nolabel="1" widget="one2many_list" mode="tree,graph" >
+									<tree colors="red:amount &lt; 0;" >
+										<field name="name" select="1" />
+										<field name="amount" sum="Total Montant" />
+										<field name="month" />
+										<field name="date" />  
+									</tree>
+									<graph  string="Compte analytique" type="bar" >
+					                    <field name="month"/>
+					                    <field name="amount" operator="+" />
+					                </graph>
+							    </field>
+							</page>
+-->
+				<page string="Stock" groups="" >
+				    <field colspan="4" name="stock_move_ids" nolabel="1" widget="one2many_list">
+					<tree colors="red: product_qty&lt;0" string="Mouvements de stock">
+					    <field name="name" select="1" />
+					    <field name="partner_id" select="1" />
+					    <field name="product_id" select="1" />
+					    <field name="product_qty" select="1" />
+					    <field name="location_id" invisible="0" />
+					    <field name="location_dest_id" invisible="0" />
+					    <field name="note" />
+					    <field name="date" />
+					    <field name="state" invisible="True" />  
+					</tree>
+				    </field>
+				</page>
+<!--
+							<page  string="Bons gasoil" groups="tms.group_tms_gasoil_user" >
+							    <field colspan="4" name="gasoil_order" nolabel="1" widget="one2many_list" mode="tree,graph" >
+									<tree colors="green:state == 'progress';blue:state == 'controle';grey:state == 'cancel';" >
+										<field name="name" select="1" />
+										<field name="cistern_id"  />
+										<field name="qty_stock" select="1" sum="Quantité totale" />
+										<field name="counter_old" sum="Total ancien compteur" />
+										<field name="counter_new_computed" sum="Total nouveau compteur calculé" />
+										<field name="counter_new" sum="Total nouveau commpteur" />
+										<field name="total_km_driven" sum="Total km parcourus"/> 
+										<field name="total_km_driven_computed" sum="Total km parcourus calculés" />  
+										<field name="total_real_consumption" sum="Total consommation réelle" />
+										<field name="total_intern_liter" sum="Total litrage interne" /> 
+										<field name="total_liter_realised" sum="Total litrage réalisé" />  
+										<field name="total_liter_estimated" sum="Total litrage estimé" />
+										<field name="total_external_liter" sum="Total litrage externe estimé" /> 
+										<field name="total_price" sum="Montant total" />  
+										<field name="variance_liter" sum="Total différence litrage" />
+										<field name="variance_km" sum="Total différence km" /> 
+										<field name="total_km_estimated" sum="Total km estimé" />
+										<field name="total_autoroute_cost" sum="Total Frais autoroute" />
+										<field name="total_autoroute_cost_estimated" sum="Total Frais autoroute estimé" /> 
+										<field name="date" /> 
+										<field name="state" />  
+									</tree>
+									<graph  string="Consommation carburant" type="bar" >
+					                    <field name="month" />
+					                    <field name="total_intern_liter" operator="+"  />
+					                    <field name="total_liter_estimated" operator="+"  />
+					                    <field name="total_liter_realised" operator="+"  />
+					                </graph>
+							    </field>
+							</page>
+							<page  string="Bon gasoil externe" groups="tms.group_tms_gasoil_order_external_user" >
+							    <field colspan="4" name="gasoil_order_external" nolabel="1" widget="one2many_list" mode="tree,graph" >
+									<tree  colors="green:state == 'free';blue:state == 'assigned';grey:state == 'cancel';" >
+										<field name="name" select="1" />
+										<field name="gasoil_order" sum="Total compteur début" />
+										<field name="extern_liter" select="1" sum="Total compteur fin" />
+										<field name="amount_total" sum="Total compteur fin estimé" groups="tms.group_tms_picking_gasoil_order_external_reception_manager" />
+										<field name="gasoil_id" sum="Total km parcourus estimé" />
+										<field name="state"  /> 
+										<field name="date" />  
+									</tree>
+									<graph  string="Consommation carburant externe" type="bar" >
+					                    <field name="month"  />
+					                    <field name="extern_liter" operator="+"  />
+					                    <field name="amount_total_ht" operator="+" groups="tms.group_tms_picking_gasoil_order_external_reception_manager"  />
+					                    <field name="amount_total" operator="+" groups="tms.group_tms_picking_gasoil_order_external_reception_manager"  />
+					                </graph>
+							    </field>
+							</page>
+-->
+			    </notebook>
+<!--
+                        <field name="disponibility"  string="Etat de vehicule" colspan="1"/>
+-->
+			</group>
+		    </sheet>
+		</form>
+	    </field>
+	</record>
+
+        <record id="tms_fleet_vehicle_search" model="ir.ui.view">
+            <field name="name">tms.fleet.vehicle.search</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="arch" type="xml">
+                <search string="Recherche véhicules">
+			<separator orientation="vertical"/>
+			<filter string="Mon parc" icon="STOCK_HOME" domain="[('park_ids.user_ids','in',[uid])]" context="{}" />
+			<newline/>
+			<field name="name" string="Matricule véhicule" />
+			<field name="default_code" string="Référence véhicule" />
+			<field name="hr_driver_id"/>
+			<field name="trailer_id"/>
+			<field name="license_plate"/>
+			<newline/>
+			<field name="merchandise_id"/>
+			<field name="brand_id"/>
+			<field name="category_id"/>
+			<field name="owner"/>
+			<field name="manager"/>
+			<field name="acquisition_date"/>
+			<newline/>
+			<group  expand='0' string='Grouper par...' >
+	                	<filter string="Catégorie" icon="terp-personal" domain="[]" context="{'group_by':'category_id'}"/>
+				<filter string="Marque" icon="terp-stage" domain="[]" context="{'group_by':'brand_id'}"/>
+				<filter string="Modèle" icon="terp-stage" domain="[]" context="{'group_by':'model_id'}"/>
+				<filter string="Chauffeur" icon="terp-stage" domain="[]" context="{'group_by':'hr_driver_id'}"/>
+<!--
+					    <filter string="Etat" icon="terp-stage" domain="[]" context="{'group_by':'disponibility'}"/>
+				<filter string="Vendeur" icon="stock_person" domain="[]" context="{'group_by':'partner_id'}"/>
+-->
+				<filter string="Propriétaire" icon="stock_person" domain="[]" context="{'group_by':'owner'}"/>
+				<filter string="Exploitant" icon="stock_person" domain="[]" context="{'group_by':'manager'}"/>
+				<filter string="Type de transport" icon="terp-product" domain="[]" context="{'group_by':'merchandise_id'}"/>
+			</group>
+               </search>
+            </field>
+        </record>
+		
+	<record model="ir.ui.view" id="tms_fleet_vehicle_tree">
+		<field name="name">tms.fleet.vehicle.tree</field>
+		<field name="model">fleet.vehicle</field>
+		<field name="arch" type="xml">
+<!--
+		<tree string="Liste des vehicules" colors="#800000:disponibility == 'unavailable';#4646B5:disponibility == 'available';">
+-->
+		    <tree string="Liste des vehicules" >
+			<field name="name" string="Matricule véhicule" select="1"/>
+			<field name="default_code" string="Référence" select="1"/>
+			<field name="hr_driver_id" select="1" />
+			<field name="trailer_id" select="1" string="Semi-remorque" />
+                    	<field name="brand_id" select="1"/>
+			<field name="model_id" select="1"/>
+			<field name="merchandise_id" select="1" />
+			<field name="partner_id" invisible="1" string="Vendeur" select="1"/>
+                    	<field name="category_id" select="1" />
+			<field name="owner"/>
+			<field name="manager"/>
+			<field name="acquisition_date" invisible="1" select="1" />
+<!--
+                  	<field name="disponibility"/>
+-->
+			<field name="current_travel"/>
+<!--
+                    	<field name="counter_current" string="Compteur courant"/>
+-->
+		    </tree>
+		</field>
+	</record>
+		
+	<!-- actions -->
+		
+	<record id="action_tms_fleet_vehicle" model="ir.actions.act_window">
+		<field name="name">Véhicules</field>
+		<field name="res_model">fleet.vehicle</field>
+		<!-- <field name="src_model">tms.truck.vehicle</field> -->
+		<field name="type">ir.actions.act_window</field>        
+		<field name="view_type">form</field>
+		<field name="view_mode">kanban,tree,form,graph</field>
+		<field name="context">{'default_vehicle_ok': True, 'default_trailer_ok': False}</field>
+		<field name="domain">[('vehicle_ok','=',True)]</field>
+		<field name="search_view_id" ref="tms_fleet_vehicle_search"/>
+		<field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+Les véhicules présentés représentent les ressources disponibles dans le parc automobile de l'entreprise.
+		</p>
+		</field>
+	</record>
+		
+	<!-- liens -->
+
+        <record id="act_tms_fleet_vehicle_kanban" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="fleet.fleet_vehicle_kanban"/>
+            <field name="act_window_id" ref="action_tms_fleet_vehicle"/>
+        </record>
+
+        <record id="act_tms_fleet_vehicle_tree" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="tms_fleet_vehicle_tree"/>
+            <field name="act_window_id" ref="action_tms_fleet_vehicle"/>
+        </record>
+        
+        <record id="act_tms_fleet_vehicle_form" model="ir.actions.act_window.view">
+            <field eval="3" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tms_fleet_vehicle_form"/>
+            <field name="act_window_id" ref="action_tms_fleet_vehicle"/>
+        </record>
+
+  	<!-- ========================== TMS Trailer =============================== -->
+
+	<!-- views -->
+
+  	<record model="ir.ui.view" id="tms_fleet_trailer_form">
+	    <field name="name">tms.fleet.trailer.form</field>
+	    <field name="model">fleet.vehicle</field>
+	    <field name="arch" type="xml">
+		<form string="Semi-remorque" >
+                    <header>
+                        <field name="state_id"  widget="statusbar" clickable="True" />
+                    </header>
+                    <sheet> 
+                        <field name="image_medium" widget='image' class="oe_left oe_avatar"/> 
+                        <div class="oe_title">
+                            <label for="license_plate" class="oe_edit_only"/>
+                            <h2>
+                                <field name="license_plate" string="Immatriculation" class="oe_inline"/>
+                            </h2>
+                            <label for="tag_ids" class="oe_edit_only"/>
+                            <field name="tag_ids" widget="many2many_tags" />
+                        </div>
+                        <div class="oe_right oe_button_box">
+                            <button name="return_action_to_open" type="object" context="{'xml_id':'fleet_vehicle_log_contract_act'}" string="Contracts" help="show the contract for this vehicle" />
+                            <button name="act_show_log_cost" type="object" string="Costs" help="show all the costs for this vehicle" groups="fleet.group_fleet_manager"/>
+                            <button name="return_action_to_open" type="object" context="{'xml_id':'fleet_vehicle_log_services_act'}" string="Services" help="show the services logs for this vehicle" />
+<!--                             <button name="return_action_to_open" type="object" context="{'xml_id':'fleet_vehicle_log_fuel_act'}" string="Fuel Logs" help="show the fuel logs for this vehicle" /> -->
+                            <button name="return_action_to_open" type="object" context="{'xml_id':'action_fleet_vehicle_log_fuel_tms','tms':True}" string="Bons de carburant" help="show the fuel logs for this vehicle" />
+                        </div>
+			<group colspan="4" col="6">
+                	    <group  col="2">
+				<field name="name" invisible="1"/>
+				<field name="category_id" select="1" domain="[('trailer_ok','=',True)]"/>
+				<field name="merchandise_id" colspan="1" string="Type de transport" />
+		    		<field name="vehicle_ok" invisible="1"/>
+		    		<field name="trailer_ok" invisible="1"/>
+<!--	
+				<field name="counter_current" />
+-->
+                   	    </group>             
+                   	    <group col="2">
+<!-- 				<field name="company_id"  string="Entreprise" /> -->
+				<field name="location_id"  string="Emplacement semi-remorque" readonly="True" />
+				<field name="account_id" colspan="1" readonly="True" />
+                 	    </group>                         
+ 			</group> 
+			<newline />
+			<group colspan="6" >
+			    <notebook colspan="6" >
+				<page string="Informations générales">
+				    <group colspan="4" col="4">
+					<group colspan="2" col="2">
+					    <field name="brand_id" domain="[('trailer_ok','=',True)]" colspan="1" />
+					    <field name="required_vin" invisible="1"/>
+					    <field name="vin_sn"  colspan="1" attrs="{'required':[('required_vin','=',True)]}"/>
+					    <field name="car_value"  colspan="1" groups="" />
+					</group>
+					<group colspan="2" col="2">
+					    <field name="owner" colspan="1"/>
+					    <field name="manager" colspan="1"/>
+                            		    <field name="acquisition_date" colspan="1"/>
+					    <field name="date_start_circulation" colspan="1" />
+<!--
+                            		    <field name="partner_id" colspan="1" />
+-->
+<!--
+                            <field name="driver_id" colspan="1" />
+-->
+					</group>
+				    </group>
+				</page>
+                      		<page string="Spécification physique">        
+                        	    <group colspan="6" col="6">  
+                            		<group col="2" colspan="2">                        
+					    <field name="volume" />
+					    <field name="gross_weight" />
+					</group>
+					<group col="2" colspan="2" >    
+					    <field name="length" />
+ 					    <field name="width" />
+ 					</group>
+ 					<group col="2" colspan="2" > 
+					    <field name="height"  />
+					    <field name="total_axle"  />
+					</group>
+				    </group>  
+				    <group> 
+                           		<separator string="Capacité Semi-remorque" colspan="4"/>
+                          		<label string="PTC - PV" colspan="1"/>
+                            		<field name="capacity" colspan="1" nolabel="1"/>
+				    </group>                              
+                    		</page>
+				<page string="Historique modifications" groups="" >
+				    <field colspan="4" name="trailer_modification_ids" nolabel="1" widget="one2many_list" readonly="True" >
+					<tree string="Historique Remorques">
+					    <field name="name"/>
+					    <field name="date_hook"/>
+					    <field name="date_unhook"/>
+					    <field name="vehicle_id" string="Matricule véhicule"/>
+					    <field name="state"/>
+					</tree>
+				    </field>
+				</page>
+<!--
+							<page  string="voyages" groups="tms.group_tms_travel_user" >
+							    <field colspan="4" name="travel_ids" nolabel="1" widget="one2many_list" mode="tree,graph" >
+									<tree string="Voyages" colors="green:state == 'free';blue:state == 'assigned';grey:state == 'cancel';" >
+									   		<field name="name"/>
+										    <field name="gasoil_order"/>
+										    <field name="driver"/>
+										    <field name="vehicle" string="Matricule véhicule" />
+										    <field name="km_total" sum="Total km"/>
+										    <field name="freeway_total" sum="Total Frais autoroute" />
+										    <field name="travel_return"/>
+										    <field name="date"/>
+										    <field name="state"/>
+									</tree>
+									<graph  string="voyages" type="bar" >
+						                    <field name="month"/>
+						                    <field name="qty" operator="+" />
+						                </graph>
+							    </field>
+							</page>	
+							<page  string="Compte analytique"  groups="analytic.group_analytic_accounting" >
+							    <field colspan="4" name="account_line_ids" nolabel="1" widget="one2many_list" mode="tree,graph" >
+									<tree colors="red:amount &lt; 0;" >
+										<field name="name" select="1" />
+										<field name="amount" sum="Total Montant" />
+										<field name="date" />  
+									</tree>
+									<graph  string="Compte analytique" type="bar" >
+					                    <field name="month"/>
+					                    <field name="amount" operator="+" />
+					                </graph>
+							    </field>
+							</page>
+
+							<page  string="Stock" groups="" >
+							    <field colspan="4" name="stock_move_ids" nolabel="1" widget="one2many_list">
+									<tree string="Mouvements de stock">
+										<field name="name" select="1" />
+										<field name="partner_id" select="1" />
+										<field name="product_id" select="1" />
+										<field name="product_qty" select="1" sum="Total quantité" />
+										<field name="location_dest_id" invisible="True" />
+										<field name="note" invisible="True" />
+										<field name="location_id" invisible="True" />
+										<field name="date" />  
+									</tree>
+							    </field>
+							</page>
+-->
+			    </notebook>
+			</group>
+		    </sheet>
+		</form>
+	    </field>
+	</record>
+		
+	<record model="ir.ui.view" id="tms_fleet_trailer_tree">
+	    <field name="name">tms.fleet.trailer.tree</field>
+	    <field name="model">fleet.vehicle</field>
+	    <field name="arch" type="xml">
+		<tree string="Liste des Semi-remorques">
+		    <field name="name" select="1" string="Matricule" />
+		    <field name="category_id" string="Catégorie" select="1" />
+        	    <field name="brand_id" select="1" />
+<!--
+            	<field name="partner_id" string="Vendeur" />
+-->
+		    <field name="owner"/>
+		    <field name="manager"/>
+               	    <field name="merchandise_id" string="Type de transport" />
+		    <field name="vehicle_id" string="Matricule véhicule"  select="1"/>
+<!--
+				<field name="counter_current" />
+-->
+               	    <field name="capacity" string="Capacité" select="1" />
+		    <field name="acquisition_date" colspan="1" select="1" />
+		</tree>
+	    </field>
+	</record>
+		
+	<record id="tms_fleet_trailer_search" model="ir.ui.view">
+      	<field name="name">tms.fleet.trailer.search</field>
+      	<field name="model">fleet.vehicle</field>
+       	<field name="arch" type="xml">
+            <search string="Recherche Semi-remorques">
+		<field name="name"/>
+		<field name="vehicle_id" string="Matricule véhicule" />
+		<field name="brand_id"/>
+		<field name="category_id"/>
+		<field name="owner"/>
+		<field name="manager"/>
+		<field name="merchandise_id"/>
+		<field name="acquisition_date"/>
+		<newline/>
+		<group expand='0' string='Grouper par...' >
+		    <filter string="Propriétaire" icon="stock_person" domain="[]" context="{'group_by':'owner'}"/>
+		    <filter string="Exploitant" icon="stock_person" domain="[]" context="{'group_by':'manager'}"/>
+	            <filter string="Catégorie" icon="terp-stage" domain="[]" context="{'group_by':'category_id'}"/>
+		    <filter string="Marque" icon="terp-stage" domain="[]" context="{'group_by':'brand_id'}"/>
+<!--
+		    <filter string="Vendeur" icon="stock_person" domain="[]" context="{'group_by':'partner_id'}"/>
+-->
+		    <filter string="Type de transport" icon="terp-product" domain="[]" context="{'group_by':'merchandise_id'}"/>
+		</group>
+            </search>
+        </field>
+  	</record>
+        
+    <record id="action_tms_fleet_trailer" model="ir.actions.act_window">
+		<field name="name">Semi-remorques</field>
+		<field name="res_model">fleet.vehicle</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">kanban,tree,form,graph</field>
+		<field name="context">{'default_trailer_ok': True, 'default_vehicle_ok': False, 'default_volume': 10.0}</field>
+        <field name="domain">[('trailer_ok','=',True)]</field>
+		<field name="search_view_id" ref="tms_fleet_trailer_search"/>
+		<field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+Une semi-remorque est une remorque routière destinée au transport de marchandises dont la particularité est qu'elle repose sur un ou plusieurs essieux à l'arrière et peut être accrochée à un véhicule. Vous pourrez voir ici toutes les semi-remorques et leurs caractéristiques.
+		</p>
+		</field>
+	</record>
+
+        <record id="act_tms_fleet_trailer_kanban" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="fleet.fleet_vehicle_kanban"/>
+            <field name="act_window_id" ref="action_tms_fleet_trailer"/>
+        </record>
+		
+	<record id="act_tms_fleet_trailer_tree" model="ir.actions.act_window.view">
+   		<field eval="2" name="sequence"/>
+   		<field name="view_mode">tree</field>
+        <field name="view_id" ref="tms_fleet_trailer_tree"/>
+        <field name="act_window_id" ref="action_tms_fleet_trailer"/>
+	</record>
+        
+    <record id="act_tms_fleet_trailer_form" model="ir.actions.act_window.view">
+    	<field eval="3" name="sequence"/>
+    	<field name="view_mode">form</field>
+        <field name="view_id" ref="tms_fleet_trailer_form"/>
+        <field name="act_window_id" ref="action_tms_fleet_trailer"/>
+  	</record>
+
+
+  	<!-- ========================== fleet_vehicle_model_brand =============================== -->
+
+        <record model='ir.ui.view' id='tms_fleet_vehicle_model_brand_form_inherit'>
+            <field name="name">tms.fleet.vehicle.mdoel.brand.form.inherit</field>
+            <field name="model">fleet.vehicle.model.brand</field>
+	    <field name='inherit_id' ref="fleet.fleet_vehicle_model_brand_form"/>
+            <field name="arch" type="xml">
+		<field name="name" position="before">
+		    <field name="vehicle_ok" invisible="1"/>
+		    <field name="trailer_ok" invisible="1"/>
+		</field>
+	    </field>
+	</record>
+
+        <record model='ir.actions.act_window' id='fleet_vehicle_model_brand_veh_act'>
+            <field name="name">Marque de véhicule</field>
+            <field name="res_model">fleet.vehicle.model.brand</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{'default_trailer_ok': False, 'default_vehicle_ok': True}</field>
+	    <field name="domain">[('vehicle_ok','=',True)]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer une nouvelle marque de véhicule.
+              </p>
+            </field>
+        </record>
+
+        <record model='ir.actions.act_window' id='fleet_vehicle_model_brand_rem_act'>
+            <field name="name">Marque de semi-remorque</field>
+            <field name="res_model">fleet.vehicle.model.brand</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{'default_trailer_ok': True, 'default_vehicle_ok': False}</field>
+	    <field name="domain">[('trailer_ok','=',True)]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer une nouvelle marque de semi-remorque.
+              </p>
+            </field>
+        </record>
+
+  	<!-- ========================== fleet_vehicle_cost =============================== -->
+
+        <record model='ir.ui.view' id='tms_fleet_vehicle_costs_form_inherit'>
+            <field name="name">tms.fleet.vehicle.costs.form.inherit</field>
+            <field name="model">fleet.vehicle.cost</field>
+	    <field name='inherit_id' ref="fleet.fleet_vehicle_costs_form"/>
+            <field name="arch" type="xml">
+		<field name="vehicle_id" position="before">
+		    <field name="vehicle_ok" invisible="1"/>
+		    <field name="trailer_ok" invisible="1"/>
+		</field>
+		<field name="vehicle_id" position="replace">
+			<field name="vehicle_id" domain="[('vehicle_ok','=',vehicle_ok),('trailer_ok','=',trailer_ok)]"/>
+		</field>
+	    </field>
+	</record>
+
+        <record model='ir.actions.act_window' id='tms_fleet_vehicle_costs_act'>
+            <field name="name">Coûts des véhicules</field>
+            <field name="res_model">fleet.vehicle.cost</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_vehicle_ok': True, 'default_trailer_ok': False}</field>
+	    <field name="domain">[('vehicle_ok','=',True)]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer un nouveau coût.
+              </p><p>
+                OpenERP vous aide à manager les coûts des différents véhicules. Les coûts sont générés automatiquement à partir des contrats et des relévés de carburant.
+              </p>
+            </field>
+        </record>
+
+        <record model='ir.actions.act_window' id='tms_fleet_trailer_costs_act'>
+            <field name="name">Coûts des SR</field>
+            <field name="res_model">fleet.vehicle.cost</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_trailer_ok': True, 'default_vehicle_ok': False}</field>
+	    <field name="domain">[('trailer_ok','=',True)]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer un nouveau coût.
+              </p><p>
+                OpenERP vous aide à manager les coûts des différentes semi-remorques. Les coûts sont générés automatiquement à partir des contrats.
+              </p>
+            </field>
+        </record>
+	
+  	<!-- ========================== fleet_vehicle_log_contract =============================== -->
+
+        <record model='ir.ui.view' id='tms_fleet_vehicle_log_contract_form_inherit'>
+            <field name="name">tms.fleet.vehicle.log_contract.form.inherit</field>
+            <field name="model">fleet.vehicle.log.contract</field>
+	    <field name='inherit_id' ref="fleet.fleet_vehicle_log_contract_form"/>
+            <field name="arch" type="xml">
+		<field name="vehicle_id" position="before">
+		    <field name="vehicle_ok" invisible="1"/>
+		    <field name="trailer_ok" invisible="1"/>
+		</field>
+		<field name="vehicle_id" position="replace">
+			<field name="vehicle_id" domain="[('vehicle_ok','=',vehicle_ok),('trailer_ok','=',trailer_ok)]"/>
+		</field>
+	    </field>
+	</record>
+
+        <record model='ir.actions.act_window' id='tms_fleet_vehicle_log_contract_act'>
+            <field name="name">Contrats des véhicules</field>
+            <field name="res_model">fleet.vehicle.log.contract</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    <field name="context">{'default_vehicle_ok': True, 'default_trailer_ok': False}</field>
+	    <field name="domain">[('vehicle_ok','=',True)]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer un nouveau contrat de véhicule. 
+              </p><p>
+                Vous pouvez gérer vos différents contrats (leasing, assurances, etc.) avec leurs coûts et services relatifs. OpenERP vous préviendra automatiquement quand certains contrats seront à renouveler.
+              </p><p>
+                Chaque contrat (i.e.: leasing) peut inclure différents services (réparation, assurances, maintenance périodique).
+              </p>
+            </field>
+        </record>
+
+        <record model='ir.actions.act_window' id='tms_fleet_trailer_log_contract_act'>
+            <field name="name">Contrats des Semi-remorques</field>
+            <field name="res_model">fleet.vehicle.log.contract</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    <field name="context">{'default_trailer_ok': True, 'default_vehicle_ok': False}</field>
+	    <field name="domain">[('trailer_ok','=',True)]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer un nouveau contrat de semi-remorque. 
+              </p><p>
+                Vous pouvez gérer vos différents contrats (leasing, assurances, etc.) avec leurs coûts et services relatifs. OpenERP vous préviendra automatiquement quand certains contrats seront à renouveler.
+              </p><p>
+                Chaque contrat (i.e.: leasing) peut inclure différents services (réparation, assurances, maintenance périodique).
+              </p>
+            </field>
+        </record>
+
+  	<!-- ========================== fleet_vehicle_modification =============================== -->
+
+	    <record model="ir.ui.view" id="fleet_vehicle_modification_form">
+			<field name="name">fleet.vehicle.modification.form</field>
+			<field name="model">fleet.vehicle.modification</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Modification camion">
+				<group col="6" colspan="4">
+	                <group colspan="4" >
+	                	<field name="name" colspan="2"/>
+						<group colspan="4"  >
+		                	<separator colspan="4" string="Date" />
+							<field name="date_hook" colspan="1" />
+		                	<field name="date_unhook"   attrs="{'invisible':[('state','!=','unhooked')]}" />
+		                </group>
+		                <group   colspan="4"  >
+		                	<separator colspan="4" string="Affectation" />
+			                <field  domain="[('vehicle_ok','=','True')]" name="vehicle_id" string="Matricule véhicule" on_change="onchange_vehicle_id(vehicle_id)" />	
+			                <field  name="vehicle_code" on_change="onchange_vehicle_code(vehicle_code)" string="Référence véhicule" />			
+							<field  domain="[('trailer_ok','=','True')]" name="trailer_id"/>
+						</group>
+						<field name="state" colspan="1"/>
+					</group>
+					<newline/>
+	                <group col="1" colspan="2">
+	                	<button name="set_unhook" states="hooked" string="Décrocher" type="object"/>
+	                    <button name="set_hook" states="progress" string="Accrocher" type="object"/>
+	               </group>
+	              </group>
+				</form>
+			</field>
+		</record>
+			
+		<record model="ir.ui.view" id="fleet_vehicle_modification_tree">
+			<field name="name">fleet.vehicle.modification.tree</field>
+			<field name="model">fleet.vehicle.modification</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Affectation" colors="green:state == 'unhooked';blue:state == 'hooked';" >
+                	<field name="name" select="1"/>
+					<field  name="vehicle_id" select="1" string="Matricule véhicule" />
+                    <field name="trailer_id" select="1" />
+                    <field name="date_hook" select="2"/>
+                    <field name="date_unhook" select="2"/>
+                    <field name="state" select="1" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="fleet_vehicle_modification_search" model="ir.ui.view">
+            <field name="name">fleet.vehicle..modification.search</field>
+            <field name="model">fleet.vehicle.modification</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Recherche Affectation parc">
+                 <group col='10' colspan='4'>
+                    <filter icon="STOCK_UNINDENT" name="unhooked" string="Décroché" domain="[('state','=','unhooked')]" separator="1" />
+                    <filter icon="gtk-indent" name="hooked" string="Accroché" domain="[('state','=','hooked')]" separator="1" />
+                    <filter icon="terp-gtk-go-back-rtl" name="progress" string="En cours" domain="[('state','=','progress')]" separator="1" />
+                   </group> 
+                    <newline/>
+                    <field name="vehicle_id" select="1" string="Matricule véhicule" />
+                    <field name="vehicle_code" select="1" string="Référence véhicule"/>
+                    <field name="trailer_id" select="1"/>
+                    <field name="date_hook" select="1"/>
+                    <field name="date_unhook" select="1"/>
+                <newline/>
+                  <group expand="0" string="Grouper par..." colspan="4" col="10" >
+                    <filter string="Status" icon="STOCK_ABOUT" domain="[]" context="{'group_by':'state'}"/>
+                    <filter string="Matricule véhicule" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'vehicle_id'}"/>
+                    <filter string="Semi-remorque" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'trailer_id'}"/>
+                     <separator orientation="vertical"/>
+                    <filter string="Date accrochage" icon="terp-go-month" domain="[]" context="{'group_by':'date_hook'}"/>
+                    <filter string="Date décrochage" icon="terp-go-month" domain="[]" context="{'group_by':'date_unhook'}"/>
+                </group>
+              </search>
+            </field>
+        </record>
+		
+		<record id="action_fleet_vehicle_modification" model="ir.actions.act_window">
+			<field name="name">Modification du camion</field>
+			<field name="res_model">fleet.vehicle.modification</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+            <field name="view_id" ref="fleet_vehicle_modification_tree" />	
+            <field name="search_view_id" ref="fleet_vehicle_modification_search" />	
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+La modification de parc consiste en l'affectation des véhicules aux semi-remorques à une date précise, ce dit véhicule pourra être décroché de la semi-remorque ultérieurement.
+		</p>
+		</field>
+		</record>
+		
+		<!-- liens -->
+		
+		<act_window  context="{'search_default_vehicle_id': [active_id], 'default_vehicle_id': active_id}"
+            id="act_tms_fleet_vehicle_2_modification" name="Modification parc"
+            res_model="fleet.vehicle.modification"
+            src_model="fleet.vehicle"
+            groups=""/>
+
+		<act_window  context="{'search_default_trailer_id': [active_id], 'default_trailer_id': active_id}"
+            id="act_tms_fleet_trailer_2_modification" name="Modification parc"
+            res_model="fleet.vehicle.modification"
+            src_model="fleet.vehicle"
+            groups=""/>
+
+  	<!-- ========================== fleet_vehicle_category =============================== -->
+		
+		<record model="ir.ui.view" id="fleet_vehicle_category_form">
+  			<field name="name">fleet.vehicle.category.form</field>
+			<field name="model">fleet.vehicle.category</field>
+			<field name="arch" type="xml">
+				<form string="Catégorie">
+					<group colspan="4">
+                       <group col="2">
+							<field name="vehicle_ok" invisible="1" />
+							<field name="trailer_ok" invisible="1" />	
+							<field name="name"  />	
+							<field name="hook_ok" attrs="{'invisible': [('vehicle_ok','=',False)]}"/>
+                       </group>
+                       <group col="3"> 
+							<field name="note" />	
+                       </group>
+                   </group>
+                   <newline/>
+
+		<group attrs="{'invisible': [('vehicle_ok','=',False)]}">
+		  <separator colspan="4" string="Véhicules de la catégorie"/>
+                  <field name="vehicle_ids" readonly="True" nolabel="1" colspan="4" >
+                  	<tree string="Véhicules">
+                  		<field name="license_plate"/>
+                  		<field name="hr_driver_id"/>
+                  		<field name="brand_id"/>
+                  		<field name="model_id"/>
+                  		<field name="merchandise_id"/>
+                  	</tree>
+                  </field>
+		</group>
+
+		<group attrs="{'invisible': [('trailer_ok','=',False)]}">
+		  <separator colspan="4" string="Semi-remorques de la catégorie"/>
+                  <field name="trailer_ids" readonly="True" nolabel="1" colspan="4" >
+                  	<tree string="Semi-remorques" >
+                  		<field name="license_plate"/>
+                  		<field name="brand_id"/>
+                  		<field name="merchandise_id"/>
+                  	</tree>
+                  </field>
+		</group>
+				</form>
+ 			</field>
+  		</record>
+  		
+  		<record model="ir.ui.view" id="fleet_vehicle_category_tree">
+  			<field name="name">fleet.vehicle.category.tree</field>
+			<field name="model">fleet.vehicle.category</field>
+			<field name="arch" type="xml">
+				<tree string="Parc">
+					<field name="name"  string="Nom du parc" />	
+					<field name="hook_ok" />
+                    <field name="note"  string="Description" />	
+         		</tree>
+ 			</field>
+  		</record>
+  		
+  		<record id="fleet_vehicle_category_search" model="ir.ui.view">
+            <field name="name">fleet.vehicle.category.search</field>
+            <field name="model">fleet.vehicle.category</field>
+            <field name="arch" type="xml">
+                <search string="Recherche Parc">
+                	 <filter   string="accrochable" domain="[('hook_ok','=',True)]" separator="1" />
+                	 <filter   string="non accrochable" domain="[('hook_ok','=',False)]" separator="1" />
+                	 <newline/>
+				    <field name="name" string="Parc"/>
+               </search>
+            </field>
+        </record>
+  		
+  		
+  		<record id="action_fleet_vehicle_category_vehicle" model="ir.actions.act_window">
+			<field name="name">Catégorie Véhicule</field>
+			<field name="res_model">fleet.vehicle.category</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+	    		<field name="context">{'default_trailer_ok': False, 'default_vehicle_ok': True, 'default_hook_ok': True}</field>
+	    		<field name="domain">[('vehicle_ok','=',True)]</field>
+			<field name="search_view_id" ref="fleet_vehicle_category_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer une nouvelle catégorie de véhicule. 
+              </p>
+	</field>
+		</record>
+
+  		<record id="action_fleet_vehicle_category_trailer" model="ir.actions.act_window">
+			<field name="name">Catégorie Véhicule</field>
+			<field name="res_model">fleet.vehicle.category</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="view_type">form</field>
+	    		<field name="context">{'default_trailer_ok': True, 'default_vehicle_ok': False}</field>
+	    		<field name="domain">[('trailer_ok','=',True)]</field>
+			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="fleet_vehicle_category_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer une nouvelle catégorie de semi-remorque. 
+              </p>
+	</field>
+		</record>
+
+  	<!-- ========================== fleet_vehicle_log_fuel =============================== -->
+
+  	<!-- ========================== gasoil interne =============================== -->
+
+        <record model='ir.ui.view' id='fleet_vehicle_log_fuel_search_tms'>
+            <field name="name">fleet.vehicle.log.fuel.search</field>
+            <field name="model">fleet.vehicle.log.fuel</field>
+            <field name="arch" type="xml">
+                <search string="Bon de carburant" >
+                    <field name="vehicle_id" />
+                    <field name="owner" />
+                    <field name="manager" />
+                    <field name="user_id" />
+                    <field name="driver_id" />
+                    <field name="attendant_id" />
+                    <field name="cistern_id" />
+                    <field name="gasoil_id" />
+                    <field name="date_order"/>
+                    <field name="date"/>
+                    <filter name="draft_state_filter" domain="[('state','=','draft')]" string="Brouillon"/>
+                    <filter name="done_state_filter" domain="[('state','=','done')]" string="Validé"/>
+                    <filter name="cancel_state_filter" domain="[('state','=','cancel')]" string="Annulé"/>
+
+
+
+                <field name="date_order" string="De" filter_domain="[('date_order','&gt;=',self)]" />
+                <field name="date_order"  string="A" filter_domain="[('date_order','&lt;=',self)]" />
+
+                    <group expand="1" string="Grouper Par...">
+                        <filter name="groupby_vehicle_id" context="{'group_by' : 'vehicle_id'}" string="Véhicule"/>
+                        <filter name="groupby_owner" context="{'group_by' : 'owner'}" string="Propriétaire"/>
+                        <filter name="groupby_manager" context="{'group_by' : 'manager'}" string="Exploitant"/>
+                        <filter name="groupby_category_id" context="{'group_by' : 'category_id'}" string="Catégorie"/>
+                        <filter name="groupby_user_id" context="{'group_by' : 'user_id'}" string="Utilisateur"/>
+                        <filter name="groupby_driver_id" context="{'group_by' : 'driver_id'}" string="Chauffeur"/>
+                        <filter name="groupby_attendant_id" context="{'group_by' : 'attendant_id'}" string="Pompiste"/>
+                        <filter name="groupby_cistern_id" context="{'group_by' : 'cistern_id'}" string="Citerne"/>
+                        <filter name="groupby_gasoil_id" context="{'group_by' : 'gasoil_id'}" string="Carburant"/>
+                        <filter name="groupby_date_order" context="{'group_by' : 'date_order'}" string="Date"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model='ir.ui.view' id='fleet_vehicle_log_fuel_form_tms'>
+            <field name="name">fleet.vehicle.log.fuel.form.tms</field>
+            <field name="model">fleet.vehicle.log.fuel</field>
+            <field name="arch" type="xml">
+                <form string="Bon de carburant" >
+                <header>
+                    <button name="action_done" states="draft" string="Traiter le bon" type="object" class="oe_highlight" groups="base.group_user"/>
+                    <button name="action_cancel" states="done" string="Annuler le bon" groups="base.group_user" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="info,draft,done" statusbar_colors='{}'/>
+                </header>
+                    <sheet>
+                    <h1>
+                        <field name="name" class="oe_inline" attrs="{'invisible': [('name','=','/')]}" readonly="1"/>
+                    </h1>
+                        <group colspan="6" col="6">
+                            <field name="user_id" invisible="0"/>
+                            <field name="date_create"/>
+                            <field name="date_order"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="type" invisible="1"/>
+                        </group>
+                        <group col="6" colspan="6" string="Détails du véhicule">
+<!--
+                            <group string="Détail du véhicule" col="2">
+-->
+                                <field name="vehicle_code" on_change="onchange_vehicle_code(vehicle_code)"/>
+                                <field name="vehicle_id" required="1" on_change="onchange_vehicle_id(vehicle_id)" domain="[('vehicle_ok','=',True)]" attrs="{'readonly': [('state','=','done')]}" />
+	                        <field name="driver_id" required="1"/>
+	                        <field name="category_id" required="1"/>
+	                        <field name="owner" required="0" attrs="{'readonly': [('state','=','done')]}"/>
+	                        <field name="manager" required="0" attrs="{'readonly': [('state','=','done')]}"/>
+<!--
+                            </group>
+
+                            <group string="Détail kilométrique" col="2">
+-->
+                               <field name="counter_old"/>
+                               <field name="counter_new" on_change="onchange_counter_new(counter_old, counter_new)"/>
+                               <label for="km_driven"/>
+			       <div>
+                               <field name="km_driven" class="oe_inline"/>
+<!--
+                               <field name="odometer_unit" class="oe_inline"/>
+-->
+			       </div>
+	                       <field name="location_id" required="1" invisible="1"/>
+                               <field name="fuel_odometer" invisible="1"/>
+<!--
+                            </group>
+-->
+                        </group>
+                        <group col="8" colspan="8" string="Résumé">
+			    <field name="total_liter"/>
+			    <field name="total_real_consumption"/>
+			    <field name="total_price"/>
+<!--
+			    <field name="total_price_ttc"/>
+-->
+			</group>
+	            <notebook colspan="6">
+                    <page string="Détails carburant interne">
+                        <group col="4">
+                            <group col="2" >
+                            	<separator string="Citerne" colspan="2"/>
+                                <field name="system_number"/>
+				<field name="station_site" attrs="{'readonly': [('state','=','done')]}" />
+                                <field name="attendant_id" required="1" context="{'default_attendant_ok':True}"/>
+                                <field name="cistern_id" required="1" context="{'default_cistern_ok':True}"/>
+				<field name="qty_stock" invisible="True" />
+                            </group>
+                            <group col="2" >
+                               <separator string="Carburant" colspan="4"/>
+				<field name="payment_type" attrs="{'readonly': [('state','=','done')]}" required="1" />
+                                <field name="gasoil_id" required="1" on_change="onchange_gasoil_id(gasoil_id)" context="{'default_gasoil_ok':True}"/>
+                                <field name="liter" string="Litres(interne)" required="1" on_change="on_change_liter(liter,price_per_liter,amount)" attrs="{'readonly': [('state','=','done')]}"/>
+                                <field name="price_per_liter" required="1" on_change="on_change_price_per_liter(liter,price_per_liter,amount)" attrs="{'readonly': [('state','=','done')]}"/>
+                                <field name="amount" string="Montant HT(interne)" required="1" on_change="on_change_amount_external(liter,price_per_liter,amount,amount_ttc,tax_ids)" attrs="{'readonly': [('state','=','done')]}"/>
+				<field name="amount_ttc" invisible="1"/>
+				<field name="tax_ids" invisible="1"/>
+<!--
+	                       <field name="consumption_gasoil"/>
+-->
+		           </group>
+                       </group>
+                  </page>
+<!--                  
+                  <page string="Voyages">
+                  </page>
+                  <page string="Voyages partiels">
+                  </page>
+-->
+
+                  <page string="Bons externes" attrs="{'invisible': [('state','=','info')], 'readonly': [('state','=','done')]}">
+                  	<button name="%(action_log_fuel_external_card)d" string="Créer carte rapide carburant externe" type="action" states="draft" colspan="1" groups=""/>
+                        <field colspan="4" name="assigned_external_ids" nolabel="1" string="Bons de carburant externe" widget="many2many" domain="[('vehicle_id','=',vehicle_id),('internal_order_id','=',False)]">
+                            <tree colors="green:state == 'assigned'">
+		      		<field name="date_order"/>
+		                <field name="vehicle_id" domain="[('vehicle_ok','=',True)]"/>
+		               	<field name="driver_id"/>
+		               	<field name="tax_ids" widget="many2many_tags" domain="[('parent_id','=',False),('type_tax_use','&lt;&gt;','purchase')]"/>
+		               	<field name="gasoil_id"/>
+		               	<field name="liter" sum="Total litres"/>
+		               	<field name="price_per_liter"/>
+		               	<field name="amount" string="Montant HT" sum="Total HT(ext)"/>
+		               	<field name="amount_ttc" sum="Total TTC(ext)"/>
+		               	<field name="vendor_id" />
+<!--
+		                <field name="assigned_ok" invisible="1"/>
+-->
+		                <field name="state" invisible="1"/>
+<!--
+		                <button name="action_cancel_external" states="done" icon="gtk-cancel" type="object" string="Annuler"/>
+-->
+	                    </tree>
+
+	             	</field>
+                 </page>
+                  
+                  <page string="Autres Informations">
+                 	<group col="2" colspan="2" string="Vente/Achat">
+                        	<field name="date" attrs="{'readonly': [('state','=','done')]}"/>
+                                <field name="purchaser_id" attrs="{'readonly': [('state','=','done')]}"/>
+                                <field name="inv_ref" attrs="{'readonly': [('state','=','done')]}"/>
+                                <field name="vendor_id" attrs="{'readonly': [('state','=','done')]}"/>
+                        </group>
+                   </page>
+                   <page string="Notes">
+                       	<field name="notes" nolabel="1" placeholder="Ecrivez ici toute autre information" attrs="{'readonly': [('state','=','done')]}"/>
+                   </page>
+              </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model='ir.ui.view' id='fleet_vehicle_log_fuel_tree_tms'>
+            <field name="name">fleet.vehicle.log.fuel.tree.tms</field>
+            <field name="model">fleet.vehicle.log.fuel</field>
+            <field name="arch" type="xml">
+                <tree string="Bons de carburant interne" colors="blue: state=='draft'">
+                    <field name="date_order" /> 
+                    <field name="vehicle_id" />
+                    <field name="driver_id" select="2" />
+                    <field name="owner" select="2" />
+                    <field name="manager" select="2" />
+                    <field name="attendant_id" select="2" />
+                    <field name="cistern_id" select="2"/>
+                    <field name="station_site"/>
+                    <field name="fuel_odometer" invisible="1"/>
+                    <field name="odometer_unit" invisible="1"/>
+<!--
+                    <field name="purchaser_id" /> 
+-->            
+                    <field name="inv_ref" invisible="1"/>
+                    <field name="vendor_id" invisible="1"/>
+                    <field name="payment_type" string="Type Paie." select="2"/>
+                    <field name="liter" />
+                    <field name="price_per_liter" invisible="0"/>
+                    <field name="amount" string="Montant HT(int)" sum="Price"/>
+		    <field name="km_driven"/>
+		    <field name="total_real_consumption" string="Cons. Tot. réelle"/>
+                    <field name="user_id" select="2" invisible="True"/>
+                    <field name="company_id" select="2" invisible="True"/>
+                    <field name="state" select="2" string="Statut"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model='ir.actions.act_window' id='action_fleet_vehicle_log_fuel_tms'>
+            <field name="name">Bons de carburant interne</field>
+            <field name="res_model">fleet.vehicle.log.fuel</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type', '=', 'internal')]</field>
+            <field name="context">{'default_type': 'internal', 'default_state': 'info'}</field>
+            <field name="search_view_id" ref="fleet_vehicle_log_fuel_search_tms"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer un bon de carburant interne. 
+              </p><p>
+Les bons de carburant internes vous permettent d'assurer le suivi des consommations de carburant du véhicule. Lors de la création du bon interne, vous pouvez sélectionner les bons externes et les voyages associés au véhicule concerné par le bon. Une fois le bon validé, celui-ci génèrera un compteur sur la base des bons antérieurs pour le suivi du kilométrage du véhicule en question.
+              </p>
+            </field>
+        </record>
+
+	<record id="act_fleet_vehicle_log_fuel_tree_tms" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fleet_vehicle_log_fuel_tree_tms"/>
+            <field name="act_window_id" ref="action_fleet_vehicle_log_fuel_tms"/>
+        </record>
+        
+	<record id="act_fleet_vehicle_log_fuel_form_tms" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fleet_vehicle_log_fuel_form_tms"/>
+            <field name="act_window_id" ref="action_fleet_vehicle_log_fuel_tms"/>
+        </record>
+
+
+  	<!-- ========================== gasoil externe =============================== -->
+
+        <record model='ir.ui.view' id='fleet_vehicle_log_fuel_external_search_tms'>
+            <field name="name">fleet.vehicle.log.fuel.external.search</field>
+            <field name="model">fleet.vehicle.log.fuel</field>
+            <field name="arch" type="xml">
+                <search string="Bon de carburant externe" >
+                    <field name="vehicle_id" />
+                    <field name="owner" />
+                    <field name="manager" />
+                    <field name="user_id" />
+                    <field name="driver_id" />
+                    <field name="attendant_id" />
+                    <field name="cistern_id" />
+                    <field name="gasoil_id" />
+                    <field name="date_order"/>
+                    <field name="date"/>
+                    <filter name="draft_state_filter" domain="[('state','=','draft')]" string="Brouillon"/>
+                    <filter name="free_state_filter" domain="[('state','=','done')]" string="Libre"/>
+                    <filter name="assigned_state_filter" domain="[('state','=','assigned')]" string="Assigné"/>
+                    <group expand="1" string="Grouper Par...">
+                        <filter name="groupby_vehicle_id" context="{'group_by' : 'vehicle_id'}" string="Véhicule"/>
+                        <filter name="groupby_owner" context="{'group_by' : 'owner'}" string="Propriétaire"/>
+                        <filter name="groupby_manager" context="{'group_by' : 'manager'}" string="Exploitant"/>
+                        <filter name="groupby_category_id" context="{'group_by' : 'user_id'}" string="Utilisateur"/>
+                        <filter name="groupby_user_id" context="{'group_by' : 'user_id'}" string="Utilisateur"/>
+                        <filter name="groupby_driver_id" context="{'group_by' : 'driver_id'}" string="Chauffeur"/>
+                        <filter name="groupby_attendant_id" context="{'group_by' : 'attendant_id'}" string="Pompiste"/>
+                        <filter name="groupby_cistern_id" context="{'group_by' : 'cistern_id'}" string="Citerne"/>
+                        <filter name="groupby_gasoil_id" context="{'group_by' : 'gasoil_id'}" string="Carburant"/>
+                        <filter name="groupby_date_order" context="{'group_by' : 'date_order'}" string="Date"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model='ir.ui.view' id='fleet_vehicle_log_fuel_external_form'>
+            <field name="name">fleet.vehicle.log.fuel.external.form</field>
+            <field name="model">fleet.vehicle.log.fuel</field>
+            <field name="arch" type="xml">
+                <form string="Bon de carburant" >
+                <header>
+                    <button colspan="2" name="validate_external" states="draft" string="Traiter le bon" type="object" class="oe_highlight" groups="base.group_user"/>
+                    <button colspan="2" name="cancel_external" states="free,assigned,done" string="Annuler le bon" groups="base.group_user" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,assigned,free" statusbar_colors='{}'/>
+                </header>
+                    <sheet>
+                    <h1>
+                        <field name="name" class="oe_inline" attrs="{'invisible': [('name','=','/')]}" readonly="1"/>
+                    </h1>
+                        <group colspan="4" col="4">
+                            <field name="company_id" />
+                            <field name="date_create"/>
+                            <field name="user_id"/>
+                            <field name="date_order" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                        <group col="4" colspan="4">
+                            <group string="Informations de base" col="2">
+                                <field name="internal_order_id" on_change="onchange_internal_order_id(internal_order_id)" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="vehicle_code" on_change="onchange_vehicle_code(vehicle_code)" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="vehicle_id" required="1" on_change="onchange_vehicle_id(vehicle_id)" domain="[('vehicle_ok','=',True)]" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="category_id" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+<!--
+	                        <field name="location_id" required="0" invisible="1"/>
+-->
+	                        <field name="driver_id" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+	                        <field name="owner" required="0" attrs="{'readonly': [('state','!=','draft')]}"/>
+	                        <field name="manager" required="0" attrs="{'readonly': [('state','!=','draft')]}"/>
+				<field name="tax_ids" widget="many2many_tags" domain="[('parent_id','=',False),('type_tax_use','&lt;&gt;','purchase')]" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            </group>
+
+                            <group string="Détail consommation" col="2">
+                                <field name="vendor_id" string="Station/Fournisseur" required="1" on_change="onchange_gasoil_id_external(gasoil_id,vendor_id)" attrs="{'readonly': [('state','!=','draft')]}" context="{'default_customer': False, 'default_supplier': True}" domain="[('supplier','=',True)]"/>
+				<field name="station_site" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+				<field name="payment_type" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="gasoil_id" required="1" on_change="onchange_gasoil_id_external(gasoil_id,vendor_id)" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="liter" required="1" on_change="on_change_liter(liter,price_per_liter,amount)" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="price_per_liter" required="1" on_change="on_change_price_per_liter(liter,price_per_liter,amount)" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="amount" string="Montant HT" required="1" on_change="on_change_amount_external(liter,price_per_liter,amount,amount_ttc,tax_ids)" attrs="{'readonly': [('state','!=','draft')]}"/>
+<!--
+                                <field name="amount_ttc" string="Montant TTC" required="1" on_change="on_change_amount_external(liter,price_per_liter,amount,amount_ttc,tax_ids)" attrs="{'readonly': [('state','!=','draft')]}"/>
+-->
+                                <field name="amount_ttc" string="Montant TTC" required="1" attrs="{'readonly': [('state','!=','draft')]}" on_change="on_change_amount_ttc_external(liter, price_per_liter, amount, amount_ttc, tax_ids)"/>
+                            </group>
+
+                        </group>
+	            <notebook colspan="6">
+                    <page string="Autres Informations">
+			<group colspan="4" col="4">
+                 	<group col="2" colspan="2" string="Vente/Achat">
+                        	<field name="date" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="inv_ref" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="purchaser_id" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+			</group>
+                   </page>
+                   <page string="Notes">
+                       	<field name="notes" nolabel="1" placeholder="Ecrivez ici toute autre information" attrs="{'readonly': [('state','!=','draft')]}"/>
+                   </page>
+              </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model='ir.ui.view' id='fleet_vehicle_log_fuel_external_tree'>
+            <field name="name">fleet.vehicle.log.fuel.external.tree</field>
+            <field name="model">fleet.vehicle.log.fuel</field>
+            <field name="arch" type="xml">
+                <tree string="Bons de carburant externe" colors="blue: state=='draft', green: state=='assigned', cyan: state=='free'">
+                    <field name="date_order" /> 
+                    <field name="vehicle_id" />
+                    <field name="category_id" />
+                    <field name="driver_id" select="2" />
+                    <field name="owner" />
+                    <field name="manager" />
+                    <field name="odometer_unit" invisible="1"/>
+                    <field name="purchaser_id" />             
+                    <field name="inv_ref" invisible="1"/>
+                    <field name="vendor_id" invisible="1"/>
+                    <field name="station_site" />
+                    <field name="payment_type" />
+                    <field name="liter" />
+                    <field name="price_per_liter" invisible="1"/>
+                    <field name="amount" sum="Total HT"/>
+<!--
+                    <field name="amount_tax" sum="Total TTC"/>
+                    <field name="user_id" select="2"/>
+-->
+                    <field name="company_id" select="2" invisible="True"/>
+                    <field name="state" select="2" string="Statut" />
+                </tree>
+            </field>
+        </record>
+
+        <record model='ir.actions.act_window' id='action_fleet_vehicle_log_fuel_external'>
+            <field name="name">Bon de carburant externe</field>
+            <field name="res_model">fleet.vehicle.log.fuel</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type', '=', 'external')]</field>
+            <field name="context">{'default_type': 'external', 'default_state': 'draft'}</field>
+            <field name="search_view_id" ref="fleet_vehicle_log_fuel_external_search_tms"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer un bon de carburant externe. 
+              </p><p>
+Les bons de carburant externe vous permettent d'assurer le suivi des consommations externes en carburant. Vous pouvez rattacher un bon de carburant externe à un bon de carburant interne.
+              </p>
+            </field>
+        </record>
+
+	<record id="act_fleet_vehicle_log_fuel_external_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fleet_vehicle_log_fuel_external_tree"/>
+            <field name="act_window_id" ref="action_fleet_vehicle_log_fuel_external"/>
+        </record>
+        
+	<record id="act_fleet_vehicle_log_fuel_external_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fleet_vehicle_log_fuel_external_form"/>
+            <field name="act_window_id" ref="action_fleet_vehicle_log_fuel_external"/>
+        </record>
+<!--
+        <record id="act_internal_order_2_external_order" model="ir.actions.act_window">
+            <field name="name">Bons de carburant externe</field>
+            <field name="res_model">fleet.vehicle.log.fuel</field>
+            <field name="src_model">fleet.vehicle.log.fuel</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="act_view_external_order_internal_order_form_action_tms" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fleet_vehicle_log_fuel_external_form"/>
+            <field name="act_window_id" ref="act_internal_order_2_external_order"/>
+        </record>
+-->
+<!--         <record model='ir.actions.act_window' id='fleet.fleet_vehicle_log_fuel_act'>
+            <field name="name">Vehicles Fuel Logs</field>
+            <field name="res_model">fleet.vehicle.log.fuel</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="context">{"search_default_groupby_vehicle" : True,'default_state':'draft'}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new fuel log.
+              </p><p>
+                Here you can add refuelling entries for all vehicles.  You can
+                also filter logs of a particular vehicle using the search
+                field.
+              </p>
+            </field>
+        </record> -->
+
+	</data>
+</openerp>

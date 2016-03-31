@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- Sequences for fleet.vehicle.modification-->
+        <record id="seq_type_fleet_vehicle_modification" model="ir.sequence.type">
+            <field name="name">fleet vehicle modification</field>
+            <field name="code">fleet.vehicle.modification</field>
+        </record>
+        <record id="seq_fleet_vehicle_modification" model="ir.sequence">
+            <field name="name">fleet vehicle modification</field>
+            <field name="code">fleet.vehicle.modification</field>
+            <field name="prefix">Ref-modif</field>
+            <field name="padding">5</field>
+        </record>
+
+        <!-- Sequences for fleet.vehicle.log.fuel-->
+        <record id="seq_type_fleet_vehicle_log_fuel_internal" model="ir.sequence.type">
+            <field name="name">fleet vehicle log fuel internal</field>
+            <field name="code">fleet.vehicle.log.fuel.internal</field>
+        </record>
+        <record id="seq_fleet_vehicle_log_fuel_internal" model="ir.sequence">
+            <field name="name">fleet vehicle log fuel internal</field>
+            <field name="code">fleet.vehicle.log.fuel.internal</field>
+            <field name="prefix">FINT/</field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="seq_type_fleet_vehicle_log_fuel_external" model="ir.sequence.type">
+            <field name="name">fleet vehicle log fuel external</field>
+            <field name="code">fleet.vehicle.log.fuel.external</field>
+        </record>
+        <record id="seq_fleet_vehicle_log_fuel_external" model="ir.sequence">
+            <field name="name">fleet vehicle log fuel external</field>
+            <field name="code">fleet.vehicle.log.fuel.external</field>
+            <field name="prefix">FEXT/</field>
+            <field name="padding">5</field>
+        </record>
+
+         <!-- Sequences for tms.counter -->
+<!--
+        <record id="seq_type_tms_counter" model="ir.sequence.type">
+            <field name="name">tms truck counter</field>
+            <field name="code">tms.truck.counter</field>
+        </record>
+        <record id="seq_tms_counter" model="ir.sequence">
+            <field name="name">tms truck counter</field>
+            <field name="code">tms.truck.counter</field>
+            <field name="prefix">Ref-compt</field>
+            <field name="padding">5</field>
+        </record>
+-->
+
+        <!-- Sequences for tms picking folder-->
+        <record id="seq_type_tms_picking_folder" model="ir.sequence.type">
+            <field name="name">tms picking folder</field>
+            <field name="code">tms.picking.folder</field>
+        </record>
+        <record id="seq_tms_picking_folder" model="ir.sequence">
+            <field name="name">tms picking folder type</field>
+            <field name="code">tms.picking.folder</field>
+            <field name="prefix">DOSSIER-</field>
+            <field name="padding">5</field>
+        </record>
+
+        <!-- Sequences for tms picking -->
+        <record id="seq_type_tms_picking" model="ir.sequence.type">
+            <field name="name">tms picking</field>
+            <field name="code">tms.picking</field>
+        </record>
+        <record id="seq_tms_picking" model="ir.sequence">
+            <field name="name">tms picking type</field>
+            <field name="code">tms.picking</field>
+            <field name="prefix">BL-</field>
+            <field name="padding">5</field>
+        </record>
+
+        <!-- Sequences for tms picking -->
+        <record id="seq_type_tms_grouping" model="ir.sequence.type">
+            <field name="name">tms grouping type</field>
+            <field name="code">tms.grouping</field>
+        </record>
+        <record id="seq_tms_grouping" model="ir.sequence">
+            <field name="name">tms grouping</field>
+            <field name="code">tms.grouping</field>
+            <field name="prefix">GRP-</field>
+            <field name="padding">5</field>
+        </record>
+
+    </data>
+</openerp>

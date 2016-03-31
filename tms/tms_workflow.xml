@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<!-- Activities -->
+
+        <record id="wkf_picking" model="workflow">
+            <field name="name">tms.picking.basic</field>
+            <field name="osv">tms.picking</field>
+            <field name="on_create">True</field>
+        </record>
+        <record id="act_draft" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_picking"/>
+            <field name="flow_start">True</field>
+            <field name="name">draft</field>
+        </record>
+        <record id="act_confirmed" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_picking"/>
+            <field name="name">confirmed</field>
+            <field name="kind">function</field>
+            <field name="action">action_confirm()</field>
+        </record>
+        <record id="act_assigned" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_picking"/>
+            <field name="name">assigned</field>
+            <field name="kind">function</field>
+            <field name="action">action_assign_wkf()</field>
+        </record>
+        <record id="act_done" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_picking"/>
+            <field name="name">done</field>
+            <field name="kind">function</field>
+            <field name="action">action_done_wkf()</field>
+            <field name="flow_stop">True</field>
+        </record>
+        <record id="act_cancel" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_picking"/>
+            <field name="name">cancel</field>
+            <field name="flow_stop">True</field>
+            <field name="kind">function</field>
+            <field name="action">action_cancel()</field>
+        </record>
+
+<!-- Transitions -->
+
+        <record id="trans_draft_confirmed" model="workflow.transition">
+            <field name="act_from" ref="act_draft"/>
+            <field name="act_to" ref="act_confirmed"/>
+            <field name="signal">button_confirm</field>
+        </record>
+        <record id="trans_confirmed_assigned" model="workflow.transition">
+            <field name="act_from" ref="act_confirmed"/>
+            <field name="act_to" ref="act_assigned"/>
+            <field name="signal">button_assign</field>
+        </record>
+        <record id="trans_assigned_done" model="workflow.transition">
+            <field name="act_from" ref="act_assigned"/>
+            <field name="act_to" ref="act_done"/>
+            <field name="signal">button_done</field>
+        </record>
+        <record id="trans_assigned_cancel" model="workflow.transition">
+            <field name="act_from" ref="act_assigned"/>
+            <field name="act_to" ref="act_cancel"/>
+             <field name="condition">True</field>
+            <field name="signal">button_cancel</field>
+        </record>
+        <record id="trans_confirmed_cancel" model="workflow.transition">
+            <field name="act_from" ref="act_confirmed"/>
+            <field name="act_to" ref="act_cancel"/>
+            <field name="condition">True</field>
+            <field name="signal">button_cancel</field>
+        </record>
+        <record id="trans_draft_cancel" model="workflow.transition">
+            <field name="act_from" ref="act_draft"/>
+            <field name="act_to" ref="act_cancel"/>
+            <field name="signal">button_cancel</field>
+        </record>
+    </data>
+</openerp>

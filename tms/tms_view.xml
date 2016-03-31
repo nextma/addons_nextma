@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+        <!-- ================== tms_picking =============== -->
+
+	<record id="view_tms_picking_search" model="ir.ui.view">
+            <field name="name">tms.picking.search</field>
+            <field name="model">tms.picking</field>
+            <field name="arch" type="xml">
+                <search string="Bon de livraison">
+                    <group>
+                        <filter icon="terp-check" name="available" string="Assigné" domain="[('state','=','assigned')]" help="Assigned Delivery Orders"/>
+                        <filter icon="terp-camera_test" name="confirm" string="Confirmé" domain="[('state','=','confirmed')]" help="Confirmed Delivery Orders"/>
+                        <filter icon="terp-dialog-close" name="done" string="Validé" domain="[('state','=','done')]" help="Delivery orders already processed"/>
+                        <separator orientation="vertical"/>
+                        <filter icon="terp-dolar" name="to_invoice" string="À facturer" domain="[('invoice_state','=','2binvoiced')]" help="Delivery orders to invoice"/>
+                        <filter icon="terp-dolar" name="invoiced" string="Facturé" domain="[('invoice_state','=','invoiced')]" help="Delivery orders invoiced"/>
+                        <newline/>
+<!--
+                        <field name="sale_id" invisible="True"/>
+-->
+                        <field name="name"/>
+                        <field name="no_order"/>
+                        <field name="folder_id" />
+                        <field name="removal_order" groups="" />
+                        <field name="partner_id" />
+                   	<field name="product_id"/>
+                   	<newline/>
+                        <field name="vehicle_id" />
+                        <field name="driver_id" />
+                        <field name="trailer_id" />
+                        <field name="merchandise_id" />
+                        <field name="user_id" />
+                        <field name="origin"/>
+                        <field name="tms_journal_id" widget="selection"/>
+                        <field name="company_id" widget="selection" />
+                        <newline/>
+			<separator/>
+			<field name="date" string="De" filter_domain="[('date','&gt;=',self)]"/>
+			<field name="date" string="À" filter_domain="[('date','&lt;=',self)]"/>   
+                   </group>
+                    <newline/>
+                    <filter string="Mon parc" domain="[('vehicle_id.park_ids.user_ids','in',[uid])]" context="{}" />
+                    <newline/>
+                    <group expand="0" string="Grouper par...">
+                    	<filter string="Date voyage" icon="terp-go-month" domain="[]"  context="{'group_by':'date'}"/>
+                    	<separator orientation="vertical" />
+                    	<filter string="Origine" icon="terp-partner" domain="[]" context="{'group_by':'origin'}"/>
+                        <filter string="Client" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Responsable" icon="terp-partner" domain="[]" context="{'group_by':'user_id'}"/>
+                        <filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'folder_id'}"/>
+                        <filter string="Trajet" name='group_by_travel' icon="terp-partner" domain="[]" context="{'group_by':'product_id'}"/>
+                        <filter string="Véhicule" icon="terp-partner" domain="[]" context="{'group_by':'vehicle_id'}"/>
+                        <filter string="Semi-remorque" icon="terp-partner" domain="[]" context="{'group_by':'trailer_id'}"/>
+                        <filter string="Transport" icon="terp-partner" domain="[]" context="{'group_by':'merchandise_id'}"/>
+                        <filter string="Chauffeur" icon="terp-partner" domain="[]" context="{'group_by':'driver_id'}"/>
+                        <separator orientation="vertical" />
+                        <filter string="State" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}"/>
+                        <separator orientation="vertical" />
+                        <filter string="Journal" icon="terp-folder-orange" domain="[]" context="{'group_by':'tms_journal_id'}"  />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+<!-- graph -->
+        <record model="ir.ui.view" id="view_tms_picking_graph11">
+            <field name="name">tms.picking.graph</field>
+            <field name="model">tms.picking</field>
+            <field name="arch" type="xml">
+                <graph string="TMS PICKING" type="bar">
+                    <field name="partner_id"/>
+                    <field name="amount_total" operator="+"/>
+                </graph>
+            </field>
+        </record>
+<!-- calendar -->
+        <record id="view_tms_picking_calendar11" model="ir.ui.view">
+            <field name="name">tms.picking.calendar</field>
+            <field name="model">tms.picking</field>
+            <field name="arch" type="xml">
+                <calendar string="TMS PICKING" color="vehicle_id" date_start="date">
+                    <field name="vehicle_id"/>
+                    <field name="product_id"/>
+                    <field name="state" />
+                </calendar>
+            </field>
+        </record>
+        <record id="view_tms_picking_form" model="ir.ui.view">
+            <field name="name">tms.picking.form</field>
+            <field name="model">tms.picking</field>
+            <field eval="12" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Bon de livraison" version="7.0">
+                <header>
+                    <button name="draft_force_assign" states="draft" string="Plannifier" type="object" class="oe_highlight" groups="base.group_user"/>
+                    <button name="draft_assign" states="draft" string="Assigner" type="object" class="oe_highlight" groups="base.group_user"/>
+
+			<!-- @TODO changer le groupe de ce bouton, pour un accès restraint -->
+                    <button name="draft_force_done" states="draft" string="Terminer" type="object" class="oe_highlight" groups=""/>
+						
+					<button name="action_decharger" states="assigned" string="Dechargé" type="object" class="oe_highlight"/>
+						
+                    <button name="action_assign" states="confirmed" string="Vérifier disponibilité" type="object" class="oe_highlight"/>
+                    <button name="force_assign" states="confirmed" string="Forcer disponibilité" type="object" class="oe_highlight" groups="base.group_user"/>
+                    <button name="action_done" states="assigned,decharge" string="Terminer" type="object" class="oe_highlight"/>
+                    <button name="action_mise_a_jour" states="assigned,confirmed,done,draft" string="mise a jour " type="object" class="oe_highlight"/>
+                    <button name="button_draft" states="cancel,assigned,confirmed,done" string="Mettre en Brouillon" icon="gtk-ok" class="oe_highlight"  type="object"/>
+                    <button name="action_cancel" states="assigned,confirmed,done" string="Annuler" icon="gtk-cancel" class="oe_highlight"  type="object"/>
+				
+<!--
+                    <button name="action_process" states="assigned" string="Traiter" groups="" type="object" class="oe_highlight"/>
+-->
+<!--
+                    button action_tms_invoice_onshipping
+
+                    <button name="button_cancel" states="assigned,confirmed,draft" string="Annuler le bon" groups="base.group_user"/>-->
+                    <field name="state" widget="statusbar" statusbar_visible="draft,assigned,decharge,done" statusbar_colors='{"shipping_except":"red","invoice_except":"red","waiting_date":"blue"}'/>
+                </header>
+                <sheet>
+                     
+                    <h1>
+                        <field name="name" class="oe_inline" attrs="{'invisible': [('name','=','/')]}" readonly="1"/>
+		    	<field name="picking_merchandise_ok" invisible="1"/>
+		    	<field name="display_tms_cost" invisible="1" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="date" on_change="onchange_date_travel(date,date_end)" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}"/>
+                        <field name="partner_id" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" on_change="onchange_partner_id(partner_id)" />
+	                    <field name="partner_invoiced_id" />
+	                    <field name="vehicle_id" on_change="onchange_vehicle_id(vehicle_id)" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" />
+	                    <field name="product_id" on_change="onchange_product_id(partner_id, product_id, merchandise_id, product_qty, qty)" context="{'default_trajet_ok':True,'partner_id':partner_id,'tms':True}" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}"/>
+	                    <field name="fixed" on_change="onchange_delivrery_qty(delivrery_qty,partner_id,product_id,merchandise_id,uom_delivrery_id,fixed)"/>
+	                    <field name="delivrery_qty" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" on_change="onchange_delivrery_qty(delivrery_qty,partner_id,product_id,merchandise_id,uom_delivrery_id,fixed)" />
+                        <field name="number_colis" />
+                            <field name="folder_id" attrs="{'readonly': [('state','in',('assigned'))]}"/>
+			    <field name="no_order" string="Répertoire" attrs="{'readonly': [('state','in',('assigned'))]}" />
+                            <field name="removal_order" attrs="{'readonly': [('state','in',('assigned'))]}" groups=""/>
+
+<!--
+                            <field name="address_id" on_change="onchange_partner_in(address_id)" context="{'contact_display':'partner'}" colspan="4" required="True" invisible="True" />
+-->
+                            <field name="invoice_state" groups="account.group_account_invoice" attrs="{'invisible': [('invoice_state', '=', 'none')]}"/>
+                        </group>
+                        <group>
+                            <field name="date_end" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" />
+                            <field name="user_id"/>
+			    <field name="merchandise_id" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" on_change="onchange_product_id(partner_id, product_id, merchandise_id, product_qty, qty)"/>
+			    <field name="driver_id" on_change="onchange_driver_id(driver_id)" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" context="{'default_driver_ok': True}"/>
+
+                            <field name="origin" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" placeholder="e.g. SO0032" class="oe_inline" />
+                            <field name="company_id" groups="base.group_multi_company" widget="selection" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}"/>
+                    		<field name="uom_delivrery_id" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}"/>
+              <!--              <field name="tms_journal_id" widget="selection" groups="account.group_account_user" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}"/>  -->
+                        </group>
+                    </group>
+                    <group col="2" colspan="4">
+                     	<group string="Informations de base">
+	                    <field name="vehicle_code" on_change="onchange_vehicle_code(vehicle_code)" string="Référence véhicule" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}"/>
+                     	</group>
+                  <!--      <group string="Informations véhicule" >
+			    <field name="trailer_id" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}"/>   
+	             	</group>-->
+
+					<group string="" >
+
+	             	</group>
+		    </group>
+		    <group>
+                        <group colspan="6" col="6">
+                            <separator string="Facturation" colspan="6"/>
+	               	   <!-- <field name="product_qty" on_change="onchange_quantity_travel(product_id, product_qty, product_uom_id, product_uos_id,price_unit,commission,commission_fixed,commission_value_type,travel_return)" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" />
+	                    <field name="product_uom_id" on_change="onchange_quantity_travel(product_id, product_qty, product_uom_id, product_uos_id,price_unit,commission,commission_fixed,commission_value_type,travel_return)" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}"  />-->
+						<field name="product_qty" on_change="onchange_quantity_travel(product_id, product_qty, product_uom_id, product_uos_id,price_unit,commission,travel_return,partner_id,merchandise_id)" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" />
+	                    <field name="product_uom_id" on_change="onchange_quantity_travel(product_id, product_qty, product_uom_id, product_uos_id,price_unit,commission,travel_return,partner_id,merchandise_id)" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}"  />
+	                    <field name="price_unit" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" required="True" groups="" on_change="onchange_price_unit(merchandise_id,product_id,price_unit,product_qty,commission,commission_fixed,commission_value_type,partner_id,qty)"/>
+	                    <field name="amount_total_ht" groups="" />
+	                    <field name="amount_tax" groups="" />
+			    <field name="tax_ids" widget="many2many_tags" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" domain="[('parent_id','=',False),('type_tax_use','&lt;&gt;','purchase')]"/>
+	                    <field name="amount_total" groups="" />
+	                    <field name="discount" on_change="onchange_price_discount(discount, price_unit)"/>
+	                    <field name="product_uos_qty" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" on_change="onchange_uos_quantity(product_id, product_uos_qty, product_uos_id, product_uom_id)" invisible="True"/>
+	                    <field name="product_uos_id" on_change="onchange_quantity(product_id, product_qty, product_uom_id, product_uos_id)" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" invisible="True"/>
+			    <field name="qty" invisible="True" />
+	            	</group>
+		    </group>
+		    <notebook colspan="6">
+			<page string="Voyage">
+<!--
+			    <separator colspan="4" string="voyage"/>
+-->
+		            <group col="6" colspan="6">
+				<field name="km_estimated" string="km estimés" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" />
+				<field name="km_return" string="km retour" on_change="onchange_travel_km_freeway_return(km_return,freeway_return,travel_return)" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}"/>
+				<field name="km_additional" string="km suppl." attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" />
+				<field name="freeway_estimated" string="Frais autoroute" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" />
+				<field name="freeway_return" string="Frais autoroute retour" on_change="onchange_travel_km_freeway_return(km_return,freeway_return,travel_return)" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" />
+				<field name="freeway_additional" string="Frais autoroute suppl." attrs="{'readonly': [('state','in',('confirmed','assigned'))]}"/>				<field name="km_total"/>
+				<field name="freeway_total"/>
+				<field name="travel_return" on_change="onchange_travel_return(km_estimated,freeway_estimated,travel_return,product_id)" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" />
+				<field name="consumption_gasoil" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" />
+				<field name="commission" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" groups="" />
+				<field name="driver_move_costs" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" invisible="1" />
+				<field name="driver_travel_costs" attrs="{'readonly': [('state','in',('confirmed','assigned'))]}" groups="" />
+				<field name="commission_fixed" invisible="True" />
+				<field name="commission_value_type" invisible="True" />
+			    </group>
+			</page>
+
+			<page string="Marchandises transportées" attrs="{'invisible': [('picking_merchandise_ok','=',False)]}">
+		  	    <field name="details_ids" nolabel="1" widget="one2many_list">
+				<tree editable="bottom">
+					<field name="picking_partner_id" invisible="1" on_change="on_change_picking_partner_id(picking_partner_id)"/>
+					<field name="product_id" domain="[('picking_product_ok','=',True)]" context="{'default_picking_product_ok': True}" on_change="onchange_product_id(product_id)"/>
+					<field name="description"/>
+					<field name="product_uom_id"/>
+					<field name="product_qty"/>
+				</tree>
+<!--
+				<form>
+				    <group>
+					<field name="picking_partner_id" invisible="1" on_change="on_change_picking_partner_id(picking_partner_id)"/>
+					<field name="product_id" domain="[('picking_product_ok','=',True)]" on_change="onchange_product_id(product_id)"/>
+					<field name="description"/>
+					<field name="product_uom_id"/>
+					<field name="product_qty"/>
+                         	    </group>
+				</form>
+-->
+			    </field>
+			</page>
+			<page string="Frais annexes">
+                        <field name="picking_cost_ids" nolabel="1">
+                              <tree string="Charges" editable="bottom">
+                                    <field name="product_id" on_change="onchange_product_id(product_id)" context="{'default_cout':True}"/> 
+                                    <field name="description" />
+                                    <field name="quantity" />
+                                    <field name="price_unit" />
+                                    <field name="discount" />
+                                    <field name="price_subtotal" />
+                              </tree>
+                        </field>
+                        <center>
+                           <group>
+                               <field name="total_cost" />
+                           </group>
+                        </center>
+			</page>
+			<page string="Notes"> 
+		  	    <field name="note" nolabel="1" />
+		  	    <field name="obs" invisible="1" />
+			</page>
+		    </notebook> 
+                </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_tms_picking_tree" model="ir.ui.view">
+            <field name="name">tms.picking.tree</field>
+            <field name="model">tms.picking</field>
+            <field eval="12" name="priority"/>
+            <field name="arch" type="xml">
+                <tree colors="blue:state == 'draft';grey:state == 'cancel';green:state == 'assigned';turquoise:state == 'confirmed';black:state == 'done'" string="Bons de livraison">
+                    <field name="date" />
+<!--
+                    <field name="date_end" />
+-->
+                    <field name="name"/>
+                    <field name="folder_id" />
+                    <field name='no_order' />
+                    <field name="partner_id"/>
+                    <field name="user_id" />
+                    <field name="origin"/>
+<!--
+                    <field name="removal_order" groups="" />
+-->
+                    <field name="product_id"/>
+                    <field name="vehicle_id" string="Matricule véhicule" />
+<!--
+                    <field name="vehicle_code" string="Code véhicule" />
+-->
+                    <field name="trailer_id"/>
+                    <field name="merchandise_id"/>
+                    <field name="driver_id"/>
+                    <field name="price_unit" groups="" />
+                    <field name="amount_total_ht" groups="" sum="Total HT"/>
+                    <field name="amount_total" groups="" sum="Total montant"/>
+                    <field name="display_tms_cost" invisible="1" />
+                    <field name="total_cost" groups="" sum="Total hors taxe"/>
+                    <field name="driver_travel_costs" />
+                    <field name="km_total" sum="Total KM"/>
+                    <field name="freeway_total" sum="Total autoroute" /> 
+                    <field name="qty" sum="Total quantité"/>
+                    <field name="delivrery_qty" sum="Total quantité livrée"/>
+<!--
+                    <field name="uom"/>
+-->
+                    <field name="date_create" invisible="True" />
+                    <field name="invoice_state"/>
+                    <field name="tms_journal_id" groups="base.group_extended" invisible="True" widget="selection"/>
+                    <field name="state"/>
+<!--
+                    <button name="action_process_travel" states="assigned" string="Traiter" type="object" icon="gtk-go-forward" groups="" />
+-->
+
+                </tree>
+            </field>
+        </record>
+
+
+  <record id="act_bls_all" model="ir.actions.act_window">
+            <field name="name">Bls</field>
+            <field name="res_model">tms.picking</field>
+            <field name="view_mode">tree,form,graph,calendar</field>
+		    <field name="view_type">form</field>
+            <field name="context">{'search_default_invoice_id': [active_ids]}</field>
+            <field name="domain">[('invoice_id','=',active_id)]</field>
+        </record>
+
+
+
+
+	<record id="action_tms_picking" model="ir.actions.act_window">
+            <field name="name">Bons de livraison voyage</field>
+            <field name="res_model">tms.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,calendar</field>
+            <field name="search_view_id" ref="view_tms_picking_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+Les bons de livraison voyage représentent la base du voyage, ils peuvent être encodés manuellement ou générés à partir d'un bon de commande voyage. Le processus de validation général d'un bon de livraison voyage est le suivant: L'affectation de ressources au voyage (véhicule, chauffeur, semi-remorque, estimation du prix), la validation logistique, la validation finale.
+		</p>
+	    </field>
+        </record>
+
+         <record id="act_tms_picking_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_tms_picking_tree"/>
+            <field name="act_window_id" ref="action_tms_picking"/>
+        </record>
+        
+        <record id="act_tms_picking_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_tms_picking_form"/>
+            <field name="act_window_id" ref="action_tms_picking"/>
+        </record>
+
+
+        <!-- ================== tms_travel_palet_merchandise =============== -->
+        
+        <record model="ir.ui.view" id="view_tms_travel_palet_merchandise_tree">
+			<field name="name">tms.travel.palet.merchandise.tree</field>
+			<field name="model">tms.travel.palet.merchandise</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Type de transport"  >
+					<field name="name" string="Type de transport"  select="1"/>
+
+					<field name="category_id"/>
+
+					<field name="description" select="1" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_tms_travel_palet_merchandise_form">
+			<field name="name">tms.travel.palet.merchandise.form</field>
+			<field name="model">tms.travel.palet.merchandise</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="type de transport"  >
+				   <group>
+					   <field name="name" select="1" string="Type de transport"/>
+					   <field name="category_id"/>
+					   <field name="description" select="1" />
+					</group>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="view_tms_travel_palet_merchandise_search">
+			<field name="name">tms.travel.palet.merchandise.search</field>
+			<field name="model">tms.travel.palet.merchandise</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Type de transport"  >
+					<field name="name" string="Type de transport"  select="1"/>
+
+					<field name="category_id"/>
+
+				</search>
+			</field>
+		</record>
+        
+        <record id="action_tms_travel_palet_merchandise" model="ir.actions.act_window">
+		<field name="name">Marchandises</field>
+		<field name="res_model">tms.travel.palet.merchandise</field>
+		<!-- <field name="src_model">tms.truck.vehicle</field> -->
+		<field name="type">ir.actions.act_window</field>        
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="search_view_id" ref="view_tms_travel_palet_merchandise_search" />	
+		<field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+Les types de transport peuvent être définis selon le bon vouloir de l'utilisateur. Ils peuvent représenter une tranche de tonnage ( 20 T - 30 T) ou une marchandise (maïs), pour être assigné aux caractéristiques véhicules ou semi-remorques (catégorie). Aussi, le type de transport est  utile pour la gestion des listes de prix en fonction des clients.
+		</p>
+		</field>	
+		</record>
+		
+<!--
+		<act_window  context="{'search_default_merchandise_id': [active_id], 'default_merchandise_id': active_id}"
+            id="act_tms_travel_palet_merchandise_2_tms_travel" name="Voyages"
+            res_model="tms.travel"
+            src_model="tms.travel.palet.merchandise"
+            groups="tms.group_tms_travel_user"
+        />
+-->
+
+       <!--  =============================== tms_picking_folder ===================================== -->
+       
+       <record model="ir.ui.view" id="tms_picking_folder_form">
+			<field name="name">tms.picking.folder.form</field>
+			<field name="model">tms.picking.folder</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Dossier">
+				<group colspan="4" >
+					<group>
+						<field name="name"  select="1" string="Numéro de dossier" attrs="{'readonly':[('state','=','done')]}"  />
+						<field name="state" select="1" />
+						<newline/>
+						<group colspan="4" string="Description" >
+							<field name="description" select="1" attrs="{'readonly':[('state','=','done')]}" colspan="4" nolabel="1" />
+						</group>
+					</group>
+					<newline/>
+					<group>
+						<button name="action_close_folder" states="draft" string="Fermer dossier" type="object" />
+						<button name="action_open_folder" states="done" string="Réouvrir dossier" type="object" />
+						<button name="action_invoice" states="draft,done" string="Facturer" type="object" />
+               	</group>
+				</group>
+				<newline/>
+<!--
+				<separator string="Bons de livraion" colspan="4" />
+					<newline/>
+					<field name="picking_ids" select="1" colspan="4" nolabel="1" widget="many2many" attrs="{'readonly': [('state','=','done')]}" domain="[('travel_ok','=',True),('folder_id','=',False)]" context="{'form_view_ref':'tms.view_picking_out_form_tms'}"  >
+						<tree  colors="blue:state == 'draft';grey:state == 'cancel';green:state == 'validation';red:state not in ('cancel', 'done') and min_date &lt; current_date" string="Bons de livraisons">
+		                    <field name="name" readonly="True" />
+		                    <field name='no_order' readonly="True" />
+		                    <field name="traject_id" readonly="True" />
+		                    <field name="partner_id" readonly="True" />
+		                    <field name="folder_id" readonly="True" />
+		                    <field name="origin" readonly="True" />
+		                    <field name="date" readonly="True" />
+		                    <field name="min_date" invisible="True" readonly="True" />
+		                    <field name="backorder_id" groups="base.group_extended" readonly="True" invisible="True" />
+		                    <field name="invoice_state" readonly="True" />
+		                    <field name="stock_journal_id" groups="base.group_extended" invisible="True" widget="selection" readonly="True" />
+		                    <field name="state" readonly="True" />
+		                    <button name="action_process_travel" states="assigned,validation" string="Process" type="object" icon="gtk-go-forward" readonly="True" />
+		                </tree>
+					</field>
+-->
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="tms_picking_folder_search">
+			<field name="name">tms.picking.folder.search</field>
+			<field name="model">tms.picking.folder</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Recherche dossier"  >
+					<field name="name"  select="1" string="Numéro de dossier" />
+					<newline/>
+				    <filter string="En cours" icon="STOCK_SORT_DESCENDING" domain="[('state','=','draft')]" context="{}"/>
+					<filter string="Validé" icon="terp-camera_test" domain="[('state','=','done')]" context="{}"/>
+				</search>
+			</field>
+		</record>
+		
+		
+		<record model="ir.ui.view" id="tms_picking_folder_tree">
+			<field name="name">tms.picking.folder.tree</field>
+			<field name="model">tms.picking.folder</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Dossiers"  >
+					<field name="name"  select="1" string="Numéro de dossier" />
+					<field name="description" select="1" />
+					<field name="state" select="1" />
+				</tree>
+			</field>
+		</record>
+       
+       <record id="action_tms_picking_folder" model="ir.actions.act_window">
+            <field name="name">Dossiers de bons de livraison</field>
+            <field name="res_model">tms.picking.folder</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="tms_picking_folder_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+Les dossiers de bon de livraison voyage représentent un regroupement logique pour le traitement des bons de livraisons. Ces dossiers peuvent être utiles pour le suivi de facturation en les groupant par lot de facturation.
+		</p>
+	    </field>
+        </record>
+
+
+
+      <record model="ir.ui.view" id="invoice_view_inherit_1">
+            <field name="name">account.invoice.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+            <field name="partner_id" position="before">
+                <group colspan="4">
+                     <button name="%(tms.act_bls_all)d" string="Liste des Bons de Livraison" type="action" class="oe_highlight" groups="base.group_user"/>
+                </group>
+            </field>
+       </field>
+
+        </record>
+
+	</data>
+</openerp>

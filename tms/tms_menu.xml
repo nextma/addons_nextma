@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+	
+	<menuitem id="base.menu_tms_root" name="Transport Management System" web_icon="data/transport_logo.png" web_icon_hover="data/transport_logo-hover.png" icon="terp-mrp" groups="" sequence="4"/>
+
+							<!--_____________PARC_____________-->
+
+	<menuitem id="menu_tms_park_management" name="Parc automobile" parent="base.menu_tms_root" icon="terp-stock" sequence="1" groups=""/>
+		<menuitem id="menu_fleet_park_tree" name="Parcs" parent="menu_tms_park_management" sequence="0" groups="" action="action_fleet_park"/>
+		<menuitem id="menu_tms_park_change" name="Changer de parc" parent="menu_tms_park_management" sequence="1" groups="" action="action_res_users_default_park"/>
+		<menuitem id="menu_tms_park_vehicle_management" name="Gestion de Véhicule" parent="menu_tms_park_management" sequence="2" groups=""/>
+			<menuitem id="menu_tms_park_vehicle_tree" name="Véhicules" parent="menu_tms_park_vehicle_management" sequence="0" groups="" action="action_tms_fleet_vehicle"/>
+			<menuitem id="menu_tms_park_vehicle_contract" name="Contrats" parent="menu_tms_park_vehicle_management" sequence="1" groups="" action="tms_fleet_vehicle_log_contract_act"/>
+			<menuitem id="menu_tms_park_vehicle_costs" name="Coûts" parent="menu_tms_park_vehicle_management" sequence="2" groups="" action="tms_fleet_vehicle_costs_act"/>
+
+		<menuitem id="menu_tms_park_trailer_management" name="Gestion de Semi-remorque" parent="menu_tms_park_management" sequence="3" groups=""/>
+			<menuitem id="menu_tms_park_trailer_tree" name="Semi-remorques" parent="menu_tms_park_trailer_management" sequence="0" groups="" action="action_tms_fleet_trailer"/>
+			<menuitem id="menu_tms_park_trailer_contract" name="Contrats" parent="menu_tms_park_trailer_management" sequence="1" groups="" action="tms_fleet_trailer_log_contract_act"/>
+			<menuitem id="menu_tms_park_trailer_costs" name="Coûts" parent="menu_tms_park_trailer_management" sequence="2" groups="" action="tms_fleet_trailer_costs_act"/>
+
+		<menuitem id="menu_tms_park_modification" name="Modifications du parc" parent="menu_tms_park_management" sequence="5" groups="" action="action_fleet_vehicle_modification"/>
+
+		<menuitem id="menu_tms_park_employee" name="Personnel du parc" parent="menu_tms_park_management" sequence="6" groups="" />
+			<menuitem id="menu_tms_park_employee_driver" name="Chauffeurs" parent="menu_tms_park_employee" sequence="1" groups="" action="action_driver_employee"/>
+			<menuitem id="menu_tms_park_employee_attendant" name="Pompistes" parent="menu_tms_park_employee" sequence="1" groups="" action="action_attendant_employee"/>
+
+							<!--_____________VOYAGES_____________-->
+
+	<menuitem id="menu_tms_travel_mngmt" name="Gestion de voyage" parent="base.menu_tms_root" icon="terp-stock" sequence="2" groups=""/>
+		<menuitem id="menu_tms_picking_traject" name="Trajets" parent="menu_tms_travel_mngmt" sequence="10" groups="" action="action_tms_traject"/>
+		<menuitem id="menu_tms_grouping" name="Groupage" parent="menu_tms_travel_mngmt" sequence="20" groups=""/>
+			<menuitem id="menu_tms_grouping_circuit" name="Circuits" parent="menu_tms_grouping" sequence="10" groups="" action="action_tms_grouping_circuit"/>
+			<menuitem id="menu_tms_grouping_grouping" name="Groupages" parent="menu_tms_grouping" sequence="20" groups="" action="action_tms_grouping"/>
+		<menuitem id="menu_tms_picking_folder" name="Dossiers BL" parent="menu_tms_travel_mngmt" sequence="30" groups="" action="action_tms_picking_folder"/>
+		<menuitem id="menu_tms_sale_order" name="Bons de commande" parent="menu_tms_travel_mngmt" sequence="40" groups="" action="action_sale_order_tms"/>
+		<menuitem id="menu_tms_picking" name="Bons de livraison" parent="menu_tms_travel_mngmt" sequence="50" groups="" action="action_tms_picking"/>
+
+							<!--_____________CARBURANT_____________-->
+	<menuitem id="menu_tms_gasoil_mngmt" name="Gestion de carburant" parent="base.menu_tms_root" icon="terp-stock" sequence="3" groups=""/>
+		<menuitem id="menu_tms_gasoil_product" name="Carburant" parent="menu_tms_gasoil_mngmt" sequence="1" groups="" action="product_normal_action_gasoil"/>
+		<menuitem id="menu_tms_gasoil_cistern" name="Citernes" parent="menu_tms_gasoil_mngmt" sequence="2" groups="" action="action_tms_stock_location"/>
+		<menuitem id="menu_tms_gasoil_order_internal" name="Bon de carburant interne" parent="menu_tms_gasoil_mngmt" sequence="3" groups="" action="action_fleet_vehicle_log_fuel_tms"/>
+		<menuitem id="menu_tms_gasoil_order_external" name="Bon de carburant externe" parent="menu_tms_gasoil_mngmt" sequence="4" groups="" action="action_fleet_vehicle_log_fuel_external"/>
+
+
+							<!--_____________CONFIGURATION_____________-->
+
+	<menuitem id="menu_tms_config" name="Configuration" parent="base.menu_tms_root" icon="terp-stock" sequence="4" groups=""/>
+		<menuitem id="menu_tms_config_vehicle" name="Véhicules" parent="menu_tms_config" sequence="1" groups=""/>
+			<menuitem id="menu_tms_config_vehicle_category" name="Catégories" parent="menu_tms_config_vehicle" sequence="1" groups="" action="action_fleet_vehicle_category_vehicle"/>
+			<menuitem id="menu_tms_config_vehicle_brand" name="Marques" parent="menu_tms_config_vehicle" sequence="2" groups="" action="fleet_vehicle_model_brand_veh_act"/>
+			<menuitem id="menu_tms_config_vehicle_model" name="Modèles" parent="menu_tms_config_vehicle" sequence="3" groups="" action="fleet.fleet_vehicle_model_act"/>
+
+		<menuitem id="menu_tms_config_trailer" name="Semi-remorques" parent="menu_tms_config" sequence="2" groups=""/>
+			<menuitem id="menu_tms_config_trailer_category" name="Catégories" parent="menu_tms_config_trailer" sequence="1" groups="" action="action_fleet_vehicle_category_trailer"/>
+			<menuitem id="menu_tms_config_trailer_brand" name="Marques" parent="menu_tms_config_trailer" sequence="2" groups="" action="fleet_vehicle_model_brand_rem_act"/>
+
+		<menuitem id="menu_tms_config_merchandise" name="Types de transport" parent="menu_tms_config" sequence="3" groups="" action="action_tms_travel_palet_merchandise"/>
+
+		<menuitem id="menu_tms_config_pricelist" name="Listes de prix" parent="menu_tms_config" sequence="4" groups=""/>
+			<menuitem id="menu_tms_config_pricelist_list" name="Listes de prix" parent="menu_tms_config_pricelist" sequence="1" groups="" action="product.product_pricelist_action2"/>
+			<menuitem id="menu_tms_config_pricelist_version" name="Versions de liste de prix" parent="menu_tms_config_pricelist" sequence="1" groups="" action="product.product_pricelist_action"/>
+			<menuitem id="menu_tms_config_pricelist_type" name="Types de prix" parent="menu_tms_config_pricelist" sequence="1" groups="" action="product_price_type_action_tms"/>
+	</data>
+</openerp>

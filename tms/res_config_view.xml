@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_tms_config_settings" model="ir.ui.view">
+            <field name="name">tms settings</field>
+            <field name="model">tms.config.settings</field>
+            <field name="arch" type="xml">
+                <form string="Configurer le TMS" version="7.0" class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <separator string="Marchandises transportées"/>
+                    <group>
+                        <div>
+                            <div>
+                                <field name="tms_param_customer_merchandise_select" class="oe_inline"/>
+                                <label for="tms_param_customer_merchandise_select"/>
+                            </div>
+                        </div>    
+                    </group>
+                    <separator string="Frais annexes"/>
+                    <group>
+                        <div>
+                            <div>
+                                <field name="display_tms_cost" class="oe_inline"/>
+                                <label for="display_tms_cost"/>
+                            </div>
+                        </div>    
+                    </group>
+                    <separator string="Numéro de chassis"/>
+                    <group>
+                        <div>
+                            <div>
+                                <field name="required_vin" class="oe_inline"/>
+                                <label for="required_vin"/>
+                            </div>
+                        </div>    
+                    </group>                   
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tms_config_settings" model="ir.actions.act_window">
+            <field name="name">Configurer le TMS</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tms.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem id="menu_tms_config_settings" name="TMS" parent="base.menu_config"
+            sequence="10" action="action_tms_config_settings"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!--========================== product_pricelist ============================-->
+<!--
+        <record id="product_pricelist_form_inherit_tms" model="ir.ui.view">
+            <field name="name">product.pricelist.form.inherit.tms</field>
+            <field name="model">product.pricelist</field>
+	    <field name="inherit_id" ref="product.product_pricelist_view"/>
+            <field name="arch" type="xml">
+		<field name="company_id" position="after">
+		    <field name="category_id"/>
+		</field>
+	    </field>
+	</record>
+
+        <record id="product_pricelist_tree_inherit_tms" model="ir.ui.view">
+            <field name="name">product.pricelist.tree.inherit.tms</field>
+            <field name="model">product.pricelist</field>
+	    <field name="inherit_id" ref="product.product_pricelist_view_tree"/>
+            <field name="arch" type="xml">
+		<field name="active" position="after">
+		    <field name="category_id"/>
+		</field>
+	    </field>
+	</record>
+-->
+		<!--========================== product_pricelist_item ============================-->
+		<record model="ir.ui.view" id="product_pricelist_item_form_inherit">
+		    <field name="name">product.pricelist.item.form</field>
+		    <field name="model">product.pricelist.item</field>
+		    <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+		    <field name="arch" type="xml">
+		    	<xpath expr="//form[@string='Products Listprices Items']/group" position="after" >
+			<group>
+		    		<field name="trajet_ok" invisible="1"/>
+		    		<separator colspan="4"/>
+				<group>
+		    		<field name="commission_ok" />
+				</group>
+		    		<separator colspan="4" string="Commission chauffeur" attrs="{'invisible': [('commission_ok','=',False)]}" />
+				<group>
+		         <field name="fixed_commission_ok" on_change="onchange_fixed_commission_ok(fixed_commission_ok)" attrs="{'invisible': [('commission_ok','=',False)]}" /> 
+				</group>
+		    		<group col="6" colspan="5" attrs="{'invisible': ['|',('commission_ok','=',False),('fixed_commission_ok','=',False)]}" >
+		    			<group col="6" colspan="5">
+                        <label string="Nouvelle commission ="/>
+                        <label string="Commission de base"/>
+                        <label string="* ( 1 + "/>
+                        <field name="price_discount_commission" nolabel="1"/>
+                        <label string=" ) + "/>
+                        <field name="price_surcharge_commission" nolabel="1"/>
+                        <newline/>
+                        <field name="price_round_commission" />
+                        <field name="price_min_margin_commission" />
+                        <field name="price_max_margin_commission" />
+                        </group>
+                    </group>
+			<group>
+                    <field name="percent_commission_ok"  on_change="onchange_percent_commission_ok(percent_commission_ok)" attrs="{'invisible': [('commission_ok','=',False)]}" />
+			</group>
+                        <newline/>
+                        <field name="percent_commission"  attrs="{'invisible': [('percent_commission_ok','=',False)]}" />
+                        <newline/>
+                    <separator colspan="4" string="Tarification par type de transport"/>
+		    			<group col="6" colspan="5">
+	                        <field name="item_merchandise_ids" nolabel="1"  widget="one2many_list"  >
+	                        	<tree>
+	                        		<field name="merchandise_id" string="type de transport"/>
+			                        <field name="fixed" />
+			                        <field name="born_inf" attrs="{'invisible':[('fixed','=',False)]}" />
+			                        <field name="born_sup" attrs="{'invisible':[('fixed','=',False)]}"/>	                 
+			                        <field name="price" string="Prix"/>
+                                    <field name="comission"/>
+                                    <field name="fixe"/>
+                                    <field name="comission_fixe"/>
+                                    <field name="min_quantity" />
+                                    <field name="uom_id" />
+	                        	</tree>
+	                        	<form>
+	                        	  <group>
+	                        		<field name="pricelist_item_id" invisible="1" />
+	                        		<field name="merchandise_id" string="type de transport"/>
+			                        <field name="fixed" />
+			                        <field name="born_inf" attrs="{'invisible':[('fixed','=',False)]}" />
+			                        <field name="born_sup" attrs="{'invisible':[('fixed','=',False)]}"/>
+			                        <field name="price" string="Prix"/>
+									<field name="comission"/>
+                                    <field name="fixe"/>
+                                    <field name="comission_fixe"  attrs="{'invisible':[('fixe','=',False)]}"/>
+	                        	  	<field name="min_quantity" />
+	                        	  	<field name="uom_id" />
+	                        	  </group>
+	                        	</form>
+			    			</field>
+		    			</group>
+			</group>
+		    	</xpath>
+		    </field>
+		   </record>
+	       
+	       <record id="product_pricelist_action_version_tms" model="ir.actions.act_window">
+	            <field name="name">Versions de liste de prix</field>
+	            <field name="type">ir.actions.act_window</field>
+	            <field name="res_model">product.pricelist.version</field>
+	            <field name="view_type">form</field>
+	            <field name="view_id" ref="product.product_pricelist_version_tree_view"/>
+	            <field name="help">There can be more than one version of a pricelist. Here you can create and manage new versions of a price list. Some examples of versions: 2010, 2011, Summer Promotion, etc.</field>
+	       </record>
+	       
+	       <record id="product_price_type_action_tms" model="ir.actions.act_window">
+	            <field name="name">Types de prix</field>
+	            <field name="type">ir.actions.act_window</field>
+	            <field name="res_model">product.price.type</field>
+	            <field name="view_type">form</field>
+	            <field name="view_mode">tree,form</field>
+	       </record>
+	
+	</data>
+</openerp>
