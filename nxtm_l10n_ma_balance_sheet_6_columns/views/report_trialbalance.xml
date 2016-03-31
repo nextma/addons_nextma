@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_trialbalance" inherit_id="account.report_trialbalance">
+<xpath expr="//div[@class='page']" position="replace">
+            <div class="page">
+                <h2><span t-esc="res_company.name"/>: Balance Générale</h2>
+
+                <div class="row mt32">
+                    <div class="col-xs-3">
+                        <strong>Plan comptable:</strong>
+                        <p t-esc="get_account(data)"/>
+                    </div>
+                    <div class="col-xs-3">
+                        <strong>Année fiscale:</strong>
+                        <p t-esc="get_fiscalyear(data)"/>
+                    </div>
+                    <div class="col-xs-3">
+                        <strong>Comptes affichés:</strong>
+                        <p>
+                            <span t-if="data['form']['display_account'] == 'all'">Tous les comptes</span>
+                            <span t-if="data['form']['display_account'] == 'movement'">Avec des mouvements</span>
+                            <span t-if="data['form']['display_account'] == 'not_zero'">Avec balance différentes de zero</span>
+                        </p>
+                    </div>
+                    <div class="col-xs-3">
+                        <strong>Filtrer par:</strong>
+                        <p>
+                            <span t-if="data['form']['filter'] == 'filter_no'">Non filtré</span>
+                            <span t-if="data['form']['filter'] == 'filter_period'">Filtré par période</span>
+                            <span t-if="data['form']['filter'] == 'filter_date'">Filtré par date</span>
+                            <p t-if="data['form']['filter'] == 'filter_period'">
+                                Période initiale: <span t-esc="get_start_period(data)"/>
+                                Période finale: <span t-esc="get_end_period(data)"/>
+                            </p>
+                            <p t-if="data['form']['filter'] == 'filter_date'">
+                                De : <span t-esc="formatLang(get_start_date(data), date=True)"/><br />
+                                À : <span t-esc="formatLang(get_end_date(data), date=True)"/>
+                            </p>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mb32">
+                    <div class="col-xs-3">
+                        <strong>Écritures cibles:</strong>
+                        <p t-esc="get_target_move(data)"/>
+                    </div>
+                    <div class="col-xs-3">
+                        <strong>Année fiscale(N-1):</strong>
+                        <p t-esc="get_fiscalyear_balance(data['form']['fiscalyear_id_old'])"/>
+                    </div>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                            <th class="text-center" colspan="2">Compte</th>
+                            <th class="text-center" colspan="2">Soldes initiaux</th>
+                            <th class="text-center" colspan="2">Mouvements</th>
+                            <th class="text-center" colspan="2">Soldes finaux</th>
+                        </tr>
+                        <tr>
+                            <th>Code</th>
+                            <th>Libellé</th>
+                            <th class="text-center">Débit</th>
+                            <th class="text-center">Crédit</th>
+                            <th class="text-center">Débit</th>
+                            <th class="text-center">Crédit</th>
+                            <th class="text-center">Débiteur</th>
+                            <th class="text-center">Créditeur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="lines_new_balance(data['form'])" t-as="childrenaccount">
+                            <t t-if="childrenaccount['type'] == 'view'">
+                                <t t-set="style" t-value="'font-weight:bold;'"/>
+                            </t>
+                            <t t-if="childrenaccount['type'] != 'view'">
+                                <t t-set="style" t-value="'font-weight:normal;'"/>
+                            </t>
+
+                            <td>
+                                <span t-att-style="style" t-esc="childrenaccount['code']"/>                                     
+                            </td>
+                            <td>
+                                <span style="color: white;" t-esc="'.' * (childrenaccount['level'] - 1)"/>
+                                <span t-att-style="style" t-esc="childrenaccount['name']"/>
+                            </td>
+                            <td class="text-right">
+                                 <span t-att-style="style" t-esc="formatLang(childrenaccount['debit_old'], currency_obj=res_company.currency_id)"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-att-style="style" t-esc="formatLang(childrenaccount['credit_old'], currency_obj=res_company.currency_id)"/>
+                            </td>
+                            <td class="text-right">
+                                 <span t-att-style="style" t-esc="formatLang(childrenaccount['debit'], currency_obj=res_company.currency_id)"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-att-style="style" t-esc="formatLang(childrenaccount['credit'], currency_obj=res_company.currency_id)"/>
+                            </td>
+                            <td class="text-right">
+                              <t t-if="childrenaccount['balance_old']+childrenaccount['balance']>0">
+                                  <span t-att-style="style" t-esc="formatLang(childrenaccount['balance_old']+childrenaccount['balance'], currency_obj=res_company.currency_id)"/>
+                              </t>
+                              <t t-if="0==childrenaccount['balance_old']+childrenaccount['balance']">
+                                   <span t-att-style="style" t-esc="formatLang(0, currency_obj=res_company.currency_id)"/>
+                               </t>  
+                            </td>
+                            <td class="text-right">
+                               <t t-if="0>childrenaccount['balance_old']+childrenaccount['balance']">
+                                   <span t-att-style="style" t-esc="formatLang(-1*(childrenaccount['balance_old']+childrenaccount['balance']), currency_obj=res_company.currency_id)"/>
+                               </t> 
+                               <t t-if="0==childrenaccount['balance_old']+childrenaccount['balance']">
+                                     <span t-att-style="style" t-esc="formatLang(0, currency_obj=res_company.currency_id)"/>
+                               </t>                           
+                            </td>  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+</xpath>
+</template>
+</data>
+</openerp>
