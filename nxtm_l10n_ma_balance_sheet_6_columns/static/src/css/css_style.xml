@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="style_for_report" inherit_id="report.layout">
+  <xpath expr="//style" position="after">
+    <style type="text/css">
+
+	.table-bordered {
+               border: 1px solid black;
+               border-radius:10px;
+                    }
+	.table-bordered > thead > tr > th,
+	.table-bordered > tbody > tr > th,
+	.table-bordered > tfoot > tr > th,
+	.table-bordered > thead > tr > td,
+	.table-bordered > tbody > tr > td,
+	.table-bordered > tfoot > tr > td {
+  										border: 1px solid black;
+									  }
+
+    </style>
+  </xpath>
+</template>
+</data>
+</openerp>
