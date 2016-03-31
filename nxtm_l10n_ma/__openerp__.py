@@ -28,12 +28,9 @@
 Ceci est le module de base pour gérer le plan comptable marocain.
 =================================================================
 
-Ce Module charge le modèle du plan de comptes standard Marocain et permet de
-générer les états comptables aux normes marocaines (Bilan, CPC (comptes de
-produits et charges), balance générale à 6 colonnes, Grand livre cumulatif...).
-L'intégration comptable a été validé avec l'aide du Cabinet d'expertise comptable
-Seddik au cours du troisième trimestre 2010.""",
-    'website': 'http://www.kazacube.com',
+Plan Comptable Générale Marocain avec des modifications apportées au module officiel suite au meetup Localisation maroc organisé 
+par la société NEXTMA avec la participation d'intégarteurs odoo marocains voir liste des modifications dans le fichier readme.""",
+    'website': 'http://www.kazacube.com,http://www.nextma.com',
     'depends' : ['base', 'account','account_accountant'],
     'data' : [
         'security/ir.model.access.csv',
