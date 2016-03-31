@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="account_report_balance_view" model="ir.ui.view">
+          <field name="name">Trial Balance</field>
+          <field name="model">account.balance.report</field>
+          <field name="inherit_id" ref="account.account_report_balance_view" />
+          <field name="arch" type="xml">
+            <data>
+            <xpath expr="//field[@name='fiscalyear_id']" position="after">
+                 <field name="fiscalyear_id_old" domain="[('company_id','=',company_id)]"/>
+            </xpath>
+            </data>
+          </field>
+        </record>
+    </data>
+</openerp>
