@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="action_picking_tree1" model="ir.actions.act_window">
+            <field name="name">Incoming Shipments</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('picking_type_id.code','=','incoming')]</field>
+            <field name="context">{
+                    'search_default_picking_type_id': [1],
+                    'default_picking_type_id': 1,
+                    'contact_display': 'partner_address'
+                    
+            }
+            </field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create an incoming shipment. 
+              </p><p>
+                The Incoming Shipments is the list of all orders you will
+                receive from your suppliers. An incoming shipment contains a
+                list of products to be received according to the original
+                purchase order.
+              </p>
+            </field>
+        </record>
+        <record id="action_picking_tree2" model="ir.actions.act_window">
+            <field name="name">Delivery Orders</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('picking_type_id.code','=','outgoing')]</field>
+            <field name="context">{
+                    'search_default_picking_type_id': [2],
+                    'default_picking_type_id': 2,
+                    'contact_display': 'partner_address'
+                    
+            }
+            </field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create an outgoing shipment. 
+              </p><p>
+             
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_picking_tree1" id="menu_action_picking_tree1" parent="stock.menu_stock_warehouse_mgmt" sequence="2" />
+        <menuitem action="action_picking_tree2" id="menu_action_picking_tree2" parent="stock.menu_stock_warehouse_mgmt" sequence="3" />
+        
+    </data>
+</openerp>
