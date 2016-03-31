@@ -1,0 +1,5015 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-aab3d9f\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-09 10:30+0000\n"
+"PO-Revision-Date: 2015-12-10 06:42-0000\n"
+"Last-Translator: salif <somandesalif@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: tms
+#: help:tms.picking,state:0 help:tms.picking.report2,state:0
+#: help:tms.picking.report2.line,state:0
+msgid ""
+"\n"
+"            * Brouillon: Bon de livraison voyage non encore confirmé et ne "
+"sera pas plannifié tant qu'il ne sera pas confirmé.\n"
+"\n"
+"            * En attente de disponibilité: En attente de disponibilité du "
+"véhicule ou du chauffeur pour effectuer le voyage.\n"
+"\n"
+"            * Assigné: Véhicule et chauffeur assignés, juste en attente de "
+"la validation de l'utilisateur.\n"
+"\n"
+"            * Terminé: Voyage créé, bon de livraison validé et prêt à être "
+"facturé.\n"
+"\n"
+"            * Annulé: La livraison a été annulée."
+msgstr ""
+
+#. module: tms
+#: help:tms.grouping,state:0
+msgid ""
+"\n"
+"            * Brouillon: Bons de livraison voyage non encore confirmés.\n"
+"\n"
+"            * En attente de disponibilité: En attente de disponibilité du "
+"véhicule ou du chauffeur pour effectuer les voyages.\n"
+"\n"
+"            * Assigné: Véhicule et chauffeur assignés, juste en attente de "
+"la validation de l'utilisateur.\n"
+"\n"
+"            * Terminé: Voyages créés, bons de livraison validés et prêts à "
+"être facturés.\n"
+"\n"
+"            * Annulé: Les livraisons ont été annulées."
+msgstr ""
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,total_real_consumption:0
+msgid "(Total litrage réalisé * 100)/ Kilométrage parcourus"
+msgstr "(Total litrage réalisé * 100)/ Kilométrage parcourus"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "(update)"
+msgstr "(update)"
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_fleet_vehicle_log_fuel_external
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer un bon de carburant externe. \n"
+"              </p><p>\n"
+"Les bons de carburant externe vous permettent d'assurer le suivi des "
+"consommations externes en carburant. Vous pouvez rattacher un bon de "
+"carburant externe à un bon de carburant interne.\n"
+"              </p>\n"
+"            "
+msgstr ""
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_fleet_vehicle_log_fuel_tms
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer un bon de carburant interne. \n"
+"              </p><p>\n"
+"Les bons de carburant internes vous permettent d'assurer le suivi des "
+"consommations de carburant du véhicule. Lors de la création du bon interne, "
+"vous pouvez sélectionner les bons externes et les voyages associés au "
+"véhicule concerné par le bon. Une fois le bon validé, celui-ci génèrera un "
+"compteur sur la base des bons antérieurs pour le suivi du kilométrage du "
+"véhicule en question.\n"
+"              </p>\n"
+"            "
+msgstr ""
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_driver_employee
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer un nouveau chauffeur. \n"
+"              </p><p>\n"
+"Les chauffeurs sont des employés avec le statut de conducteur. Pour créer un "
+"chauffeur, veillez à cocher la case chauffeur, pour qu'il soit considéré "
+"comme tel et donc être affecté à un véhicule donné.\n"
+"\t\t</p>\n"
+"\t\t"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Click here to create a "
+"new driver.               </p><p>The drivers are employees with the status "
+"of the driver. To create a driver, be sure to check the driver box, to be "
+"considered as such and thus be assigned to a given vehicle.</p>"
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.tms_fleet_trailer_log_contract_act
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer un nouveau contrat de semi-"
+"remorque. \n"
+"              </p><p>\n"
+"                Vous pouvez gérer vos différents contrats (leasing, "
+"assurances, etc.) avec leurs coûts et services relatifs. OpenERP vous "
+"préviendra automatiquement quand certains contrats seront à renouveler.\n"
+"              </p><p>\n"
+"                Chaque contrat (i.e.: leasing) peut inclure différents "
+"services (réparation, assurances, maintenance périodique).\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Cliquer ici pour créer "
+"un nouveau contrat de semi-remorque.               </p><p>                "
+"Vous pouvez gérer vos différents contrats (leasing, assurances, etc.) avec "
+"leurs coûts et services relatifs. OpenERP vous préviendra automatiquement "
+"quand certains contrats seront à renouveler.              </"
+"p><p>                Chaque contrat (i.e.: leasing) peut inclure différents "
+"services (réparation, assurances, maintenance périodique).              </"
+"p>            "
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.tms_fleet_vehicle_log_contract_act
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer un nouveau contrat de véhicule. \n"
+"              </p><p>\n"
+"                Vous pouvez gérer vos différents contrats (leasing, "
+"assurances, etc.) avec leurs coûts et services relatifs. OpenERP vous "
+"préviendra automatiquement quand certains contrats seront à renouveler.\n"
+"              </p><p>\n"
+"                Chaque contrat (i.e.: leasing) peut inclure différents "
+"services (réparation, assurances, maintenance périodique).\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click here to create a new vehicle "
+"contract. </p><p>                You can manage your different contracts "
+"(leasing, insurance, etc.) with their relative costs and services. OpenERP "
+"automatically notify you when certain contracts will be renewed.             "
+"</p><p>                Each contract (eg: leasing) can include different "
+"services (repair, insurance, periodic maintenance).            </"
+"p>            "
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.tms_fleet_trailer_costs_act
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer un nouveau coût.\n"
+"              </p><p>\n"
+"                OpenERP vous aide à manager les coûts des différentes semi-"
+"remorques. Les coûts sont générés automatiquement à partir des contrats.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Click here to create a "
+"new cost.              </p><p>                Click here to create a new "
+"cost. OpenERP helps you to manage costs of the different trailers. Costs are "
+"automatically generated from the contracts.              </p>            "
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.tms_fleet_vehicle_costs_act
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer un nouveau coût.\n"
+"              </p><p>\n"
+"                OpenERP vous aide à manager les coûts des différents "
+"véhicules. Les coûts sont générés automatiquement à partir des contrats et "
+"des relévés de carburant.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Cliquer ici pour créer "
+"un nouveau coût.              </p><p>                OpenERP vous aide à "
+"manager les coûts des différents véhicules. Les coûts sont générés "
+"automatiquement à partir des contrats et des relévés de "
+"carburant.              </p>            "
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_attendant_employee
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer un nouveau pompiste. \n"
+"              </p><p>\n"
+"Les pompistes sont des employés qui ont pour rôle d'effectuer "
+"l'approvisionnement des véhicules en carburant. Pour créer un pompiste, "
+"veillez à cocher la case pompiste, pour qu'il soit considéré comme tel.\n"
+"\t\t</p>\n"
+"\t\t"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Click here to create a "
+"new pump assistant.              </p><p>The pump assistants are employees "
+"whose role is to perform supplying fuel vehicles.To create a pump assistant, "
+"be sure to check the box pump assistant, to be considered as such.</p>"
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_fleet_vehicle_category_trailer
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer une nouvelle catégorie de semi-"
+"remorque. \n"
+"              </p>\n"
+"\t"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Cliquer ici pour créer "
+"une nouvelle catégorie de semi-remorque.               </p>"
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_fleet_vehicle_category_vehicle
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer une nouvelle catégorie de véhicule. \n"
+"              </p>\n"
+"\t"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Click here to create a "
+"new category of vehicle.               </p>"
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.fleet_vehicle_model_brand_rem_act
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer une nouvelle marque de semi-"
+"remorque.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Click here to create a "
+"new trailer brand.             </p>            "
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.fleet_vehicle_model_brand_veh_act
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer une nouvelle marque de véhicule.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Cliquer ici pour créer "
+"une nouvelle marque de véhicule.              </p>            "
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_sale_order_tms
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"Cliquer ici pour créer un bon de commande de voyages. \n"
+"              </p><p>\n"
+"Les bons de commande voyage sont optionnels. Vous pouvez encoder ici un "
+"devis de plusieurs voyages pour le même client qui, une fois confirmé pourra "
+"être converti en bon de livraison voyage. Ce bon de commande voyage génère "
+"automatiquement un ou plusieurs bons de livraison voyage selon le nombre de "
+"voyages.\n"
+"\t\t</p>\n"
+"\t\t"
+msgstr ""
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_tms_grouping_circuit
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"Cliquer ici pour encoder un nouveau circuit.\n"
+"\t\t</p><p>\n"
+"Les circuits vous favorisent la gestion des livraisons de marchandises "
+"groupées ou encore tournées. Elles vous facilitent le contrôle d'une charge "
+"maximale à ne pas dépasser, la mise en place d'un itinéraire permettant une "
+"gestion plus facile du suivi du camion.\n"
+"\t\t</p>\n"
+"\t    "
+msgstr ""
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_tms_grouping
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"Cliquer ici pour encoder un nouveau groupage.\n"
+"\t\t</p><p>\n"
+"\t\t</p>\n"
+"\t    "
+msgstr ""
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_fleet_vehicle_modification
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"La modification de parc consiste en l'affectation des véhicules aux semi-"
+"remorques à une date précise, ce dit véhicule pourra être décroché de la "
+"semi-remorque ultérieurement.\n"
+"\t\t</p>\n"
+"\t\t"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">Modifying park consists of the "
+"allocation of vehicles to trailers on a specific date, the vehicle can be "
+"unhooked from the trailer later.</p>"
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_tms_picking
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"Les bons de livraison voyage représentent la base du voyage, ils peuvent "
+"être encodés manuellement ou générés à partir d'un bon de commande voyage. "
+"Le processus de validation général d'un bon de livraison voyage est le "
+"suivant: L'affectation de ressources au voyage (véhicule, chauffeur, semi-"
+"remorque, estimation du prix), la validation logistique, la validation "
+"finale.\n"
+"\t\t</p>\n"
+"\t    "
+msgstr ""
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.product_normal_action_gasoil
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"Les carburants représentent les types de ressources carburant existantes "
+"comme produit au sein de l'entreprise. Veuillez à cocher la case gasoil dans "
+"le forumlaire lors de la création d'un carburant\n"
+"\t        </p>\n"
+"\t    "
+msgstr ""
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_tms_stock_location
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"Les citernes ou cuves sont des emplacements ou sont stockés votre réserve "
+"interne de carburant. Pour créer une cuve, veillez à cocher l'option "
+"citerne.\n"
+"\t\t</p>\n"
+"\t    "
+msgstr ""
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_tms_picking_folder
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"Les dossiers de bon de livraison voyage représentent un regroupement logique "
+"pour le traitement des bons de livraisons. Ces dossiers peuvent être utiles "
+"pour le suivi de facturation en les groupant par lot de facturation.\n"
+"\t\t</p>\n"
+"\t    "
+msgstr ""
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_tms_traject
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"Les trajets sont des données représentant le parcours effectué lors d'un "
+"voyage de camion. Ils peuvent être vus comme des produits (services) et "
+"influencent donc la décision de facturation. Vous pouvez définir des trajets "
+"(i.e: Casablanca-Mohammedia ) avec un prix fixe et les informations propres "
+"au trajet comme la commission et le kilométrage estimé. Veillez à cocher la "
+"case trajet dans le formulaire lors de la création d'un trajet.\n"
+"\t\t</p>\n"
+"\t    "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">The journeys are data representing the "
+"distance covered on a trip truck. They can be seen as products (services) "
+"and thus influence the charging decision. You can set journeys (ie: "
+"Casablanca-Mohammedia) with a fixed price and route-specific information as "
+"the commission and the estimated mileage. Be sure to check the box journey "
+"in the form when creating a journey.</p>    "
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_tms_travel_palet_merchandise
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"Les types de transport peuvent être définis selon le bon vouloir de "
+"l'utilisateur. Ils peuvent représenter une tranche de tonnage ( 20 T - 30 T) "
+"ou une marchandise (maïs), pour être assigné aux caractéristiques véhicules "
+"ou semi-remorques (catégorie). Aussi, le type de transport est  utile pour "
+"la gestion des listes de prix en fonction des clients.\n"
+"\t\t</p>\n"
+"\t\t"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">Les types de transport peuvent être "
+"définis selon le bon vouloir de l'utilisateur. Ils peuvent représenter une "
+"tranche de tonnage ( 20 T - 30 T) ou une marchandise (maïs), pour être "
+"assigné aux caractéristiques véhicules ou semi-remorques (catégorie). Aussi, "
+"le type de transport est  utile pour la gestion des listes de prix en "
+"fonction des clients.</p>"
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_tms_fleet_vehicle
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"Les véhicules présentés représentent les ressources disponibles dans le parc "
+"automobile de l'entreprise.\n"
+"\t\t</p>\n"
+"\t\t"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">The vehicles presented are the "
+"resources available in the fleet of the company.</p>"
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_fleet_park
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"Un parc est un regroupement de ressources concernant le voyage, à savoir les "
+"véhicules, les clients et le trajet. Chaque utilisateur a un parc par défaut "
+"qui lui permet d'encoder des bons de livraison voyage, des bons carburants "
+"externes et autres, tout en ayant une visibilité que sur les véhicules, les "
+"clients et les trajets définis dans son parc. Ainsi l'encodage des bons de "
+"livraison voyage s'avère rapide et aisé.\n"
+"\t\t</p>\n"
+"\t\t"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">Un parc est un regroupement de "
+"ressources concernant le voyage, à savoir les véhicules, les clients et le "
+"trajet. Chaque utilisateur a un parc par défaut qui lui permet d'encoder des "
+"bons de livraison voyage, des bons carburants externes et autres, tout en "
+"ayant une visibilité que sur les véhicules, les clients et les trajets "
+"définis dans son parc. Ainsi l'encodage des bons de livraison voyage s'avère "
+"rapide et aisé.</p>"
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.action_tms_fleet_trailer
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"Une semi-remorque est une remorque routière destinée au transport de "
+"marchandises dont la particularité est qu'elle repose sur un ou plusieurs "
+"essieux à l'arrière et peut être accrochée à un véhicule. Vous pourrez voir "
+"ici toutes les semi-remorques et leurs caractéristiques.\n"
+"\t\t</p>\n"
+"\t\t"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">Une semi-remorque est une remorque "
+"routière destinée au transport de marchandises dont la particularité est "
+"qu'elle repose sur un ou plusieurs essieux à l'arrière et peut être "
+"accrochée à un véhicule. Vous pourrez voir ici toutes les semi-remorques et "
+"leurs caractéristiques.</p>"
+
+#. module: tms
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_form
+msgid "Accrocher"
+msgstr "To hook"
+
+#. module: tms
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_search
+#: selection:fleet.vehicle.modification,state:0
+msgid "Accroché"
+msgstr "Hooked"
+
+#. module: tms
+#: field:fleet.vehicle.modification,date_hook:0
+msgid "Accroché le"
+msgstr "Hooked at"
+
+#. module: tms
+#: view:hr.employee:tms.hr_attendant_employee_search
+#: view:hr.employee:tms.hr_driver_employee_search
+msgid "Actif"
+msgstr "Active"
+
+#. module: tms
+#: field:fleet.vehicle,active:0
+msgid "Activé"
+msgstr "Activated"
+
+#. module: tms
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_form
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_tree
+msgid "Affectation"
+msgstr "Affectation"
+
+#. module: tms
+#: field:fleet.vehicle,vehicle_modification_ids:0
+msgid "Affectation remorques"
+msgstr "Affectation of the trailers"
+
+#. module: tms
+#: selection:tms.picking,state:0 selection:tms.picking.report2.line,state:0
+msgid "Affecté"
+msgstr "Affected"
+
+#. module: tms
+#: field:sale.order.line,travel_return:0 field:tms.picking,travel_return:0
+#: field:tms.travel,travel_return:0
+msgid "Aller-retour"
+msgstr "Round trip"
+
+#. module: tms
+#: field:tms.config.settings,tms_param_commission_include:0
+msgid "Amputer les commissions dans les coûts des véhicules"
+msgstr "Amputer les commissions dans les coûts des véhicules"
+
+#. module: tms
+#: field:tms.config.settings,tms_param_freeway_include:0
+msgid "Amputer les frais d'autoroute dans les coûts des véhicules"
+msgstr "Amputer les frais d'autoroute dans les coûts des véhicules"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,counter_old:0
+msgid "Ancien compteur"
+msgstr "Old odometer"
+
+#. module: tms
+#: view:log.fuel.external.card:tms.log_fuel_external_card_form
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Annuler"
+msgstr "Cancel"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_form
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Annuler le bon"
+msgstr "Cancel the order"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: selection:fleet.vehicle.log.fuel,state:0 selection:tms.grouping,state:0
+#: selection:tms.picking,state:0 selection:tms.picking.report2,state:0
+#: selection:tms.picking.report2.line,state:0
+msgid "Annulé"
+msgstr "Cancelled"
+
+#. module: tms
+#: view:tms.config.settings:tms.view_tms_config_settings
+msgid "Apply"
+msgstr "Apply"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Arrêter la facture à la somme de:"
+msgstr "Stop the invoice to the sum of:"
+
+#. module: tms
+#: field:tms.picking.product.details,product_id:0
+msgid "Article"
+msgstr "Product"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_picking_assigne
+#: view:picking.assigne:tms.view_picking_assigne
+msgid "Assign BLs"
+msgstr "Assign BLs"
+
+#. module: tms
+#: help:res.partner,picking_merchandise_ids:0
+msgid "Assignation des marchandises aux clients pour l'encodage des BLs."
+msgstr "Assignment of goods to customers for the encoding of the deliveries."
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "Assigned Delivery Orders"
+msgstr "Assigned Delivery Orders"
+
+#. module: tms
+#: view:picking.assigne:tms.view_picking_assigne
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Assigner"
+msgstr "Assign"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: selection:fleet.vehicle.log.fuel,state:0 selection:tms.grouping,state:0
+#: view:tms.picking:tms.view_tms_picking_search
+#: selection:tms.picking.report2,state:0
+msgid "Assigné"
+msgstr "Assigned"
+
+#. module: tms
+#: code:addons/tms/pricelist.py:313
+#, python-format
+msgid ""
+"At least one pricelist has no active version !\n"
+"Please create or activate one."
+msgstr ""
+"At least one pricelist has no active version !Please create or activate one."
+
+#. module: tms
+#: code:addons/tms/tms.py:204
+#, python-format
+msgid "Attachments"
+msgstr "Attachments"
+
+#. module: tms
+#: code:addons/tms/pricelist.py:123
+#, python-format
+msgid "Attention !"
+msgstr "Warning !"
+
+#. module: tms
+#: view:website:tms.picking_report2
+msgid "Au   :"
+msgstr "To   :"
+
+#. module: tms
+#: field:tms.picking.report2,criteria_3:0
+msgid "Au :"
+msgstr "To :"
+
+#. module: tms
+#: code:addons/tms/sale.py:140
+#, python-format
+msgid "Aucun client défini !"
+msgstr "No defined customer!"
+
+#. module: tms
+#: code:addons/tms/sale.py:238
+#, python-format
+msgid "Aucune ligne de liste de prix valide ! :"
+msgstr "No valid pricelist item! :"
+
+#. module: tms
+#: code:addons/tms/sale.py:221
+#, python-format
+msgid "Aucune liste de prix ! : "
+msgstr "No pricelist! :"
+
+#. module: tms
+#: field:sale.order.line,freeway_estimated:0
+msgid "Autoroute"
+msgstr "Highway"
+
+#. module: tms
+#: field:tms.grouping,freeway_estimated:0
+msgid "Autoroute estimée"
+msgstr "Highway estimated"
+
+#. module: tms
+#: field:sale.order.line,freeway_return:0
+msgid "Autoroute retour"
+msgstr "Highway return"
+
+#. module: tms
+#: field:sale.order.line,freeway_additional:0
+#: field:tms.grouping,freeway_additional:0
+msgid "Autoroute supplémentaire"
+msgstr "Highway additional"
+
+#. module: tms
+#: field:tms.grouping,freeway_total:0
+msgid "Autoroute total"
+msgstr "Highway total"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_form
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Autres Informations"
+msgstr "Others Informations"
+
+#. module: tms
+#: code:addons/tms/sale.py:140
+#, python-format
+msgid ""
+"Avant de choisir un trajet,\n"
+" veuillez sélectionner un client dans le formulaire du bon de commande."
+msgstr "Before choosing a journey, please select a customer in the order form."
+
+#. module: tms
+#: field:account.invoice,bl_id:0
+#: field:tms.picking.product.details,picking_id:0
+msgid "BL"
+msgstr "Delivery order"
+
+#. module: tms
+#: field:tms.travel,picking_id:0
+msgid "BL associé"
+msgstr "Associated delivery order"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Base"
+msgstr "Base"
+
+#. module: tms
+#: field:sale.order,boat:0
+msgid "Bateau"
+msgstr "Boat"
+
+#. module: tms
+#: field:account.invoice,picking_ids:0
+#: model:ir.actions.act_window,name:tms.act_bls_all
+msgid "Bls"
+msgstr "Delivery orders"
+
+#. module: tms
+#: field:fleet.vehicle,bl_ids:0
+msgid "Bls associées"
+msgstr "Associated delivery orders"
+
+#. module: tms
+#: help:tms.travel,fuel_order_id:0
+msgid "Bon carburant interne associé au voyage"
+msgstr "Fuel voucher internal associated with travel"
+
+#. module: tms
+#: field:tms.picking,removal_order:0 field:tms.travel,removal_order:0
+msgid "Bon d'enlèvement"
+msgstr "Removal order"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_form
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+msgid "Bon de carburant"
+msgstr "Fuel vouchers"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: model:ir.actions.act_window,name:tms.action_fleet_vehicle_log_fuel_external
+#: model:ir.ui.menu,name:tms.menu_tms_gasoil_order_external
+msgid "Bon de carburant externe"
+msgstr "Fuel vouchers external"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_gasoil_order_internal
+msgid "Bon de carburant interne"
+msgstr "Fuel vouchers internal"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,internal_order_id:0
+#: help:log.fuel.external.card,internal_order_id:0
+msgid "Bon de carburant interne lié."
+msgstr "Fuel voucher internal attached."
+
+#. module: tms
+#: code:addons/tms/sale.py:53 code:addons/tms/sale.py:72
+#: field:tms.travel,origin:0
+#, python-format
+msgid "Bon de commande"
+msgstr "Order"
+
+#. module: tms
+#: model:ir.actions.report.xml,name:tms.picking_report
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "Bon de livraison"
+msgstr "Delivery order"
+
+#. module: tms
+#: view:website:tms.report_tms_picking_document
+msgid "Bon de livraison N°"
+msgstr "Delivery order N°"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_picking
+msgid "Bon de livraison voyage"
+msgstr "Travel delivery order"
+
+#. module: tms
+#: field:tms.travel,fuel_order_id:0
+msgid "Bon gasoil interne"
+msgstr "Bon gasoil interne"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,internal_order_id:0
+#: field:log.fuel.external.card,internal_order_id:0
+msgid "Bon interne"
+msgstr "Internal order"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "Bons de carburant"
+msgstr "Fuel vouchers"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_tree
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Bons de carburant externe"
+msgstr "Fuel vouchers external"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_tree_tms
+#: model:ir.actions.act_window,name:tms.action_fleet_vehicle_log_fuel_tms
+msgid "Bons de carburant interne"
+msgstr "Fuel vouchers internal"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_sale_order
+msgid "Bons de commande"
+msgstr "Order"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_picking
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_tree
+msgid "Bons de livraison"
+msgstr "Delivery order"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_picking
+msgid "Bons de livraison voyage"
+msgstr "Travel delivery order"
+
+#. module: tms
+#: field:tms.picking.folder,picking_ids:0
+msgid "Bons de livraisons"
+msgstr "Delivery-orders"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Bons externes"
+msgstr "Bons externes"
+
+#. module: tms
+#: model:ir.model,name:tms.model_fleet_vehicle_model_brand
+msgid "Brand model of the vehicle"
+msgstr "Brand model of the vehicle"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: selection:fleet.vehicle.log.fuel,state:0 selection:tms.grouping,state:0
+msgid "Brouillon"
+msgstr "Draft"
+
+#. module: tms
+#: view:tms.picking.report2:tms.fleet_report_form
+msgid "CRITERIA"
+msgstr "CRITERIA"
+
+#. module: tms
+#: view:website:tms.report_tms_picking_document
+msgid "Cachet & Signature"
+msgstr "Stamp & Signature"
+
+#. module: tms
+#: view:picking.assigne:tms.view_picking_assigne
+#: view:picking.make.invoice:tms.view_picking_make_invoice2
+#: view:picking.terminer:tms.view_picking_terminer
+#: view:sale.make.invoice:tms.view_sale_order_make_invoice
+#: view:tms.config.settings:tms.view_tms_config_settings
+#: view:tms.picking.report.driver:tms.fleet_report_driver_form
+#: view:tms.picking.report2:tms.fleet_report_form
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Cancel Order"
+msgstr "Cancel Order"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Cancel Quotation"
+msgstr "Cancel Quotation"
+
+#. module: tms
+#: code:addons/tms/tms.py:1017
+#, python-format
+msgid ""
+"Cannot find a chart of accounts for this company, you should create one."
+msgstr ""
+"Cannot find a chart of accounts for this company, you should create one."
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_tree
+#: field:fleet.vehicle,capacity:0
+msgid "Capacité"
+msgstr "Capacity"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+msgid "Capacité Semi-remorque"
+msgstr "Semitrailer capacity"
+
+#. module: tms
+#: field:fleet.vehicle,capacity_global:0
+msgid "Capacité globale"
+msgstr "Global capacity"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: model:ir.actions.act_window,name:tms.product_normal_action_gasoil
+#: model:ir.ui.menu,name:tms.menu_tms_gasoil_product
+msgid "Carburant"
+msgstr "Fuel"
+
+#. module: tms
+#: view:log.fuel.external.card:tms.log_fuel_external_card_form
+msgid "Carburant externe"
+msgstr "Fuel external"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,gasoil_id:0
+msgid "Carburant utilisé"
+msgstr "Fuel used"
+
+#. module: tms
+#: selection:fleet.vehicle.log.fuel,payment_type:0
+msgid "Carte"
+msgstr "Card"
+
+#. module: tms
+#: model:ir.model,name:tms.model_log_fuel_external_card
+msgid "Carte de gasoil externe"
+msgstr "External gasoil card"
+
+#. module: tms
+#: view:product.product:tms.product_search_form_tms_gasoil_view
+msgid "Category"
+msgstr "Category"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_search
+#: view:fleet.vehicle:tms.tms_fleet_trailer_tree
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_search
+#: field:fleet.vehicle,category_id:0
+#: view:fleet.vehicle.category:tms.fleet_vehicle_category_form
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: field:fleet.vehicle.log.fuel,category_id:0
+#: view:product.product:tms.product_search_form_tms_view
+msgid "Catégorie"
+msgstr "Category"
+
+#. module: tms
+#: field:hr.employee,car_licence_category:0
+msgid "Catégorie Permis"
+msgstr "License Category"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_fleet_vehicle_category_trailer
+#: model:ir.actions.act_window,name:tms.action_fleet_vehicle_category_vehicle
+msgid "Catégorie Véhicule"
+msgstr "Vehicle Category"
+
+#. module: tms
+#: field:hr.employee.licence_category,name:0
+#: model:ir.actions.act_window,name:tms.open_view_licence_categ_act
+#: model:ir.ui.menu,name:tms.menu_view_employee_licence_category_form
+msgid "Catégorie de permis"
+msgstr "License category"
+
+#. module: tms
+#: field:tms.travel.palet.merchandise,category_id:0
+msgid "Catégorie de véhicule"
+msgstr "Vehicle category"
+
+#. module: tms
+#: field:fleet.vehicle.category,trailer_ok:0
+msgid "Catégorie semi-remorque TMS"
+msgstr "Catégorie semi-remorque TMS"
+
+#. module: tms
+#: field:fleet.vehicle.category,vehicle_ok:0
+msgid "Catégorie véhicule TMS"
+msgstr "Catégorie véhicule TMS"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_config_trailer_category
+#: model:ir.ui.menu,name:tms.menu_tms_config_vehicle_category
+msgid "Catégories"
+msgstr "Categories"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_park_change
+msgid "Changer de parc"
+msgstr "Change Park"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_res_users_default_park
+#: view:res.users.default.park:tms.tms_res_users_default_park_form
+msgid "Changer mon parc"
+msgstr "Change My Park"
+
+#. module: tms
+#: field:tms.picking,picking_cost_ids:0
+msgid "Charge"
+msgstr "Charge"
+
+#. module: tms
+#: field:tms.grouping,truck_actual_charge:0
+msgid "Charge actuelle"
+msgstr "Charge actuelle"
+
+#. module: tms
+#: field:tms.grouping,truck_max_charge:0
+msgid "Charge maximale autorisée"
+msgstr "Charge maximale autorisée"
+
+#. module: tms
+#: field:tms.grouping.circuit,truck_max_charge:0
+msgid "Charge maximale permise"
+msgstr "Maximum load permitted"
+
+#. module: tms
+#: help:tms.grouping,truck_max_charge:0
+#: help:tms.grouping.circuit,truck_max_charge:0
+msgid "Charge maximale pour un camion sur ce circuit."
+msgstr "Charge maximale pour un camion sur ce circuit."
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Charges"
+msgstr "Charges"
+
+#. module: tms
+#: field:product.product,cout:0
+msgid "Charges?"
+msgstr "Costs?"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_search
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: field:fleet.vehicle.log.fuel,driver_id:0
+#: view:hr.employee:tms.hr_driver_employee_search
+#: view:hr.employee:tms.hr_driver_tree field:hr.employee,driver_ok:0
+#: field:log.fuel.external.card,driver_id:0 field:tms.grouping,driver_id:0
+#: view:tms.picking:tms.view_tms_picking_search field:tms.picking,driver_id:0
+#: field:tms.picking.report.driver,driver_id:0
+#: field:tms.picking.report.driver.line,driver_id:0
+#: field:tms.picking.report2.line,driver_id:0 field:tms.travel,driver_id:0
+#: view:website:tms.picking_report2 view:website:tms.picking_report_driver
+#: view:website:tms.report_tms_picking_document
+msgid "Chauffeur"
+msgstr "Driver"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,driver_id:0
+msgid ""
+"Chauffeur affecté au véhicule, vous avez la possibilité de ne pas définir le "
+"chauffeur"
+msgstr ""
+"Chauffeur affecté au véhicule, vous avez la possibilité de ne pas définir le "
+"chauffeur"
+
+#. module: tms
+#: help:tms.grouping,driver_id:0
+msgid "Chauffeur dédié pour ce groupage."
+msgstr "Chauffeur dédié pour ce groupage."
+
+#. module: tms
+#: help:tms.picking,driver_id:0
+msgid "Chauffeur dédié pour ce voyage."
+msgstr "Chauffeur dédié pour ce voyage."
+
+#. module: tms
+#: field:fleet.vehicle,hr_driver_id:0
+msgid "Chauffeur employé"
+msgstr "Driver"
+
+#. module: tms
+#: code:addons/tms/fleet.py:156
+#, python-format
+msgid "Chauffeur employé: de '%s' à '%s'"
+msgstr "Driver: from '%s' to '%s'"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_driver_employee
+#: model:ir.ui.menu,name:tms.menu_tms_park_employee_driver
+msgid "Chauffeurs"
+msgstr "Drivers"
+
+#. module: tms
+#: help:picking.make.invoice,grouped_by_product:0
+msgid "Check the box to group the invoices according to the choice"
+msgstr "Check the box to group the invoices according to the choice"
+
+#. module: tms
+#: help:picking.make.invoice,grouped:0
+msgid "Check the box to group the invoices for the same customers"
+msgstr "Check the box to group the invoices for the same customers"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_search
+#: field:tms.grouping,circuit_id:0
+msgid "Circuit"
+msgstr "Circuit"
+
+#. module: tms
+#: help:tms.grouping,circuit_id:0
+msgid "Circuit de clients et de trajets pour faciliter la saisie des BLs."
+msgstr "Circuit de clients et de trajets pour faciliter la saisie des BLs."
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_grouping_circuit
+#: model:ir.ui.menu,name:tms.menu_tms_grouping_circuit
+#: view:tms.grouping:tms.view_tms_grouping_search
+#: view:tms.grouping.circuit:tms.view_tms_grouping_circuit_form
+#: view:tms.grouping.circuit:tms.view_tms_grouping_circuit_search
+#: view:tms.grouping.circuit:tms.view_tms_grouping_circuit_tree
+msgid "Circuits"
+msgstr "Circuits"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_grouping_circuit
+msgid "Circuits de clients"
+msgstr "Circuits de clients"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: field:fleet.vehicle.log.fuel,cistern_id:0 field:stock.location,cistern_ok:0
+msgid "Citerne"
+msgstr "Citern"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_stock_location
+#: model:ir.ui.menu,name:tms.menu_tms_gasoil_cistern
+#: view:stock.location:tms.view_stock_location_search_inherit_tms
+msgid "Citernes"
+msgstr "Citerns"
+
+#. module: tms
+#: field:tms.grouping.circuit.line,partner_id:0
+#: view:tms.picking:tms.view_tms_picking_search field:tms.picking,partner_id:0
+#: field:tms.picking.report.driver.line,partner_id:0
+#: view:tms.picking.report2.line:tms.view_tms_pciking_report_product_search
+#: field:tms.picking.report2.line,partner_id:0 field:tms.travel,partner_id:0
+#: view:website:tms.picking_report_driver
+#: view:website:tms.report_tms_picking_document
+msgid "Client"
+msgstr "Clustomer"
+
+#. module: tms
+#: view:website:tms.picking_report2
+msgid "Client -- Trajet"
+msgstr "Customer -- Journey"
+
+#. module: tms
+#: field:product.product,picking_customer_id:0
+msgid "Client marchandise transportées"
+msgstr "Client marchandise transportées"
+
+#. module: tms
+#: field:tms.picking,partner_invoiced_id:0
+msgid "Client à facturer"
+msgstr "Customer to be invoiced"
+
+#. module: tms
+#: view:fleet.park:tms.fleet_park_form field:fleet.park,partner_ids:0
+#: field:fleet.vehicle,partner_id:0
+msgid "Clients"
+msgstr "Customer"
+
+#. module: tms
+#: view:hr.employee:tms.hr_attendant_employee_search
+#: view:hr.employee:tms.hr_driver_employee_search
+msgid "Coach"
+msgstr "Coach"
+
+#. module: tms
+#: help:tms.grouping,trajet_ok:0
+msgid ""
+"Cocher pour définir un plus long trajet pour le groupage, manuellement ou "
+"décocher pour choisir un circuit."
+msgstr ""
+"Cocher pour définir un plus long trajet pour le groupage, manuellement ou "
+"décocher pour choisir un circuit."
+
+#. module: tms
+#: help:hr.employee,driver_ok:0
+msgid ""
+"Cochez cette case pour définir l'employé comme chauffeur pour la gestion de "
+"voyages"
+msgstr ""
+"Cochez cette case pour définir l'employé comme chauffeur pour la gestion de "
+"voyages"
+
+#. module: tms
+#: help:hr.employee,attendant_ok:0
+msgid ""
+"Cochez cette case pour définir l'employé comme pompiste pour la gestion de "
+"bons carburants"
+msgstr ""
+"Cochez cette case pour définir l'employé comme pompiste pour la gestion de "
+"bons carburants"
+
+#. module: tms
+#: help:product.product,gasoil_ok:0
+msgid "Cochez cette case si vous définissez un carburant"
+msgstr "Cochez cette case si vous définissez un carburant"
+
+#. module: tms
+#: help:product.product,trajet_ok:0
+msgid "Cochez cette case si vous définissez un trajet"
+msgstr "Cochez cette case si vous définissez un trajet"
+
+#. module: tms
+#: help:tms.picking,travel_return:0
+msgid ""
+"Cochez cette option pour un voyage aller-retour. Le km retour et les frais "
+"d'autoroute retour seront automatiquement renseignés."
+msgstr ""
+"Cochez cette option pour un voyage aller-retour. Le km retour et les frais "
+"d'autoroute retour seront automatiquement renseignés."
+
+#. module: tms
+#: help:product.uom,travel_ok:0
+msgid ""
+"Cochez cette option si celle-ci est une unité de voyage, la quantité "
+"attribuée sera prise en compte pour les traitements multi-voyages"
+msgstr ""
+"Cochez cette option si celle-ci est une unité de voyage, la quantité "
+"attribuée sera prise en compte pour les traitements multi-voyages"
+
+#. module: tms
+#: help:tms.picking,km_return:0
+msgid ""
+"Cochez l'option aller-retour pour renseingner automatiquement le kilométrage "
+"retour."
+msgstr ""
+"Cochez l'option aller-retour pour renseingner automatiquement le kilométrage "
+"retour."
+
+#. module: tms
+#: help:tms.picking,freeway_return:0
+msgid ""
+"Cochez l'option aller-retour pour renseingner automatiquement les frais "
+"d'autoroute retour."
+msgstr ""
+"Cochez l'option aller-retour pour renseingner automatiquement les frais "
+"d'autoroute retour."
+
+#. module: tms
+#: help:product.pricelist.item,commission_ok:0
+msgid "Cochez pour paramétrez la commission du chauffeur sur le trajet"
+msgstr "Cochez pour paramétrez la commission du chauffeur sur le trajet"
+
+#. module: tms
+#: view:res.users.default.park:tms.tms_res_users_default_park_form
+msgid "Comfirmer le changement de parc ?"
+msgstr "Comfirmer le changement de parc ?"
+
+#. module: tms
+#: field:product.pricelist.item.merchandise,comission:0
+msgid "Comission"
+msgstr "Comission"
+
+#. module: tms
+#: field:product.pricelist.item.merchandise,comission_fixe:0
+msgid "Comission fixe"
+msgstr "Comission fixe"
+
+#. module: tms
+#: field:product.pricelist.item.merchandise,fixe:0
+msgid "Comission fixe?"
+msgstr "Comission fixe?"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_sale_order_tms
+msgid "Commandes Voyage"
+msgstr "Commandes Voyage"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+#: view:sale.order:tms.view_sale_order_tree_tms
+msgid "Commandes voyage"
+msgstr "Commandes voyage"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Comment:"
+msgstr "Comment:"
+
+#. module: tms
+#: field:sale.order.line,commission:0 field:tms.picking,commission:0
+#: field:tms.picking.report.driver.line,commission:0
+msgid "Commission"
+msgstr "Commission"
+
+#. module: tms
+#: view:product.pricelist.item:tms.product_pricelist_item_form_inherit
+#: field:product.pricelist.item,commission_ok:0
+msgid "Commission chauffeur"
+msgstr "Driver commission"
+
+#. module: tms
+#: view:product.pricelist.item:tms.product_pricelist_item_form_inherit
+msgid "Commission de base"
+msgstr "Commission de base"
+
+#. module: tms
+#: field:product.pricelist.item,percent_commission_ok:0
+msgid "Commission en pourcentage"
+msgstr "Commission en pourcentage"
+
+#. module: tms
+#: help:product.pricelist.item,percent_commission:0
+msgid "Commission en pourcentage variant selon le coût du voyage"
+msgstr "Commission en pourcentage variant selon le coût du voyage"
+
+#. module: tms
+#: field:product.pricelist.item,fixed_commission_ok:0
+#: field:product.product,fixed_commission_ok:0
+#: field:sale.order.line,commission_fixed:0
+#: field:tms.picking,commission_fixed:0
+msgid "Commission fixe"
+msgstr "Fixed Commission"
+
+#. module: tms
+#: field:product.product,percent_commission_ok:0
+msgid "Commission pourcentage"
+msgstr "Percentage Commission"
+
+#. module: tms
+#: help:product.product,rate_commission:0
+msgid "Commission standard fixe"
+msgstr "Commission standard fixe"
+
+#. module: tms
+#: field:tms.grouping,commission:0
+msgid "Commission totale"
+msgstr "Commission totale"
+
+#. module: tms
+#: field:product.product,rate_commission:0
+msgid "Commission trajet"
+msgstr "Journey Commission"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,company_id:0
+#: view:hr.employee:tms.hr_attendant_employee_search
+#: view:hr.employee:tms.hr_driver_employee_search
+#: view:product.product:tms.product_search_form_tms_view
+#: field:tms.picking,company_id:0
+msgid "Compagnie"
+msgstr "Company"
+
+#. module: tms
+#: view:product.product:tms.product_search_form_tms_gasoil_view
+msgid "Company"
+msgstr "Company"
+
+#. module: tms
+#: field:fleet.vehicle,account_id:0
+#: field:fleet.vehicle.log.contract,account_id:0
+msgid "Compte analytique"
+msgstr "Analytic Account"
+
+#. module: tms
+#: field:fleet.vehicle,counter_basic:0
+msgid "Compteur de base"
+msgstr "Basic Odometer"
+
+#. module: tms
+#: field:fleet.vehicle,fuel_odometer:0
+#: field:fleet.vehicle.cost,fuel_odometer:0
+#: field:fleet.vehicle.cost,fuel_odometer_id:0
+msgid "Compteur gasoil"
+msgstr "Gasoil odometer"
+
+#. module: tms
+#: help:fleet.vehicle,fuel_odometer:0 help:fleet.vehicle.cost,fuel_odometer:0
+msgid "Compteur gasoil au moment de cet encodage."
+msgstr "Compteur gasoil au moment de cet encodage."
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "Compteur voyage"
+msgstr "Travel odometer"
+
+#. module: tms
+#: view:product.product:tms.product_normal_form_view3
+msgid "Conducteur"
+msgstr "Driver"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_config
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: tms
+#: code:addons/tms/tms.py:1016
+#, python-format
+msgid "Configuration Error!"
+msgstr "Configuration Error!"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_config_settings
+#: view:tms.config.settings:tms.view_tms_config_settings
+msgid "Configurer le TMS"
+msgstr "Configurer le TMS"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Confirm Sale"
+msgstr "Confirm Sale"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "Confirmed Delivery Orders"
+msgstr "Confirmed Delivery Orders"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "Confirmé"
+msgstr "Confirmed"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_tree_tms
+msgid "Cons. Tot. réelle"
+msgstr "Cons. Tot. réelle"
+
+#. module: tms
+#: field:tms.config.settings,tms_param_travel_situation:0
+msgid ""
+"Considérer les bons de livraisons non validés comme des voyages en cours"
+msgstr ""
+"Considérer les bons de livraisons non validés comme des voyages en cours"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,total_real_consumption:0
+msgid "Consommation Totale réelle(%)"
+msgstr "Real total consumption (%)"
+
+#. module: tms
+#: field:fleet.vehicle,consumption_gasoil:0
+msgid "Consommation carburant %"
+msgstr "Fuel consumption %"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,consumption_gasoil:0
+msgid "Consommation en % définie dans la fiche véhicule"
+msgstr "Consommation en % définie dans la fiche véhicule"
+
+#. module: tms
+#: field:sale.order.line,consumption_gasoil:0
+#: field:tms.picking,consumption_gasoil:0
+#: field:tms.travel,consumption_gasoil:0
+msgid "Consommation gasoil %"
+msgstr "Gasoil consumption %"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,consumption_gasoil:0
+msgid "Consommation moyenne du véhicule(%)"
+msgstr "Consommation moyenne du véhicule(%)"
+
+#. module: tms
+#: view:product.product:tms.product_search_form_tms_gasoil_view
+#: view:product.product:tms.product_search_form_tms_view
+msgid "Context..."
+msgstr "Context..."
+
+#. module: tms
+#: model:ir.model,name:tms.model_fleet_vehicle_log_contract
+msgid "Contract information on a vehicle"
+msgstr "Contract information on a vehicle"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "Contracts"
+msgstr "Contracts"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_park_trailer_contract
+#: model:ir.ui.menu,name:tms.menu_tms_park_vehicle_contract
+msgid "Contrats"
+msgstr "Contracts"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.tms_fleet_trailer_log_contract_act
+msgid "Contrats des Semi-remorques"
+msgstr "Semitrailer contracts"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.tms_fleet_vehicle_log_contract_act
+msgid "Contrats des véhicules"
+msgstr "Vehicles contracts"
+
+#. module: tms
+#: model:ir.model,name:tms.model_fleet_vehicle_cost
+msgid "Cost related to a vehicle"
+msgstr "Cost related to a vehicle"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "Costs"
+msgstr "Costs"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_park_trailer_costs
+#: model:ir.ui.menu,name:tms.menu_tms_park_vehicle_costs
+msgid "Coûts"
+msgstr "Costs"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.tms_fleet_trailer_costs_act
+msgid "Coûts des SR"
+msgstr "Coûts des SR"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.tms_fleet_vehicle_costs_act
+msgid "Coûts des véhicules"
+msgstr "Vehicles costs"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Create Invoice"
+msgstr "Create Invoice"
+
+#. module: tms
+#: view:sale.make.invoice:tms.view_sale_order_make_invoice
+msgid "Create Invoices"
+msgstr "Create Invoices"
+
+#. module: tms
+#: view:sale.make.invoice:tms.view_sale_order_make_invoice
+msgid "Create invoices"
+msgstr "Create invoices"
+
+#. module: tms
+#: field:fleet.park,create_uid:0 field:fleet.vehicle.category,create_uid:0
+#: field:fleet.vehicle.modification,create_uid:0
+#: field:hr.employee.licence_category,create_uid:0
+#: field:log.fuel.external.card,create_uid:0
+#: field:picking.assigne,create_uid:0 field:picking.make.invoice,create_uid:0
+#: field:picking.terminer,create_uid:0
+#: field:product.pricelist.item.merchandise,create_uid:0
+#: field:res.users.default.park,create_uid:0
+#: field:tms.config.settings,create_uid:0 field:tms.grouping,create_uid:0
+#: field:tms.grouping.circuit,create_uid:0
+#: field:tms.grouping.circuit.line,create_uid:0 field:tms.journal,create_uid:0
+#: field:tms.picking,create_uid:0 field:tms.picking.cost,create_uid:0
+#: field:tms.picking.folder,create_uid:0
+#: field:tms.picking.product.details,create_uid:0
+#: field:tms.picking.report.driver,create_uid:0
+#: field:tms.picking.report.driver.line,create_uid:0
+#: field:tms.picking.report2,create_uid:0
+#: field:tms.picking.report2.line,create_uid:0 field:tms.travel,create_uid:0
+#: field:tms.travel.palet.merchandise,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: tms
+#: field:fleet.park,create_date:0 field:fleet.vehicle.category,create_date:0
+#: field:fleet.vehicle.modification,create_date:0
+#: field:hr.employee.licence_category,create_date:0
+#: field:log.fuel.external.card,create_date:0
+#: field:picking.assigne,create_date:0
+#: field:picking.make.invoice,create_date:0
+#: field:picking.terminer,create_date:0
+#: field:product.pricelist.item.merchandise,create_date:0
+#: field:res.users.default.park,create_date:0
+#: field:tms.config.settings,create_date:0 field:tms.grouping,create_date:0
+#: field:tms.grouping.circuit,create_date:0
+#: field:tms.grouping.circuit.line,create_date:0
+#: field:tms.journal,create_date:0 field:tms.picking,create_date:0
+#: field:tms.picking.cost,create_date:0 field:tms.picking.folder,create_date:0
+#: field:tms.picking.product.details,create_date:0
+#: field:tms.picking.report.driver,create_date:0
+#: field:tms.picking.report.driver.line,create_date:0
+#: field:tms.picking.report2,create_date:0
+#: field:tms.picking.report2.line,create_date:0 field:tms.travel,create_date:0
+#: field:tms.travel.palet.merchandise,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+#: model:ir.actions.act_window,name:tms.action_log_fuel_external_card
+msgid "Créer carte rapide carburant externe"
+msgstr "Créer carte rapide carburant externe"
+
+#. module: tms
+#: field:fleet.vehicle,date:0
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_form
+#: field:tms.picking.report.driver.line,date:0
+#: field:tms.picking.report2.line,date:0 view:website:tms.picking_report2
+#: view:website:tms.picking_report_driver
+msgid "Date"
+msgstr "Date"
+
+#. module: tms
+#: field:hr.employee,date_delivery_car_licence:0
+msgid "Date Délivrance"
+msgstr "Issuance Date"
+
+#. module: tms
+#: field:hr.employee,date_of_expiry:0
+msgid "Date Expiration Permis"
+msgstr "License Expiration Date"
+
+#. module: tms
+#: field:sale.order,date_end:0
+msgid "Date Fin"
+msgstr "End Date"
+
+#. module: tms
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_search
+msgid "Date accrochage"
+msgstr "Date hanging"
+
+#. module: tms
+#: help:fleet.vehicle.modification,date_hook:0
+msgid "Date d'accrochage"
+msgstr "Date d'accrochage"
+
+#. module: tms
+#: field:hr.employee,date_hiring:0
+msgid "Date d'embauche"
+msgstr "Date of hire"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,date_create:0 field:tms.picking,date_create:0
+msgid "Date d'encodage"
+msgstr "Encoding date"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,date_create:0 help:tms.picking,date_create:0
+msgid "Date d'encodage du bon."
+msgstr "Delivery encoding date"
+
+#. module: tms
+#: help:tms.grouping,date:0 help:tms.picking,date:0
+msgid "Date de début du voyage"
+msgstr "Date de début du voyage"
+
+#. module: tms
+#: help:fleet.vehicle.modification,date_unhook:0
+msgid "Date de décrochage"
+msgstr "Date de décrochage"
+
+#. module: tms
+#: help:tms.picking,date_end:0
+msgid "Date de fin du voyage"
+msgstr "Date de fin du voyage"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,date_order:0
+#: field:log.fuel.external.card,date_order:0
+msgid "Date du bon"
+msgstr "Order date"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,date_order:0
+msgid "Date du bon."
+msgstr "Order date."
+
+#. module: tms
+#: field:tms.travel,date:0
+msgid "Date début"
+msgstr "Start date"
+
+#. module: tms
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_search
+msgid "Date décrochage"
+msgstr "Unhook date"
+
+#. module: tms
+#: field:log.fuel.external.card,date:0
+msgid "Date facture"
+msgstr "Invoice date"
+
+#. module: tms
+#: field:tms.picking,date_end:0
+msgid "Date fin"
+msgstr "End Date"
+
+#. module: tms
+#: field:sale.order.line,date_end:0
+msgid "Date fin voyage"
+msgstr "Travel end date"
+
+#. module: tms
+#: field:fleet.vehicle,date_start_circulation:0
+msgid "Date mise en circulation"
+msgstr "Date of entry into service"
+
+#. module: tms
+#: help:tms.picking,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Date of the last message posted on the record."
+
+#. module: tms
+#: field:tms.grouping,date:0 view:tms.picking:tms.view_tms_picking_search
+#: field:tms.picking,date:0
+msgid "Date voyage"
+msgstr "Travel date"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Date:"
+msgstr "Date:"
+
+#. module: tms
+#: field:product.pricelist.item.merchandise,born_inf:0
+msgid "De"
+msgstr "De"
+
+#. module: tms
+#: field:tms.picking.report.driver,criteria_1:0
+msgid "De :"
+msgstr "De :"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Dechargé"
+msgstr "Discharge"
+
+#. module: tms
+#: view:product.product:tms.product_search_form_tms_gasoil_view
+msgid "Default UOM"
+msgstr "Default UOM"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "Delivery orders already processed"
+msgstr "Delivery orders already processed"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "Delivery orders invoiced"
+msgstr "Delivery orders invoiced"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "Delivery orders to invoice"
+msgstr "Delivery orders to invoice"
+
+#. module: tms
+#: view:fleet.park:tms.fleet_park_form view:fleet.park:tms.fleet_park_tree
+#: field:fleet.park,note:0
+#: view:fleet.vehicle.category:tms.fleet_vehicle_category_tree
+#: field:fleet.vehicle.category,note:0 field:fleet.vehicle.model,note:0
+#: field:fleet.vehicle.model.brand,note:0 field:tms.picking.cost,description:0
+#: view:tms.picking.folder:tms.tms_picking_folder_form
+#: field:tms.picking.folder,description:0
+#: field:tms.picking.product.details,description:0
+#: field:tms.travel.palet.merchandise,description:0
+#: view:website:tms.report_invoice_document22
+#: view:website:tms.report_tms_picking_document
+msgid "Description"
+msgstr "Description"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Description:"
+msgstr "Description:"
+
+#. module: tms
+#: selection:fleet.vehicle,disponibility:0
+#: selection:hr.employee,disponibility:0
+msgid "Disponible"
+msgstr "Disponible"
+
+#. module: tms
+#: view:picking.make.invoice:tms.view_picking_make_invoice2
+#: view:sale.make.invoice:tms.view_sale_order_make_invoice
+msgid "Do you really want to create the invoice(s)?"
+msgstr "Do you really want to create the invoice(s)?"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+#: view:tms.picking.folder:tms.tms_picking_folder_form
+#: field:tms.travel,folder_id:0 view:website:tms.report_tms_picking_document
+msgid "Dossier"
+msgstr "Folder"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_picking_folder
+msgid "Dossier de bons de livraisons"
+msgstr "Delivery folder"
+
+#. module: tms
+#: view:tms.picking.folder:tms.tms_picking_folder_tree
+msgid "Dossiers"
+msgstr "Folders"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_picking_folder
+msgid "Dossiers BL"
+msgstr "Delivery  folder"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_picking_folder
+msgid "Dossiers de bons de livraison"
+msgstr "Delevery folder"
+
+#. module: tms
+#: field:tms.picking.report2,criteria_2:0 view:website:tms.picking_report2
+msgid "Du :"
+msgstr "From:"
+
+#. module: tms
+#: selection:tms.picking,state:0 selection:tms.picking.report2,state:0
+#: selection:tms.picking.report2.line,state:0
+msgid "Déchargé"
+msgstr "Discharged"
+
+#. module: tms
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_form
+msgid "Décrocher"
+msgstr "Unhook"
+
+#. module: tms
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_search
+#: selection:fleet.vehicle.modification,state:0
+msgid "Décroché"
+msgstr "Unhooked"
+
+#. module: tms
+#: field:fleet.vehicle.modification,date_unhook:0
+msgid "Décroché le"
+msgstr "Unhook at"
+
+#. module: tms
+#: help:product.pricelist.item,item_merchandise_ids:0
+msgid "Définir les tarifications en fonction du type de transport"
+msgstr "Définir les tarifications en fonction du type de transport"
+
+#. module: tms
+#: help:product.pricelist.item,fixed_commission_ok:0
+msgid "Définir une commission fixe pour le chauffeur"
+msgstr "Définir une commission fixe pour le chauffeur"
+
+#. module: tms
+#: help:product.pricelist.item,percent_commission_ok:0
+msgid "Définir une commission variant selon le coût du voyage"
+msgstr "Définir une commission variant selon le coût du voyage"
+
+#. module: tms
+#: help:fleet.park,name:0
+msgid "Définissez le nom du parc à segmenter(ex: Parc poids lourds)"
+msgstr "Définissez le nom du parc à segmenter(ex: Parc poids lourds)"
+
+#. module: tms
+#: help:sale.order.line,merchandise_id:0
+msgid ""
+"Définissez le type de transport associé à ce voyage(ex: maïs, 1-2 Tonnes)."
+msgstr ""
+"Définissez le type de transport associé à ce voyage(ex: maïs, 1-2 Tonnes)."
+
+#. module: tms
+#: help:fleet.park,partner_ids:0
+msgid ""
+"Définissez les clients associés au parc, pour une rapidité d'encodage des "
+"voyages"
+msgstr ""
+"Définissez les clients associés au parc, pour une rapidité d'encodage des "
+"voyages"
+
+#. module: tms
+#: help:fleet.park,traject_ids:0
+msgid "Définissez les trajets associés à ce parc."
+msgstr "Définissez les trajets associés à ce parc."
+
+#. module: tms
+#: help:fleet.park,vehicle_ids:0
+msgid "Définissez les véhicules contenu dans ce parc."
+msgstr "Définissez les véhicules contenu dans ce parc."
+
+#. module: tms
+#: view:hr.employee:tms.hr_attendant_employee_search
+#: view:hr.employee:tms.hr_driver_employee_search
+msgid "Départment"
+msgstr "Department"
+
+#. module: tms
+#: field:tms.picking.report.driver,commission_move:0
+msgid "Déplacement et Commission"
+msgstr "Déplacement et Commission"
+
+#. module: tms
+#: view:website:tms.report_tms_picking_document
+msgid "Désignation"
+msgstr "Designation"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_form
+msgid "Détail consommation"
+msgstr "Detail consumption"
+
+#. module: tms
+#: help:tms.picking,details_ids:0
+msgid "Détail des marchandises transportées lors de ce voyage."
+msgstr "Détail des marchandises transportées lors de ce voyage."
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Détails carburant interne"
+msgstr "Internal fuel details"
+
+#. module: tms
+#: field:tms.picking,details_ids:0
+msgid "Détails des articles"
+msgstr "Détails des articles"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Détails du véhicule"
+msgstr "Vehicle Details"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_picking_product_details
+msgid "Détails marchandises transportées"
+msgstr "Détails marchandises transportées"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_form
+msgid "Ecrivez ici toute autre information"
+msgstr "Ecrivez ici toute autre information"
+
+#. module: tms
+#: field:fleet.vehicle,location_id:0
+msgid "Emplacement"
+msgstr "Location"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+msgid "Emplacement semi-remorque"
+msgstr "Semitrailer location"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,location_id:0
+msgid "Emplacement virtuel du véhicule"
+msgstr "Emplacement virtuel du véhicule"
+
+#. module: tms
+#: model:ir.model,name:tms.model_hr_employee
+msgid "Employee"
+msgstr "Employee"
+
+#. module: tms
+#: code:addons/tms/fleet.py:744
+#, python-format
+msgid "Emptying the odometer value of a vehicle is not allowed."
+msgstr "Emptying the odometer value of a vehicle is not allowed."
+
+#. module: tms
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_search
+#: selection:fleet.vehicle.modification,state:0
+#: view:tms.picking.folder:tms.tms_picking_folder_search
+msgid "En cours"
+msgstr "In progress"
+
+#. module: tms
+#: selection:fleet.vehicle,disponibility:0
+#: selection:hr.employee,disponibility:0
+msgid "En voyage"
+msgstr "Travelling"
+
+#. module: tms
+#: selection:fleet.vehicle.log.fuel,state:0
+msgid "Encodage"
+msgstr "Encodage"
+
+#. module: tms
+#: code:addons/tms/sale.py:247
+#, python-format
+msgid "Erreur de configuration !"
+msgstr "Erreur de configuration !"
+
+#. module: tms
+#: code:addons/tms/tms.py:868
+#, python-format
+msgid "Erreur!"
+msgstr "Erreur!"
+
+#. module: tms
+#: code:addons/tms/tms.py:399 code:addons/tms/tms.py:410
+#, python-format
+msgid "Error de Configuration!"
+msgstr "Error de Configuration!"
+
+#. module: tms
+#: code:addons/tms/sale.py:86
+#: code:addons/tms/wizard/tms_stock_invoice_onshipping.py:91
+#, python-format
+msgid "Error!"
+msgstr "Error!"
+
+#. module: tms
+#: selection:fleet.vehicle.log.fuel,payment_type:0
+msgid "Espèces"
+msgstr "Espèces"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,state:0 field:tms.grouping,state:0
+#: field:tms.picking,state:0 field:tms.picking.report2,state:0
+#: field:tms.picking.report2.line,state:0 view:website:tms.picking_report2
+msgid "Etat"
+msgstr "State"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_search
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_search
+#: field:fleet.vehicle,manager:0
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: field:fleet.vehicle.log.fuel,manager:0
+#: field:log.fuel.external.card,manager:0
+msgid "Exploitant"
+msgstr "Exploitant"
+
+#. module: tms
+#: selection:fleet.vehicle.log.fuel,type:0
+msgid "Externe"
+msgstr "Externe"
+
+#. module: tms
+#: view:fleet.vehicle:tms.view_fleet_vehicle_graph11
+#: view:tms.picking.report2.line:tms.fleet_report_graph
+msgid "FLEET VEHICLE"
+msgstr "FLEET VEHICLE"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+#: field:tms.picking,invoice_state:0
+msgid "Facturation"
+msgstr "Invoicing"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Facture"
+msgstr "Invoice"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Facture Annulée"
+msgstr "Cancelled invoice"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Facture Brouillon"
+msgstr "Draft invoice"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Facture Fournisseur"
+msgstr "Supplier invoice"
+
+#. module: tms
+#: view:tms.picking.folder:tms.tms_picking_folder_form
+msgid "Facturer"
+msgstr "To invoice"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+#: selection:tms.picking,invoice_state:0
+msgid "Facturé"
+msgstr "Invoiced"
+
+#. module: tms
+#: view:tms.picking.folder:tms.tms_picking_folder_form
+msgid "Fermer dossier"
+msgstr "Close the folder"
+
+#. module: tms
+#: selection:tms.picking.folder,state:0
+msgid "Fermé"
+msgstr "Closed"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Fiscal Position Remark:"
+msgstr "Fiscal Position Remark:"
+
+#. module: tms
+#: field:fleet.vehicle,account_line_ids:0
+msgid "Flux analytiques"
+msgstr "Flux analytiques"
+
+#. module: tms
+#: field:fleet.vehicle,stock_move_ids:0
+msgid "Flux de stock"
+msgstr "Flux de stock"
+
+#. module: tms
+#: field:tms.picking,message_follower_ids:0
+msgid "Followers"
+msgstr "Followers"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Forcer disponibilité"
+msgstr "Forcer disponibilité"
+
+#. module: tms
+#: view:tms.config.settings:tms.view_tms_config_settings
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Frais annexes"
+msgstr "Additional costs"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Frais autoroute"
+msgstr "Highway fees"
+
+#. module: tms
+#: field:product.product,freeway_estimated:0
+#: field:tms.travel,freeway_estimated:0
+msgid "Frais autoroute estimé"
+msgstr "Highway costs estimated"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+#: field:tms.travel,freeway_return:0
+msgid "Frais autoroute retour"
+msgstr "Highway fees return"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Frais autoroute suppl."
+msgstr "Highway fees additional"
+
+#. module: tms
+#: field:tms.travel,freeway_additional:0
+msgid "Frais autoroute supplémentaires"
+msgstr "Frais autoroute supplémentaires"
+
+#. module: tms
+#: field:sale.order.line,freeway_total:0 field:tms.travel,freeway_total:0
+msgid "Frais autoroute total"
+msgstr "Frais autoroute total"
+
+#. module: tms
+#: help:sale.order.line,freeway_estimated:0
+#: field:tms.picking,freeway_estimated:0
+msgid "Frais d'autoroute"
+msgstr "Frais d'autoroute"
+
+#. module: tms
+#: help:sale.order.line,freeway_return:0
+msgid "Frais d'autoroute en cas de voyage retour."
+msgstr "Frais d'autoroute en cas de voyage retour."
+
+#. module: tms
+#: help:tms.picking,freeway_estimated:0
+msgid "Frais d'autoroute occasionnés par le voyage (i.e: point de péage)."
+msgstr "Frais d'autoroute occasionnés par le voyage (i.e: point de péage)."
+
+#. module: tms
+#: field:tms.picking,freeway_return:0
+msgid "Frais d'autoroute retour"
+msgstr "Frais d'autoroute retour"
+
+#. module: tms
+#: field:tms.picking,freeway_additional:0
+msgid "Frais d'autoroute supplémentaires"
+msgstr "Frais d'autoroute supplémentaires"
+
+#. module: tms
+#: field:tms.picking,freeway_total:0
+msgid "Frais d'autoroute total"
+msgstr "Total highway cost"
+
+#. module: tms
+#: field:product.product,driver_move_costs:0
+#: field:product.product,driver_travel_costs:0
+#: field:tms.picking,driver_move_costs:0
+#: field:tms.picking,driver_travel_costs:0
+#: field:tms.travel,driver_move_costs:0
+msgid "Frais de déplacement"
+msgstr "Travel expenses"
+
+#. module: tms
+#: field:tms.travel,driver_travel_costs:0
+msgid "Frais de voyage"
+msgstr "Frais de voyage"
+
+#. module: tms
+#: field:tms.picking.report.driver.line,driver_travel_costs:0
+msgid "Frais déplacement"
+msgstr "Travel expenses"
+
+#. module: tms
+#: model:ir.model,name:tms.model_fleet_vehicle_log_fuel
+msgid "Fuel log for vehicles"
+msgstr "Fuel log for vehicles"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,gasoil_id:0
+#: field:log.fuel.external.card,gasoil_id:0
+msgid "Gasoil"
+msgstr "Gasoil"
+
+#. module: tms
+#: model:fleet.service.type,name:tms.type_service_refueling_external
+msgid "Gasoil externe"
+msgstr "Gasoil externe"
+
+#. module: tms
+#: model:fleet.service.type,name:tms.type_service_refueling_internal
+msgid "Gasoil interne"
+msgstr "Gasoil interne"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_park_trailer_management
+msgid "Gestion de Semi-remorque"
+msgstr "Manage Semitrailer"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_park_vehicle_management
+msgid "Gestion de Véhicule"
+msgstr "Manage Vehicle"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_gasoil_mngmt
+msgid "Gestion de carburant"
+msgstr "Manage Fuel"
+
+#. module: tms
+#: model:ir.module.category,description:tms.module_category_tms
+msgid "Gestion de transport et dérivées"
+msgstr "Gestion de transport et dérivées"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_travel_mngmt
+msgid "Gestion de voyage"
+msgstr "Manage travel"
+
+#. module: tms
+#: view:hr.employee:tms.hr_driver_tree
+msgid "Gestion des chauffeurs"
+msgstr "Gestion des chauffeurs"
+
+#. module: tms
+#: view:tms.picking.report2.line:tms.view_tms_pciking_report_product_search
+msgid "Group By"
+msgstr "Group By"
+
+#. module: tms
+#: view:hr.employee:tms.hr_attendant_employee_search
+#: view:hr.employee:tms.hr_driver_employee_search
+msgid "Group By..."
+msgstr "Group By..."
+
+#. module: tms
+#: view:product.product:tms.product_search_form_tms_gasoil_view
+#: view:product.product:tms.product_search_form_tms_view
+msgid "Group by..."
+msgstr "Group by..."
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_grouping
+#: view:tms.grouping:tms.view_tms_grouping_form
+msgid "Groupage"
+msgstr "Grouping"
+
+#. module: tms
+#: field:tms.travel,grouping_id:0
+msgid "Groupage associé"
+msgstr "Groupage associé"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_grouping
+msgid "Groupage des BLs"
+msgstr "Groupage des BLs"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_grouping
+#: model:ir.ui.menu,name:tms.menu_tms_grouping_grouping
+#: view:tms.grouping:tms.view_tms_grouping_tree
+msgid "Groupages"
+msgstr "Groupings"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+msgid "Grouper Par..."
+msgstr "Grouper Par..."
+
+#. module: tms
+#: selection:picking.make.invoice,grouped_by_product:0
+msgid "Grouper les BLs par voyage et par type de transport"
+msgstr "Grouper les BLs par voyage et par type de transport"
+
+#. module: tms
+#: selection:picking.make.invoice,grouped_by_product:0
+msgid "Grouper les BLs par voyage et par véhicule"
+msgstr "Grouper les BLs par voyage et par véhicule"
+
+#. module: tms
+#: field:picking.make.invoice,grouped:0
+msgid "Grouper par Client"
+msgstr "Grouper par Client"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_search
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_search
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_search
+#: view:tms.grouping:tms.view_tms_grouping_search
+#: view:tms.grouping.circuit:tms.view_tms_grouping_circuit_search
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "Grouper par..."
+msgstr "Grouper par..."
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_picking_make_invoice2
+#: view:picking.make.invoice:tms.view_picking_make_invoice2
+msgid "Générer factures"
+msgstr "Générer factures"
+
+#. module: tms
+#: field:tms.config.settings,display_tms_cost:0
+#: field:tms.picking,display_tms_cost:0
+msgid "Gérer les frais annexes"
+msgstr "Gérer les frais annexes"
+
+#. module: tms
+#: field:fleet.vehicle,height:0
+msgid "Hauteur"
+msgstr "Height"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+msgid "Historique Remorques"
+msgstr "Historique Remorques"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: field:fleet.vehicle,trailer_modification_ids:0
+msgid "Historique modifications"
+msgstr "Historique modifications"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "Historique remorques"
+msgstr "Historique remorques"
+
+#. module: tms
+#: help:tms.picking,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+
+#. module: tms
+#: field:fleet.park,id:0 field:fleet.vehicle.category,id:0
+#: field:fleet.vehicle.modification,id:0
+#: field:hr.employee.licence_category,id:0 field:log.fuel.external.card,id:0
+#: field:picking.assigne,id:0 field:picking.make.invoice,id:0
+#: field:picking.terminer,id:0 field:product.pricelist.item.merchandise,id:0
+#: field:res.users.default.park,id:0 field:tms.config.settings,id:0
+#: field:tms.grouping,id:0 field:tms.grouping.circuit,id:0
+#: field:tms.grouping.circuit.line,id:0 field:tms.journal,id:0
+#: field:tms.picking,id:0 field:tms.picking.cost,id:0
+#: field:tms.picking.folder,id:0 field:tms.picking.product.details,id:0
+#: field:tms.picking.report.driver,id:0
+#: field:tms.picking.report.driver.line,id:0 field:tms.picking.report2,id:0
+#: field:tms.picking.report2.line,id:0 field:tms.travel,id:0
+#: field:tms.travel.palet.merchandise,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: tms
+#: help:tms.picking,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "If checked new messages require your attention."
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Ignore Exception"
+msgstr "Ignore Exception"
+
+#. module: tms
+#: code:addons/tms/pricelist.py:123
+#, python-format
+msgid ""
+"Il y'a au moins une liste de prix sans version active !\n"
+"Veuillez s'il vous plaît créer ou activer une."
+msgstr ""
+"Il y'a au moins une liste de prix sans version active !Veuillez s'il vous "
+"plaît créer ou activer une."
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+msgid "Immatriculation"
+msgstr "Immatriculation"
+
+#. module: tms
+#: code:addons/tms/sale.py:237
+#, python-format
+msgid ""
+"Impossible de trouver une liste de prix correspondant au trajet et à la "
+"quantité renseignés.\n"
+"Vous devez changer le trajet, la quantité ou la liste de prix."
+msgstr ""
+"Impossible de trouver une liste de prix correspondant au trajet et à la "
+"quantité renseignés.Vous devez changer le trajet, la quantité ou la liste de "
+"prix."
+
+#. module: tms
+#: view:tms.picking.report.driver:tms.fleet_report_driver_form
+#: view:tms.picking.report2:tms.fleet_report_form
+msgid "Imprimer"
+msgstr "Imprimer"
+
+#. module: tms
+#: field:fleet.vehicle,imprimer_rapport:0
+msgid "Imprimer dans le rapport d'activité"
+msgstr "Print on the activity report"
+
+#. module: tms
+#: field:tms.config.settings,tms_param_gasoil_external_include_tax:0
+msgid "Inclure les taxes de gasoil externe dans les coûts des véhicules"
+msgstr "Inclure les taxes de gasoil externe dans les coûts des véhicules"
+
+#. module: tms
+#: field:tms.config.settings,tms_param_include_tax:0
+msgid "Inclure les taxes de voyages dans les coûts des véhicules"
+msgstr "Inclure les taxes de voyages dans les coûts des véhicules"
+
+#. module: tms
+#: model:ir.model,name:tms.model_fleet_vehicle
+msgid "Information on a vehicle"
+msgstr "Information on a vehicle"
+
+#. module: tms
+#: view:hr.employee:tms.hr_driver_employee_form
+msgid "Informations Chauffeur"
+msgstr "Informations on driver"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "Informations Générales"
+msgstr "General informations"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_form
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Informations de base"
+msgstr "Basic Information"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+msgid "Informations générales"
+msgstr "General informations"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+msgid "Informations sur la livraison"
+msgstr "Informations sur la livraison"
+
+#. module: tms
+#: view:hr.employee:tms.hr_driver_employee_form
+msgid "Informations sur le permis"
+msgstr "Informations sur le permis"
+
+#. module: tms
+#: view:product.product:tms.product_normal_form_view3
+msgid "Informations trajet"
+msgstr "Journey Informations"
+
+#. module: tms
+#: selection:fleet.vehicle.log.fuel,type:0
+msgid "Interne"
+msgstr "Interne"
+
+#. module: tms
+#: model:ir.model,name:tms.model_stock_location
+msgid "Inventory Locations"
+msgstr "Inventory Locations"
+
+#. module: tms
+#: model:ir.model,name:tms.model_account_invoice
+#: view:sale.order:tms.view_sale_order_form_tms field:tms.picking,invoice_id:0
+msgid "Invoice"
+msgstr "Invoice"
+
+#. module: tms
+#: field:picking.make.invoice,invoice_date:0
+msgid "Invoice Date"
+msgstr "Invoice Date"
+
+#. module: tms
+#: model:ir.model,name:tms.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Invoice Line"
+
+#. module: tms
+#: field:tms.picking,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Is a Follower"
+
+#. module: tms
+#: view:tms.grouping.circuit:tms.view_tms_grouping_circuit_form
+#: field:tms.grouping.circuit,circuit_line_ids:0
+msgid "Itinéraire"
+msgstr "Itinerary"
+
+#. module: tms
+#: view:hr.employee:tms.hr_attendant_employee_search
+#: view:hr.employee:tms.hr_driver_employee_search
+msgid "Job"
+msgstr "Job"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "Journal"
+msgstr "Journal"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_journal
+#: field:tms.grouping,tms_journal_id:0 field:tms.journal,name:0
+#: field:tms.picking,tms_journal_id:0
+msgid "Journal TMS"
+msgstr "Journal TMS"
+
+#. module: tms
+#: field:sale.order.line,km_estimated:0 field:tms.picking,km_estimated:0
+msgid "Kilomètres estimés"
+msgstr "Kilomètres estimés"
+
+#. module: tms
+#: help:sale.order.line,km_estimated:0 help:tms.picking,km_estimated:0
+msgid "Kilomètres estimés définis dans la fiche trajet."
+msgstr "Kilomètres estimés définis dans la fiche trajet."
+
+#. module: tms
+#: field:sale.order.line,km_return:0 field:tms.picking,km_return:0
+msgid "Kilomètres retour"
+msgstr "Kilomètres retour"
+
+#. module: tms
+#: help:sale.order.line,km_return:0
+msgid ""
+"Kilomètres retour, vous pouvez le définir si vous cochez l'option voyage "
+"aller-retour."
+msgstr ""
+"Kilomètres retour, vous pouvez le définir si vous cochez l'option voyage "
+"aller-retour."
+
+#. module: tms
+#: field:sale.order.line,km_additional:0 field:tms.picking,km_additional:0
+msgid "Kilomètres supplémentaires"
+msgstr "Kilomètres supplémentaires"
+
+#. module: tms
+#: help:sale.order.line,km_additional:0
+msgid "Kilomètres supplémentaires si il y'a plus que les kilomètres estimés."
+msgstr "Kilomètres supplémentaires si il y'a plus que les kilomètres estimés."
+
+#. module: tms
+#: field:tms.grouping,km_estimated:0 field:tms.travel,km_estimated:0
+msgid "Km estimé"
+msgstr "Km estimated"
+
+#. module: tms
+#: field:tms.travel,km_return:0
+msgid "Km retour"
+msgstr "Km return"
+
+#. module: tms
+#: field:tms.grouping,km_additional:0 field:tms.travel,km_additional:0
+msgid "Km supplémentaire"
+msgstr "Km additional"
+
+#. module: tms
+#: field:sale.order.line,km_total:0 field:tms.grouping,km_total:0
+#: field:tms.grouping.circuit,total_km:0 field:tms.picking,km_total:0
+#: field:tms.travel,km_total:0
+msgid "Km total"
+msgstr "Km total"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,counter_old:0
+msgid "L'ancien compteur du véhicule au moment de la saisie du bon"
+msgstr "L'ancien compteur du véhicule au moment de la saisie du bon"
+
+#. module: tms
+#: sql_constraint:fleet.vehicle.log.contract:0
+msgid "La date d'expiration doit être supérieure à celle de début"
+msgstr "La date d'expiration doit être supérieure à celle de début"
+
+#. module: tms
+#: sql_constraint:hr.employee:0
+msgid "La date d'expiration du permis doit être supérieure à celle d'embauche"
+msgstr "La date d'expiration du permis doit être supérieure à celle d'embauche"
+
+#. module: tms
+#: sql_constraint:fleet.vehicle:0
+msgid ""
+"La date de mise en circulation doit être supérieure à celle d'acquisition"
+msgstr ""
+"La date de mise en circulation doit être supérieure à celle d'acquisition"
+
+#. module: tms
+#: field:fleet.vehicle,width:0
+msgid "Largeur"
+msgstr "Width"
+
+#. module: tms
+#: field:tms.picking,message_last_post:0
+msgid "Last Message Date"
+msgstr "Last Message Date"
+
+#. module: tms
+#: field:fleet.park,write_uid:0 field:fleet.vehicle.category,write_uid:0
+#: field:fleet.vehicle.modification,write_uid:0
+#: field:hr.employee.licence_category,write_uid:0
+#: field:log.fuel.external.card,write_uid:0 field:picking.assigne,write_uid:0
+#: field:picking.make.invoice,write_uid:0 field:picking.terminer,write_uid:0
+#: field:product.pricelist.item.merchandise,write_uid:0
+#: field:res.users.default.park,write_uid:0
+#: field:tms.config.settings,write_uid:0 field:tms.grouping,write_uid:0
+#: field:tms.grouping.circuit,write_uid:0
+#: field:tms.grouping.circuit.line,write_uid:0 field:tms.journal,write_uid:0
+#: field:tms.picking,write_uid:0 field:tms.picking.cost,write_uid:0
+#: field:tms.picking.folder,write_uid:0
+#: field:tms.picking.product.details,write_uid:0
+#: field:tms.picking.report.driver,write_uid:0
+#: field:tms.picking.report.driver.line,write_uid:0
+#: field:tms.picking.report2,write_uid:0
+#: field:tms.picking.report2.line,write_uid:0 field:tms.travel,write_uid:0
+#: field:tms.travel.palet.merchandise,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: tms
+#: field:fleet.park,write_date:0 field:fleet.vehicle.category,write_date:0
+#: field:fleet.vehicle.modification,write_date:0
+#: field:hr.employee.licence_category,write_date:0
+#: field:log.fuel.external.card,write_date:0
+#: field:picking.assigne,write_date:0 field:picking.make.invoice,write_date:0
+#: field:picking.terminer,write_date:0
+#: field:product.pricelist.item.merchandise,write_date:0
+#: field:res.users.default.park,write_date:0
+#: field:tms.config.settings,write_date:0 field:tms.grouping,write_date:0
+#: field:tms.grouping.circuit,write_date:0
+#: field:tms.grouping.circuit.line,write_date:0 field:tms.journal,write_date:0
+#: field:tms.picking,write_date:0 field:tms.picking.cost,write_date:0
+#: field:tms.picking.folder,write_date:0
+#: field:tms.picking.product.details,write_date:0
+#: field:tms.picking.report.driver,write_date:0
+#: field:tms.picking.report.driver.line,write_date:0
+#: field:tms.picking.report2,write_date:0
+#: field:tms.picking.report2.line,write_date:0 field:tms.travel,write_date:0
+#: field:tms.travel.palet.merchandise,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: tms
+#: sql_constraint:fleet.vehicle.modification:0
+msgid "Le nom d'une modification doit être unique"
+msgstr "Le nom d'une modification doit être unique"
+
+#. module: tms
+#: sql_constraint:fleet.vehicle.category:0
+msgid "Le nom de catégorie doit être unique !"
+msgstr "Le nom de catégorie doit être unique !"
+
+#. module: tms
+#: sql_constraint:fleet.vehicle.model:0
+#: sql_constraint:fleet.vehicle.model.brand:0
+msgid "Le nom de modèle doit être unique !"
+msgstr "The model name must be  unique !"
+
+#. module: tms
+#: sql_constraint:tms.picking:0
+msgid "Le nom du BL doit être unique !"
+msgstr "Le nom du BL doit être unique !"
+
+#. module: tms
+#: sql_constraint:tms.grouping.circuit:0
+msgid "Le nom du circuit doit être unique !"
+msgstr "Le nom du circuit doit être unique !"
+
+#. module: tms
+#: sql_constraint:fleet.park:0
+msgid "Le nom du parc doit être unique !"
+msgstr "The name of the park must be unique !"
+
+#. module: tms
+#: sql_constraint:tms.travel.palet.merchandise:0
+msgid "Le nom du type de transport doit être unique !"
+msgstr "Le nom du type de transport doit être unique !"
+
+#. module: tms
+#: sql_constraint:hr.employee:0
+msgid "Le nombre d'acident doit être une valeur positive"
+msgstr "Le nombre d'acident doit être une valeur positive"
+
+#. module: tms
+#: sql_constraint:tms.picking.folder:0
+msgid "Le numéro de dossier doit être unique."
+msgstr "The folder numbe must be unique"
+
+#. module: tms
+#: help:tms.picking.folder,state:0
+msgid ""
+"Les états ouvert et fermé vous permettent de savoir l'état de traitement par "
+"dossier"
+msgstr ""
+"Les états ouvert et fermé vous permettent de savoir l'état de traitement par "
+"dossier"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: selection:fleet.vehicle.log.fuel,state:0
+msgid "Libre"
+msgstr "Free"
+
+#. module: tms
+#: field:tms.picking.report.driver,data_line_ids:0
+#: field:tms.picking.report2,data_line_ids:0
+msgid "Lignes"
+msgstr "Lines"
+
+#. module: tms
+#: field:tms.grouping,picking_ids:0
+msgid "Lignes de livraison"
+msgstr "Delivery lines"
+
+#. module: tms
+#: view:account.invoice:tms.invoice_view_inherit_1
+msgid "Liste des Bons de Livraison"
+msgstr "List of delivery order"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_tree
+msgid "Liste des Semi-remorques"
+msgstr "List of semitrailers"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_tree
+msgid "Liste des vehicules"
+msgstr "Liste des vehicules"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_config_pricelist
+#: model:ir.ui.menu,name:tms.menu_tms_config_pricelist_list
+msgid "Listes de prix"
+msgstr "Pricelists"
+
+#. module: tms
+#: field:log.fuel.external.card,liter:0
+msgid "Litrage (externe)"
+msgstr "Litrage (externe)"
+
+#. module: tms
+#: help:product.product,gasoil_estimated:0
+msgid "Litrage carburant estimé"
+msgstr "Litrage carburant estimé"
+
+#. module: tms
+#: field:product.product,gasoil_estimated:0 field:tms.travel,liter_estimated:0
+msgid "Litrage estimé"
+msgstr "litrage estimated"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,liter_external:0
+msgid "Litrage externe réalisé"
+msgstr "Litrage externe réalisé"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,total_liter:0
+msgid "Litrage réalisé (Interne) + Litrage réalisé (Externe)"
+msgstr "Litrage réalisé (Interne) + Litrage réalisé (Externe)"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Litres(interne)"
+msgstr "Liters(internal)"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,location_id:0
+msgid "Local véhicule"
+msgstr "Local vehicle"
+
+#. module: tms
+#: field:fleet.vehicle,length:0
+msgid "Longueur"
+msgstr "Length"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_sale_order_make_invoice
+msgid "Make Invoices"
+msgstr "Make Invoices"
+
+#. module: tms
+#: view:hr.employee:tms.hr_attendant_employee_search
+#: view:hr.employee:tms.hr_driver_employee_search
+#: model:res.groups,name:tms.group_tms_manager
+msgid "Manager"
+msgstr "Manager"
+
+#. module: tms
+#: field:product.product,picking_product_ok:0
+msgid "March. transp."
+msgstr "March. transp."
+
+#. module: tms
+#: field:tms.travel.palet.merchandise,name:0
+msgid "Marchandise"
+msgstr "Marchandise"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_travel_palet_merchandise
+msgid "Marchandises"
+msgstr "Marchandises"
+
+#. module: tms
+#: view:res.partner:tms.view_partner_form_inherit1_tms
+#: field:res.partner,picking_merchandise_ids:0
+#: view:tms.config.settings:tms.view_tms_config_settings
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Marchandises transportées"
+msgstr "Marchandises transportées"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_search
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_search
+#: field:fleet.vehicle,brand_id:0 view:website:tms.picking_report2
+msgid "Marque"
+msgstr "Brand"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.fleet_vehicle_model_brand_rem_act
+msgid "Marque de semi-remorque"
+msgstr "Marque de semi-remorque"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.fleet_vehicle_model_brand_veh_act
+msgid "Marque de véhicule"
+msgstr "Marque de véhicule"
+
+#. module: tms
+#: field:fleet.vehicle.model.brand,trailer_ok:0
+msgid "Marque semi-remorque TMS"
+msgstr "Marque semi-remorque TMS"
+
+#. module: tms
+#: field:fleet.vehicle.model.brand,vehicle_ok:0
+msgid "Marque véhicule TMS"
+msgstr "Marque véhicule TMS"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_config_trailer_brand
+#: model:ir.ui.menu,name:tms.menu_tms_config_vehicle_brand
+msgid "Marques"
+msgstr "Brands"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_tree
+#: view:website:tms.picking_report2
+msgid "Matricule"
+msgstr "Matricule"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "Matricule Semi-remorque"
+msgstr "Matricule Semi-remorque"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: view:fleet.vehicle:tms.tms_fleet_trailer_search
+#: view:fleet.vehicle:tms.tms_fleet_trailer_tree
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_search
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_tree
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_form
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_search
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_tree
+#: view:tms.picking:tms.view_tms_picking_tree
+msgid "Matricule véhicule"
+msgstr "Mat.  Vehicle"
+
+#. module: tms
+#: code:addons/tms/tms.py:1380 code:addons/tms/tms.py:1382
+#, python-format
+msgid "Mauvaise procédure!"
+msgstr "Mauvaise procédure!"
+
+#. module: tms
+#: field:product.pricelist.item,price_max_margin_commission:0
+msgid "Max. Price Margin"
+msgstr "Max. Price Margin"
+
+#. module: tms
+#: field:tms.picking,message_ids:0
+msgid "Messages"
+msgstr "Messages"
+
+#. module: tms
+#: help:tms.picking,message_ids:0
+msgid "Messages and communication history"
+msgstr "Messages and communication history"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Mettre en Brouillon"
+msgstr "Mettre en Brouillon"
+
+#. module: tms
+#: field:product.pricelist.item,price_min_margin_commission:0
+msgid "Min. Price Margin"
+msgstr "Min. Price Margin"
+
+#. module: tms
+#: model:ir.model,name:tms.model_fleet_vehicle_model
+msgid "Model of a vehicle"
+msgstr "Model of a vehicle"
+
+#. module: tms
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_form
+#: model:ir.model,name:tms.model_fleet_vehicle_modification
+msgid "Modification camion"
+msgstr "Modification camion"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_fleet_vehicle_modification
+msgid "Modification du camion"
+msgstr "Modification du camion"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.act_tms_fleet_trailer_2_modification
+#: model:ir.actions.act_window,name:tms.act_tms_fleet_vehicle_2_modification
+msgid "Modification parc"
+msgstr "Park changes"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_park_modification
+msgid "Modifications du parc"
+msgstr "Park changes"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_search
+msgid "Modèle"
+msgstr "Model"
+
+#. module: tms
+#: field:fleet.vehicle.model.brand,model_ids:0
+#: model:ir.ui.menu,name:tms.menu_tms_config_vehicle_model
+msgid "Modèles"
+msgstr "Models"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_search
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "Mon parc"
+msgstr "My park"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Montant"
+msgstr "Amount"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_form
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+#: field:log.fuel.external.card,amount:0
+msgid "Montant HT"
+msgstr "Amount HT"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_tree_tms
+msgid "Montant HT(int)"
+msgstr "Amount HT(int)"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Montant HT(interne)"
+msgstr "Amount  HT(internal)"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_form
+#: field:fleet.vehicle.log.fuel,amount_ttc:0
+#: field:log.fuel.external.card,amount_ttc:0
+msgid "Montant TTC"
+msgstr "Amount TTC"
+
+#. module: tms
+#: view:website:tms.picking_report_driver
+msgid "Montant commission"
+msgstr "Commission Amount"
+
+#. module: tms
+#: view:website:tms.picking_report_driver
+msgid "Montant déplacement"
+msgstr "Montant déplacement"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,amount_external:0
+msgid "Montant externe HT"
+msgstr "Montant externe HT"
+
+#. module: tms
+#: field:tms.grouping,amount_total_ht:0
+msgid "Montant total HT"
+msgstr "Amount Total Untaxed"
+
+#. module: tms
+#: field:tms.grouping,amount_total:0
+msgid "Montant total TTC"
+msgstr "Amount Total Taxed"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "Mouvements de stock"
+msgstr "Mouvements de stock"
+
+#. module: tms
+#: field:tms.picking,no_order:0
+msgid "N bon"
+msgstr "N bon"
+
+#. module: tms
+#: help:tms.picking,no_order:0
+msgid "N inscrit sur le bon du client."
+msgstr "N inscrit sur le bon du client."
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "New Copy of Quotation"
+msgstr "New Copy of Quotation"
+
+#. module: tms
+#: code:addons/tms/wizard/tms_stock_invoice_onshipping.py:91
+#, python-format
+msgid "No invoice created!"
+msgstr "No invoice created!"
+
+#. module: tms
+#: field:fleet.vehicle.category,name:0 field:tms.grouping,name:0
+msgid "Nom"
+msgstr "Name"
+
+#. module: tms
+#: field:fleet.park,name:0
+msgid "Nom du Parc"
+msgstr "Park name"
+
+#. module: tms
+#: field:tms.grouping.circuit,name:0
+msgid "Nom du circuit"
+msgstr "Circuit Name"
+
+#. module: tms
+#: help:tms.picking.folder,name:0
+msgid "Nom du dossier, par défaut, il est numéroté"
+msgstr "Name of the folder. By default it is numbered"
+
+#. module: tms
+#: view:fleet.park:tms.fleet_park_form view:fleet.park:tms.fleet_park_tree
+#: view:fleet.vehicle.category:tms.fleet_vehicle_category_tree
+msgid "Nom du parc"
+msgstr "Park name"
+
+#. module: tms
+#: help:tms.travel,name:0
+msgid "Nom du voyage"
+msgstr "Travel  name"
+
+#. module: tms
+#: field:fleet.vehicle,cylinder_qty:0
+msgid "Nombre Cylindres"
+msgstr "Nombre Cylindres"
+
+#. module: tms
+#: field:tms.picking.report2,count:0
+msgid "Nombre Total"
+msgstr "Nombre Total"
+
+#. module: tms
+#: view:website:tms.picking_report2
+msgid "Nombre Total :"
+msgstr "Nombre Total :"
+
+#. module: tms
+#: field:hr.employee,accident_qty:0
+msgid "Nombre d'accidents"
+msgstr "Number of accidents"
+
+#. module: tms
+#: help:hr.employee,accident_qty:0
+msgid "Nombre d'accidents occasionnés durant son activité"
+msgstr "Nombre d'accidents occasionnés durant son activité"
+
+#. module: tms
+#: field:fleet.vehicle,total_axle:0
+msgid "Nombre d'essieux"
+msgstr "Number of axles"
+
+#. module: tms
+#: field:tms.picking,number_colis:0
+msgid "Nombre de colis"
+msgstr "Number of packages"
+
+#. module: tms
+#: field:fleet.vehicle,tyre_qty:0
+msgid "Nombre de pneus"
+msgstr "Number of tires"
+
+#. module: tms
+#: field:hr.employee,point_driving:0
+msgid "Nombre de points"
+msgstr "Number of points"
+
+#. module: tms
+#: help:hr.employee,point_driving:0
+msgid "Nombre de points du permis"
+msgstr "Nombre de points du permis"
+
+#. module: tms
+#: selection:tms.picking,invoice_state:0
+msgid "Non Appliquable"
+msgstr "Non Appliquable"
+
+#. module: tms
+#: selection:tms.travel,state:0
+msgid "Non assigné"
+msgstr "Non assigné"
+
+#. module: tms
+#: code:addons/tms/fleet.py:155
+#, python-format
+msgid "None"
+msgstr "None"
+
+#. module: tms
+#: code:addons/tms/wizard/tms_stock_invoice_onshipping.py:82
+#, python-format
+msgid "None of these picking lists require invoicing."
+msgstr "None of these picking lists require invoicing."
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_form
+#: view:tms.grouping:tms.view_tms_grouping_form field:tms.grouping,note:0
+#: view:tms.picking:tms.view_tms_picking_form field:tms.picking,note:0
+msgid "Notes"
+msgstr "Notes"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,counter_new:0
+msgid "Nouveau compteur"
+msgstr "New odometer"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,km_driven:0
+msgid "Nouveau compteur - Ancien compteur"
+msgstr "New odometer - Old odometer"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,counter_new:0
+msgid ""
+"Nouveau compteur à prélever sur le véhicule au moment de la saisie du bon"
+msgstr ""
+"Nouveau compteur à prélever sur le véhicule au moment de la saisie du bon"
+
+#. module: tms
+#: view:product.pricelist.item:tms.product_pricelist_item_form_inherit
+msgid "Nouvelle commission ="
+msgstr "New commission ="
+
+#. module: tms
+#: field:tms.picking,origin:0 field:tms.picking.report.driver.line,origin:0
+#: field:tms.picking.report2.line,origin:0
+#: view:website:tms.picking_report_driver
+msgid "Num. TC"
+msgstr "TC  Num."
+
+#. module: tms
+#: field:account.invoice,numero_facture:0
+msgid "Numero facture"
+msgstr "Invoice Number"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,system_number:0
+msgid "Numero système"
+msgstr "System Number"
+
+#. module: tms
+#: field:tms.picking.folder,name:0
+msgid "Numéro"
+msgstr "Numer"
+
+#. module: tms
+#: view:website:tms.picking_report2
+msgid "Numéro TC"
+msgstr "TC Number"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+msgid "Numéro de Bon"
+msgstr "Order number"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,name:0
+msgid "Numéro de bon carburant, par défaut numéroté"
+msgstr "Numéro de bon carburant, par défaut numéroté"
+
+#. module: tms
+#: view:tms.config.settings:tms.view_tms_config_settings
+msgid "Numéro de chassis"
+msgstr "Chassis number"
+
+#. module: tms
+#: field:fleet.vehicle,required_vin:0 field:tms.config.settings,required_vin:0
+msgid "Numéro de chassis obligatoire"
+msgstr "Chassis number required"
+
+#. module: tms
+#: field:tms.picking,folder_id:0
+#: view:tms.picking.folder:tms.tms_picking_folder_form
+#: view:tms.picking.folder:tms.tms_picking_folder_search
+#: view:tms.picking.folder:tms.tms_picking_folder_tree
+msgid "Numéro de dossier"
+msgstr "Folder Number"
+
+#. module: tms
+#: help:hr.employee,license_no:0
+msgid "Numéro de permis"
+msgstr "Licence Number"
+
+#. module: tms
+#: field:tms.travel,system_number:0
+msgid "Numéro du système"
+msgstr "System Number"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,system_number:0
+msgid ""
+"Numéro du système si vous identifiez avec une méthode tierce vos "
+"approvisionnements en carburant."
+msgstr ""
+"Numéro du système si vous identifiez avec une méthode tierce vos "
+"approvisionnements en carburant."
+
+#. module: tms
+#: view:hr.employee:tms.hr_driver_employee_search
+#: field:hr.employee,license_no:0
+msgid "Numéro permis"
+msgstr "Licence Number"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,name:0
+msgid "N°"
+msgstr "N°"
+
+#. module: tms
+#: field:tms.travel,no_order:0
+msgid "N° bon"
+msgstr "Order N°"
+
+#. module: tms
+#: field:tms.picking,obs:0 field:tms.travel,observation:0
+#: view:website:tms.report_tms_picking_document
+msgid "Observation"
+msgstr "Observation"
+
+#. module: tms
+#: model:ir.model,name:tms.model_fleet_vehicle_odometer
+msgid "Odometer log for a vehicle"
+msgstr "Odometer log for a vehicle"
+
+#. module: tms
+#: code:addons/tms/fleet.py:744
+#, python-format
+msgid "Operation not allowed!"
+msgstr "Operation not allowed!"
+
+#. module: tms
+#: field:picking.make.invoice,grouped_by_product:0
+msgid "Options supplémentaires"
+msgstr "Additional options"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Order Lines"
+msgstr "Order Lines"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "Origine"
+msgstr "Origin"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Other Information"
+msgstr "Other Information"
+
+#. module: tms
+#: code:addons/tms/pricelist.py:548
+#, python-format
+msgid "Other Pricelist"
+msgstr "Other Pricelist"
+
+#. module: tms
+#: selection:tms.picking.folder,state:0
+msgid "Ouvert"
+msgstr "Open"
+
+#. module: tms
+#: field:fleet.vehicle,gross_weight:0
+msgid "P.T.C"
+msgstr "P.T.C"
+
+#. module: tms
+#: help:fleet.vehicle,capacity_global:0
+msgid "P.T.C - ( PV_SemiR + PV_Tracteur )"
+msgstr "P.T.C - ( PV_SemiR + PV_Tracteur )"
+
+#. module: tms
+#: help:fleet.vehicle,capacity:0
+msgid "P.T.C - Volume"
+msgstr "P.T.C - Volume"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "PRO-FORMA"
+msgstr "PRO-FORMA"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+msgid "PTC - PV"
+msgstr "PTC - PV"
+
+#. module: tms
+#: field:fleet.vehicle,ptc_trailer:0
+msgid "PTC Remorque"
+msgstr "PTC Remorque"
+
+#. module: tms
+#: field:fleet.vehicle,pv_trailer:0
+msgid "PV Remorque"
+msgstr "PV Remorque"
+
+#. module: tms
+#: view:fleet.park:tms.fleet_park_form view:fleet.park:tms.fleet_park_search
+#: view:fleet.park:tms.fleet_park_tree
+#: view:fleet.vehicle.category:tms.fleet_vehicle_category_search
+#: view:fleet.vehicle.category:tms.fleet_vehicle_category_tree
+#: field:res.users.default.park,park_id:0
+msgid "Parc"
+msgstr "Park"
+
+#. module: tms
+#: field:fleet.vehicle,park_ids:0
+msgid "Parc Véhicule"
+msgstr "Park Vehicle"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_park_management
+msgid "Parc automobile"
+msgstr "FLeet"
+
+#. module: tms
+#: model:ir.model,name:tms.model_res_users_default_park
+msgid "Parc par defaut"
+msgstr "Default park"
+
+#. module: tms
+#: field:res.users,park_id:0
+msgid "Parc par défaut"
+msgstr "Default park"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+#: model:ir.actions.act_window,name:tms.action_fleet_park
+#: model:ir.ui.menu,name:tms.menu_fleet_park_tree
+msgid "Parcs"
+msgstr "Parks"
+
+#. module: tms
+#: field:account.invoice,partner_delivery_id:0
+msgid "Partenaire livraison"
+msgstr "Delivery partner"
+
+#. module: tms
+#: model:ir.model,name:tms.model_res_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: tms
+#: code:addons/tms/pricelist.py:549
+#, python-format
+msgid "Partner section of the product form"
+msgstr "Partner section of the product form"
+
+#. module: tms
+#: field:res.partner,partner_invoiced_id:0
+msgid "Parténaire de facturation"
+msgstr "Invoicing partner"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Payment Term:"
+msgstr "Payment Term:"
+
+#. module: tms
+#: field:tms.config.settings,tms_param_only_travel:0
+msgid "Permettre la création de bons carburants internes sans voyages"
+msgstr "Permettre la création de bons carburants internes sans voyages"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_park_employee
+msgid "Personnel du parc"
+msgstr "Park staff"
+
+#. module: tms
+#: field:fleet.vehicle,hook_ok:0 field:fleet.vehicle.category,hook_ok:0
+msgid "Peut être accroché"
+msgstr "Can be hooked"
+
+#. module: tms
+#: model:ir.model,name:tms.model_picking_assigne
+msgid "Pickings Make Assigne"
+msgstr "Pickings Make Assigne"
+
+#. module: tms
+#: model:ir.model,name:tms.model_picking_make_invoice
+msgid "Pickings Make Invoice"
+msgstr "Pickings Make Invoice"
+
+#. module: tms
+#: model:ir.model,name:tms.model_picking_terminer
+msgid "Pickings Terminer"
+msgstr "Pickings Terminer"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Plannifier"
+msgstr "Plan"
+
+#. module: tms
+#: selection:tms.grouping,state:0 selection:tms.picking,state:0
+#: selection:tms.picking.report2,state:0
+#: selection:tms.picking.report2.line,state:0
+msgid "Plannifié"
+msgstr "Planned"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: field:fleet.vehicle.log.fuel,attendant_id:0
+#: field:hr.employee,attendant_ok:0
+msgid "Pompiste"
+msgstr "Pump assistant"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,attendant_id:0
+msgid "Pompiste effectuant l'approvisionnement du carburant."
+msgstr "Pompiste effectuant l'approvisionnement du carburant."
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_attendant_employee
+#: model:ir.ui.menu,name:tms.menu_tms_park_employee_attendant
+msgid "Pompistes"
+msgstr "Pump assistants."
+
+#. module: tms
+#: code:addons/tms/tms.py:1380 code:addons/tms/tms.py:1382
+#, python-format
+msgid ""
+"Pour créer un voyage vous devez passer par le bon de commande ou le bon de "
+"livraison"
+msgstr ""
+"Pour créer un voyage vous devez passer par le bon de commande ou le bon de "
+"livraison"
+
+#. module: tms
+#: field:product.product,percent_rate_commission:0
+msgid "Pourcentage Commission trajet"
+msgstr "Pourcentage Commission trajet"
+
+#. module: tms
+#: field:product.pricelist.item,percent_commission:0
+msgid "Pourcentage commission"
+msgstr "Pourcentage commission"
+
+#. module: tms
+#: help:product.product,percent_rate_commission:0
+msgid "Pourcentage commission standard"
+msgstr "Pourcentage commission standard"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_tree_tms
+msgid "Price"
+msgstr "Price"
+
+#. module: tms
+#: model:ir.model,name:tms.model_product_pricelist
+msgid "Pricelist"
+msgstr "Pricelist"
+
+#. module: tms
+#: model:ir.model,name:tms.model_product_pricelist_item
+msgid "Pricelist item"
+msgstr "Pricelist item"
+
+#. module: tms
+#: field:res.partner,pricelist_item_ids:0
+msgid "Pricelist items"
+msgstr "Pricelist items"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Print"
+msgstr "Print"
+
+#. module: tms
+#: view:product.pricelist.item:tms.product_pricelist_item_form_inherit
+msgid "Prix"
+msgstr "Price"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,total_price:0
+msgid "Prix HT interne + Prix HT externe"
+msgstr "Prix HT interne + Prix HT externe"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,amount:0
+msgid "Prix Total"
+msgstr "Price Total"
+
+#. module: tms
+#: field:tms.picking,price_unit:0 view:website:tms.report_invoice_document22
+#: view:website:tms.report_tms_picking_document
+msgid "Prix Unitaire"
+msgstr "Unit Price"
+
+#. module: tms
+#: field:product.pricelist.item,price_round_commission:0
+msgid "Prix arrondi commission"
+msgstr "Prix arrondi commission"
+
+#. module: tms
+#: field:log.fuel.external.card,price_per_liter:0
+msgid "Prix au litre"
+msgstr "Price per liter"
+
+#. module: tms
+#: field:product.pricelist.item,price_discount_commission:0
+msgid "Prix de réduction commission"
+msgstr "Prix de réduction commission"
+
+#. module: tms
+#: field:product.pricelist.item,price_surcharge_commission:0
+msgid "Prix de surcharge commission"
+msgstr "Prix de surcharge commission"
+
+#. module: tms
+#: help:tms.picking,price_unit:0
+msgid "Prix en fonction de la marchandise."
+msgstr "Prix en fonction de la marchandise."
+
+#. module: tms
+#: field:product.pricelist.item,fixed:0
+msgid "Prix fixe"
+msgstr "Fixed price"
+
+#. module: tms
+#: field:tms.picking,fixed:0
+msgid "Prix fixe par intervalle"
+msgstr "Fixed price by interval"
+
+#. module: tms
+#: field:product.pricelist.item.merchandise,fixed:0
+msgid "Prix fixe par intervalle?"
+msgstr "Prix fixe par intervalle?"
+
+#. module: tms
+#: field:product.pricelist.item.merchandise,price:0
+msgid "Prix supplémentaire"
+msgstr "Prix supplémentaire"
+
+#. module: tms
+#: view:website:tms.report_tms_picking_document
+msgid "Prix total"
+msgstr "Price Total"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,total_price:0
+msgid "Prix total (HT)"
+msgstr "Total Price (HT)"
+
+#. module: tms
+#: field:tms.picking.cost,price_unit:0
+msgid "Prix unitaire"
+msgstr "Unit Price"
+
+#. module: tms
+#: help:product.pricelist.item.merchandise,price:0
+msgid "Prix unitaire pour le type de transport associé à ce trajet"
+msgstr "Unit Price for the type of transport associated to the journey"
+
+#. module: tms
+#: model:ir.model,name:tms.model_product_product
+msgid "Product"
+msgstr "Product"
+
+#. module: tms
+#: model:ir.model,name:tms.model_product_uom
+msgid "Product Unit of Measure"
+msgstr "Product Unit of Measure"
+
+#. module: tms
+#: view:product.product:tms.product_product_tree_tms_view
+msgid "Products"
+msgstr "Products"
+
+#. module: tms
+#: field:tms.picking.cost,product_id:0
+msgid "Produit"
+msgstr "Product"
+
+#. module: tms
+#: field:tms.picking,product_uos_id:0
+msgid "Produit UoS"
+msgstr "Product UoS"
+
+#. module: tms
+#: selection:tms.picking,state:0 selection:tms.picking.report2,state:0
+#: selection:tms.picking.report2.line,state:0
+msgid "Programmé"
+msgstr "Scheduled"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_search
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_search field:fleet.vehicle,owner:0
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: field:fleet.vehicle.log.fuel,owner:0 field:log.fuel.external.card,owner:0
+msgid "Propriétaire"
+msgstr "Owner"
+
+#. module: tms
+#: field:tms.picking,product_qty:0 field:tms.picking,qty:0
+#: field:tms.picking.cost,quantity:0
+#: field:tms.picking.product.details,product_qty:0
+#: view:website:tms.report_invoice_document22
+#: view:website:tms.report_tms_picking_document
+msgid "Quantité"
+msgstr "Quantity"
+
+#. module: tms
+#: field:tms.picking,product_uos_qty:0
+msgid "Quantité (UOS)"
+msgstr "Quantity (UOS)"
+
+#. module: tms
+#: help:tms.picking,product_qty:0
+msgid "Quantité de marchandise selon l'UdM."
+msgstr "Quantité de marchandise selon l'UdM."
+
+#. module: tms
+#: field:tms.travel,product_qty:0
+msgid "Quantité facturée"
+msgstr "Invoiced quantity"
+
+#. module: tms
+#: field:tms.picking,delivrery_qty:0
+msgid "Quantité livrée"
+msgstr "Delivery quantity"
+
+#. module: tms
+#: field:product.pricelist.item.merchandise,min_quantity:0
+msgid "Quantité min."
+msgstr "Min. quantity"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Quotation"
+msgstr "Quotation"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.tms_picking_report_driver_wiz
+msgid "Rapport Frais déplacement"
+msgstr "Travel expense report"
+
+#. module: tms
+#: model:ir.actions.report.xml,name:tms.picking_report22
+msgid "Rapport Journalier"
+msgstr "Rapport Journalier"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.tms_picking_report_wiz
+msgid "Rapport Véhicles"
+msgstr "Vehicle reports"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.tms_picking_report_driver_act
+msgid "Rapport des frais de déplacement des chauffeurs"
+msgstr "Report of drivers travel expenses."
+
+#. module: tms
+#: view:website:tms.picking_report_driver
+msgid "Rapport des frais du :"
+msgstr "Fees report from :"
+
+#. module: tms
+#: model:ir.actions.report.xml,name:tms.picking_report24
+msgid "Rapport déplacement"
+msgstr "Rapport déplacement"
+
+#. module: tms
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_search
+msgid "Recherche Affectation parc"
+msgstr "Recherche Affectation parc"
+
+#. module: tms
+#: view:product.product:tms.product_search_form_tms_gasoil_view
+msgid "Recherche Carburant"
+msgstr "Fuel search"
+
+#. module: tms
+#: view:fleet.park:tms.fleet_park_search
+#: view:fleet.vehicle.category:tms.fleet_vehicle_category_search
+msgid "Recherche Parc"
+msgstr "Park search"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_search
+msgid "Recherche Semi-remorques"
+msgstr "Semi trailer search"
+
+#. module: tms
+#: view:product.product:tms.product_search_form_tms_view
+msgid "Recherche Trajet"
+msgstr "Journey search"
+
+#. module: tms
+#: view:hr.employee:tms.hr_driver_employee_search
+msgid "Recherche chauffeurs"
+msgstr "Drivers search"
+
+#. module: tms
+#: view:tms.picking.folder:tms.tms_picking_folder_search
+msgid "Recherche dossier"
+msgstr "Folder search"
+
+#. module: tms
+#: view:hr.employee:tms.hr_attendant_employee_search
+msgid "Recherche pompiste"
+msgstr "Pump assistant search"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_search
+msgid "Recherche véhicules"
+msgstr "Recherche véhicules"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Recreate Invoice"
+msgstr "Recreate Invoice"
+
+#. module: tms
+#: field:fleet.vehicle.modification,name:0
+msgid "Ref modification"
+msgstr "Ref modification"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Refund"
+msgstr "Refund"
+
+#. module: tms
+#: field:tms.picking.cost,discount:0
+msgid "Remise (%)"
+msgstr "Discount (%)"
+
+#. module: tms
+#: view:website:tms.report_tms_picking_document
+msgid "Repertoire"
+msgstr "Repertoire"
+
+#. module: tms
+#: field:tms.picking.report.driver.line,report_id:0
+#: field:tms.picking.report2.line,report_id:0
+msgid "Report"
+msgstr "Report"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,user_id:0 field:tms.grouping,user_id:0
+#: field:tms.journal,user_id:0 view:tms.picking:tms.view_tms_picking_search
+#: field:tms.picking,user_id:0
+msgid "Responsable"
+msgstr "Responsible"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_tree
+#: field:fleet.vehicle,vehicle_code:0
+#: field:fleet.vehicle.modification,vehicle_code:0 field:tms.picking,name:0
+msgid "Référence"
+msgstr "Reference"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Référence client:"
+msgstr "Customer Ref:"
+
+#. module: tms
+#: help:fleet.vehicle.cost,fuel_odometer_id:0
+msgid "Référence du dernier compteur gasoil au moment de cet encodage."
+msgstr "Référence du dernier compteur gasoil au moment de cet encodage."
+
+#. module: tms
+#: help:tms.picking,origin:0
+msgid "Référence du document d'origine."
+msgstr "Référence du document d'origine."
+
+#. module: tms
+#: field:log.fuel.external.card,inv_ref:0
+msgid "Référence facture"
+msgstr "Référence facture"
+
+#. module: tms
+#: field:fleet.vehicle,default_code:0
+msgid "Référence interne"
+msgstr "Référence interne"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_search
+#: field:fleet.vehicle.log.fuel,vehicle_code:0
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_form
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_search
+#: field:log.fuel.external.card,vehicle_code:0
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: field:tms.grouping,vehicle_code:0
+#: view:tms.picking:tms.view_tms_picking_form field:tms.picking,vehicle_code:0
+#: field:tms.travel,vehicle_code:0
+msgid "Référence véhicule"
+msgstr " Vehicle reference"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Référence:"
+msgstr "Reference:"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Rémise (%)"
+msgstr "Disc (%)"
+
+#. module: tms
+#: view:tms.picking.folder:tms.tms_picking_folder_form
+msgid "Réouvrir dossier"
+msgstr "Reopen folder"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Répertoire"
+msgstr "Repertory"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Résumé"
+msgstr "Summary"
+
+#. module: tms
+#: model:ir.model,name:tms.model_sale_make_invoice
+msgid "Sales Make Invoice"
+msgstr "Sales Make Invoice"
+
+#. module: tms
+#: model:ir.model,name:tms.model_sale_order
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Sales Order"
+msgstr "Sales Order"
+
+#. module: tms
+#: model:ir.model,name:tms.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Sales Order Line"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Sales Order Lines"
+msgstr "Sales Order Lines"
+
+#. module: tms
+#: field:fleet.vehicle,trailer_ok:0
+#: field:fleet.vehicle.modification,trailer_id:0
+msgid "Semi-Remorque"
+msgstr "Semitrailer"
+
+#. module: tms
+#: field:fleet.vehicle.model.brand,trailer_ids:0
+msgid "Semi-Remorques"
+msgstr "Semi-Remorques"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_tree
+#: field:fleet.vehicle,trailer_id:0
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_search
+#: field:tms.grouping,trailer_id:0
+#: view:tms.picking:tms.view_tms_picking_search field:tms.picking,trailer_id:0
+#: field:tms.travel,trailer_id:0
+msgid "Semi-remorque"
+msgstr "Semitrailer"
+
+#. module: tms
+#: field:fleet.vehicle.cost,trailer_ok:0
+#: field:fleet.vehicle.log.contract,trailer_ok:0
+msgid "Semi-remorque TMS"
+msgstr "TMS semitrailer"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "Semi-remorque accrochée"
+msgstr "Semi-remorque accrochée"
+
+#. module: tms
+#: help:tms.grouping,trailer_id:0 help:tms.picking,trailer_id:0
+msgid "Semi-remorque dédiée pour ce voyage."
+msgstr "Semi-remorque dédiée pour ce voyage."
+
+#. module: tms
+#: view:fleet.vehicle.category:tms.fleet_vehicle_category_form
+#: model:ir.actions.act_window,name:tms.action_tms_fleet_trailer
+#: model:ir.ui.menu,name:tms.menu_tms_config_trailer
+#: model:ir.ui.menu,name:tms.menu_tms_park_trailer_tree
+msgid "Semi-remorques"
+msgstr "Semitrailers"
+
+#. module: tms
+#: help:fleet.vehicle.model.brand,trailer_ids:0
+msgid "Semi-remorques de cette marque"
+msgstr "Semi-remorques de cette marque"
+
+#. module: tms
+#: view:fleet.vehicle.category:tms.fleet_vehicle_category_form
+msgid "Semi-remorques de la catégorie"
+msgstr "Semitrailer of the category"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Send by Email"
+msgstr "Send by Email"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "Services"
+msgstr "Services"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,station_site:0
+msgid "Site/Ville"
+msgstr "Site/City"
+
+#. module: tms
+#: field:log.fuel.external.card,company_id:0
+msgid "Société"
+msgstr "Company"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Source:"
+msgstr "Source:"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "Spécification physique"
+msgstr "Spécification physique"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "State"
+msgstr "State"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_form
+#: field:log.fuel.external.card,station_id:0
+msgid "Station/Fournisseur"
+msgstr "Station/Fournisseur"
+
+#. module: tms
+#: view:fleet.vehicle.modification:tms.fleet_vehicle_modification_search
+msgid "Status"
+msgstr "Status"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_tree
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_tree_tms
+#: field:fleet.vehicle.modification,state:0 field:tms.travel,state:0
+msgid "Statut"
+msgstr "Status"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+#: field:fleet.vehicle.log.fuel,qty_stock:0
+msgid "Stock"
+msgstr "Stock"
+
+#. module: tms
+#: field:tms.picking,message_summary:0
+msgid "Summary"
+msgstr "Summary"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Supplier Refund"
+msgstr "Supplier Refund"
+
+#. module: tms
+#: help:product.pricelist.item,price_surcharge_commission:0
+msgid "Surplus commission"
+msgstr "Surplus commission"
+
+#. module: tms
+#: help:sale.order.line,freeway_additional:0
+msgid "Surplus sur les frais d'autoroute estimés."
+msgstr "Surplus sur les frais d'autoroute estimés."
+
+#. module: tms
+#: field:res.partner,picking_merchandise_ok:0
+#: field:tms.picking,picking_merchandise_ok:0
+msgid "Sélection des marchandises"
+msgstr "Sélection des marchandises"
+
+#. module: tms
+#: field:tms.config.settings,tms_param_customer_merchandise_select:0
+msgid "Sélection des marchandises transportées dans le formulaire des clients"
+msgstr "Sélection des marchandises transportées dans le formulaire des clients"
+
+#. module: tms
+#: help:res.users,park_id:0
+msgid ""
+"Sélectionnez le parc adéquat pour l'utilisateur, vous pouvez segmenter vos "
+"parcs et les assigner aux utilisateurs correspondants."
+msgstr ""
+"Sélectionnez le parc adéquat pour l'utilisateur, vous pouvez segmenter vos "
+"parcs et les assigner aux utilisateurs correspondants."
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,assigned_external_ids:0
+msgid ""
+"Sélectionnez les bons de carburant externe effectués avec ce bon pour un "
+"contrôle adéquat de la consommation."
+msgstr ""
+"Sélectionnez les bons de carburant externe effectués avec ce bon pour un "
+"contrôle adéquat de la consommation."
+
+#. module: tms
+#: field:tms.grouping.circuit.line,sequence:0
+msgid "Séquence"
+msgstr "Sequence"
+
+#. module: tms
+#: model:ir.module.category,name:tms.module_category_tms
+#: model:ir.ui.menu,name:tms.menu_tms_config_settings
+msgid "TMS"
+msgstr "TMS"
+
+#. module: tms
+#: view:tms.picking.report2.line:tms.view_tms_pciking_report_product_search
+msgid "TMS Analysis"
+msgstr "TMS Analysis"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_calendar11
+#: view:tms.picking:tms.view_tms_picking_graph11
+msgid "TMS PICKING"
+msgstr "TMS PICKING"
+
+#. module: tms
+#: view:website:tms.report_tms_picking_document
+msgid "TOTAL HT"
+msgstr "TOTAL HT"
+
+#. module: tms
+#: view:product.pricelist.item:tms.product_pricelist_item_form_inherit
+msgid "Tarification par type de transport"
+msgstr "Tarification par type de transport"
+
+#. module: tms
+#: help:tms.picking,discount:0
+msgid "Taux de remise exprimé en pourcentage (entre 0 et 100)."
+msgstr "Taux de remise exprimé en pourcentage (entre 0 et 100)."
+
+#. module: tms
+#: field:tms.picking,discount:0
+msgid "Taux de remise(%)"
+msgstr "Discount rate(%)"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Taxe"
+msgstr "Tax"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,tax_ids:0
+#: field:log.fuel.external.card,tax_ids:0 field:tms.picking,tax_ids:0
+#: view:website:tms.report_invoice_document22
+msgid "Taxes"
+msgstr "Taxes"
+
+#. module: tms
+#: field:tms.travel,tax_ok:0
+msgid "Taxes incluses dans l'analytique"
+msgstr "Taxes incluses dans l'analytique"
+
+#. module: tms
+#: view:picking.terminer:tms.view_picking_terminer
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Terminer"
+msgstr "Process Entirely"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_picking_terminer
+#: view:picking.terminer:tms.view_picking_terminer
+msgid "Terminer BLs"
+msgstr "Process Entirely Delivery Orders"
+
+#. module: tms
+#: selection:tms.grouping,state:0 selection:tms.picking,state:0
+#: selection:tms.picking.report2,state:0
+#: selection:tms.picking.report2.line,state:0
+msgid "Terminé"
+msgstr "Done"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "Terms and conditions..."
+msgstr "Terms and conditions..."
+
+#. module: tms
+#: model:ir.actions.act_window,help:tms.product_pricelist_action_version_tms
+msgid ""
+"There can be more than one version of a pricelist. Here you can create and "
+"manage new versions of a price list. Some examples of versions: 2010, 2011, "
+"Summer Promotion, etc."
+msgstr ""
+"There can be more than one version of a pricelist. Here you can create and "
+"manage new versions of a price list. Some examples of versions: 2010, 2011, "
+"Summer Promotion, etc."
+
+#. module: tms
+#: field:tms.picking.report2,title:0
+msgid "Titre du rapport"
+msgstr "Titre du rapport"
+
+#. module: tms
+#: field:tms.picking.cost,picking_id:0
+msgid "Tms picking"
+msgstr "Tms picking"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.tms_picking_report_act
+#: model:ir.actions.act_window,name:tms.tms_picking_report_act22
+msgid "Tms picking report"
+msgstr "Tms picking report"
+
+#. module: tms
+#: field:tms.picking,amount_total:0 field:tms.picking.cost,price_subtotal:0
+#: view:website:tms.picking_report_driver
+#: view:website:tms.report_invoice_document22
+msgid "Total"
+msgstr "Total"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_tree
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_tree
+#: field:tms.picking,amount_total_ht:0 field:tms.travel,amount_total_ht:0
+msgid "Total HT"
+msgstr "Total HT"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Total HT(ext)"
+msgstr "Total HT(ext)"
+
+#. module: tms
+#: view:website:tms.report_invoice_document22
+msgid "Total Hors Taxes"
+msgstr "Total Hors Taxes"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_tree
+msgid "Total KM"
+msgstr "Total KM"
+
+#. module: tms
+#: field:tms.travel,amount_tax:0
+msgid "Total TAX"
+msgstr "Total TAX"
+
+#. module: tms
+#: field:tms.travel,amount_total:0
+msgid "Total TTC"
+msgstr "Total TTC"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Total TTC(ext)"
+msgstr "Total TTC(ext)"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_tree_tms
+msgid "Total Tax Excluded"
+msgstr "Total Tax Excluded"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_tree_tms
+msgid "Total Tax Included"
+msgstr "Total Tax Included"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_tree
+msgid "Total autoroute"
+msgstr "Total autoroute"
+
+#. module: tms
+#: view:website:tms.picking_report_driver
+msgid "Total commissions"
+msgstr "Total commissions"
+
+#. module: tms
+#: view:website:tms.picking_report_driver
+msgid "Total déplacements"
+msgstr "Total déplacements"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_tree field:tms.picking,total_cost:0
+msgid "Total hors taxe"
+msgstr "Total hors taxe"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,km_driven:0
+msgid "Total km. parcourus"
+msgstr "Total km. travelled"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,total_liter:0
+msgid "Total litrage réalisé"
+msgstr "Total realized litrage"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Total litres"
+msgstr "Total litres"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_tree
+msgid "Total montant"
+msgstr "Total amount"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_tree
+msgid "Total quantité"
+msgstr "Total quantity"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_tree
+msgid "Total quantité livrée"
+msgstr "Total delivery quantity"
+
+#. module: tms
+#: field:tms.picking,amount_tax:0
+msgid "Total taxe"
+msgstr "Total tax"
+
+#. module: tms
+#: selection:tms.picking.report2,criteria_1:0
+msgid "Tous"
+msgstr "All"
+
+#. module: tms
+#: field:fleet.park,all_partner_ok:0
+msgid "Tous les clients"
+msgstr "All customers"
+
+#. module: tms
+#: field:fleet.park,all_traject_ok:0
+msgid "Tous les trajets"
+msgstr "All journeys"
+
+#. module: tms
+#: field:fleet.park,all_vehicle_ok:0
+msgid "Tous les véhicules"
+msgstr "All vehicles"
+
+#. module: tms
+#: field:tms.picking.report2.line,product_id:0
+msgid "Trafet"
+msgstr "Journey"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_form
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Traiter le bon"
+msgstr "Process the order"
+
+#. module: tms
+#: view:product.product:tms.product_search_form_view_inherit
+#: view:sale.order:tms.view_sale_order_form_tms
+#: field:tms.grouping,traject_id:0
+#: field:tms.grouping.circuit.line,traject_id:0
+#: view:tms.picking:tms.view_tms_picking_search field:tms.picking,product_id:0
+#: field:tms.picking.report.driver.line,product_id:0
+#: view:tms.picking.report2.line:tms.fleet_report_tree
+#: view:tms.picking.report2.line:tms.view_tms_pciking_report_product_search
+#: field:tms.travel,product_id:0 view:website:tms.picking_report_driver
+msgid "Trajet"
+msgstr "Journey"
+
+#. module: tms
+#: field:tms.grouping,trajet_ok:0
+msgid "Trajet ?"
+msgstr "Journey ?"
+
+#. module: tms
+#: view:fleet.park:tms.fleet_park_form field:fleet.park,traject_ids:0
+#: field:fleet.vehicle,product_id:0
+#: model:ir.actions.act_window,name:tms.action_tms_traject
+#: model:ir.ui.menu,name:tms.menu_tms_picking_traject
+msgid "Trajets"
+msgstr "Journeys"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+msgid "Transport"
+msgstr "Transport"
+
+#. module: tms
+#: field:account.invoice.line,merchandise_id:0
+#: field:fleet.vehicle.log.fuel,type:0
+#: view:product.product:tms.product_search_form_tms_gasoil_view
+#: view:product.product:tms.product_search_form_tms_view
+msgid "Type"
+msgstr "Type"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_tree_tms
+msgid "Type Paie."
+msgstr "Payroll Type."
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,payment_type:0
+msgid "Type de paiement"
+msgstr "Mode of payment"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: view:fleet.vehicle:tms.tms_fleet_trailer_search
+#: view:fleet.vehicle:tms.tms_fleet_trailer_tree
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_search
+#: field:fleet.vehicle,merchandise_id:0 field:sale.order.line,merchandise_id:0
+#: field:tms.picking,merchandise_id:0 field:tms.travel,merchandise_id:0
+#: view:tms.travel.palet.merchandise:tms.view_tms_travel_palet_merchandise_form
+#: view:tms.travel.palet.merchandise:tms.view_tms_travel_palet_merchandise_search
+#: view:tms.travel.palet.merchandise:tms.view_tms_travel_palet_merchandise_tree
+msgid "Type de transport"
+msgstr "Type of transport"
+
+#. module: tms
+#: help:product.pricelist.item.merchandise,merchandise_id:0
+msgid "Type de transport utilisé(exemple, 1-2 tonnes, Maïs)"
+msgstr "Type of transport used (eg 1-2 tons, corn)."
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.product_price_type_action_tms
+#: model:ir.ui.menu,name:tms.menu_tms_config_pricelist_type
+msgid "Types de prix"
+msgstr "Price types"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_config_merchandise
+msgid "Types de transport"
+msgstr "Types of transport"
+
+#. module: tms
+#: view:product.product:tms.product_product_tree_tms_view
+msgid "UdM"
+msgstr "UoM"
+
+#. module: tms
+#: view:product.product:tms.product_search_form_tms_view
+msgid "UdM par défaut"
+msgstr "Default UoM "
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_search
+msgid "Unité de charge"
+msgstr "Unit of load"
+
+#. module: tms
+#: view:tms.grouping.circuit:tms.view_tms_grouping_circuit_search
+msgid "Unité de la charge"
+msgstr "Unit of the load"
+
+#. module: tms
+#: field:product.pricelist.item.merchandise,uom_id:0
+#: field:tms.grouping,charge_uom_id:0
+msgid "Unité de livraison"
+msgstr "Delivery unit"
+
+#. module: tms
+#: field:tms.grouping.circuit,charge_uom_id:0
+#: field:tms.picking.product.details,product_uom_id:0
+msgid "Unité de mesure"
+msgstr "Unit of Measure"
+
+#. module: tms
+#: help:tms.grouping,charge_uom_id:0 help:tms.grouping.circuit,charge_uom_id:0
+msgid "Unité de mesure de la charge, i.e: tonne."
+msgstr "Unit of measure of the load, eg: ton."
+
+#. module: tms
+#: help:tms.picking.product.details,product_uom_id:0
+msgid "Unité de mesure du produit."
+msgstr "Product unit of measure"
+
+#. module: tms
+#: field:tms.picking,product_uom_id:0
+msgid "Unité de mésure"
+msgstr "Unit of Measure"
+
+#. module: tms
+#: field:tms.picking,uom_delivrery_id:0
+msgid "Unité livraison"
+msgstr "Delivery unit"
+
+#. module: tms
+#: field:tms.picking,message_unread:0
+msgid "Unread Messages"
+msgstr "Unread Messages"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "UoS"
+msgstr "UoS"
+
+#. module: tms
+#: model:ir.model,name:tms.model_res_users
+msgid "Users"
+msgstr "Users"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: model:res.groups,name:tms.group_tms_user
+msgid "Utilisateur"
+msgstr "User"
+
+#. module: tms
+#: help:fleet.vehicle.log.fuel,user_id:0
+msgid "Utilisateur qui a saisi le bon de carburant"
+msgstr "User who entered the fuel  voucher"
+
+#. module: tms
+#: view:fleet.park:tms.fleet_park_form field:fleet.park,user_ids:0
+msgid "Utilisateurs"
+msgstr "Users"
+
+#. module: tms
+#: field:sale.order.line,commission_value_type:0
+msgid "Valeur commission"
+msgstr "Commission amount"
+
+#. module: tms
+#: field:tms.picking,commission_value_type:0
+msgid "Valeur de la commission selon le type."
+msgstr "Commission amount by type."
+
+#. module: tms
+#: view:log.fuel.external.card:tms.log_fuel_external_card_form
+msgid "Valider"
+msgstr "Validate"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: selection:fleet.vehicle.log.fuel,state:0
+#: view:tms.picking:tms.view_tms_picking_search
+#: view:tms.picking.folder:tms.tms_picking_folder_search
+msgid "Validé"
+msgstr "Validated"
+
+#. module: tms
+#: field:account.invoice.line,vehicle_id:0
+msgid "Vehicle"
+msgstr "Vehicle"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_tree
+msgid "Vendeur"
+msgstr "Salesperson"
+
+#. module: tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_form
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_form_tms
+msgid "Vente/Achat"
+msgstr "Sale/Purchase"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.product_pricelist_action_version_tms
+#: model:ir.ui.menu,name:tms.menu_tms_config_pricelist_version
+msgid "Versions de liste de prix"
+msgstr "Pricelists Versions"
+
+#. module: tms
+#: view:sale.order:tms.view_sale_order_form_tms
+msgid "View Invoice"
+msgstr "View Invoice"
+
+#. module: tms
+#: field:fleet.vehicle,volume:0
+msgid "Volume"
+msgstr "Volume"
+
+#. module: tms
+#: help:fleet.vehicle,volume:0
+msgid "Volume en m3."
+msgstr "The volume in m3."
+
+#. module: tms
+#: view:picking.assigne:tms.view_picking_assigne
+msgid "Voulez-vous vraiment assigner les BL(s)?"
+msgstr "Do you really want to assign the delivery order(s)?"
+
+#. module: tms
+#: view:picking.terminer:tms.view_picking_terminer
+msgid "Voulez-vous vraiment terminer les BL(s)?"
+msgstr "Do you really want to mark the delivery order(s) as done?"
+
+#. module: tms
+#: code:addons/tms/sale.py:219
+#, python-format
+msgid ""
+"Vous devez sélectionner une liste de prix ou un client dans le formulaire du "
+"bon de commande !\n"
+"Veuillez en sélectionner un avant de choisir un trajet."
+msgstr ""
+"You must select a price list or a customer in the form of the order! \n"
+"Please select one before choosing a journey."
+
+#. module: tms
+#: sql_constraint:tms.grouping.circuit.line:0
+msgid ""
+"Vous ne pouvez définir deux itinéraires du même couple (trajet, client) !"
+msgstr "You can not define two journeys of the same couple (path, customer)!"
+
+#. module: tms
+#: code:addons/tms/tms.py:868
+#, python-format
+msgid ""
+"Vous ne pouvez pas confirmer un BL sans partenaire, produit ou marchandise."
+msgstr ""
+"You can not confirm a delivery without a partner, product or commodity."
+
+#. module: tms
+#: code:addons/tms/pricelist.py:531
+#: sql_constraint:product.pricelist.item.merchandise:0
+#, python-format
+msgid "Vous ne pouvez pas définir plusieurs fois le type de transport"
+msgstr "You can not set more than once the type of transport."
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_travel
+#: field:product.pricelist.item,trajet_ok:0
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form field:tms.travel,name:0
+msgid "Voyage"
+msgstr "Travel"
+
+#. module: tms
+#: field:fleet.vehicle,current_travel:0 field:hr.employee,current_travel:0
+msgid "Voyage en cours"
+msgstr "Underway travel"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.tms_picking_report
+msgid "Vue graphique"
+msgstr "Graph view"
+
+#. module: tms
+#: field:tms.picking.report2.line,vehicle_id:0
+msgid "Véhicle"
+msgstr "Vehicle"
+
+#. module: tms
+#: selection:tms.picking.report2,criteria_1:0
+msgid "Véhicles non programmés"
+msgstr "Unscheduled vehicles"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+#: field:fleet.vehicle,vehicle_ok:0
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_external_search_tms
+#: view:fleet.vehicle.log.fuel:tms.fleet_vehicle_log_fuel_search_tms
+#: field:log.fuel.external.card,vehicle_id:0 field:tms.grouping,vehicle_id:0
+#: view:tms.picking:tms.view_tms_picking_search field:tms.picking,vehicle_id:0
+#: view:tms.picking.report2.line:tms.view_tms_pciking_report_product_search
+#: field:tms.travel,vehicle_id:0
+msgid "Véhicule"
+msgstr "Vehicle"
+
+#. module: tms
+#: field:fleet.vehicle.cost,vehicle_ok:0
+#: field:fleet.vehicle.log.contract,vehicle_ok:0
+msgid "Véhicule TMS"
+msgstr "TMS vehicle"
+
+#. module: tms
+#: field:hr.employee,vehicle_id:0
+msgid "Véhicule affecté"
+msgstr "Assigned vehicle"
+
+#. module: tms
+#: view:fleet.park:tms.fleet_park_form field:fleet.park,vehicle_ids:0
+#: view:fleet.vehicle.category:tms.fleet_vehicle_category_form
+#: field:fleet.vehicle.model,vehicle_ids:0
+#: field:fleet.vehicle.model.brand,vehicle_ids:0
+#: model:ir.actions.act_window,name:tms.action_tms_fleet_vehicle
+#: model:ir.ui.menu,name:tms.menu_tms_config_vehicle
+#: model:ir.ui.menu,name:tms.menu_tms_park_vehicle_tree
+#: field:tms.picking.report2,criteria_1:0
+msgid "Véhicules"
+msgstr "Vehicles"
+
+#. module: tms
+#: help:fleet.vehicle.model.brand,vehicle_ids:0
+msgid "Véhicules de cette marque"
+msgstr "Vehicles of this brand"
+
+#. module: tms
+#: view:fleet.vehicle.category:tms.fleet_vehicle_category_form
+msgid "Véhicules de la catégorie"
+msgstr "Vehicles of the category"
+
+#. module: tms
+#: selection:tms.picking.report2,criteria_1:0
+msgid "Véhicules programmés"
+msgstr "Scheduled vehicles"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "Vérifier disponibilité"
+msgstr "Check availability"
+
+#. module: tms
+#: code:addons/tms/pricelist.py:313
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: tms
+#: code:addons/tms/wizard/picking_make_invoice.py:56
+#: code:addons/tms/wizard/sale_make_invoice.py:43
+#: code:addons/tms/wizard/sale_make_invoice.py:56
+#: code:addons/tms/wizard/tms_stock_invoice_onshipping.py:82
+#, python-format
+msgid "Warning!"
+msgstr "Warning!"
+
+#. module: tms
+#: code:addons/tms/sale.py:86
+#, python-format
+msgid "You cannot confirm a sales order which has no line."
+msgstr "You cannot confirm a sales order which has no line."
+
+#. module: tms
+#: code:addons/tms/wizard/picking_make_invoice.py:56
+#, python-format
+msgid "You cannot create invoice when picking is not confirmed."
+msgstr "You cannot create invoice when picking is not confirmed."
+
+#. module: tms
+#: code:addons/tms/wizard/sale_make_invoice.py:43
+#, python-format
+msgid "You cannot create invoice when sales order is not confirmed."
+msgstr "You cannot create invoice when sales order is not confirmed."
+
+#. module: tms
+#: code:addons/tms/wizard/sale_make_invoice.py:56
+#, python-format
+msgid "You shouldn't manually invoice the following sale order %s"
+msgstr "You shouldn't manually invoice the following sale order %s"
+
+#. module: tms
+#: view:res.users.default.park:tms.tms_res_users_default_park_form
+msgid "_Annuler"
+msgstr "_Cancel"
+
+#. module: tms
+#: view:res.users.default.park:tms.tms_res_users_default_park_form
+msgid "_Valider"
+msgstr "_Validate"
+
+#. module: tms
+#: help:tms.picking,km_additional:0
+msgid "a renseigner pour la différence de kilométrage."
+msgstr "a renseigner pour la différence de kilométrage."
+
+#. module: tms
+#: view:fleet.vehicle.category:tms.fleet_vehicle_category_search
+msgid "accrochable"
+msgstr "Hookable"
+
+#. module: tms
+#: selection:tms.travel,state:0
+msgid "annuler"
+msgstr "Cancel"
+
+#. module: tms
+#: selection:tms.travel,state:0
+msgid "assigné"
+msgstr "assigned"
+
+#. module: tms
+#: view:website:tms.picking_report_driver
+msgid "au :"
+msgstr "To :"
+
+#. module: tms
+#: field:fleet.vehicle.log.fuel,assigned_external_ids:0
+msgid "bon de carburant externe assigné"
+msgstr "Fuel voucher external assigned"
+
+#. module: tms
+#: view:product.product:tms.product_search_form_view_inherit
+msgid "carburant"
+msgstr "Fuel"
+
+#. module: tms
+#: help:sale.order.line,travel_return:0
+msgid ""
+"cochez cette option si vous effectuez un voyage aller-retour pour définir le "
+"km retour et les frais d'autoroute retour"
+msgstr ""
+"Check this option if you make a round trip travel in order to set the "
+"return  mileage  and associated highway costs"
+
+#. module: tms
+#: field:tms.travel,commission_driver:0
+msgid "commission"
+msgstr "Commission"
+
+#. module: tms
+#: field:tms.travel,commission_ok:0
+msgid "commissions incluses dans l'analytique"
+msgstr "Commissions included in the analytic"
+
+#. module: tms
+#: field:fleet.vehicle,current_date_travel:0
+#: field:hr.employee,current_date_travel:0
+msgid "date voyage"
+msgstr "Travel date"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "e.g. SO0032"
+msgstr "e.g. SO0032"
+
+#. module: tms
+#: field:tms.travel,freeway_ok:0
+msgid "frais autoroutes incluses dans l'analytique"
+msgstr "Highways costs included in the analytic"
+
+#. module: tms
+#: help:product.product,freeway_estimated:0
+msgid "frais occassionnés sur l'autoroute (ex: point de péage)"
+msgstr "costs caused on the highway (eg toll point)"
+
+#. module: tms
+#: field:fleet.vehicle.odometer,fuel_ok:0 field:product.product,gasoil_ok:0
+msgid "gasoil"
+msgstr "Gasoil"
+
+#. module: tms
+#: field:tms.grouping.circuit.line,circuit_id:0
+msgid "id circuit"
+msgstr "id circuit"
+
+#. module: tms
+#: field:tms.picking,grouping_id:0
+msgid "id groupage"
+msgstr "id grouping"
+
+#. module: tms
+#: field:tms.travel,trailer_odometer_id:0
+msgid "id1 odometer"
+msgstr "id1 odometer"
+
+#. module: tms
+#: field:tms.travel,vehicle_odometer_id:0
+msgid "id2 odometer"
+msgstr "id2 odometer"
+
+#. module: tms
+#: field:fleet.vehicle,vehicle_in_park:0
+msgid "in users park"
+msgstr "in users park"
+
+#. module: tms
+#: field:product.pricelist.item.merchandise,pricelist_item_id:0
+msgid "item liste de prix"
+msgstr "Pricelist item"
+
+#. module: tms
+#: field:product.product,km_estimated:0
+msgid "kilometrage estimé"
+msgstr "Estimated mileage"
+
+#. module: tms
+#: help:product.product,km_estimated:0
+msgid "km estimé du trajet"
+msgstr "Estimated number of kilometers of the journey."
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "km estimés"
+msgstr "Estimated kilometers"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "km retour"
+msgstr "Return kilometers"
+
+#. module: tms
+#: view:tms.grouping:tms.view_tms_grouping_form
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "km suppl."
+msgstr "Additional kilometers"
+
+#. module: tms
+#: help:product.pricelist.item.merchandise,pricelist_item_id:0
+msgid "ligne de liste de prix associée"
+msgstr "Pricelist line associated"
+
+#. module: tms
+#: view:website:tms.picking_report2
+msgid "lignes"
+msgstr "Lines"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_form
+msgid "mise a jour"
+msgstr "update"
+
+#. module: tms
+#: view:fleet.vehicle.category:tms.fleet_vehicle_category_search
+msgid "non accrochable"
+msgstr "Not hookable"
+
+#. module: tms
+#: view:picking.assigne:tms.view_picking_assigne
+#: view:picking.make.invoice:tms.view_picking_make_invoice2
+#: view:picking.terminer:tms.view_picking_terminer
+#: view:sale.make.invoice:tms.view_sale_order_make_invoice
+#: view:tms.config.settings:tms.view_tms_config_settings
+#: view:tms.picking.report.driver:tms.fleet_report_driver_form
+#: view:tms.picking.report2:tms.fleet_report_form
+msgid "or"
+msgstr "or"
+
+#. module: tms
+#: view:hr.employee:tms.hr_attendant_employee_search
+msgid "pompiste"
+msgstr "Pump assistant"
+
+#. module: tms
+#: field:tms.picking,grouping_ok:0
+msgid "provenance groupage"
+msgstr "From groupage"
+
+#. module: tms
+#: field:tms.travel,qty:0
+msgid "quantité"
+msgstr "Quantity"
+
+#. module: tms
+#: field:tms.travel,delivrery_qty:0
+msgid "quantité livrée"
+msgstr "Delivered quantity"
+
+#. module: tms
+#: help:product.pricelist.item,price_discount_commission:0
+msgid "réduction commission"
+msgstr "reduction commission"
+
+#. module: tms
+#: field:fleet.vehicle.category,trailer_ids:0
+msgid "semi-remorques"
+msgstr "Semitrailers"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "show all the costs for this vehicle"
+msgstr "show all the costs for this vehicle"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "show the contract for this vehicle"
+msgstr "show the contract for this vehicle"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "show the fuel logs for this vehicle"
+msgstr "show the fuel logs for this vehicle"
+
+#. module: tms
+#: view:fleet.vehicle:tms.tms_fleet_trailer_form
+#: view:fleet.vehicle:tms.tms_fleet_vehicle_form
+msgid "show the services logs for this vehicle"
+msgstr "show the services logs for this vehicle"
+
+#. module: tms
+#: field:tms.picking.folder,state:0
+msgid "statut"
+msgstr "status"
+
+#. module: tms
+#: field:fleet.vehicle,disponibility:0 field:hr.employee,disponibility:0
+msgid "statut-voyage"
+msgstr "status-travel"
+
+#. module: tms
+#: field:product.pricelist.item,item_merchandise_ids:0
+msgid "supplément type de transport"
+msgstr "Additional transport type"
+
+#. module: tms
+#: model:ir.model,name:tms.model_product_pricelist_item_merchandise
+msgid "tarification en fonction du type de transport."
+msgstr "Pricing based on the type of transport."
+
+#. module: tms
+#: selection:tms.travel,state:0
+msgid "traité"
+msgstr "Processed"
+
+#. module: tms
+#: field:product.product,trajet_ok:0
+msgid "trajet"
+msgstr "Journey"
+
+#. module: tms
+#: view:product.pricelist.item:tms.product_pricelist_item_form_inherit
+#: field:product.pricelist.item.merchandise,merchandise_id:0
+#: view:tms.travel.palet.merchandise:tms.view_tms_travel_palet_merchandise_form
+msgid "type de transport"
+msgstr "Type of transport"
+
+#. module: tms
+#: field:tms.travel,product_uom_id:0
+msgid "unité de mesure facturée"
+msgstr "UoM of the invoice"
+
+#. module: tms
+#: field:product.uom,travel_ok:0
+msgid "unité de voyage ?"
+msgstr "unit of travel ?"
+
+#. module: tms
+#: field:tms.travel,uom_delivrery_id:0
+msgid "unité livraison"
+msgstr "Delivery unit"
+
+#. module: tms
+#: field:fleet.vehicle,vehicle_id:0
+#: field:tms.picking.product.details,picking_partner_id:0
+msgid "unknown"
+msgstr "Unknown"
+
+#. module: tms
+#: field:fleet.vehicle.modification,vehicle_id:0
+msgid "vehicle"
+msgstr "Vehicle"
+
+#. module: tms
+#: field:fleet.vehicle.odometer,travel_ok:0 field:sale.order,travel_ok:0
+#: field:sale.order.line,travel_ok:0
+msgid "voyage"
+msgstr "Travel"
+
+#. module: tms
+#: field:fleet.vehicle.category,vehicle_ids:0
+msgid "véhicules"
+msgstr "Vehicles"
+
+#. module: tms
+#: field:product.pricelist.item.merchandise,born_sup:0
+msgid "À"
+msgstr "To"
+
+#. module: tms
+#: field:tms.picking.report.driver,criteria_2:0
+msgid "À :"
+msgstr "To :"
+
+#. module: tms
+#: view:tms.picking:tms.view_tms_picking_search
+#: selection:tms.picking,invoice_state:0
+msgid "À facturer"
+msgstr "To be invoiced"
+
+#. module: tms
+#: help:tms.picking,freeway_additional:0
+msgid "À renseigner si présence d'un supplément de frais d'autoroute."
+msgstr "To define if the presence of a highway fee supplement."
