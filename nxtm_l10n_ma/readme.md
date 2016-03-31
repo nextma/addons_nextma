@@ -1,6 +1,6 @@
-- module  localisation maroc odoo avec correction apportées au module officiel odoo comptabilité maroc suite au meetup organisé le 29 février 2016 par la société nextma avec la participation d'intégrateurs marocains odoo
+Module  localisation maroc odoo avec correction apportées au module officiel odoo comptabilité maroc suite au meetup organisé le 29 février 2016 par la société nextma avec la participation d'intégrateurs marocains odoo
 - Listes de modifications apportées :
-- 1/ compte tva par défaut 20% au lieu de 7%
+ 1/ compte tva par défaut 20% au lieu de 7%
 
 2/ Mettre le MAD comme devise de base et mettre son taux a 1
 
