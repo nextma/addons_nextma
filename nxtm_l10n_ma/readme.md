@@ -1,1 +1,1 @@
-test
+- module  localisation maroc odoo avec correction apportées au module officiel odoo comptabilité maroc suite au meetup organisé le 29 février 2016 par la société nextma avec la participation d'intégrateurs marocains odoo
