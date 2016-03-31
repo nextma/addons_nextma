@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="1">
+
+	    <record model="ir.module.category" id="module_category_tms">
+	            <field name="name">Gestion Logistique</field>
+	            <field name="description">Gestion de transport et dérivées</field>
+	            <field name="sequence">2</field>
+	    </record>
+
+	    <record model="fleet.park" id="tms_park_all">
+	    	<field name="name">Tous les véhicules</field>
+	        <field name="note">Contient tous les véhicules</field>
+	    </record>
+	    
+	    <record model="res.users" id="base.user_root">
+            	<field name="park_id" ref="tms_park_all"/>
+            </record>
+
+	    <!-- decimal precision -->
+	    
+	    <record model="decimal.precision" id="tms_decimal_precision_qty_delivrery">
+	            <field name="name">Quantité voyage</field>
+	            <field name="digits">3</field>
+	            
+	    </record>
+	    
+	    <record model="decimal.precision" id="tms_decimal_precision_fuel_log_price">
+	            <field name="name">Prix carburant</field>
+	            <field name="digits">4</field>
+	    </record>
+
+	    <record model="decimal.precision" id="tms_decimal_precision_fuel_log_amount">
+	            <field name="name">Montant carburant</field>
+	            <field name="digits">2</field>
+	    </record>
+	    
+	    <record model="decimal.precision" id="tms_decimal_precision_amount">
+	            <field name="name">Montant Total</field>
+	            <field name="digits">2</field>
+	    </record>
+
+	</data>
+</openerp>
