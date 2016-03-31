@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="0">
+   <record model="ir.module.category" id="module_category_tms">
+         <field name="name">TMS</field>
+         <field name="sequence">2</field>
+   </record>
+   
+    <record id="group_tms_user" model="res.groups">
+        <field name="name">Utilisateur</field>
+        <field name="category_id" ref="module_category_tms"/>
+    </record>
+
+    <record id="group_tms_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_tms"/>
+    </record>
+
+    </data>
+</openerp>
+
