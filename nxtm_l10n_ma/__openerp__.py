@@ -25,7 +25,7 @@
     'author' : 'kazacube,nextma',
     'category' : 'Localization/Account Charts',
     'description': """
-Ceci est le module de base pour gérer le plan comptable marocain.
+Module du Plan Comptable Générale (PCG) mise à jour meetup nextma
 =================================================================
 
 Plan Comptable Générale Marocain avec des modifications apportées au module officiel suite au meetup Localisation maroc organisé 
