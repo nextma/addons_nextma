@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!-- QWeb Reports -->
+
+        <report 
+            id="action_report_trial_balance"
+            model="account.balance.report"
+            string="Balance générale"
+            report_type="qweb-pdf"
+            name="account.report_trialbalance"
+            file="account.report_trialbalance"
+        />
+        
+        <record id="action_report_trial_balance" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="nxtm_l10n_ma_balance_sheet_6_columns.paperformat_balance"/>
+        </record>
+
+      
+    </data>
+</openerp>
