@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_tms_picking_document">
+  <t t-call="report.html_container">
+    <t t-foreach="docs" t-as="ls">
+     <div class="page">  
+        <div class="row">
+            <b t-field="ls.company_id.name" style="text-decoration: underline;font-size:20px;" /> <br />
+            <center style="font-size:20px;"><b>Bon de livraison N° <pan t-field="ls.name" /></b></center>
+            <table style="width:36%;display:inline-block;border:1px solid black;">
+                    <tr style="height:25px;border-bottom:1px solid black;"><td>Client</td><td style="border-left:1px solid black;"><span t-field="ls.partner_id.name"/></td></tr>
+                    <tr style="height:25px;border-bottom:1px solid black;"><td>Dossier</td><td style="border-left:1px solid black;"><span t-field="ls.folder_id"/></td></tr>
+                    <tr style="height:25px;border-bottom:1px solid black;"><td>Repertoire</td><td style="border-left:1px solid black;"><span t-field="ls.no_order"/></td></tr>
+                    <tr style="height:25px;border-bottom:1px solid black;"><td>Chauffeur</td><td style="border-left:1px solid black;"><span t-field="ls.driver_id.name"/></td></tr>
+            </table>
+            <div style="border:2px solid black;float:right;width:36%;height:100px;display:inline-block;">
+               <br />
+               <br />
+                <center><span t-field="ls.date" /></center>
+            </div>
+         </div>
+            <table class="table table-condensed" width="100%">
+                <thead>
+                    <tr>
+                        <th class="text-center">Désignation</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Quantité</th>
+                        <th class="text-center">Prix Unitaire</th>
+                        <th class="text-center">Prix total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<tr>
+                	    <td><span t-field="ls.product_id.name"/></td>
+                	    <td></td>
+                	    <td class="text-right"><span t-field="ls.product_qty"/></td>
+                	    <td class="text-right"><span t-field="ls.price_unit"/></td>
+                	    <td class="text-right"><span t-field="ls.amount_total_ht"/></td>
+                	</tr>
+                    <tr t-foreach="ls.picking_cost_ids" t-as="l">
+                        <td><span t-field="l.product_id.name"/></td>
+                        <td><span t-field="l.description" /></td>
+                        <td class="text-right"><span t-field="l.quantity"/></td>
+                        <td class="text-right"><span t-field="l.price_unit"/></td>
+                        <td class="text-right"><span t-field="l.price_subtotal" /></td>
+                    </tr>
+                    <tr style="background-color:gray;"><td colspan="4" class="text-center">TOTAL HT</td><td class="text-right"><span t-field="ls.total_cost" /></td></tr>
+                </tbody>
+            </table>
+            <br />
+            <div class="row">
+                 <p style="text-decoration: underline;">Observation</p>
+                 <div style="border:2px solid black;width:36%;height:70px;display:inline-block;"><span t-field="ls.note" /></div>
+                 <div style="text-decoration: underline;display:inline-block;margin-top:0px;float:right;font-size:18px;"><b>Cachet &amp; Signature</b></div>
+            </div>
+           <br />
+           <br />
+           <br />
+        <div class="row">
+            <b t-field="ls.company_id.name" style="text-decoration: underline;font-size:20px;" /> <br />
+            <center style="font-size:20px;"><b>Bon de livraison N° <pan t-field="ls.name" /></b></center>
+            <table style="width:36%;display:inline-block;border:1px solid black;">
+                    <tr style="height:25px;border-bottom:1px solid black;"><td>Client</td><td style="border-left:1px solid black;"><span t-field="ls.partner_id.name"/></td></tr>
+                    <tr style="height:25px;border-bottom:1px solid black;"><td>Dossier</td><td style="border-left:1px solid black;"><span t-field="ls.folder_id"/></td></tr>
+                    <tr style="height:25px;border-bottom:1px solid black;"><td>Repertoire</td><td style="border-left:1px solid black;"><span t-field="ls.no_order"/></td></tr>
+                    <tr style="height:25px;border-bottom:1px solid black;"><td>Chauffeur</td><td style="border-left:1px solid black;"><span t-field="ls.driver_id.name"/></td></tr>
+            </table>
+            <div style="border:2px solid black;float:right;width:36%;height:100px;display:inline-block;">
+               <br />
+               <br />
+                <center><span t-field="ls.date" /></center>
+            </div>
+         </div>
+            <table class="table table-condensed" width="100%">
+                <thead>
+                    <tr>
+                        <th class="text-center">Désignation</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Quantité</th>
+                        <th class="text-center">Prix Unitaire</th>
+                        <th class="text-center">Prix total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<tr>
+                	    <td><span t-field="ls.product_id.name"/></td>
+                	    <td></td>
+                	    <td class="text-right"><span t-field="ls.product_qty"/></td>
+                	    <td class="text-right"><span t-field="ls.price_unit"/></td>
+                	    <td class="text-right"><span t-field="ls.amount_total_ht"/></td>
+                	</tr>
+                    <tr t-foreach="ls.picking_cost_ids" t-as="l">
+                        <td><span t-field="l.product_id.name"/></td>
+                        <td><span t-field="l.description" /></td>
+                        <td class="text-right"><span t-field="l.quantity"/></td>
+                        <td class="text-right"><span t-field="l.price_unit"/></td>
+                        <td class="text-right"><span t-field="l.price_subtotal" /></td>
+                    </tr>
+                    <tr style="background-color:gray;"><td colspan="4" class="text-center">TOTAL HT</td><td class="text-right"><span t-field="ls.total_cost" /></td></tr>
+                </tbody>
+            </table>
+            <br />
+            <div class="row">
+                 <p style="text-decoration: underline;">Observation</p>
+                 <div style="border:2px solid black;width:36%;height:70px;display:inline-block;"><span t-field="ls.note" /></div>
+                 <div style="text-decoration: underline;display:inline-block;margin-top:0px;float:right;font-size:18px;"><b>Cachet &amp; Signature</b></div>
+            </div>
+     </div>
+    </t>
+ </t>
+</template>
+</data>
+</openerp>

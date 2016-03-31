@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="picking_report_driver">
+  <t t-call="report.html_container">
+    <t t-foreach="docs" t-as="tp">
+     <div class="page">  
+     		<div class="row" style="text-align:center;">
+     		      <strong>Rapport des frais du : <span t-field="tp.criteria_1"/> au : <span t-field="tp.criteria_2"/></strong>
+     		</div>
+            <table class="table table-condensed" width="100%">
+                <thead>
+                    <tr>
+                        <th class="text-left">Chauffeur</th>
+                        <th class="text-left">Trajet</th>
+                        <th class="text-left">Date</th>
+                        <th class="text-left">Num. TC</th>
+                        <th class="text-left">Client</th>
+                        <th class="text-left">Montant déplacement</th>
+                        <t t-if="tp.commission_move"><th class="text-left">Montant commission</th></t>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="tp.data_line_ids" t-as="l">
+                        <td class="text-left"><span t-field="l.driver_id.name"/></td>
+                        <td class="text-left"><span t-field="l.product_id.name"/></td>
+                        <td class="text-left"><span t-field="l.date"/></td>
+                        <td class="text-left"><span t-field="l.origin"/></td>
+                        <td class="text-left"><span t-field="l.partner_id.name"/></td>
+                        <td class="text-right"><span t-field="l.driver_travel_costs"/></td>
+                        <t t-if="tp.commission_move"><td class="text-right"><span t-field="l.commission"/></td></t>
+                    </tr>
+                </tbody>
+            </table>
+            <br /><br />
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr class="border-black">
+                            <td><strong>Total déplacements</strong></td>
+                            <td class="text-right">
+                                <span t-esc="tp.get_total_amount_move()" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                            </td>
+                        </tr>
+                        <tr>
+                          <t t-if="tp.commission_move">
+                            <td>Total commissions</td>
+                            <td class="text-right">
+                                <span t-esc="tp.get_total_amount_commission()" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                            </td>
+                           </t>
+                        </tr>
+                        <tr class="border-black">
+                            <td><strong>Total</strong></td>
+                            <td class="text-right">
+                                 <span t-esc="tp.get_total_amount()" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+    </div>
+   </t>
+ </t>
+</template>
+</data>
+</openerp>

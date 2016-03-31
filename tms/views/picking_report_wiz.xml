@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="picking_report2">
+  <t t-call="report.html_container">
+    <t t-foreach="docs" t-as="tp">
+     <div class="page">  
+     	    <div class="row" style="text-align:center;font-size:18px;">
+     		     <strong><span t-field="tp.title"/></strong>
+     		</div>
+     		<br />
+     		<br />
+     		<div class="row" style="text-align:center;">
+     		      <strong>
+     		         Du : <span t-field="tp.criteria_2"/>
+     		         <t t-if="tp.criteria_3">
+     		              Au   :<span t-field="tp.criteria_3"/>
+     		         </t>
+     		      </strong>
+     		</div>
+            <table class="table table-condensed" width="100%">
+                <thead>
+                    <tr>
+                        <th class="text-left">Chauffeur</th>
+                        <th class="text-left">Matricule</th>
+                        <th class="text-left">Marque</th>
+                        <t t-if="not tp.criteria_1=='unused'">
+                        	<th class="text-left">Client -- Trajet</th>
+                        	<th class="text-left">Numéro TC</th>
+                        	<th class="text-left">Date</th>
+                        	<th class="text-left">Etat</th>
+                        </t>
+                        <t t-if="tp.criteria_1=='unused'">
+                            <th class="text-left"></th>
+                        	<th class="text-left"></th>
+                        	<th class="text-left"></th>
+                       </t>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="tp.data_line_ids" t-as="l">
+                        <td class="text-left"><span t-field="l.driver_id.name"/></td>
+                        <td class="text-left"><span t-field="l.vehicle_id.name"/></td>
+                        <td class="text-left"><span t-field="l.vehicle_id.brand_id.name"/></td>
+                        <t t-if="not tp.criteria_1=='unused'">
+                        	<td class="text-left"><span t-field="l.partner_id.name" /> -- <span t-field="l.product_id.name" /></td>
+                    		<td class="text-left"><span t-field="l.origin" /></td>
+                    		<td class="text-left"><span t-field="l.date" /></td>
+                    		<td class="text-left"><span t-field="l.state" /></td>
+                    	</t>
+                        <t t-if="tp.criteria_1=='unused'">
+                        	<td class="text-left"></td>
+                    		<td class="text-left"></td>
+                    		<td class="text-left"></td>
+                    	</t>                    	
+                    </tr>
+                </tbody>
+            </table>
+            <b>Nombre Total : <span t-field="tp.count" /> lignes</b>
+    </div>
+<!--     <div class="footer" style="text-align:center;">
+            <ul class="list-inline">
+                <li><span class="page"/></li>
+                <li>/</li>
+                <li><span class="topage"/></li>
+            </ul>
+    </div> -->
+   </t>
+ </t>
+</template>
+</data>
+</openerp>

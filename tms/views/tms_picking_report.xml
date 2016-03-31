@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_tms_picking_document">
+  <t t-call="report.html_container">
+    <t t-foreach="docs" t-as="tp">
+     <div class="page">  
+            <table class="table table-condensed" width="100%">
+                <thead>
+                    <tr>
+                        <th class="text-center">Véhicule</th>
+                        <th class="text-center">Date</th>
+                        <th class="text-center"></th>
+                        <th class="text-center">Prix Unitaire</th>
+                        <th class="text-center">Prix total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<tr>
+                	    <td><span t-field="ls.product_id.name"/></td>
+                	    <td></td>
+                	    <td class="text-right"><span t-field="ls.product_qty"/></td>
+                	    <td class="text-right"><span t-field="ls.price_unit"/></td>
+                	    <td class="text-right"><span t-field="ls.amount_total_ht"/></td>
+                	</tr>
+                    <tr t-foreach="ls.picking_cost_ids" t-as="l">
+                        <td><span t-field="l.product_id.name"/></td>
+                        <td><span t-field="l.description" /></td>
+                        <td class="text-right"><span t-field="l.quantity"/></td>
+                        <td class="text-right"><span t-field="l.price_unit"/></td>
+                        <td class="text-right"><span t-field="l.price_subtotal" /></td>
+                    </tr>
+                    <tr style="background-color:gray;"><td colspan="4" class="text-center">TOTAL HT</td><td class="text-right"><span t-field="ls.total_cost" /></td></tr>
+                </tbody>
+            </table>
+    </div>
+   </t>
+ </t>
+</template>
+</data>
+</openerp>
