@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="base.MAD" model="res.currency">
+            <field name="name">MAD</field>
+            <field name="symbol">dh</field>
+            <field name="rounding">0.01</field>
+            <field name="accuracy">4</field>
+            <field name="base">1</field>
+        </record>
+        <record forcecreate="0" id="base.rateMAD" model="res.currency.rate">
+            <field name="currency_id" ref="base.MAD" />
+            <field name="name">2010-01-01</field>
+            <field name="rate">1.0</field>
+        </record>
+
+        <record id="base.EUR" model="res.currency">
+            <field name="name">EUR</field>
+            <field name="symbol">€</field>
+            <field name="rounding">0.01</field>
+            <field name="accuracy">4</field>
+            <field name="base">0</field>
+        </record>
+        <record forcecreate="0" id="base.rateEUR" model="res.currency.rate">
+            <field name="currency_id" ref="base.EUR" />
+            <field name="name">2010-01-01</field>
+            <field name="rate">0.09090909</field>
+        </record>
+    </data>
+</openerp>

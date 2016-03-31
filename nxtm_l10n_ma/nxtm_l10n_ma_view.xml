@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<openerp>
+    <data>
+		<!-- <function model="l10n.ma.update" name="update_data"/> -->
+  </data>
+</openerp>

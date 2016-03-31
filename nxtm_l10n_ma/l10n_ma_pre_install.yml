@@ -1,0 +1,52 @@
+-
+  change journal default account.
+-
+  !python {model: account.installer}: |
+    journal_obj = self.pool.get('account.journal')
+    account_obj = self.pool.get('account.account')
+    property_obj = self.pool.get('ir.property')
+    journal_bank_id = journal_obj.search(cr,uid,[('code','=','BNK2'),('type','=','bank')], context=context)
+    account_journal_bank_id = account_obj.search(cr,uid,[('code','=','514100')], context=context)
+
+    journal_cash_id = journal_obj.search(cr,uid,[('code','=','BNK1'),('type','=','cash')], context=context)
+    account_journal_cash_id = account_obj.search(cr,uid,[('code','=','516110')], context=context)
+
+    journal_purchase_id = journal_obj.search(cr,uid,[('code','=','EXJ'),('type','=','purchase')], context=context)
+    account_journal_purchase_id = account_obj.search(cr,uid,[('code','=','611100')], context=context)
+
+    journal_sale_id = journal_obj.search(cr,uid,[('code','=','SAJ'),('type','=','sale')], context=context)
+
+    journal_sale_refund_id = journal_obj.search(cr,uid,[('code','=','SCNJ'),('type','=','sale_refund')], context=context)
+
+    property_id = property_obj.search(cr,uid,[('name','=',('property_account_expense_categ'))], context=context)
+    property_account_id = account_obj.search(cr,uid,[('code','=','611100')], context=context)
+
+    journal_situation_id = journal_obj.search(cr,uid,[('code','=','AN'),('type','=','situation')], context=context)
+    account_journal_situation_id = account_obj.search(cr,uid,[('code','=','8600')], context=context)
+
+    # if we know the country and the wizard has not yet been executed, we do it
+    
+    if journal_bank_id and account_journal_bank_id:
+        journal_obj.write(cr,uid,journal_bank_id[0],{'default_debit_account_id':account_journal_bank_id[0],'default_credit_account_id':account_journal_bank_id[0]})
+
+    if journal_cash_id and account_journal_cash_id:
+        journal_obj.write(cr,uid,journal_cash_id[0],{'default_debit_account_id':account_journal_cash_id[0],'default_credit_account_id':account_journal_cash_id[0]})
+
+    if journal_cash_id:
+        journal_obj.write(cr,uid,journal_cash_id[0],{'code':'CAISSE','name':'CAISSE'})
+
+    if journal_purchase_id and account_journal_purchase_id:
+        journal_obj.write(cr,uid,journal_purchase_id[0],{'default_debit_account_id':account_journal_purchase_id[0],'default_credit_account_id':False})
+
+    if journal_sale_id:
+        journal_obj.write(cr,uid,journal_sale_id[0],{'default_debit_account_id':False})
+
+    if journal_sale_refund_id:
+        journal_obj.write(cr,uid,journal_sale_refund_id[0],{'default_credit_account_id':False})
+
+    if property_id and property_account_id:
+        property_obj.write(cr,uid,property_id[0],{'value_reference':'account.account,'+str(property_account_id[0])})
+
+    if journal_situation_id and account_journal_situation_id:
+        journal_obj.write(cr,uid,journal_situation_id[0],{'default_debit_account_id':account_journal_situation_id[0],'default_credit_account_id':account_journal_situation_id[0]})
+
