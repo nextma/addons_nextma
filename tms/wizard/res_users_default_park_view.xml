@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<record id="tms_res_users_default_park_form" model="ir.ui.view">
+            <field name="name">res.users.default.park.form</field>
+            <field name="model">res.users.default.park</field>
+            <field name="arch" type="xml">
+                <form string="Changer mon parc">
+                    <group>
+                         <field name="park_id" />
+                    </group>
+                    <newline/>
+                    <group col="2" colspan="2">
+                        <button icon='gtk-cancel' special="cancel" string="_Annuler" />
+                        <button name="action_validate_default_park" string="_Valider" colspan="1" type="object" icon="gtk-go-forward" confirm="Comfirmer le changement de parc ?"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_res_users_default_park" model="ir.actions.act_window">
+            <field name="name">Changer mon parc</field>
+            <field name="res_model">res.users.default.park</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+<!--
+            <field name="groups"></field>
+-->
+            <field name="target">new</field>
+        </record>
+	
+	</data>
+</openerp>

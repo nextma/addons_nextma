@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+        <record id="fleet_report_form" model="ir.ui.view">
+            <field name="name">tms.picking.report2.form</field>
+            <field name="model">tms.picking.report2</field>
+            <field name="arch" type="xml">
+                <form string="CRITERIA">
+                    <group>
+                         <field name="title" />
+                    </group>
+                    <group>
+                         <field name="criteria_1" />
+                         <field name="state" />
+                    </group>
+                    <group>
+                         <field name="criteria_2" class="oe_inline"/>
+                         <field name="criteria_3" attrs="{'readonly':['|',('criteria_1','=','unused'),('criteria_1','=','both')]}" />
+                    </group>
+                    <footer>
+                        <button name="print_report" string="Imprimer" type="object"  class="oe_highlight"/>
+                        or 
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                     </footer>
+                </form>
+            </field>
+        </record>
+
+
+       <record id="tms_picking_report_act" model="ir.actions.act_window">
+            <field name="name">Tms picking report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tms.picking.report2</field>
+             <field name="view_type">form</field>
+             <field name="view_mode">form</field>
+             <field name="view_id" ref="fleet_report_form"/>
+             <field name="target">new</field>
+        </record>
+        <menuitem action="tms_picking_report_act" name="Rapport Véhicles" parent="fleet.fleet_vehicles" id="tms_picking_report_wiz" sequence="50" groups="fleet.group_fleet_user"/>
+
+
+        <record id="fleet_report_driver_form" model="ir.ui.view">
+            <field name="name">tms.picking.report_driver.form</field>
+            <field name="model">tms.picking.report.driver</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                         <field name="criteria_1" class="oe_inline"/>
+                         <field name="criteria_2" class="oe_inline"/>
+                         <field name="driver_id" />
+                         <field name="commission_move" />
+                    </group>
+                    <footer>
+                        <button name="print_report" string="Imprimer" type="object"  class="oe_highlight"/>
+                        or 
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                     </footer>
+                </form>
+              </field>
+         </record>
+         <record id="tms_picking_report_driver_act" model="ir.actions.act_window">
+            <field name="name">Rapport des frais de déplacement des chauffeurs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tms.picking.report.driver</field>
+             <field name="view_type">form</field>
+             <field name="view_mode">form</field>
+             <field name="view_id" ref="fleet_report_driver_form"/>
+             <field name="target">new</field>
+        </record>
+        <menuitem action="tms_picking_report_driver_act" name="Rapport Frais déplacement" parent="fleet.fleet_vehicles" id="tms_picking_report_driver_wiz" sequence="52" groups="fleet.group_fleet_user"/>
+
+
+
+</data>
+</openerp>

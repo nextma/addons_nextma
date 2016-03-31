@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_picking_make_invoice2" model="ir.ui.view">
+            <field name="name">Create draft invoices</field>
+            <field name="model">picking.make.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Générer factures">
+                    <separator colspan="4" string="Do you really want to create the invoice(s)?" />
+                    <group>
+                        <field name="grouped" on_change="onchange_grouped(grouped)"/>
+                        <field name="grouped_by_product" attrs="{'invisible':[('grouped','!=',True)]}"/>
+                        <field name="invoice_date"/>
+                    </group>
+                    <footer>
+                        <button name="make_invoices2" string="Générer factures" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_picking_make_invoice2" model="ir.actions.act_window">
+            <field name="name">Générer factures</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">picking.make.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_picking_make_invoice2"/>
+            <field name="target">new</field>
+            <field name="multi">True</field>
+        </record>
+
+        <record model="ir.values" id="picking_make_invoice2">
+            <field name="model_id" ref="tms.model_tms_picking" />
+            <field name="name">Générer factures</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_picking_make_invoice2'))" />
+            <field name="key">action</field>
+            <field name="model">tms.picking</field>
+        </record>
+    </data>
+</openerp>

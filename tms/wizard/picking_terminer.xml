@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_picking_terminer" model="ir.ui.view">
+            <field name="name">Terminer BLs</field>
+            <field name="model">picking.terminer</field>
+            <field name="arch" type="xml">
+                <form string="Terminer BLs" version="7.0">
+                    <separator colspan="4" string="Voulez-vous vraiment terminer les BL(s)?" />
+                    <footer>
+                        <button name="terminer_bls" string="Terminer" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_picking_terminer" model="ir.actions.act_window">
+            <field name="name">Terminer BLs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">picking.terminer</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_picking_terminer"/>
+            <field name="target">new</field>
+            <field name="multi">True</field>
+        </record>
+
+        <record model="ir.values" id="picking_terminer">
+            <field name="model_id" ref="tms.model_tms_picking" />
+            <field name="name">Terminer BLs</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_picking_terminer'))" />
+            <field name="key">action</field>
+            <field name="model">tms.picking</field>
+        </record>
+    </data>
+</openerp>
