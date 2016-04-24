@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+<!-- tms_gmao_pm -->
+
+	<record id="tms_gmao_pm_search" model="ir.ui.view">
+            <field name="name">tms.gmao.pm.search</field>
+            <field name="model">tms.gmao.pm</field>
+            <field name="arch" type="xml">
+                <search string="Recherche maintenance programmée">
+<!--
+				    <filter string="Pneu" icon="terp-stage" domain="[('type','=','tyre')]" context="{}"/>
+				    <separator orientation="vertical"/>
+				    <filter string="Vidange" icon="terp-stage" domain="[('type_alert','=','Vidange')]" context="{}"/>
+				    <filter string="Visite technique" icon="terp-stage" domain="[('type_alert','=','visite technique')]" context="{}"/>
+				    <filter string="Pièces détachées" icon="terp-stage" domain="[('type_alert','=','Affectation pièce détachée')]" context="{}"/>
+				    <filter string="Contrôle général" icon="terp-stage" domain="[('type_alert','=','Controle general')]" context="{}"/>
+				    <filter string="Démontage pneu" icon="terp-stage" domain="[('type_alert','=','Démontage pneu')]" context="{}"/>
+				    <newline/>
+-->
+		    <filter string="Brouillon" icon="terp-stage" domain="[('state','=','new')]" context="{}"/>
+		    <filter string="Normal" icon="terp-stage" domain="[('state','=','draft')]" context="{}"/>
+		    <filter string="Dépassé" icon="terp-stage" domain="[('state','=','left')]" context="{}"/>
+		    <filter string="Alerte" icon="terp-stage" domain="[('state','=','alert')]" context="{}"/>
+		    <filter string="Validé" icon="terp-stage" domain="[('state','=','done')]" context="{}"/>
+		    <newline/>
+                    <field name="name" />
+<!--
+                    <field name="category" widget="selection" />
+                    <field name="tyre" />
+-->
+                    <field name="vehicle_id" />
+                    <newline/>
+		    <group  expand='0' string='Grouper par...' >
+			<filter string="Véhicule" icon="terp-stage" domain="[]" context="{'group_by':'vehicle_id'}"/>
+<!--
+			<filter string="Pneu" icon="terp-stage" domain="[]" context="{'group_by':'tyre'}"/>
+			<filter string="Catégorie" icon="terp-personal" domain="[]" context="{'group_by':'category'}"/>
+-->
+	                <filter string="Type maintenance" icon="terp-personal" domain="[]" context="{'group_by':'type_alert'}"/>
+	                <filter string="Type intervention" icon="terp-stage" domain="[]" context="{'group_by':'service_type_id'}"/>
+			<filter string="Statut" icon="terp-stage" domain="[]" context="{'group_by':'state'}"/>
+		    </group>
+               </search>
+            </field>
+        </record>
+
+	<record id="view_tms_gmao_pm_form" model="ir.ui.view" >
+	    <field name="name">tms.gmao.pm.form</field>
+	    <field name="model">tms.gmao.pm</field>
+	    <field name="arch" type="xml">
+		<form string="Maintenances programmées" version="7.0">
+                <header>
+		    <button name="generate_alert" string="Déclencher l'alerte" attrs="{'invisible':['|',('state','!=','draft'),('draft_ok','=',False)]}" type="object" groups="" class="oe_highlight"/>
+	            <button name="end_periodic" string="Terminer périodicité" attrs="{'invisible':['|','|',('periodic','=',False),('state','=','done'),('draft_ok','=',True)]}" type="object" groups="" class="oe_highlight"/>
+	     	    <button name="end_pm" string="Arrêter prévention" attrs="{'invisible':['|',('state','=','done'),('draft_ok','=',True)]}" type="object" groups="" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_colors='{}'/>
+                </header>
+                    <sheet>
+                    <h1>
+                        <field name="name" class="oe_inline" attrs="{'invisible': [('name','=','/')]}" readonly="1" required="True"/>
+                    </h1>
+		    <group col="4" colspan="2">
+			<field name="service_type_id" colspan="2" select="1" attrs="{'readonly':[('draft_ok','!=',True)]}"/>
+			<field name="meter" colspan="2"  attrs="{'readonly':[('draft_ok','!=',True)]}" />
+              		<field name="vehicle_id" required="1" attrs="{'readonly':[('draft_ok','!=',True)]}" on_change='onchange_vehicle_id(vehicle_id)'/>
+			<field name="periodic" attrs="{'readonly':[('draft_ok','!=',True)]}" />
+			<field name="draft_ok" invisible="1" />
+<!--
+		    <group colspan="3">
+                        	<group attrs="{'invisible':[('type','!=','tyre')]}" >
+                        		<field name="type_maintainance_tyre"  select="1" attrs="{'readonly':[('draft_ok','!=',True)] ,'required':[('type','=','tyre')] }" on_change='onchange_tyre(tyre,type_maintainance_tyre)' />
+                        	</group>
+                        	<group attrs="{'invisible':['|','|','&amp;',('type','=','trailer'),('type_maintainance_trailer','!=','control'),('type','=','tyre'),'&amp;',('type','=','vehicle'),('type_maintainance_vehicle','!=','control')]}" >
+                        		<field name="category"  select="1"  />
+                        	</group>
+                        </group>
+-->
+<!--
+		    <group groups="">
+			<button name="generate_alert" string="Déclencher l'alerte" attrs="{'invisible':['|',('state','!=','draft'),('draft_ok','=',False)]}" type="object" groups=""/>
+	            	<button name="end_periodic" string="Terminer périodicité" attrs="{'invisible':['|','|',('periodic','=',False),('state','=','done'),('draft_ok','=',True)]}" type="object" groups="" />
+	          	<button name="end_pm" string="Arrêter prévention" attrs="{'invisible':['|',('state','=','done'),('draft_ok','=',True)]}" type="object" groups=""/>
+            	    </group>
+-->
+		    </group>	
+		    <group col="4" colspan="4">
+			<separator string="Paramètres de la maintainance préventive" colspan="4"/>
+
+			    <group col="4" colspan="4" attrs="{'invisible':[('meter','!=','days')]}" >
+				<group col="2" colspan="2">
+				    <field name="days_last_done" select="1" attrs="{'readonly':[('draft_ok','!=',True)]}"/>
+				    <field name="days_interval" attrs="{'readonly':[('draft_ok','!=',True)]}" string="Intervalle de jour" />
+				    <field name="days_warn_period" attrs="{'readonly':[('draft_ok','!=',True)]}" string="Nombre de jours avant alerte"/>
+				</group>
+				<group col="2" colspan="2">
+				    <field name="days_next_due" />
+				    <field name="days_left" string="Jours restants"/>
+				</group>
+			    </group>
+			    <group col="4" colspan="4" attrs="{'invisible':[('meter','!=','km')]}">
+				<group col="2" colspan="2">
+				    <field name="km_last_done" select="1" attrs="{'readonly':[('draft_ok','!=',True)]}" string="Km de départ"/>
+				    <field name="km_interval"  attrs="{'readonly':[('draft_ok','!=',True)]}" string="Km d'intervalle" />
+				    <field name="km_warn_period" attrs="{'readonly':[('draft_ok','!=',True)]}" string="Nombre de km avant alerte"/>
+				</group>
+				<group col="2" colspan="2">
+				    <field name="km_next_due" string="km prochains"  />
+				    <field name="km_left"  string="km restants"/>
+				    <field name="counter_current" string="Compteur actuel" invisible="0"/>
+				</group>
+			    </group>
+
+		    </group>
+<!--
+                    <group>
+                                 <group attrs="{'invisible':[('type','!=','tyre')]}">
+                                       <field name="tyre" select="1" colspan="1" attrs="{'required':[('type','=','tyre')], 'readonly':[('draft_ok','!=',True)]}" on_change='onchange_tyre(tyre,type_maintainance_tyre)' />       
+                                       <field name="type_assigned" invisible="True" />
+                                       <group attrs="{'invisible':[('type_assigned','!=','vehicle')]}" >
+                                       	<field name="vehicle_assigned" />
+                                       </group>
+                                       <group attrs="{'invisible':[('type_assigned','!=','trailer')]}" >
+                                       	<field name="trailer_assigned" />
+                                       </group>  
+                                 </group>
+		    </group>
+-->
+		    <separator colspan="4" string="Suivi des alertes"/>
+                    	<field colspan="4" name="alert_ids" nolabel="1" >
+                    	    <tree string="Suivi des historiques" colors="red:state == 'left' or state_process == 'cancel';blue:state == 'draft';green:state == 'done';orange:state == 'alert';" delete="false">
+                            	<field name="name" select="1"/>
+                                <field name="date" select="1"/>
+                                <field name="last_done_view" />
+				<field name="next_due_view" />
+				<field name="interval_view" />
+				<field name="left_view"/>
+				<field name="warn_period_view"/>
+				<field name="days_left" invisible="True" />
+				<field name="km_left" invisible="True" />
+				<field name="meter" invisible="True" />
+				<field name="state" select="1" />
+				<field name="state_process" select="1" />
+				<!--<button name="action_done_alert" string="Traiter" icon="gtk-go-forward" type="object" attrs="{'invisible':['|',('state_process','=','cancel'),('state','not in',('draft','left','alert'))]}" groups="" />-->
+				<button name="action_done_alert" string="Traiter" icon="gtk-go-forward" type="object"  />
+				<button name="action_cancel_alert" string="Annuler" icon="gtk-cancel" type="object" attrs="{'invisible':['|',('state_process','=','cancel'),('state','not in',('draft','left','alert'))]}" groups="" />
+                    	    </tree>
+                    	    <form string="Suivi des historiques alerte">
+                       		<group col="6" colspan="4">
+                           	    <field name="name" select="1"/>
+                                    <field name="date" select="1"/>
+				    <field name="description" select="1" readonly="0"/>
+                           	</group>
+			    </form>
+                     	</field>
+		    </sheet>
+		</form>
+	    </field>
+	</record>
+		
+	<record id="view_tms_gmao_pm_tree" model="ir.ui.view">
+	    <field name="name">tms.gmao.pm.tree</field>
+	    <field name="model">tms.gmao.pm</field>
+	    <field name="type">tree</field>
+	    <field name="arch" type="xml">
+		<tree string="Maintenances programmées" colors="red:state == 'left';blue:state == 'draft';green:state == 'done';orange:state == 'alert';">
+		    <field name="name" select="1" />
+		    <field name="vehicle_id" colspan="2" select="1" />
+<!--
+		    <field name="tyre" colspan="2" select="1" />
+-->
+		    <field name="last_done_view" />
+		    <field name="next_due_view" />
+		    <field name="interval_view" />
+		    <field name="left_view"/>
+		    <field name="warn_period_view"/>
+		    <field name="type_alert" />
+<!--
+		    <field name="category"  select="1"  />
+-->
+		    <field name="days_left" invisible="True" />
+		    <field name="km_left" invisible="True" />
+		    <field name="meter" invisible="True" />
+		    <field name="state" string="statut"  />
+		    <field name="service_type_id" invisible="True" />
+		</tree>
+	    </field>
+	</record>
+		
+	<record id="action_tms_gmao_pm" model="ir.actions.act_window">
+            <field name="name">Maintenances programmées</field>
+            <field name="res_model">tms.gmao.pm</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="tms_gmao_pm_search" />
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer une maintenance programmée. 
+              </p><p>
+Les maintenances programmées sont des maintenances qui permettent de générer des types d'alertes. Ces alertes à leur tour seront associées à des maintenances.
+              </p>
+	    </field>
+        </record>
+
+<!-- tms_gmao_pm_alert -->
+
+	<record id="tms_gmao_pm_alert_search" model="ir.ui.view">
+            <field name="name">tms.gmao.pm.alert.search</field>
+            <field name="model">tms.gmao.pm.alert</field>
+            <field name="arch" type="xml">
+                <search string="Recherche alertes">
+<!--
+				    <filter string="Pneu" icon="terp-stage" domain="[('type','=','tyre')]" context="{}"/>
+				    <separator orientation="vertical"/>
+				    <filter string="Démontage pneu" icon="terp-stage" domain="[('type_alert','=','Démontage pneu')]" context="{}"/>
+				    <newline/>
+-->
+		    <filter string="Normal" icon="terp-stage" domain="[('state','=','draft')]" context="{}"/>
+		    <filter string="Dépassé" icon="terp-stage" domain="[('state','=','left')]" context="{}"/>
+		    <filter string="Alerte" icon="terp-stage" domain="[('state','=','alert')]" context="{}"/>
+		    <filter string="Validé" icon="terp-stage" domain="[('state','=','done')]" context="{}"/>
+		    <separator orientation="vertical"/>
+		    <filter string="En cours" icon="terp-stage" domain="[('state_process','=','progress')]" context="{}"/>
+		    <filter string="Annulé" icon="terp-stage" domain="[('state_process','=','cancel')]" context="{}"/>
+                    <newline/>
+                    <field name="name" />
+                    <field name="pm_id" />
+                    <field name="vehicle_id" />
+<!--
+                    <field name="tyre" />
+-->
+                    <newline/>
+		    <group  expand='0' string='Grouper par...' >
+		    	<filter string="Véhicule" icon="terp-stage" domain="[]" context="{'group_by':'vehicle_id'}"/>
+<!--
+		    	<filter string="Pneu" icon="terp-stage" domain="[]" context="{'group_by':'tyre'}"/>
+-->
+		    	<filter string="Maintenance programmée" icon="terp-personal" domain="[]" context="{'group_by':'pm_id'}"/>
+			<filter string="Type maintenance" icon="terp-personal" domain="[]" context="{'group_by':'type_alert'}"/>
+			<filter string="Statut" icon="terp-stage" domain="[]" context="{'group_by':'state'}"/>
+			<filter string="Etat traitement" icon="terp-stage" domain="[]" context="{'group_by':'state_process'}"/>
+		    </group>
+               </search>
+            </field>
+        </record>
+	
+	<record id="tms_gmao_pm_alert_tree" model="ir.ui.view">
+	    <field name="name">tms.gmao.pm.alert.tree</field>
+	    <field name="model">tms.gmao.pm.alert</field>
+	    <field name="arch" type="xml">
+		<tree string="Alertes" colors="red:state == 'left' or state_process == 'cancel';blue:state == 'draft';green:state == 'done';orange:state == 'alert';">
+		    <field name="name" select="1" />
+		    <field name="pm_id" string="Maintenance programmée" />
+		    <field name="vehicle_id" colspan="2" select="1" />
+<!--
+					<field name="tyre" colspan="2" select="1" />
+-->
+		    <field name="date"/>
+		    <field name="description"/>
+		    <field name="last_done_view" />
+		    <field name="next_due_view" />
+		    <field name="interval_view" />
+		    <field name="left_view"/>
+		    <field name="warn_period_view"/>
+		    <field name="days_left" invisible="True" />
+		    <field name="km_left" invisible="True" />
+		    <field name="meter" invisible="True" />
+		    <field name="type_alert" />
+		    <field name="state" string="Statut"  />
+		    <field name="state_process" />
+		    <button name="action_done_alert" string="Traiter" icon="gtk-go-forward" type="object" attrs="{'invisible':['|',('state_process','=','cancel'),('state','not in',('draft','left','alert'))]}" groups=""/>
+		    <button name="action_cancel_alert" string="Annuler" icon="gtk-cancel" type="object" attrs="{'invisible':['|',('state_process','=','cancel'),('state','not in',('draft','left','alert'))]}" confirm="Annuler l'alerte ?" groups=""/>
+		</tree>
+	    </field>
+	</record>
+		
+	<record id="tms_gmao_pm_alert_form" model="ir.ui.view">
+	    <field name="name">tms.gmao.pm.alert.form</field>
+	    <field name="model">tms.gmao.pm.alert</field>
+	    <field name="arch" type="xml">
+	    <form string="Alertes" version="7.0">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_colors='{}'/>
+                </header>
+                    <sheet>
+                    <h1>
+                        <field name="name" class="oe_inline" attrs="{'invisible': [('name','=','/')]}" readonly="1" required="True"/>
+                    </h1>
+		<group colspan="4" col="4">
+		    <field name="pm_id" string="Maintenance programmée" />
+		    <field name="vehicle_id" colspan="2" select="1" />
+		    <field name="type_alert"/>
+		    <field name="date"/>
+		    <field name="description"/>
+		</group>
+<!--
+					<group attrs="{'invisible':[('type','!=','tyre')] }" >
+						<field name="tyre" colspan="2" select="1" />
+					</group>
+-->
+		<group colspan="4" col="4">
+		    <field name="interval_view" />
+		    <field name="last_done_view" />
+		    <field name="next_due_view" />
+		    <field name="warn_period_view"/>
+		    <field name="left_view"/>
+		</group>
+		<newline/>
+		<notebook colspan="4">
+		    <page string="Maintenances associées">
+			<field name="maintenance_ids" nolabel="1"  >
+			    <tree colors="">
+				<field name="name" readonly="True" />
+				<field name="maintenancier_id" />
+				<field name="maintenance_type" />
+				<field name="vehicle_id" />
+				<field name="service_type_id" />
+				<field name="state" />
+			    </tree>
+			</field>
+		    </page>
+		</notebook>
+		</sheet>
+	    </form>
+	    </field>
+	</record>
+			
+	<record id="action_tms_gmao_pm_alert" model="ir.actions.act_window">
+            <field name="name">Alertes</field>
+            <field name="res_model">tms.gmao.pm.alert</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="tms_gmao_pm_alert_search" />
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquer ici pour créer une alerte. 
+              </p><p>
+Les alertes permettent le suivi des maintenances. Vous ne pouvez pas créer d'alerte directement, vous devez créer une maiintenance programmée qui génèrera une alerte.
+	      </p>
+	    </field>
+        </record>
+<!--
+		<record id="act_view_tms_gmao_alert_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="tms_gmao_pm_alert_tree"/>
+            <field name="act_window_id" ref="action_tms_gmao_alert"/>
+        </record>
+        
+        <record id="act_view_tms_gmao_alert_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tms_gmao_pm_alert_form"/>
+            <field name="act_window_id" ref="action_tms_gmao_alert"/>
+        </record>
+-->
+
+	</data>
+</openerp>

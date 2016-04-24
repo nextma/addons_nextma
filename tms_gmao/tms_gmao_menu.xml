@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+        <!-- Configuration menu -->
+        <menuitem name="Configuration"
+            id="menu_gmao_configuration"
+            parent="base.menu_mro_root"
+            sequence="15"/>
+
+        <menuitem name="Types d'intervention"
+            action="action_fleet_vehicle_service_types_gmao"
+            id="menu_gmao_configuration_service_types"
+            parent="menu_gmao_configuration"
+            sequence="100"/>
+
+        <!-- Maintenance pm sub menu -->
+        <menuitem name="Préventif"
+            id="menu_gmao_preventive"
+            parent="mro.menu_mro_maintenance"
+            sequence="200"/>
+        	<menuitem name="Maintenances programmées"
+		action="action_tms_gmao_pm"
+            	id="menu_gmao_preventive_pm"
+            	parent="menu_gmao_preventive"
+            	sequence="1"/>
+        	<menuitem name="Alertes"
+		action="action_tms_gmao_pm_alert"
+            	id="menu_gmao_preventive_alert"
+            	parent="menu_gmao_preventive"
+            	sequence="10"/>
+
+        <menuitem name="Parts"
+            action="product_normal_action_tms_gmao"
+            id="mro.menu_maintenance_parts_parts"
+            parent="mro.menu_maintenance_parts"
+            sequence="100"/>
+
+ 	</data>
+</openerp>

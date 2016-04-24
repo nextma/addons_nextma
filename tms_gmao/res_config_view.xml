@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_tms_gmao_config_settings" model="ir.ui.view">
+            <field name="name">tms gmao config settings</field>
+            <field name="model">tms.gmao.config.settings</field>
+            <field name="arch" type="xml">
+                <form string="Configurer la GMAO" version="7.0" class="oe_form_configuration">
+                    <header>
+                        <button string="Appliquer" type="object" name="execute" class="oe_highlight"/>
+                        or
+                        <button string="Annuler" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <separator string="Choix du compteur"/>
+                    <group>
+                        <div>
+                            <div>
+                                <field name="tms_gmao_param_current_counter" class="oe_inline"/>
+                                <label for="tms_gmao_param_current_counter"/>
+                            </div>
+                        </div>    
+                    </group>
+                    <separator string="Supply chain pour les ordres de maintenance"/>
+                    <group>
+                        <div>
+                            <div>
+                                <field name="tms_gmao_param_mro_order_supply_chain" class="oe_inline"/>
+                                <label for="tms_gmao_param_mro_order_supply_chain"/>
+                            </div>
+                        </div>    
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tms_gmao_config_settings" model="ir.actions.act_window">
+            <field name="name">Configurer la GMAO</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tms.gmao.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem id="menu_tms_gmao_config_settings" name="GMAO" parent="base.menu_config"
+            sequence="15" action="action_tms_gmao_config_settings"/>
+
+    </data>
+</openerp>

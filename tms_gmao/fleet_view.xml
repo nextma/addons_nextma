@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+  	<!-- ========================== fleet_service_type =============================== -->
+
+        <record model='ir.ui.view' id='fleet_vehicle_service_types_tree_gmao'>
+            <field name="name">fleet.service.type.tree.gmao</field>
+            <field name="model">fleet.service.type</field>
+            <field name="arch" type="xml">
+                <tree string="Types d'intervention">
+                    <field name="name" />
+                    <field name="maintenance_type"/>
+                    <field name="category"/>
+                    <field name="mro_ok"/>
+                </tree>
+            </field>
+        </record>
+
+    <record model='ir.ui.view' id='fleet_vehicle_service_types_form_gmao'>
+            <field name="name">fleet.service.type.form.gmao</field>
+            <field name="model">fleet.service.type</field>
+            <field name="arch" type="xml">
+                <form string="Types de service">
+                  <group>
+                    <field name="name" />
+                    <field name="maintenance_type" required="1"/>
+                    <field name="category"  required="0"/>
+                    <field name="mro_ok" />
+                  </group>
+                </form>
+            </field>
+        </record> 
+
+        <record model='ir.actions.act_window' id='action_fleet_vehicle_service_types_gmao'>
+            <field name="name">Types d'intervention</field>
+            <field name="res_model">fleet.service.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	    <field name="domain">[('mro_ok','=',True), ('category','=','service')]</field>
+	    <field name="context">{'default_mro_ok': True, 'default_category': 'service'}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Cliquez ici pour créer un nouveau type d'intervention pour la GMAO.
+              </p><p>
+              </p>
+            </field>
+        </record>
+
+	<record id="act_fleet_vehicle_service_types_tree_gmao" model="ir.actions.act_window.view">
+            <field eval="100" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fleet_vehicle_service_types_tree_gmao"/>
+            <field name="act_window_id" ref="action_fleet_vehicle_service_types_gmao"/>
+        </record>
+        
+	<record id="act_fleet_vehicle_service_types_form_gmao" model="ir.actions.act_window.view">
+            <field eval="200" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fleet_vehicle_service_types_form_gmao"/>
+            <field name="act_window_id" ref="action_fleet_vehicle_service_types_gmao"/>
+        </record>
+
+	</data>
+</openerp>

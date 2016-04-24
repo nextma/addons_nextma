@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+<!--
+		<record id="trans_draft_ready_mro_gmao" model="workflow.transition">
+            		<field name="act_from" ref="mro.act_draft"/>
+            		<field name="act_to" ref="mro.act_ready"/>
+			<field name="signal">button_confirm_order</field>
+			<field name="condition">(state == 'released' and not test_gmao_supply_chain_param()) or not test_if_parts()</field>
+		</record>
+-->
+ 	</data>
+</openerp>

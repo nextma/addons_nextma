@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+<!-- ==================== tms_gmao_pm ===================== -->
+
+    	<record id="seq_type_gmao_pm" model="ir.sequence.type">
+            <field name="name">tms gmao pm</field>
+            <field name="code">tms.gmao.pm</field>
+        </record>
+        
+        <record id="seq_gmao_pm" model="ir.sequence">
+            <field name="name">tms.gmao pm</field>
+            <field name="code">tms.gmao.pm</field>
+            <field name="prefix">MP-</field>
+            <field name="padding">5</field>
+        </record> 
+        
+<!-- ==================== tms_gmao_pm_alert ===================== -->
+        
+        <record id="seq_type_gmao_pm_alert" model="ir.sequence.type">
+            <field name="name">tms gmao pm alert</field>
+            <field name="code">tms.gmao.pm.alert</field>
+        </record>
+        <record id="seq_gmao_pm_alert" model="ir.sequence">
+            <field name="name">tms.gmao pm alert</field>
+            <field name="code">tms.gmao.pm.alert</field>
+            <field name="prefix">ALT-</field>
+            <field name="padding">5</field>
+        </record>
+    
+    </data>
+</openerp>

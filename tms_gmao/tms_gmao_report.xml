@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report id="report_mro_order"
+			string="Order de Maintenance"
+			model="mro.order"
+			name="mro.order.report"
+			rml="tms_gmao/report/mro_order.rml"   
+                        attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+			auto="False"/>
+               
+	</data>
+</openerp>
