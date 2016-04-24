@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+    	    
+	<record model="ir.module.category" id="module_category_tms_gmao">
+	    <field name="name">Gestion de maintenance</field>
+	    <field name="description">Gestion de maintenance assistée par ordinateur</field>
+	    <field name="sequence">2</field>
+	</record>
+
+        <record id="tms_gmao_asset_truck" model="asset.asset">
+            <field name="name">Camion</field>
+            <field name="property_stock_asset" ref="asset.stock_location_assets"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="model"></field>
+            <field name="serial"></field>
+            <field name="image"></field>
+        </record>
+
+    </data>
+</openerp>
