@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_tms_gmao_pm,access_tms_gmao_pm,model_tms_gmao_pm,group_gmao_manager,1,1,1,1
+access_tms_gmao_pm_alert,access_tms_gmao_pm_alert,model_tms_gmao_pm_alert,group_gmao_manager,1,1,1,1
+access_mro_order_operation,access_mro_order_operation,model_mro_order_operation,group_gmao_manager,1,1,1,1
