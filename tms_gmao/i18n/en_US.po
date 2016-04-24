@@ -1,0 +1,1071 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms_gmao
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-aab3d9f\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-07 20:53+0000\n"
+"PO-Revision-Date: 2015-12-10 11:19-0000\n"
+"Last-Translator: salif <somandesalif@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: tms_gmao
+#: model:ir.actions.act_window,help:tms_gmao.action_tms_gmao_pm_alert
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer une alerte. \n"
+"              </p><p>\n"
+"Les alertes permettent le suivi des maintenances. Vous ne pouvez pas créer "
+"d'alerte directement, vous devez créer une maiintenance programmée qui "
+"génèrera une alerte.\n"
+"\t      </p>\n"
+"\t    "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Cliquer ici pour créer "
+"une alerte.               </p><p>Les alertes permettent le suivi des "
+"maintenances. Vous ne pouvez pas créer d'alerte directement, vous devez "
+"créer une maiintenance programmée qui génèrera une alerte.      </p>    "
+
+#. module: tms_gmao
+#: model:ir.actions.act_window,help:tms_gmao.action_tms_gmao_pm
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer ici pour créer une maintenance programmée. \n"
+"              </p><p>\n"
+"Les maintenances programmées sont des maintenances qui permettent de générer "
+"des types d'alertes. Ces alertes à leur tour seront associées à des "
+"maintenances.\n"
+"              </p>\n"
+"\t    "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Cliquer ici pour créer "
+"une maintenance programmée.               </p><p>Les maintenances "
+"programmées sont des maintenances qui permettent de générer des types "
+"d'alertes. Ces alertes à leur tour seront associées à des "
+"maintenances.              </p>    "
+
+#. module: tms_gmao
+#: model:ir.actions.act_window,help:tms_gmao.product_normal_action_tms_gmao
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquez ici pour créer un nouveau produit de maintenance.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Cliquez ici pour créer "
+"un nouveau produit de maintenance.              </p>            "
+
+#. module: tms_gmao
+#: model:ir.actions.act_window,help:tms_gmao.action_fleet_vehicle_service_types_gmao
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquez ici pour créer un nouveau type d'intervention pour "
+"la GMAO.\n"
+"              </p><p>\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Cliquez ici pour créer "
+"un nouveau type d'intervention pour la GMAO.              </"
+"p><p>              </p>            "
+
+#. module: tms_gmao
+#: field:mro.order,alert_id:0 view:tms.gmao.pm:tms_gmao.tms_gmao_pm_search
+#: selection:tms.gmao.pm,state:0
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+#: field:tms.gmao.pm.alert,name:0 selection:tms.gmao.pm.alert,state:0
+msgid "Alerte"
+msgstr "Alert"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,warn_period_view:0
+msgid "Alerte dans"
+msgstr "Alert  in"
+
+#. module: tms_gmao
+#: model:ir.actions.act_window,name:tms_gmao.action_tms_gmao_pm_alert
+#: model:ir.ui.menu,name:tms_gmao.menu_gmao_preventive_alert
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_form
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_tree
+msgid "Alertes"
+msgstr "Alerts"
+
+#. module: tms_gmao
+#: view:tms.gmao.config.settings:tms_gmao.view_tms_gmao_config_settings
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_tree
+msgid "Annuler"
+msgstr "Cancel"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_tree
+msgid "Annuler l'alerte ?"
+msgstr "Cancel  alert ?"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+#: selection:tms.gmao.pm.alert,state_process:0
+msgid "Annulé"
+msgstr "Cancelled"
+
+#. module: tms_gmao
+#: view:tms.gmao.config.settings:tms_gmao.view_tms_gmao_config_settings
+msgid "Appliquer"
+msgstr "Apply"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Arrêter prévention"
+msgstr "Stop prevention"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Available Parts"
+msgstr "Available Parts"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert.process.line,process_id:0
+msgid "Bon de maintenance"
+msgstr "Maintenance order"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.tms_gmao_pm_search
+msgid "Brouillon"
+msgstr "Draft"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,draft_ok:0
+msgid "Brouillon de création"
+msgstr "Draft of creation"
+
+#. module: tms_gmao
+#: model:asset.asset,name:tms_gmao.tms_gmao_asset_truck
+msgid "Camion"
+msgstr "Truck"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: tms_gmao
+#: view:tms.gmao.config.settings:tms_gmao.view_tms_gmao_config_settings
+msgid "Choix du compteur"
+msgstr "Choice of the odometer"
+
+#. module: tms_gmao
+#: help:tms.gmao.pm,periodic:0
+msgid "Cochez cette option si la maintenance programmée est periodique."
+msgstr "Check this if scheduled maintenance is periodic."
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,last_done_view:0 field:tms.gmao.pm.alert,last_done_view:0
+msgid "Commence"
+msgstr "Starts"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,days_last_done:0 field:tms.gmao.pm.alert,days_last_done:0
+msgid "Commencer le"
+msgstr "Starting "
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,km_last_done:0 field:tms.gmao.pm.alert,km_last_done:0
+msgid "Commencer à"
+msgstr "Start to"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Compteur actuel"
+msgstr "Current odometer"
+
+#. module: tms_gmao
+#: field:tms.gmao.config.settings,tms_gmao_param_current_counter:0
+msgid ""
+"Compteur sur base des voyages (Oui), Compteur sur base des bons de carburant "
+"(Non)"
+msgstr "Odometer  based on travel (Yes), Odometer based on fuel vouchers(No)"
+
+#. module: tms_gmao
+#: model:ir.ui.menu,name:tms_gmao.menu_gmao_configuration
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: tms_gmao
+#: model:ir.actions.act_window,name:tms_gmao.action_tms_gmao_config_settings
+#: view:tms.gmao.config.settings:tms_gmao.view_tms_gmao_config_settings
+msgid "Configurer la GMAO"
+msgstr "Configure CMMS"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Confirm Maintenance"
+msgstr "Confirm Maintenance"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Consumed Parts"
+msgstr "Consumed Parts"
+
+#. module: tms_gmao
+#: selection:fleet.service.type,maintenance_type:0
+msgid "Corrective"
+msgstr "Corrective"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert.process.line,amount:0
+msgid "Coût"
+msgstr "Cost"
+
+#. module: tms_gmao
+#: field:mro.order.operation,create_uid:0
+#: field:tms.gmao.config.settings,create_uid:0 field:tms.gmao.pm,create_uid:0
+#: field:tms.gmao.pm.alert,create_uid:0
+#: field:tms.gmao.pm.alert.process,create_uid:0
+#: field:tms.gmao.pm.alert.process.line,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: tms_gmao
+#: field:mro.order.operation,create_date:0
+#: field:tms.gmao.config.settings,create_date:0
+#: field:tms.gmao.pm,create_date:0 field:tms.gmao.pm.alert,create_date:0
+#: field:tms.gmao.pm.alert.process,create_date:0
+#: field:tms.gmao.pm.alert.process.line,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert,date:0 field:tms.gmao.pm.alert.process,date:0
+msgid "Date"
+msgstr "Date"
+
+#. module: tms_gmao
+#: report:mro.order.report:0
+msgid "Date :"
+msgstr "Date :"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,days_warn_period:0
+#: field:tms.gmao.pm.alert,days_warn_period:0
+msgid "Date alerte"
+msgstr "Date alert"
+
+#. module: tms_gmao
+#: help:tms.gmao.pm,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Date of the last message posted on the record."
+
+#. module: tms_gmao
+#: field:mro.order.operation,description:0 field:tms.gmao.pm,description:0
+#: field:tms.gmao.pm.alert,description:0
+#: field:tms.gmao.pm.alert.process,description:0
+#: field:tms.gmao.pm.alert.process.line,description:0
+msgid "Description"
+msgstr "Description"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Description for Documentation"
+msgstr "Description for Documentation"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Description for Labor"
+msgstr "Description for Labor"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Description for Operations"
+msgstr "Description for Operations"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Description for Tools"
+msgstr "Description for Tools"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Documentation"
+msgstr "Documentation"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Done"
+msgstr "Done"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Déclencher l'alerte"
+msgstr "Trigger alert"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.tms_gmao_pm_search selection:tms.gmao.pm,state:0
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+#: selection:tms.gmao.pm.alert,state:0
+msgid "Dépassé"
+msgstr "Outdated"
+
+#. module: tms_gmao
+#: report:mro.order.report:0
+msgid "Désignation"
+msgstr "Designation"
+
+#. module: tms_gmao
+#: help:mro.order,maintenancier_id:0
+msgid "Employé qui effectue la maintenance"
+msgstr "Employee who performs maintenance"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+#: selection:tms.gmao.pm.alert,state_process:0
+msgid "En cours"
+msgstr "In progress"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert,state:0
+msgid "Etat"
+msgstr "State"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+msgid "Etat traitement"
+msgstr "Etat traitement"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert,next_due_view:0
+msgid "Fini"
+msgstr "Finished"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,message_follower_ids:0
+msgid "Followers"
+msgstr "Followers"
+
+#. module: tms_gmao
+#: model:ir.ui.menu,name:tms_gmao.menu_tms_gmao_config_settings
+msgid "GMAO"
+msgstr "CMMS"
+
+#. module: tms_gmao
+#: model:ir.module.category,name:tms_gmao.module_category_tms_gmao
+msgid "Gestion de maintenance"
+msgstr "Maintenance Management"
+
+#. module: tms_gmao
+#: model:ir.module.category,description:tms_gmao.module_category_tms_gmao
+msgid "Gestion de maintenance assistée par ordinateur"
+msgstr "Gestion de maintenance assistée par ordinateur"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.tms_gmao_pm_search
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+msgid "Grouper par..."
+msgstr "Grouper par..."
+
+#. module: tms_gmao
+#: help:tms.gmao.pm,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+
+#. module: tms_gmao
+#: field:mro.order.operation,id:0 field:tms.gmao.config.settings,id:0
+#: field:tms.gmao.pm,id:0 field:tms.gmao.pm.alert,id:0
+#: field:tms.gmao.pm.alert.process,id:0
+#: field:tms.gmao.pm.alert.process.line,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: tms_gmao
+#: help:tms.gmao.pm,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "If checked new messages require your attention."
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,days_interval:0 field:tms.gmao.pm,interval_view:0
+#: field:tms.gmao.pm,km_interval:0 field:tms.gmao.pm.alert,days_interval:0
+#: field:tms.gmao.pm.alert,interval_view:0
+#: field:tms.gmao.pm.alert,km_interval:0
+msgid "Intervalle"
+msgstr "Interval"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Intervalle de jour"
+msgstr "Interval of day"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Is a Follower"
+
+#. module: tms_gmao
+#: selection:tms.gmao.pm,meter:0 selection:tms.gmao.pm.alert,meter:0
+#: selection:tms.gmao.pm.alert.process,meter:0
+msgid "Jours"
+msgstr "Jours"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,days_left:0 field:tms.gmao.pm.alert,days_left:0
+msgid "Jours restant"
+msgstr "Remaining Days"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Jours restants"
+msgstr "Remaining Days"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert.process,km:0
+msgid "KM"
+msgstr "KM"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,counter_current:0
+msgid "Kilométrage actuel"
+msgstr "Current odometer"
+
+#. module: tms_gmao
+#: selection:tms.gmao.pm,meter:0 selection:tms.gmao.pm.alert,meter:0
+msgid "Km"
+msgstr "Km"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,km_warn_period:0 field:tms.gmao.pm.alert,km_warn_period:0
+msgid "Km alerte"
+msgstr "Km alert"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Km d'intervalle"
+msgstr "Km d'intervalle"
+
+#. module: tms_gmao
+#: field:mro.order,km_start:0
+msgid "Km de début"
+msgstr "Km start"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Km de départ"
+msgstr "Km start"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,km_left:0 field:tms.gmao.pm.alert,km_left:0
+msgid "Km restant"
+msgstr "Km Remaining"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Labor"
+msgstr "Labor"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,message_last_post:0
+msgid "Last Message Date"
+msgstr "Last Message Date"
+
+#. module: tms_gmao
+#: field:mro.order.operation,write_uid:0
+#: field:tms.gmao.config.settings,write_uid:0 field:tms.gmao.pm,write_uid:0
+#: field:tms.gmao.pm.alert,write_uid:0
+#: field:tms.gmao.pm.alert.process,write_uid:0
+#: field:tms.gmao.pm.alert.process.line,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: tms_gmao
+#: field:mro.order.operation,write_date:0
+#: field:tms.gmao.config.settings,write_date:0 field:tms.gmao.pm,write_date:0
+#: field:tms.gmao.pm.alert,write_date:0
+#: field:tms.gmao.pm.alert.process,write_date:0
+#: field:tms.gmao.pm.alert.process.line,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: tms_gmao
+#: help:tms.gmao.pm,days_interval:0 help:tms.gmao.pm.alert,days_interval:0
+msgid "Le nombre de jours avant la prochaine maintenance."
+msgstr "Le nombre de jours avant la prochaine maintenance."
+
+#. module: tms_gmao
+#: help:tms.gmao.pm,km_interval:0 help:tms.gmao.pm.alert,km_interval:0
+msgid "Le nombre de kilomètres avant la prochaine maintenance."
+msgstr "Le nombre de kilomètres avant la prochaine maintenance."
+
+#. module: tms_gmao
+#: field:mro.order,dest_location_id:0
+msgid "Location de destination"
+msgstr "Location de destination"
+
+#. module: tms_gmao
+#: report:mro.order.report:0
+msgid "Magasin :"
+msgstr "Magasin :"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert,pm_id:0
+msgid "Maint. Prog."
+msgstr "Maint. Prog."
+
+#. module: tms_gmao
+#: model:ir.model,name:tms_gmao.model_mro_order
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Maintenance Order"
+msgstr "Maintenance Order"
+
+#. module: tms_gmao
+#: model:ir.actions.act_window,name:tms_gmao.action_orders_tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Maintenance Orders"
+msgstr "Maintenance Orders"
+
+#. module: tms_gmao
+#: model:ir.model,name:tms_gmao.model_mro_order_parts_line
+msgid "Maintenance Planned Parts"
+msgstr "Maintenance Planned Parts"
+
+#. module: tms_gmao
+#: model:ir.model,name:tms_gmao.model_mro_request
+msgid "Maintenance Request"
+msgstr "Maintenance Request"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_form
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_tree
+msgid "Maintenance programmée"
+msgstr "Scheduled Maintenance"
+
+#. module: tms_gmao
+#: model:ir.model,name:tms_gmao.model_tms_gmao_pm
+msgid "Maintenance préventive"
+msgstr "Preventive Maintenance"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert,maintenance_ids:0
+msgid "Maintenances"
+msgstr "Maintenances"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_form
+msgid "Maintenances associées"
+msgstr "Associated Maintenances"
+
+#. module: tms_gmao
+#: model:ir.actions.act_window,name:tms_gmao.action_tms_gmao_pm
+#: model:ir.ui.menu,name:tms_gmao.menu_gmao_preventive_pm
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_tree
+msgid "Maintenances programmées"
+msgstr "Scheduled Maintenances"
+
+#. module: tms_gmao
+#: field:mro.order,maintenancier_id:0
+#: field:tms.gmao.pm.alert.process,maintenancier_id:0
+msgid "Maintenancier"
+msgstr "Maintainer"
+
+#. module: tms_gmao
+#: model:res.groups,name:tms_gmao.group_gmao_manager
+msgid "Manager GMAO"
+msgstr "Manager CMMS"
+
+#. module: tms_gmao
+#: report:mro.order.report:0
+msgid "Matricule :"
+msgstr "Matricule :"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,message_ids:0
+msgid "Messages"
+msgstr "Messages"
+
+#. module: tms_gmao
+#: help:tms.gmao.pm,message_ids:0
+msgid "Messages and communication history"
+msgstr "Messages and communication history"
+
+#. module: tms_gmao
+#: field:mro.order.operation,hours:0
+msgid "Nombre d'heures"
+msgstr "Number of hours"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Nombre de jours avant alerte"
+msgstr "Number of days before alert"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Nombre de km avant alerte"
+msgstr "Number of km before alert"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.tms_gmao_pm_search selection:tms.gmao.pm,state:0
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+#: selection:tms.gmao.pm.alert,state:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Operations"
+msgstr "Operations"
+
+#. module: tms_gmao
+#: field:mro.order,operation_ids:0
+msgid "Opérations"
+msgstr "Operations"
+
+#. module: tms_gmao
+#: model:ir.model,name:tms_gmao.model_mro_order_operation
+msgid "Opérations de maintenance"
+msgstr "Maintenance Operations"
+
+#. module: tms_gmao
+#: model:ir.actions.report.xml,name:tms_gmao.report_mro_order
+msgid "Order de Maintenance"
+msgstr "Order de Maintenance"
+
+#. module: tms_gmao
+#: report:mro.order.report:0
+msgid "Ordre N° :"
+msgstr "Ordre N° :"
+
+#. module: tms_gmao
+#: selection:fleet.service.type,maintenance_type:0
+msgid "Panne"
+msgstr "Panne"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Paramètres de la maintainance préventive"
+msgstr "Settings Preventive Maintenance"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Parts"
+msgstr "Parts"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Parts to Consume"
+msgstr "Parts to Consume"
+
+#. module: tms_gmao
+#: field:product.product,spare_ok:0
+msgid "Pièces de rechange"
+msgstr "Parts"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Planned Parts"
+msgstr "Planned Parts"
+
+#. module: tms_gmao
+#: field:mro.order.parts.line,price_unit:0
+msgid "Prix Unitaire"
+msgstr "Unit Price"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Problem Description"
+msgstr "Problem Description"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,km_next_due:0 field:tms.gmao.pm.alert,km_next_due:0
+msgid "Prochain km"
+msgstr "Next km"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,days_next_due:0 field:tms.gmao.pm.alert,days_next_due:0
+msgid "Prochaine date"
+msgstr "Next date"
+
+#. module: tms_gmao
+#: model:ir.model,name:tms_gmao.model_product_product
+msgid "Product"
+msgstr "Product"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert.process.line,product_id:0
+msgid "Produit"
+msgstr "Product"
+
+#. module: tms_gmao
+#: model:ir.actions.act_window,name:tms_gmao.product_normal_action_tms_gmao
+msgid "Produits"
+msgstr "Products"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm.alert.process:tms_gmao.tms_gmao_pm_alert_process_form
+msgid "Produits de la maintenance"
+msgstr "Produits de la maintenance"
+
+#. module: tms_gmao
+#: selection:fleet.service.type,maintenance_type:0
+msgid "Programmée"
+msgstr "Scheduled"
+
+#. module: tms_gmao
+#: model:ir.ui.menu,name:tms_gmao.menu_gmao_preventive
+msgid "Préventif"
+msgstr "Preventive"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert,periodic:0
+#: field:tms.gmao.pm.alert.process,periodic_ok:0
+msgid "Périodique"
+msgstr "Periodic"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,periodic:0
+msgid "Périodique ?"
+msgstr "Periodic ?"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Quantity"
+msgstr "Quantity"
+
+#. module: tms_gmao
+#: report:mro.order.report:0
+#: field:tms.gmao.pm.alert.process.line,product_qty:0
+msgid "Quantité"
+msgstr "Quantity"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+msgid "Recherche alertes"
+msgstr "Recherche alertes"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.tms_gmao_pm_search
+msgid "Recherche maintenance programmée"
+msgstr "Recherche maintenance programmée"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Recreate Picking"
+msgstr "Recreate Picking"
+
+#. module: tms_gmao
+#: field:mro.order,user_id:0 field:tms.gmao.pm.alert.process,user_id:0
+msgid "Responsable"
+msgstr "Responsible"
+
+#. module: tms_gmao
+#: report:mro.order.report:0
+msgid "Responsable :"
+msgstr "Responiable :"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,left_view:0 field:tms.gmao.pm.alert,left_view:0
+msgid "Restant"
+msgstr "Remaining"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,name:0
+msgid "Réf MP"
+msgstr "Ref MP"
+
+#. module: tms_gmao
+#: report:mro.order.report:0
+msgid "Référence"
+msgstr "Reference"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Specify the documentation useful when execute this order..."
+msgstr "Specify the documentation useful when execute this order..."
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid ""
+"Spécifiez ici les outils et mécanismes nécessaires pour effectuer cette "
+"maintenance..."
+msgstr ""
+"Spécifiez ici les outils et mécanismes nécessaires pour effectuer cette "
+"maintenance..."
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid ""
+"Spécifiez ici les spécialistes recommandés pour effectuer cette "
+"maintenance..."
+msgstr ""
+"Spécifiez ici les spécialistes recommandés pour effectuer cette "
+"maintenance..."
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.tms_gmao_pm_search field:tms.gmao.pm,state:0
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_tree
+msgid "Statut"
+msgstr "Status"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+#: field:tms.gmao.pm,alert_ids:0
+msgid "Suivi des alertes"
+msgstr "Follow-up of alerts"
+
+#. module: tms_gmao
+#: model:ir.model,name:tms_gmao.model_tms_gmao_pm_alert
+msgid "Suivi des alertes maintenance périodiques"
+msgstr "Suivi des alertes maintenance périodiques"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Suivi des historiques"
+msgstr "Suivi des historiques"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Suivi des historiques alerte"
+msgstr "Suivi des historiques alerte"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,message_summary:0
+msgid "Summary"
+msgstr "Summary"
+
+#. module: tms_gmao
+#: field:tms.gmao.config.settings,tms_gmao_param_mro_order_supply_chain:0
+msgid "Supply chain dans les ordres de maintenance"
+msgstr "Supply chain dans les ordres de maintenance"
+
+#. module: tms_gmao
+#: view:tms.gmao.config.settings:tms_gmao.view_tms_gmao_config_settings
+msgid "Supply chain pour les ordres de maintenance"
+msgstr "Supply chain pour les ordres de maintenance"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,next_due_view:0
+msgid "Termine"
+msgstr "Termine"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Terminer"
+msgstr "Terminer"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert.process,periodic_done:0
+msgid "Terminer la périodicité de la maintenance"
+msgstr "Terminer la périodicité de la maintenance"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "Terminer périodicité"
+msgstr "Terminer périodicité"
+
+#. module: tms_gmao
+#: selection:tms.gmao.pm,state:0
+msgid "Terminé"
+msgstr "Completed"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Tools"
+msgstr "Tools"
+
+#. module: tms_gmao
+#: model:ir.model,name:tms_gmao.model_tms_gmao_pm_alert_process
+#: view:tms.gmao.pm.alert.process:tms_gmao.tms_gmao_pm_alert_process_form
+msgid "Traitement alerte"
+msgstr "Traitement alerte"
+
+#. module: tms_gmao
+#: model:ir.model,name:tms_gmao.model_tms_gmao_pm_alert_process_line
+msgid "Traitement ligne d'alerte"
+msgstr "Traitement ligne d'alerte"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_tree
+msgid "Traiter"
+msgstr "Process"
+
+#. module: tms_gmao
+#: selection:tms.gmao.pm.alert,state_process:0
+msgid "Traité"
+msgstr "Processed"
+
+#. module: tms_gmao
+#: field:mro.order.operation,employee_id:0
+msgid "Travailleur"
+msgstr "Workeur"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,type_alert:0 field:tms.gmao.pm.alert,type_alert:0
+msgid "Type alerte"
+msgstr "Alert Type"
+
+#. module: tms_gmao
+#: field:mro.order,service_type_id:0 field:tms.gmao.pm,service_type_id:0
+msgid "Type d'intervention"
+msgstr "Type of intervention"
+
+#. module: tms_gmao
+#: field:fleet.service.type,maintenance_type:0
+msgid "Type de maintenance"
+msgstr "Type of maintenance"
+
+#. module: tms_gmao
+#: report:mro.order.report:0
+msgid "Type de maintenance :"
+msgstr "Type of  maintenance :"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.tms_gmao_pm_search
+msgid "Type intervention"
+msgstr "Intervention Type"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.tms_gmao_pm_search
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+msgid "Type maintenance"
+msgstr "Maintenance Type"
+
+#. module: tms_gmao
+#: model:ir.model,name:tms_gmao.model_fleet_service_type
+msgid "Type of services available on a vehicle"
+msgstr "Type of services available on a vehicle"
+
+#. module: tms_gmao
+#: view:fleet.service.type:tms_gmao.fleet_vehicle_service_types_tree_gmao
+#: model:ir.actions.act_window,name:tms_gmao.action_fleet_vehicle_service_types_gmao
+#: model:ir.ui.menu,name:tms_gmao.menu_gmao_configuration_service_types
+msgid "Types d'intervention"
+msgstr "Type of intervention"
+
+#. module: tms_gmao
+#: view:fleet.service.type:tms_gmao.fleet_vehicle_service_types_form_gmao
+msgid "Types de service"
+msgstr "Type of  Service"
+
+#. module: tms_gmao
+#: view:mro.order:tms_gmao.mro_order_form_view_tms_gmao
+msgid "Unit of Measure"
+msgstr "Unit of Measure"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,meter:0 field:tms.gmao.pm.alert,meter:0
+#: field:tms.gmao.pm.alert.process,meter:0
+msgid "Unité de mesure"
+msgstr "Unit of Measure"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,message_unread:0
+msgid "Unread Messages"
+msgstr "Unread Messages"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.tms_gmao_pm_search
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+#: selection:tms.gmao.pm.alert,state:0
+msgid "Validé"
+msgstr "Validated"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm.alert.process:tms_gmao.tms_gmao_pm_alert_process_form
+#: field:tms.gmao.pm.alert.process,line_ids:0
+msgid "Vidanges"
+msgstr "Oil changes"
+
+#. module: tms_gmao
+#: report:mro.order.report:0
+msgid "Visa Mécanicien"
+msgstr "Visa  Mechanic"
+
+#. module: tms_gmao
+#: report:mro.order.report:0
+msgid "Visa chef Atelier"
+msgstr "Visa chef Atelier"
+
+#. module: tms_gmao
+#: field:mro.order,vehicle_id:0 field:mro.request,vehicle_id:0
+#: view:tms.gmao.pm:tms_gmao.tms_gmao_pm_search
+#: view:tms.gmao.pm.alert:tms_gmao.tms_gmao_pm_alert_search
+#: field:tms.gmao.pm.alert,vehicle_id:0
+#: field:tms.gmao.pm.alert.process,vehicle_id:0
+msgid "Véhicule"
+msgstr "Vehicle"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm,vehicle_id:0
+msgid "Véhicule/SR"
+msgstr "Vehicle/SR"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm.alert.process:tms_gmao.tms_gmao_pm_alert_process_form
+msgid "_Cancel"
+msgstr "_Cancel"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm.alert.process:tms_gmao.tms_gmao_pm_alert_process_form
+msgid "_Valider"
+msgstr "_Validate"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert,warn_period_view:0
+#: field:tms.gmao.pm.alert.process,alert_id:0
+msgid "alerte"
+msgstr "alert"
+
+#. module: tms_gmao
+#: selection:tms.gmao.pm.alert.process,meter:0
+msgid "km"
+msgstr "km"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "km prochains"
+msgstr "km prochains"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_form
+msgid "km restants"
+msgstr "km restants"
+
+#. module: tms_gmao
+#: field:fleet.service.type,mro_ok:0
+msgid "mro"
+msgstr "mro"
+
+#. module: tms_gmao
+#: field:mro.order.operation,mro_id:0
+msgid "mro id"
+msgstr "mro id"
+
+#. module: tms_gmao
+#: view:tms.gmao.config.settings:tms_gmao.view_tms_gmao_config_settings
+msgid "or"
+msgstr "or"
+
+#. module: tms_gmao
+#: view:tms.gmao.pm:tms_gmao.view_tms_gmao_pm_tree
+msgid "statut"
+msgstr "statut"
+
+#. module: tms_gmao
+#: field:tms.gmao.pm.alert,state_process:0
+msgid "traitement"
+msgstr "traitement"
+
+#. module: tms_gmao
+#: field:mro.order,cost_id:0
+msgid "unknown"
+msgstr "unknown"
