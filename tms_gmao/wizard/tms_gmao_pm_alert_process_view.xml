@@ -1,0 +1,45 @@
+<openerp>
+    <data>
+    
+    	<record model="ir.ui.view" id="tms_gmao_pm_alert_process_form">
+			<field name="name">tms.gmao.pm.alert.process.form</field>
+			<field name="model">tms.gmao.pm.alert.process</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+			  <form string="Traitement alerte">
+				<field name="alert_id" select="1" readonly="True" />
+				<field name="date" select="1" />
+				<field name="meter" invisible="1" />
+				<field name="km" select="1" attrs="{'invisible':[('meter','!=','km')]}" />
+	                   <field name="vehicle_id" select="1" colspan="1" readonly="True" />
+					<field name="user_id" select="1" invisible="True" />
+					<field name="maintenancier_id" required="True" />
+					<field name="description" select="1"/>
+				<field name="periodic_ok" invisible="True" />
+				<field name="periodic_done" select="1" attrs="{'invisible':[('periodic_ok','=',False)]}" />
+<!--
+				<field name="type" select="1" />
+-->
+			<newline/>
+				<separator string="Produits de la maintenance" colspan="4"/>
+				<field name="line_ids" colspan="4" nolabel="1" >
+				  <tree string="Vidanges" editable="bottom">
+					<field name="product_id" select="1" on_change="onchange_product_id(product_id)"/>
+					<field name="product_qty" select="1"/>
+					<field name="amount" select="1"/>
+				  </tree>
+				</field>
+				<group col="2" colspan="2">
+                        <button icon='gtk-cancel' special="cancel" string="_Cancel" />
+                        <button name="action_done" string="_Valider" colspan="1" type="object" icon="gtk-go-forward" />
+				</group>
+		</form>
+	    </field>
+	</record>
+
+
+
+
+
+    </data>
+</openerp>
