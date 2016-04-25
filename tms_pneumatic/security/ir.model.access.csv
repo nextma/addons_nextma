@@ -1,0 +1,9 @@
+"id","name","model_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_fleet_tyre_odometer_history","fleet.tyre.odometer.history","model_fleet_tyre_odometer_history",1,1,1,1
+"access_tms_tyre_serial","tms.tyre.serial","model_tms_tyre_serial",1,1,1,1
+"access_tms_fleet_tyre","tms.fleet.tyre","model_tms_fleet_tyre",1,1,1,1
+"access_product_brand","product.brand","model_product_brand",1,1,1,1
+"access_mro_order_parts_line_tyre","mro.order.parts.line.tyre","model_mro_order_parts_line_tyre",1,1,1,1
+"access_stock_production_lot","stock.production.lot","stock.model_stock_production_lot",1,0,0,0
+"access_fleet_service_type","fleet.service.type","fleet.model_fleet_service_type",1,0,0,0
+"access_fleet_vehicle","fleet.vehicle","fleet.model_fleet_vehicle",1,0,0,0
