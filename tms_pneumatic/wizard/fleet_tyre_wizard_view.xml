@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="fleet_odometer_change_wizard_view">
+			<field name="name">fleet.tyre.wizard.form</field>
+			<field name="model">fleet.tyre.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Montage de pneu">
+                    <group>
+                        <field name="vehicle_id" />
+                        <field name="tyre_id" invisible="1"/>
+                        <field name="position" />
+                        <field name="user_id" />
+                        <field name="start_date" />
+                        <field name="vehicle_odometer" />
+                        
+                    </group>
+					<footer>
+                        <button string="Monter"
+                                name="action_mount"
+                                type="object"
+                                class="oe_highlight" />
+                        or
+                        <button string="Cancel"
+                                class="oe_link"
+                                special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="fleet_tyre_demount_wizard_view">
+			<field name="name">fleet.tyre.demount.wizard.form</field>
+			<field name="model">fleet.tyre.demount.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Demontage de pneu">
+					<group>
+                    	<group>
+                        	<field name="end_date" />
+                        	<field name="end_odometer" />
+                    	</group>
+                    	<group>
+                    		<field name="notes" />
+                    	</group>
+                    </group>
+					<footer>
+                        <button string="Démonter"
+                                name="action_demount"
+                                type="object"
+                                class="oe_highlight" />
+                        or
+                        <button string="Cancel"
+                                class="oe_link"
+                                special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_fleet_tyre_wizard" model="ir.actions.act_window">
+			<field name="name">Montage de pneu</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">fleet.tyre.wizard</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		<record id="action_fleet_tyre_demount_wizard_wizard" model="ir.actions.act_window">
+			<field name="name">Démontage de pneu</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">fleet.tyre.demount.wizard</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+	</data>
+</openerp>
