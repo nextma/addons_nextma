@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="product_form_view" model="ir.ui.view">
+            <field name="name">product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <field name="categ_id" position="after">
+                    <field name="tyre" />
+                    <label for="tyre" />
+                </field>
+                <field name="lst_price" position="after">
+                    <field name="brand_id" attrs="{'invisible':[('tyre','!=',True)]}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tms_pneumatic_form_view" model="ir.ui.view">
+            <field name="name">tms.tyre.serial.form</field>
+            <field name="model">tms.tyre.serial</field>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <form string="Pneu" attrs="{'readonly': [('state','not in',('draft'))]}">
+                    <header>
+                        <button name="%(action_fleet_tyre_wizard)d" type='action' string='Montage du pneu' states='free' invisible="1"/>
+                        <button name="%(action_fleet_tyre_demount_wizard_wizard)d" type='action' string='Démontage du pneu' states='used' />
+                        <field name="state" widget="statusbar" statusbar_visible="free,used" statusbar_colors='{"free":"green","used":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <group>
+                        	 <field name="product_id" />
+                        	 <field name="lot_id" context="{'default_product_id':product_id}"/>
+                        	 <field name="brand_id" />
+                        	 <field name="current_vehicle_id" readonly="1"/>
+                        	 <field name="calculate_odometer_value" />
+                        	 <field name="position" readonly="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Historique des utilisations">
+                               <field name="vehicle_history_ids">
+                                   <tree create="0">
+                                      <field name="vehicle_id" />
+                                      <field name="position" />
+                                      <field name="start_odometer" />
+                                      <field name="end_odometer" />
+                                      <field name="start_date" />
+                                      <field name="end_date" />
+                                      <field name="notes" />
+                                      <field name="status" />
+                                   </tree>
+                               </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tms_pneumatic_tree_view" model="ir.ui.view">
+            <field name="name">tms.tyre.serial.tree</field>
+            <field name="model">tms.tyre.serial</field>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <tree>
+                      <field name="lot_id" />
+                      <field name="product_id" />
+                      <field name="current_vehicle_id" />
+                      <field name="calculate_odometer_value" />
+                      <field name="position" />
+                </tree>
+            </field>
+        </record>
+
+       <record id="tms_pneumatic_filter" model="ir.ui.view">
+            <field name="name">tms.tyre.serial.search</field>
+            <field name="model">tms.tyre.serial</field>
+            <field name="arch" type="xml">
+                <search string="Rechearch">
+                	<field name="lot_id"/>
+                	<field name="brand_id"/>
+                    <group expand="0" string="Group By">
+                    	<filter  name="group_by_brand_id" string="Marque de pneu" context="{'group_by':'brand_id'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+        <record id="tms_pneumatic_graph_view" model="ir.ui.view">
+            <field name="name">tms.tyre.serial.graph</field>
+            <field name="model">tms.tyre.serial</field>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <graph>
+                      <field name="lot_id" />
+                      <field name="calculate_odometer_value" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_pneu" model="ir.actions.act_window">
+            <field name="name">Liste des Pneus</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tms.tyre.serial</field>
+            <field name="domain"></field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+        </record>
+        <menuitem name="Pneu"
+            action="action_pneu"
+            id="pneumatic"
+            parent="mro.menu_maintenance_parts"
+            sequence="101"/>
+    </data>
+</openerp>

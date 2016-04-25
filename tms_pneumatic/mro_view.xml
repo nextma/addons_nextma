@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record id="mro_order_form_view_pneumatic" model="ir.ui.view">
+            <field name="name">mro.order.form.pneu</field>
+            <field name="model">mro.order</field>
+            <field name="inherit_id" ref="tms_gmao.mro_order_form_view_tms_gmao" />
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <field name="vehicle_id" position="replace">
+                     <field name="vehicle_id" required="1" on_change="onchange_vehicle_id(vehicle_id)" />
+                </field>
+                <xpath  expr="/form/sheet/notebook[position()=1]" position="after">
+                     <field name="other_cost" />
+                </xpath>
+<!--                 <xpath  expr="/form/sheet/notebook/page[@string='Parts']/group[@string='Planned Parts']/field/tree/field[@name='parts_uom']" position="after">
+                       <field name="price_unit"/>
+                </xpath> -->
+                <xpath  expr="/form/sheet/notebook/page[position()=1]" position="attributes">
+                     <attribute name="attrs">{'invisible':[('maintenance_type','=','tyre')]}</attribute>
+                </xpath>
+                <xpath  expr="/form/sheet/notebook/page[position()=1]" position="after">
+                   <page string="Montage pneus" attrs="{'invisible':[('maintenance_type','!=','tyre')]}" focus="">
+                      <field name="tyre_lines" >
+                         <tree editable="bottom">
+                             <field name="product_id" />
+                             <field name="ref" context="{'default_product_id':product_id}"/>
+                             <field name="position" />
+                         </tree>
+                      </field>
+                   </page>
+                </xpath>
+            </field>
+        </record>
+ 	</data>
+</openerp>

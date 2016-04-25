@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+        <record model='ir.ui.view' id='fleet_vehicle_cost_tree'>
+            <field name="name">fleet.vehicle.cost.tree</field>
+            <field name="model">fleet.vehicle.cost</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_cost_tree" />
+            <field name="arch" type="xml">
+               <field name="cost_subtype_id" position="after">
+                   <field name="amount" />
+               </field>
+            </field>
+        </record>
+	    <record model="ir.ui.view" id="tms_fleet_vehicle_tyre_form">
+	    <field name="name">tms.fleet.vehicle.form</field>
+	    <field name="model">fleet.vehicle</field>
+	    <field name="inherit_id" ref="tms.tms_fleet_vehicle_form"/>
+	    <field name="arch" type="xml">
+	        <xpath expr="/form/sheet/group/notebook/page[position()=last()]" position="after">
+				<page string="Pneus montés">
+				  <field name="tyre_ids" nolabel="1" widget="one2many_list">
+					<tree create='false'>
+					    <field name="lot_id"/>
+					    <field name="brand_id"/>
+					    <field name="position"/>
+					    <field name="calculate_odometer_value" />
+					</tree>
+				  </field>
+				</page>
+             </xpath>
+	    </field>
+	</record>
+	</data>
+</openerp>
