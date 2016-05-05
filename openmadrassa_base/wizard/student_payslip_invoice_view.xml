@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_account_voucher_validate" model="ir.ui.view">
+            <field name="name">account.voucher.validate.form</field>
+            <field name="model">account.voucher.validate</field>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+              <form string="Vlidation multiple">
+                  <footer>
+                      <button name="proforma_voucher" string="Valider" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Annuler" class="oe_link" special="cancel"/>
+                  </footer>
+             </form>
+            </field>
+        </record>
+
+        <record id="view_account_invoice_cancel" model="ir.ui.view">
+            <field name="name">account.invoice.cancel.form</field>
+            <field name="model">account.invoice.cancel</field>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+              <form string="Annulation de facture">
+                  <footer>
+                      <button name="invoice_cancel" string="Annuler" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Annuler" class="oe_link" special="cancel"/>
+                  </footer>
+             </form>
+            </field>
+        </record>
+ 
+        <record id="view_account_invoice_draft" model="ir.ui.view">
+            <field name="name">account.invoice.draft.form</field>
+            <field name="model">account.invoice.draft</field>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+              <form string="Remise à l'état brouillon">
+                  <footer>
+                      <button name="invoice_draft" string="Valider" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Annuler" class="oe_link" special="cancel"/>
+                  </footer>
+             </form>
+            </field>
+        </record>
+        
+        <record id="view_student_payslip_invoice" model="ir.ui.view">
+            <field name="name">student.payslip.invoice.form</field>
+            <field name="model">student.payslip.invoice</field>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+              <form string="Générer facture(s)">
+                  <footer>
+                      <button name="open_invoice" string="Générer" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Annuler" class="oe_link" special="cancel"/>
+                  </footer>
+             </form>
+            </field>
+        </record>
+
+        <record id="view_student_payslip_invoice_billable" model="ir.ui.view">
+            <field name="name">student.payslip.invoice.form2</field>
+            <field name="model">student.payslip.invoice</field>
+            <field name="priority" eval="2" />
+            <field name="arch" type="xml">
+              <form string="Rendre facturable les éléments sélectionnés">
+                  <footer>
+                      <button name="payslip_billable" string="Valider" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Annuler" class="oe_link" special="cancel"/>
+                  </footer>
+             </form>
+            </field>
+        </record>
+
+        <record id="view_student_payslip_confirm" model="ir.ui.view">
+            <field name="name">student.payslip.confirm.form</field>
+            <field name="model">student.payslip.confirm</field>
+            <field name="arch" type="xml">
+              <form>
+                  <footer>
+                      <button name="payslip_confirm" string="Valider" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Annuler" class="oe_link" special="cancel"/>
+                  </footer>
+             </form>
+            </field>
+        </record>
+
+        <act_window name="Générer facture(s)"
+            res_model="student.payslip.invoice"
+            src_model="student.payslip"
+            key2="client_action_multi"
+            multi="True"
+            view_mode="form"
+            view_type="form"
+            target="new"
+            id="action_student_payslip_invoice"/>
+            
+        <act_window name="Permettre la facturation"
+            res_model="student.payslip.invoice"
+            src_model="student.payslip"
+            key2="client_action_multi"
+            multi="True"
+            view_mode="form"
+            view_type="form"
+            view_id="view_student_payslip_invoice_billable"
+            target="new"
+            id="action_student_payslip_invoice_billable"/>
+
+        <act_window name="Confirmer les réceptions"
+            res_model="student.payslip.confirm"
+            src_model="student.payslip"
+            key2="client_action_multi"
+            multi="True"
+            view_mode="form"
+            view_type="form"
+            target="new"
+            id="action_student_payslip_confirm"/>
+            
+      <!-- Menu sur les factures -->      
+        <act_window name="Annuler les factures"
+            res_model="account.invoice.cancel"
+            src_model="account.invoice"
+            key2="client_action_multi"
+            multi="True"
+            view_mode="form"
+            view_type="form"
+            target="new"
+            id="action_account_invoice_cancel"/>
+
+        <act_window name="Remettre à l'état brouillon"
+            res_model="account.invoice.draft"
+            src_model="account.invoice"
+            key2="client_action_multi"
+            multi="True"
+            view_mode="form"
+            view_type="form"
+            target="new"
+            id="action_account_invoice_draft"/>
+            
+        <act_window name="Poster"
+            res_model="account.voucher.validate"
+            src_model="account.voucher"
+            key2="client_action_multi"
+            multi="True"
+            view_mode="form"
+            view_type="form"
+            target="new"
+            id="action_account_voucher_validate"/>
+    </data>
+</openerp>

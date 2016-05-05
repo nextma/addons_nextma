@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_monthly_fees" model="ir.ui.view">
+            <field name="name">student.monthly.fees.form</field>
+            <field name="model">student.monthly.fees</field>
+            <field name="arch" type="xml">
+                <form string="Génération des frais mensuels">
+                    <sheet>
+                        <group col="4" colspan="2">
+                            <field name="date"/>
+                            <field name="journal_id" widget="selection"/>
+                            <field name="period_id" widget="selection"/>
+                            <field name="student_fees_structure_id" />
+                            <field name="student_all" />
+                        </group>
+                    	<group>
+                    		<field name="student_ids" attrs="{'invisible':[('student_all','=',True)]}"/>
+                    	</group>
+                    <separator string="" colspan="4"/>
+                    </sheet>
+                    <footer>
+                        <group colspan="1">
+                       		 <button class="oe_highlight" string="Générer les frais" name="generate_fees" type="object"/>
+                             <button class="oe_link" special="cancel" string="Cancel"/>
+                        </group>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_monthly_fees" model="ir.actions.act_window">
+            <field name="name">Générer les frais mensuels</field>
+            <field name="res_model">student.monthly.fees</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+           <field name="view_id" ref="view_monthly_fees"/>
+            <field name="target">new</field>
+        </record>
+			
+		<menuitem icon="STOCK_INDENT" action="action_monthly_fees"
+            id="menu_monthly_fees_sub_form"
+            parent="school_fees.menu_fees" 
+            groups="school.group_school_administration"
+            />
+    </data>
+</openerp>
