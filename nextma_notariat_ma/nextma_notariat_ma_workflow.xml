@@ -1,0 +1,881 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data>
+
+
+<!-- REPERTOITRE -->
+		<record id="workflow_repertoire" model="workflow">
+			<field eval="1" name="on_create"/>
+			<field name="name">notariat.repertoire.basic</field>
+			<field name="osv">notariat.repertoire</field>
+		</record>
+
+		<record id="act_draft" model="workflow.activity">
+			<field name="kind">dummy</field>
+			<field name="name">draft</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_repertoire"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field eval="1" name="flow_start"/>
+		</record>
+
+
+		<record id="act_canceled" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">canceled</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_repertoire"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">rep_cancel()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+
+
+		<record id="act_repvalide" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">valide</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_repertoire"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">rep_valide()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+		<record id="act_reprepertoire" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">repertoire</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_repertoire"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">rep_repertorie()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+		<record id="trs_draft2valide" model="workflow.transition">
+			<field name="signal">button_valide</field>
+			<field name="act_from" ref="act_draft"/>
+			<field name="act_to" ref="act_repvalide"/>
+			<field name="condition">True</field>
+		</record>
+
+		<record id="trs_valide2repertoire" model="workflow.transition">
+			<field name="signal">button_repertoire</field>
+			<field name="act_from" ref="act_repvalide"/>
+			<field name="act_to" ref="act_reprepertoire"/>
+			<field name="condition">True</field>
+		</record>
+
+
+
+		<record id="trs_valide2canceled" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_repvalide"/>
+			<field name="act_to" ref="act_canceled"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2canceled" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_draft"/>
+			<field name="act_to" ref="act_canceled"/>
+			<field name="condition">True</field>
+		</record>
+
+
+<!-- WORKFLOW DOSSIER -->
+
+
+		<record id="workflow_dossier" model="workflow">
+			<field eval="1" name="on_create"/>
+			<field name="name">notariat.dossier.basic</field>
+			<field name="osv">notariat.dossier</field>
+		</record>
+
+
+		<record id="act_draft_dossier" model="workflow.activity">
+			<field name="kind">dummy</field>
+			<field name="name">draft</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_dossier"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">dos_draft()</field>
+			<field eval="1" name="flow_start"/>
+		</record>
+
+
+		<record id="act_canceled_dossier" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">canceled</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_dossier"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">dos_cancel()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="act_dospreparer" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">Prepare</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_dossier"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">dos_preparer()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="act_dosvalide" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">Valide</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_dossier"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">dos_valide()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="act_doscloture" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">Cloture</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_dossier"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">dos_cloture()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+
+		<record id="trs_valide2canceled_dossier" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_dosvalide"/>
+			<field name="act_to" ref="act_canceled_dossier"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2canceled_dossier" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_draft_dossier"/>
+			<field name="act_to" ref="act_canceled_dossier"/>
+			<field name="condition">True</field>
+		</record>
+		
+		<record id="trs_canceled2draft_dossier" model="workflow.transition">
+			<field name="signal">button_draft</field>
+			<field name="act_to" ref="act_draft_dossier"/>
+			<field name="act_from" ref="act_canceled_dossier"/>
+			<field name="condition">True</field>
+		</record>
+
+		<record id="trs_draft2prepare_dossier" model="workflow.transition">
+			<field name="signal">button_preparer</field>
+			<field name="act_from" ref="act_draft_dossier"/>
+			<field name="act_to" ref="act_dospreparer"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2valide_dossier" model="workflow.transition">
+			<field name="signal">button_valider</field>
+			<field name="act_from" ref="act_dospreparer"/>
+			<field name="act_to" ref="act_dosvalide"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_valide2cloture_dossier" model="workflow.transition">
+			<field name="signal">button_cloturer</field>
+			<field name="act_from" ref="act_dosvalide"/>
+			<field name="act_to" ref="act_doscloture"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_cloture2draft_dossier" model="workflow.transition">
+			<field name="signal">button_draft</field>
+			<field name="act_from" ref="act_doscloture"/>
+			<field name="act_to" ref="act_draft_dossier"/>
+			<field name="condition">True</field>
+		</record>
+
+
+
+<!-- WORKFLOW ENREGISTREMENT -->
+
+
+
+		<record id="workflow_enregistrement" model="workflow">
+			<field eval="1" name="on_create"/>
+			<field name="name">notariat.enregistrement.basic</field>
+			<field name="osv">notariat.enregistrement</field>
+		</record>
+
+
+		<record id="act_draft_enregistrement" model="workflow.activity">
+			<field name="kind">dummy</field>
+			<field name="name">draft</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_enregistrement"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field eval="1" name="flow_start"/>
+		</record>
+
+
+		<record id="act_canceled_enregistrement" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">canceled</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_enregistrement"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">eng_cancel()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="act_engvalide" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">Valide</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_enregistrement"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">eng_valide()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="trs_draft2canceled_enregistrement" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_draft_enregistrement"/>
+			<field name="act_to" ref="act_canceled_enregistrement"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2valide_enregistrement" model="workflow.transition">
+			<field name="signal">button_valider</field>
+			<field name="act_from" ref="act_draft_enregistrement"/>
+			<field name="act_to" ref="act_engvalide"/>
+			<field name="condition">True</field>
+		</record>
+
+
+
+<!-- WORKFLOW DEPOT ENREGISTREMENT -->
+
+
+
+		<record id="workflow_depot_enregistrement" model="workflow">
+			<field eval="1" name="on_create"/>
+			<field name="name">depot.enregistrement.basic</field>
+			<field name="osv">depot.enregistrement</field>
+		</record>
+
+
+		<record id="act_draft_depot_enregistrement" model="workflow.activity">
+			<field name="kind">dummy</field>
+			<field name="name">draft</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_depot_enregistrement"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field eval="1" name="flow_start"/>
+		</record>
+
+
+		<record id="act_canceled_depot_enregistrement" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">canceled</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_depot_enregistrement"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">depot_cancel()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="act_depotvalide" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">Valide</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_depot_enregistrement"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">depot_valide()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="trs_draft2canceled_depot_enregistrement" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_draft_depot_enregistrement"/>
+			<field name="act_to" ref="act_canceled_depot_enregistrement"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2valide_depot_enregistrement" model="workflow.transition">
+			<field name="signal">button_valider</field>
+			<field name="act_from" ref="act_draft_depot_enregistrement"/>
+			<field name="act_to" ref="act_depotvalide"/>
+			<field name="condition">True</field>
+		</record>
+
+
+
+
+<!-- WORKFLOW QUITUS -->
+
+
+
+		<record id="workflow_quitus" model="workflow">
+			<field eval="1" name="on_create"/>
+			<field name="name">notariat.quitus.basic</field>
+			<field name="osv">notariat.quitus</field>
+		</record>
+
+
+		<record id="act_draft_quitus" model="workflow.activity">
+			<field name="kind">dummy</field>
+			<field name="name">draft</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_quitus"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field eval="1" name="flow_start"/>
+		</record>
+
+
+		<record id="act_canceled_quitus" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">canceled</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_quitus"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">quitus_cancel()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="act_quitusvalide" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">Valide</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_quitus"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">quitus_valide()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="trs_draft2canceled_quitus" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_draft_quitus"/>
+			<field name="act_to" ref="act_canceled_quitus"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2valide_quitus" model="workflow.transition">
+			<field name="signal">button_valider</field>
+			<field name="act_from" ref="act_draft_quitus"/>
+			<field name="act_to" ref="act_quitusvalide"/>
+			<field name="condition">True</field>
+		</record>
+
+
+<!-- WORKFLOW CONSERVATION -->
+
+
+
+		<record id="workflow_conservation" model="workflow">
+			<field eval="1" name="on_create"/>
+			<field name="name">notariat.conservation.basic</field>
+			<field name="osv">conservation.fonciere</field>
+		</record>
+
+
+		<record id="act_draft_conservation" model="workflow.activity">
+			<field name="kind">dummy</field>
+			<field name="name">draft</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_conservation"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field eval="1" name="flow_start"/>
+		</record>
+
+
+		<record id="act_canceled_conservation" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">canceled</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_conservation"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">conservation_cancel()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="act_conservationvalide" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">Valide</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_conservation"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">conservation_valide()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="trs_draft2canceled_conservation_" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_draft_conservation"/>
+			<field name="act_to" ref="act_canceled_conservation"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2valide_conservation_" model="workflow.transition">
+			<field name="signal">button_valider</field>
+			<field name="act_from" ref="act_draft_conservation"/>
+			<field name="act_to" ref="act_conservationvalide"/>
+			<field name="condition">True</field>
+		</record>
+
+<!-- WORKFLOW CERTIFICATION DE PROPRIETE-->
+
+
+
+		<record id="workflow_propriete" model="workflow">
+			<field eval="1" name="on_create"/>
+			<field name="name">notariat.propriete.basic</field>
+			<field name="osv">notariat.propriete</field>
+		</record>
+
+
+		<record id="act_draft_propriete" model="workflow.activity">
+			<field name="kind">dummy</field>
+			<field name="name">draft</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_propriete"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field eval="1" name="flow_start"/>
+		</record>
+
+
+		<record id="act_canceled_propriete" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">canceled</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_propriete"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">propriete_cancel()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="act_proprietevalide" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">Valide</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_propriete"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">propriete_valide()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="trs_draft2canceled_propriete" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_draft_propriete"/>
+			<field name="act_to" ref="act_canceled_propriete"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2valide_propriete" model="workflow.transition">
+			<field name="signal">button_valider</field>
+			<field name="act_from" ref="act_draft_propriete"/>
+			<field name="act_to" ref="act_proprietevalide"/>
+			<field name="condition">True</field>
+		</record>
+
+
+
+<!-- WORKFLOW IMPOT TPI-->
+
+
+
+		<record id="workflow_tpi" model="workflow">
+			<field eval="1" name="on_create"/>
+			<field name="name">impot.tpi.basic</field>
+			<field name="osv">impot.tpi</field>
+		</record>
+
+
+		<record id="act_draft_tpi" model="workflow.activity">
+			<field name="kind">dummy</field>
+			<field name="name">draft</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_tpi"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field eval="1" name="flow_start"/>
+		</record>
+
+
+		<record id="act_canceled_tpi" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">canceled</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_tpi"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">tpi_cancel()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="act_tpivalide" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">Valide</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_tpi"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">tpi_valide()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="trs_draft2canceled_tpi" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_draft_tpi"/>
+			<field name="act_to" ref="act_canceled_tpi"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2valide_tpi" model="workflow.transition">
+			<field name="signal">button_valider</field>
+			<field name="act_from" ref="act_draft_tpi"/>
+			<field name="act_to" ref="act_tpivalide"/>
+			<field name="condition">True</field>
+		</record>
+
+
+
+
+<!-- WORKFLOW IMPOT TE-->
+
+
+
+		<record id="workflow_te" model="workflow">
+			<field eval="1" name="on_create"/>
+			<field name="name">impot.te.basic</field>
+			<field name="osv">impot.te</field>
+		</record>
+
+
+		<record id="act_draft_te" model="workflow.activity">
+			<field name="kind">dummy</field>
+			<field name="name">draft</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_te"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field eval="1" name="flow_start"/>
+		</record>
+
+
+		<record id="act_canceled_te" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">canceled</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_te"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">te_cancel()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="act_tevalide" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">Valide</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_te"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">te_valide()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="trs_draft2canceled_te" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_draft_te"/>
+			<field name="act_to" ref="act_canceled_te"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2valide_te" model="workflow.transition">
+			<field name="signal">button_valider</field>
+			<field name="act_from" ref="act_draft_te"/>
+			<field name="act_to" ref="act_tevalide"/>
+			<field name="condition">True</field>
+		</record>
+
+
+
+
+<!-- WORKFLOW IMPOT TNB-->
+
+
+
+		<record id="workflow_tnb" model="workflow">
+			<field eval="1" name="on_create"/>
+			<field name="name">impot.tnb.basic</field>
+			<field name="osv">impot.tnb</field>
+		</record>
+
+
+		<record id="act_draft_tnb" model="workflow.activity">
+			<field name="kind">dummy</field>
+			<field name="name">draft</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_tnb"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field eval="1" name="flow_start"/>
+		</record>
+
+
+		<record id="act_canceled_tnb" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">canceled</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_tnb"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">tnb_cancel()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="act_tnbvalide" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">Valide</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_tnb"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">tnb_valide()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="trs_draft2canceled_tnb" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_draft_tnb"/>
+			<field name="act_to" ref="act_canceled_tnb"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2valide_tnb" model="workflow.transition">
+			<field name="signal">button_valider</field>
+			<field name="act_from" ref="act_draft_tnb"/>
+			<field name="act_to" ref="act_tnbvalide"/>
+			<field name="condition">True</field>
+		</record>
+
+
+
+
+
+<!-- WORKFLOW SUIVI BANQUE-->
+
+
+
+		<record id="workflow_banque" model="workflow">
+			<field eval="1" name="on_create"/>
+			<field name="name">notariat.banque.basic</field>
+			<field name="osv">notariat.banque</field>
+		</record>
+
+
+		<record id="act_draft_banque" model="workflow.activity">
+			<field name="kind">dummy</field>
+			<field name="name">draft</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_banque"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field eval="1" name="flow_start"/>
+		</record>
+
+
+		<record id="act_canceled_banque" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">canceled</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_banque"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">banque_cancel()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="act_banquevalide" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">Valide</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_banque"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">banque_valide()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="trs_draft2canceled_banque" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_draft_banque"/>
+			<field name="act_to" ref="act_canceled_banque"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2valide_banque" model="workflow.transition">
+			<field name="signal">button_valider</field>
+			<field name="act_from" ref="act_draft_banque"/>
+			<field name="act_to" ref="act_banquevalide"/>
+			<field name="condition">True</field>
+		</record>
+
+
+
+<!-- WORKFLOW TRAVAIL EFFECTUE-->
+
+		<record id="workflow_travail_effectue" model="workflow">
+			<field eval="1" name="on_create"/>
+			<field name="name">travail.effectue.basic</field>
+			<field name="osv">travail.effectue</field>
+		</record>
+
+		<record id="act_draft_travail_effectue" model="workflow.activity">
+			<field name="kind">dummy</field>
+			<field name="name">draft</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_travail_effectue"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field eval="1" name="flow_start"/>
+		</record>
+
+		<record id="act_canceled_travail_effectue" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">canceled</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_travail_effectue"/>
+			<field eval="1" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">travail_effectue_cancel()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+		<record id="act_envoye_travail_effectue" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">envoye</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_travail_effectue"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">travail_effectue_envoye()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+		<record id="act_execute_travail_effectue" model="workflow.activity">
+			<field name="kind">function</field>
+			<field name="name">execute</field>
+			<field name="join_mode">XOR</field>
+			<field name="wkf_id" ref="workflow_travail_effectue"/>
+			<field eval="0" name="flow_stop"/>
+			<field name="split_mode">XOR</field>
+			<field name="action">travail_effectue_execute()</field>
+			<field eval="0" name="flow_start"/>
+		</record>
+
+
+		<record id="trs_draft2envoye_travail_effectue" model="workflow.transition">
+			<field name="signal">button_envoyer</field>
+			<field name="act_from" ref="act_draft_travail_effectue"/>
+			<field name="act_to" ref="act_envoye_travail_effectue"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_envoye2execute_travail_effectue" model="workflow.transition">
+			<field name="signal">button_executer</field>
+			<field name="act_from" ref="act_envoye_travail_effectue"/>
+			<field name="act_to" ref="act_execute_travail_effectue"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_envoye2cancel_travail_effectue" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_envoye_travail_effectue"/>
+			<field name="act_to" ref="act_canceled_travail_effectue"/>
+			<field name="condition">True</field>
+		</record>
+
+
+		<record id="trs_draft2cancel_travail_effectue" model="workflow.transition">
+			<field name="signal">button_cancel</field>
+			<field name="act_from" ref="act_draft_travail_effectue"/>
+			<field name="act_to" ref="act_canceled_travail_effectue"/>
+			<field name="condition">True</field>
+		</record>
+
+
+
+
+
+
+
+
+
+
+		
+	</data>
+</openerp>

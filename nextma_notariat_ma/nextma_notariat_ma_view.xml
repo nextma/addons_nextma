@@ -1,0 +1,3420 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+	
+
+
+
+<!-- CLIENT -->
+
+	<record id="res_partner_inherit_notariat_search" model="ir.ui.view">
+		<field name="name">Client</field>
+		<field name="model">res.partner</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Clients">
+				<field name="code_client"/>
+				<field name="name"/>
+				<field name="complete_name"/>
+				<field name="first_name"/>
+				<field name="patente_societe"/>
+				<field name="cin"/>
+				<filter icon="terp-mail-message-new" string="Particuliers" name="particuliers" domain="[('type_client','=','particuliers')]"/>
+				<filter icon="terp-mail-message-new" string="Promotteurs" name="promotteur" domain="[('type_client','=','promotteur')]"/>
+				<filter icon="terp-mail-message-new" string="Société" name="societe" domain="[('type_client','=','societe')]"/>
+				<filter icon="terp-mail-message-new" string="Administration" name="administration" domain="[('type_client','=','administration')]"/>
+				<filter icon="terp-mail-message-new" string="Banque" name="banque" domain="[('type_client','=','banque')]"/>
+
+
+				<separator/>
+				<group expand="0" string="Group By...">
+					<filter string="Type Client" icon="terp-partner" domain="[]" context="{'group_by':'type_client'}"/>
+					<filter string="Utilisateur" icon="terp-partner" domain="[]" context="{'group_by':'user_id'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+
+    <record model="ir.ui.view" id="res_partner_inherit_notariat_form">
+        <field name="name">Partnenaire</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+            <data>
+
+                <xpath expr="//field[@name='image']" position="before">
+                    <field name="type_client" required="1" col="2"/>
+                </xpath>
+
+                <xpath expr="//field[@name='name']" position="before">
+		    		<h4>Code client</h4>
+                    <field name="code_client" readonly="1"/>
+		    		<h4 attrs="{'invisible': ['|', ('type_client','!=','particuliers')], 'required': ['|', ('type_client','=','particuliers')]}">CIN</h4>
+
+                    <field name="cin" select="1" placeholder="CIN" attrs="{'invisible': ['|', ('type_client','!=','particuliers')], 'required': ['|', ('type_client','=','particuliers')]}"/>
+
+		    		<h4 attrs="{'invisible': ['|', ('type_client','!=','particuliers')], 'required': ['|', ('type_client','=','particuliers')]}">Date de validité CIN</h4>
+
+                    <field name="civilite_client" placeholder="Civilité" select="1" attrs="{'invisible': ['|', ('type_client','!=','particuliers')], 'required': ['|', ('type_client','=','particuliers')]}" on_change="onchange_civilite(civilite_client)"/>
+                    <field name="civilite_client_arab" placeholder="اللقب المدني" select="1" attrs="{'invisible': ['|', ('type_client','!=','particuliers')], 'required': ['|', ('type_client','=','particuliers')]}" on_change="onchange_civilite_arab(civilite_client_arab)"/>
+                    <field name="first_name" string="Prénom" placeholder="Prénom" attrs="{'invisible': ['|', ('type_client','!=','particuliers')], 'required': ['|', ('type_client','=','particuliers')]}"/>
+                    <field name="first_name_arabic" placeholder="الإسم الشخصي"  attrs="{'invisible': ['|', ('type_client','!=','particuliers')], 'required': ['|', ('type_client','=','particuliers')]}"/>
+		    		<h4> Nom / Raison sociale </h4>
+                    <field name="complete_name"/>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+		    		<h4> اسم الشركة/الإسم العائلي </h4>
+		    		<field name="name_arabic" select="1" required="1"/>
+                </xpath>
+                <xpath expr="//field[@name='website']" position="after">
+                    <field name="user_creation_id" readonly="1" string="Utilisateur"/>
+                </xpath>
+                <xpath expr="//field[@name='title']" position="replace">
+                    <field name="date_creation_client" select="1"/>
+                </xpath>
+                <xpath expr="//field[@name='function']" position="replace">
+                    <field name="function" attrs="{'invisible': ['|', ('type_client','!=','particuliers')]}"/>
+                </xpath>
+                <group>
+
+
+
+
+
+                    <field name="nom_pere" select="1" string="Nom père" attrs="{'invisible': ['|', ('type_client','!=','particuliers')]}"/>
+                    <field name="nom_mere" select="1" string="Nom mère" attrs="{'invisible': ['|', ('type_client','!=','particuliers')]}"/>
+                    <field name="statut_marital" select="1" attrs="{'invisible': ['|', ('type_client','!=','particuliers')]}"/>
+                    <field name="nom_epoux"  attrs="{'invisible': ['|', ('type_client','!=','particuliers'),('statut_marital','!=','marie')], 'required': [('type_client','=','particuliers'),('statut_marital','=','marie')]}"/>
+                    <field name="date_mariage" select="1"  attrs="{'invisible': ['|', ('type_client','!=','particuliers'),('statut_marital','!=','marie')], 'required': [ ('type_client','=','particuliers'),('statut_marital','=','marie')]}" />
+	
+                    <field name="lieu_naissance" select="1" attrs="{'invisible': ['|', ('type_client','!=','particuliers')]}"/>
+                    <field name="date_naissance" select="1" attrs="{'invisible': ['|', ('type_client','!=','particuliers')]}"/>
+
+
+
+
+
+
+
+                </group>
+
+                <group>
+				<field name="patente_societe" attrs="{'invisible': ['|', ('type_client','!=','societe')]}"/>
+				<field name="if_societe" attrs="{'invisible': ['|', ('type_client','!=','societe')]}"/>
+				<field name="cnss_societe" attrs="{'invisible': ['|', ('type_client','!=','societe')]}"/>
+				<field name="rc_societe" attrs="{'invisible': ['|', ('type_client','!=','societe')]}"/>
+				<field name="gerant_societe" attrs="{'invisible': ['|', ('type_client','!=','societe')]}"/>
+                </group>
+
+                <group>
+				<field name="patente_promotteur" attrs="{'invisible': ['|', ('type_client','!=','promotteur')]}" colspan="4"/>
+
+                </group>
+
+                <group>
+				<field name="representant_administration" attrs="{'invisible': ['|', ('type_client','!=','administration')]}"/>
+
+                </group>
+
+                <group>
+
+
+                </group>
+
+                <xpath expr="//field[@name='phone']" position="replace">
+                    <field name="phone" required="1"/>
+
+	
+
+                </xpath>
+
+
+				<page string="Internal Notes" position="after">
+				        <page string="Biens liés">
+		        			<field name="proprietes_id" nolabel="1">
+							<tree string="Propriété" editable="bottom">
+								<field name="bien_id" select="1" required="1"/>
+
+
+	
+							</tree>
+		        			</field>
+
+
+		        	        </page>
+				</page>
+
+            </data>
+            </field>
+
+    </record>
+
+
+
+
+
+	<record model="ir.ui.view" id="res_partner_inherit_notariat_tree">
+		<field name="name">Partenaire</field>
+		<field name="model">res.partner</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Partenaire" colors="blue:type_client=='societe';orange:type_client=='promotteur';green:type_client=='administration';black:type_client=='particuliers';red:type_client=='banque'">
+				<field name="cin" select="1"/>
+				<field name="rc_societe" select="1"/>
+				<field name="complete_name" select="1"/>
+				<field name="comment" select="1" string="Observation"/>
+				<field name="nom_pere" select="1"/>
+				<field name="nom_mere" select="1"/>
+				<field name="phone" select="1"/>
+				<field name="mobile" select="1"/>
+				<field name="type_client" select="1"/>
+				<field name="user_id" select="1" string="Utilisateur"/>
+				<field name="date_creation_client" select="1"/>
+			</tree>
+		</field>
+	</record>
+
+
+
+
+	<record model="ir.actions.act_window" id="res_partner_inherit_notariat_action">
+		<field name="name">Partenaire</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">res.partner</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="res_partner_inherit_notariat_tree"/>
+		<field name="search_view_id" ref="res_partner_inherit_notariat_search"/>
+	</record>
+
+
+
+	
+
+
+<!-- APPEL CLIENT ENTRANTS-->
+
+
+	<record id="view_appel_client_entrant_filter" model="ir.ui.view">
+		<field name="name">Appel entrant</field>
+		<field name="model">appel.entrant</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Appel client entrant">
+				<field name="objet_appel"/>
+				<field name="date_appel"/>
+				<field name="client_id"/>
+				<field name="user_id"/>
+				<field name="dossier_id"/>
+				<field name="numero_telephone"/>
+				<field name="personne_appelee"/>
+                <filter name="today" icon="terp-go-today" domain="[('date_appel', '&lt;=', time.strftime('%%Y-%%m-%%d 23:59:59')),('date_appel', '&gt;=', time.strftime('%%Y-%%m-%%d 00:00:01'))]" string="Aujourd'hui"/>
+				<field name="date_appel" string="De" filter_domain="[('date_appel','&gt;=',self)]" />
+				<field name="date_appel"  string="A" filter_domain="[('date_appel','&lt;=',self)]" />
+
+				<separator/>
+				<group expand="0" string="Group By...">
+					<filter string="Client" icon="terp-partner" domain="[]" context="{'group_by':'client_id'}"/>
+					<filter string="Utilisateur" icon="terp-partner" domain="[]" context="{'group_by':'user_id'}"/>
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Date appel" icon="terp-partner" domain="[]" context="{'group_by':'date_appel'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+
+
+	<record model="ir.ui.view" id="notariat_appel_client_entrant_form">
+		<field name="name">Appel client entrant</field>
+		<field name="model">appel.entrant</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Appel client entrant">
+				<group>
+					<field name="date_appel" select="1"/>
+					<field name="objet_appel" select="1"/>
+					<field name="dossier_id" select="1"/> 
+					<field name="user_id" select="1"/>
+					<field name="client_id" select="1"/>
+					<field name="personne_appelee" select="1"/>
+					<field name="numero_telephone" select="1"/>
+				</group>
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="notariat_appel_client_entrant_tree">
+		<field name="name">Appel client entrant</field>
+		<field name="model">appel.entrant</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Appel client entrant" editable="bottom">
+				<field name="date_appel" select="1"/>
+				<field name="objet_appel" select="1"/>
+				<field name="dossier_id" select="1"/> 
+				<field name="user_id" select="1"/>
+				<field name="client_id" select="1"/>
+				<field name="personne_appelee" select="1"/>
+				<field name="numero_telephone" select="1"/>
+				<field name="observation" select="1"/>
+
+
+														
+						
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="appel_client_entrant_action">
+		<field name="name">Appel client entrant</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">appel.entrant</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'search_default_today':1}</field>
+	</record>
+
+	
+
+
+
+
+
+<!-- APPEL CLIENT SORTANT  -->
+
+
+
+	<record id="view_appel_client_sortant_filter" model="ir.ui.view">
+		<field name="name">Appel sortant</field>
+		<field name="model">appel.sortant</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Appel client sortant">
+				<field name="objet_appel"/>
+				<field name="date_appel"/>
+				<field name="client_id"/>
+				<field name="user_id"/>
+				<field name="dossier_id"/>
+				<field name="personne_appelee"/>
+				<field name="numero_telephone"/>
+               <filter name="today" icon="terp-go-today" domain="[('date_appel', '&lt;=', time.strftime('%%Y-%%m-%%d 23:59:59')),('date_appel', '&gt;=', time.strftime('%%Y-%%m-%%d 00:00:01'))]" string="Aujourd'hui"/>
+				<field name="date_appel" string="De" filter_domain="[('date_appel','&gt;=',self)]" />
+				<field name="date_appel"  string="A" filter_domain="[('date_appel','&lt;=',self)]" />
+				<group expand="0" string="Group By...">
+					<filter string="Client" icon="terp-partner" domain="[]" context="{'group_by':'client_id'}"/>
+					<filter string="Utilisateur" icon="terp-partner" domain="[]" context="{'group_by':'user_id'}"/>
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Date appel" icon="terp-partner" domain="[]" context="{'group_by':'date_appel'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+
+
+	<record model="ir.ui.view" id="notariat_appel_sortant_form">
+		<field name="name">Appel client sortant</field>
+		<field name="model">appel.sortant</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Appel client sortant">
+				<group>
+				<field name="date_appel" select="1"/>
+				<field name="objet_appel" select="1"/>
+				<field name="dossier_id" select="1"/> 
+				<field name="user_id" select="1"/>
+				<field name="client_id" select="1"/>
+				<field name="personne_appelee" select="1"/>
+				<field name="numero_telephone" select="1"/>
+				</group>																
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="notariat_appel_client_sortant_tree">
+		<field name="name">Appel client sortant</field>
+		<field name="model">appel.sortant</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Appel client sortant" editable="bottom">
+				<field name="date_appel" select="1"/>
+				<field name="objet_appel" select="1"/>
+				<field name="dossier_id" select="1"/> 
+				<field name="user_id" select="1"/>
+				<field name="client_id" select="1"/>
+				<field name="personne_appelee" select="1"/>
+				<field name="numero_telephone" select="1"/>
+				<field name="observation" select="1"/>
+
+														
+						
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="appel_client_sortant_action">
+		<field name="name">Appel client sortant</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">appel.sortant</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'search_default_today':1}</field>
+	</record>
+
+	
+
+
+<!-- VISITE CLIENT -->
+
+
+	<record id="view_visite_client_filter" model="ir.ui.view">
+		<field name="name">Visite client</field>
+		<field name="model">visite.client</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Visite Clients">
+				<field name="objet"/>
+				<field name="dossier_id"/>
+				<field name="client_id"/>
+				<field name="date_visite_func"/>
+				<field name="date_sortie_func"/>
+				
+				<filter icon="terp-mail-message-new" string="Visite en cours" name="visite_en_cours" domain="[('date_sortie','=',False)]"/>
+                <filter name="today" icon="terp-go-today" domain="[('date_visite', '&lt;=', time.strftime('%%Y-%%m-%%d 23:59:59')),('date_visite', '&gt;=', time.strftime('%%Y-%%m-%%d 00:00:01'))]" string="Aujourd'hui"/>
+				<field name="date_visite" string="De" filter_domain="[('date_visite','&gt;=',self)]" />
+				<field name="date_visite"  string="A" filter_domain="[('date_visite','&lt;=',self)]" />
+				<separator/>
+				<group expand="0" string="Group By...">
+					<filter string="Client" icon="terp-partner" domain="[]" context="{'group_by':'client_id'}"/>
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Date visite" icon="terp-partner" domain="[]" context="{'group_by':'date_visite'}"/>
+					<filter string="Date sortie" icon="terp-partner" domain="[]" context="{'group_by':'date_sortie'}"/>
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="notariat_visite_client_form">
+		<field name="name">Visite client</field>
+		<field name="model">visite.client</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Visite client">
+				<group>
+				<field name="date_visite" select="1" on_change="onchange_date_from(date_sortie, date_visite)"/>
+				<field name="client_id" select="1"/>
+				<field name="objet" select="1"/>
+				<field name="user_id" select="1"/>
+				<field name="dossier_id" select="1"/>  
+				<field name="date_sortie" select="1" on_change="onchange_date_to(date_sortie, date_visite)"/>
+				<field name="number_of_min_temp"/>
+				</group>																
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="notariat_visite_client_tree">
+		<field name="name">Visite client</field>
+		<field name="model">visite.client</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Visite client" editable="bottom" colors="red:date_sortie == False" >
+				<field name="date_visite" select="1" on_change="onchange_date_from(date_sortie, date_visite)"/>
+				<field name="client_id" select="1"/>
+				<field name="objet" select="1"/>
+				<field name="user_id" select="1"/>
+				<field name="dossier_id" select="1"/> 
+				<field name="date_sortie" select="1" on_change="onchange_date_to(date_sortie, date_visite)"/>
+				<field name="number_of_min_temp"/>
+
+								
+						
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="visite_client_action">
+		<field name="name">Visite client</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">visite.client</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'search_default_visite_en_cours':1}</field>
+	</record>
+
+	
+<!-- Travail EFFECTUE -->
+
+
+	<record id="notariat_travail_filter" model="ir.ui.view">
+		<field name="name">Travaux</field>
+		<field name="model">travail.effectue</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Travaux">
+				<field name="name" select="1"/>
+				<field name="libelle_travail" select="1"/>
+				<field name="dossier_id" select="1"/>
+				<field name="demandeur_id" select="1"/>
+				<field name="executeur_id" select="1"/>
+				<field name="date_demande" select="1"/>
+				<field name="date_realisation" select="1"/>
+				<field name="observation" select="1"/>
+
+				<filter icon="terp-mail-message-new" string="Travaux en attente" name="realisation_en_cours" domain="[('date_realisation','=',False)]"/>
+                        	<filter name="today" icon="terp-go-today" domain="[('date_demande', '&lt;=', time.strftime('%%Y-%%m-%%d 23:59:59')),('date_demande', '&gt;=', time.strftime('%%Y-%%m-%%d 00:00:01'))]" string=" Demande d'Aujourd'hui"/>
+				<separator/>
+				<group expand="0" string="Group By...">
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Demandeur" icon="terp-partner" domain="[]" context="{'group_by':'demandeur_id'}"/>
+					<filter string="Exécuteur" icon="terp-partner" domain="[]" context="{'group_by':'executeur_id'}"/>
+					<filter string="date_demande" icon="terp-partner" domain="[]" context="{'group_by':'date_demande'}"/>
+					<filter string="date_realisation" icon="terp-partner" domain="[]" context="{'group_by':'date_realisation'}"/>
+					<filter string="Libellé travail" icon="terp-partner" domain="[]" context="{'group_by':'libelle_travail'}"/>
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="notariat_travail_form">
+		<field name="name">Travaux</field>
+		<field name="model">travail.effectue</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Travaux effectués">
+				<group>
+				<field name="name" select="1"/>
+				<field name="libelle_travail" select="1"/>
+				<field name="dossier_id" select="1"/>
+				<field name="demandeur_id" select="1"/>
+				<field name="executeur_id" select="1"/>
+				<field name="date_demande" select="1"/>
+				<field name="date_realisation" select="1"/>
+				<field name="observation" select="1"/>
+				</group>
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="notariat_travail_tree">
+		<field name="name">Travaux</field>
+		<field name="model">travail.effectue</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Travaux effectués" editable="bottom" colors="red:date_realisation== False ">
+				<field name="name" select="1" readonly="1"/>
+				<field name="libelle_travail" select="1"/>
+				<field name="dossier_id" select="1"/>
+				<field name="demandeur_id" select="1"/>
+				<field name="executeur_id" select="1"/>
+				<field name="date_demande" select="1"/>
+				<field name="date_realisation" select="1"/>
+				<field name="observation" select="1"/>
+				<field name="state" select="1" readonly="1"/>
+		            <button name="button_envoyer" states="draft" string="Envoyer" icon="STOCK_OK"/>
+		            <button name="button_executer" states="envoye" string="Exécuter" icon="STOCK_APPLY"/>
+		            <button name="button_cancel" states="draft,envoye" string="Annuler" icon="STOCK_CANCEL" />
+
+
+																				
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_travail_action">
+		<field name="name">Travaux</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">travail.effectue</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	
+
+
+
+<!--LIBELLE TRAVAIL EFFECTUE -->
+
+	<record id="libelle_travail_search" model="ir.ui.view">
+		<field name="name">Libellé travail</field>
+		<field name="model">libelle.travail</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Libellé travail">
+				<field name="name"/>
+				<field name="code"/>
+
+
+			</search>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="libelle_travail_form">
+		<field name="name">Libellé travail</field>
+		<field name="model">libelle.travail</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Libellé travail">
+				<group>
+				<field name="code" select="1"/>
+				<field name="name" select="1"/>	
+				</group>	
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="libelle_travail_tree">
+		<field name="name">Libellé travail</field>
+		<field name="model">libelle.travail</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Libellé travail" editable="bottom">
+				<field name="code" select="1"/>
+				<field name="name" select="1"/>		
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="libelle_travail_action">
+		<field name="name">Libellé travail</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">libelle.travail</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	
+<!-- RAYON -->
+
+
+	<record id="notariat_rayon_search" model="ir.ui.view">
+		<field name="name">Rayon</field>
+		<field name="model">notariat.rayon</field>
+		<field name="arch" type="xml">
+			<search string="Recherche RAYON">
+				<field name="name"/>
+				<field name="code"/>
+
+			</search>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="notariat_rayon_form">
+		<field name="name">Rayon</field>
+		<field name="model">notariat.rayon</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Rayon">
+				<group>
+				<field name="code" select="1"/>
+				<field name="name" select="1"/>		
+				</group>
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="notariat_rayon_tree">
+		<field name="name">Rayon</field>
+		<field name="model">notariat.rayon</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Rayon" editable="bottom">
+				<field name="code" select="1"/>
+				<field name="name" select="1"/>		
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_rayon_action">
+		<field name="name">Rayon</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.rayon</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	
+
+<!-- TYPE AFFAIRE -->
+
+	<record model="ir.ui.view" id="notariat_affaire_form">
+		<field name="name">Type affaire</field>
+		<field name="model">notariat.affaire</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Type affaire" version="7.0">
+				<sheet string="Type affaire">
+                     	<group col="4" colspan="2">
+				<field name="code" select="1"/>
+				<field name="name" select="1"/>
+			<notebook colspan="4">
+		               <page string="Parties">
+                			<field name="ligne_affaire_id" nolabel="1">
+                                		<tree string="Parties" editable="bottom" nolabel="1">
+                                    			<field name="partie_id" on_change="onchange_ligne_affaire_id(partie_id)" required="1"/>
+                                    			<field name="nom_partie" required="1"/>
+
+
+                                		</tree>
+                			</field>
+                	        </page>
+			</notebook>
+
+
+                   		</group>
+				</sheet>			
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="notariat_affaire_tree">
+		<field name="name">Type affaire</field>
+		<field name="model">notariat.affaire</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Type affaire">
+				<field name="code" select="1"/>
+				<field name="name" select="1"/>		
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_affaire_action">
+		<field name="name">Type affaire</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.affaire</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	
+
+<!-- UNITE DE MESURE BIEN -->
+
+
+
+
+	<record id="notariat_unite_search" model="ir.ui.view">
+		<field name="name">Unité de mesure</field>
+		<field name="model">notariat.unite</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Unité de mesure">
+				<field name="name"/>
+				<field name="code"/>
+
+			</search>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="notariat_unite_form">
+		<field name="name">Unité de mesure</field>
+		<field name="model">notariat.unite</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Unité de mesure">
+				<group>
+				<field name="code" select="1"/>
+				<field name="name" select="1"/>		
+				</group>
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="notariat_unite_tree">
+		<field name="name">Unité de mesure</field>
+		<field name="model">notariat.unite</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Unité de mesure" editable="bottom">
+				<field name="code" select="1" required="1"/>
+				<field name="name" select="1" required="1"/>		
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_unite_action">
+		<field name="name">Unité de mesure</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.unite</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+
+
+
+
+<!-- DESIGNATION BIEN -->
+
+
+
+
+
+	<record model="ir.ui.view" id="designation_bien_form">
+		<field name="name">Désignation Bien</field>
+		<field name="model">designation.bien</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Désignation Bien">
+				<group>
+				<field name="code" select="1"/>
+				<field name="name" select="1"/>		
+				</group>
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="designation_bien_tree">
+		<field name="name">Désignation Bien</field>
+		<field name="model">designation.bien</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Désignation Bien" editable="bottom">
+				<field name="code" select="1" required="1"/>
+				<field name="name" select="1" required="1"/>		
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="designation_bien_action">
+		<field name="name">Désignation Bien</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">designation.bien</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+	
+
+<!-- VILLE -->
+
+
+
+
+	<record id="notariat_ville_search" model="ir.ui.view">
+		<field name="name">Ville</field>
+		<field name="model">notariat.ville</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Ville">
+				<field name="name"/>
+				<field name="name_ville"/>
+				<field name="pays_id"/>
+				<separator/>
+				<group expand="0" string="Group By...">
+					<filter string="Pays" icon="terp-partner" domain="[]" context="{'group_by':'pays_id'}"/>
+
+
+				</group>
+
+			</search>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="notariat_ville_form">
+		<field name="name">Ville</field>
+		<field name="model">notariat.ville</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Ville">
+				<group>
+				<field name="name" select="1" required="1"/>
+				<field name="name_ville" select="1" required="1"/>
+				<field name="pays_id" select="1" required="1"/>		
+				</group>
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="notariat_ville_tree">
+		<field name="name">Ville</field>
+		<field name="model">notariat.ville</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Ville" editable="bottom">
+				<field name="name" select="1" required="1"/>
+				<field name="name_ville" select="1" required="1"/>
+				<field name="pays_id" select="1" required="1"/>		
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_ville_action">
+		<field name="name">Ville</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.ville</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	
+
+
+
+<!-- PARTIE -->
+
+
+	<record id="notariat_partie_search" model="ir.ui.view">
+		<field name="name">Partie</field>
+		<field name="model">notariat.partie</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Partie">
+				<field name="name"/>
+				<field name="nom_partie"/>
+				<field name="code_partie"/>
+
+
+
+			</search>
+		</field>
+	</record>
+
+
+
+	<record model="ir.ui.view" id="notariat_partie_form">
+		<field name="name">Partie</field>
+		<field name="model">notariat.partie</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Partie">
+				<group>
+					<field name="name" select="1" required="1"/>						
+					<field name="nom_partie" select="1" required="1"/>
+					<field name="code_partie" select="1" required="1"/>
+				</group>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="notariat_partie_tree">
+		<field name="name">Partie</field>
+		<field name="model">notariat.partie</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Partie" editable="bottom">
+				<field name="name" select="1" required="1"/>								
+				<field name="nom_partie" select="1" required="1"/>
+				<field name="code_partie" select="1" required="1"/>
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_partie_action">
+		<field name="name">Partie</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.partie</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	
+
+
+<!-- LIEU CONSERVATION FONCIERE -->
+
+	<record id="lieu_conservation_search" model="ir.ui.view">
+		<field name="name">Lieu conservation</field>
+		<field name="model">lieu.conservation</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Lieu Conservation">
+				<field name="ville_id"/>
+				<field name="name"/>
+				<field name="region"/>
+				<separator/>
+				<group expand="0" string="Group By...">
+					<filter string="Ville" icon="terp-partner" domain="[]" context="{'group_by':'ville_id'}"/>
+
+
+				</group>
+
+			</search>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="lieu_conservation_form">
+		<field name="name">Lieu conservation</field>
+		<field name="model">lieu.conservation</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Lieu conservation">
+				<group>
+					<field name="ville_id" select="1" required="1"/>
+					<field name="name" select="1" required="1"/>
+					<field name="region" select="1" required="1"/>
+				</group>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="lieu_conservation_tree">
+		<field name="name">Lieu conservation</field>
+		<field name="model">lieu.conservation</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Lieu conservation" editable="bottom">
+				<field name="ville_id" select="1" required="1"/>
+				<field name="name" select="1" required="1"/>
+				<field name="region" select="1" required="1"/>
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="lieu_conservation_action">
+		<field name="name">Lieu conservation</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">lieu.conservation</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	
+
+<!-- BIENS -->
+
+	<record id="notariat_bien_search" model="ir.ui.view">
+		<field name="name">Biens</field>
+		<field name="model">notariat.bien</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Biens">
+					<field name="lieu_conservation"/>
+					<field name="name" select="1"/>
+					<field name="numero_ordre"/>
+					<field name="indice"/>
+					<field name="designation"/>
+					<field name="adresse"/>
+					<field name="ville"/>
+					<field name="pays"/>
+					<field name="description"/>
+					<field name="numero_lot"/>
+					<field name="etage"/>
+					<field name="superficie"/>
+					<field name="unite"/>
+					<field name="numero_tf_mere"/>
+					<field name="millieme"/>
+					<field name="fraction"/>
+					<field name="type_acte_id"/>
+					<field name="acquis_le"/>
+					<field name="enregistre_le"/>
+					<field name="reference"/>
+					<field name="user_id"/>
+					<field name="last_dossier"/>
+				<separator/>
+				<group expand="0" string="Group By...">
+					<filter string="Ville" icon="terp-partner" domain="[]" context="{'group_by':'ville'}"/>
+
+					<filter string="Pays" icon="terp-partner" domain="[]" context="{'group_by':'pays'}"/>
+					<filter string="Utilisateur" icon="terp-partner" domain="[]" context="{'group_by':'user_id'}"/>
+					<filter string="Unité" icon="terp-partner" domain="[]" context="{'group_by':'unite'}"/>
+					<filter string="Désignation Bien" icon="terp-partner" domain="[]" context="{'group_by':'designation'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="notariat_bien_form">
+		<field name="name">Biens</field>
+		<field name="model">notariat.bien</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Biens" version="7.0" >
+				<sheet string="Biens">
+
+				    <div class="oe_right oe_button_box">
+                       		 <button name="attachment_tree_view_bien" string="Documents" type="object"/>
+				    </div>
+                     	         <group col="4" colspan="2">
+					<field name="lieu_conservation" select="1"/>
+					<field name="name" select="1"/>
+					<field name="numero_ordre" select="1" required="1"/>
+					<field name="indice" select="1" required="1"/>
+					<field name="designation" select="1" required="1"/>
+					<field name="adresse" select="1"/>
+					<field name="ville" select="1"/>
+					<field name="pays" select="1"/>
+					<field name="description" select="1"/>
+					<field name="numero_lot" select="1" required="1"/>
+					<field name="etage" select="1"/>
+					<field name="superficie" select="1"/>
+					<field name="unite" select="1"/>
+					<field name="numero_tf_mere" select="1"/>
+					<field name="millieme" select="1"/>
+					<field name="fraction" select="1"/>
+					<field name="type_acte_id" select="1"/>
+					<field name="acquis_le" select="1"/>
+					<field name="enregistre_le" select="1"/>
+					<field name="reference" select="1"/>
+					<field name="user_id" select="1" readonly="1"/>
+
+                     	         </group>
+			<notebook colspan="4">
+
+		                <page string="Propriétaire">
+                			<field name="proprietes_id" nolabel="1" required="1">
+						<tree string="Propriété" editable="bottom">
+							<field name="client_id" select="1" required="1"/>
+							<field name="quote_part" select="1" required="1"/>
+
+
+	
+						</tree>
+                			</field>
+
+
+                	        </page>
+		                <page string="Consultations">
+                			<field name="consultations_id" nolabel="1">
+						<tree string="Consultations" editable="bottom">
+							<field name="date_consultation" select="1" required="1"/>
+							<field name="user_consultation_id" select="1" required="1"/>
+							<field name="file_id" select="1" required="1"/>
+	
+						</tree>
+                			</field>
+
+
+                	        </page>
+
+		                <page string="Historique des Dossiers">
+                			<field name="dossiers_ids" nolabel="1" readonly="1"/>
+
+                	        </page>
+			</notebook>
+
+				</sheet>
+
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="notariat_bien_tree">
+		<field name="name">Biens</field>
+		<field name="model">notariat.bien</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Biens">
+
+
+
+					<field name="lieu_conservation"/>
+					<field name="name"/>
+
+					<field name="numero_ordre"/>
+					<field name="indice"/>
+					<field name="designation"/>
+					<field name="adresse"/>
+					<field name="ville"/>
+					<field name="pays"/>
+					<field name="description"/>
+					<field name="numero_lot"/>
+					<field name="etage"/>
+					<field name="superficie"/>
+					<field name="unite"/>
+					<field name="numero_tf_mere"/>
+					<field name="millieme"/>
+					<field name="fraction"/>
+					<field name="type_acte_id"/>
+					<field name="acquis_le"/>
+					<field name="enregistre_le"/>
+					<field name="reference"/>
+					<field name="dv_enregistrement"/>
+					<field name="or_enregistrement"/>
+					<field name="re_enregistrement"/>
+					<field name="e17b_enregistrement"/>
+					<field name="user_id"/>
+					<field name="last_dossier" select="1"/>
+
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="notariat_bien_action">
+		<field name="name">Biens</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.bien</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	
+
+
+
+<!-- RAYONNAGE DOSSIERS -->
+
+
+	<record id="view_notariat_rayonnage_filter" model="ir.ui.view">
+		<field name="name">Rayonnage</field>
+		<field name="model">notariat.rayonnage</field>
+		<field name="arch" type="xml">
+			<search string="Recherche rayonnage">
+				<field name="dossier_id"/>
+				<field name="user_id"/>
+				<field name="rayon_id"/>
+				<field name="observation"/>
+				<field name="date_rayonnage"/>
+				<field name="repertoire_name"/>
+               <filter name="today" icon="terp-go-today" domain="[('date_rayonnage', '&lt;=', time.strftime('%%Y-%%m-%%d 23:59:59')),('date_rayonnage', '&gt;=', time.strftime('%%Y-%%m-%%d 00:00:01'))]" string="Aujourd'hui"/>
+				<field name="date_rayonnage" string="De" filter_domain="[('date_rayonnage','&gt;=',self)]" />
+				<field name="date_rayonnage"  string="A" filter_domain="[('date_rayonnage','&lt;=',self)]" />
+				<separator/>				
+				<group expand="0" string="Group By...">
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Utilisateur" icon="terp-partner" domain="[]" context="{'group_by':'user_id'}"/>
+					<filter string="Rayon" icon="terp-partner" domain="[]" context="{'group_by':'rayon_id'}"/>
+					<filter string="Date rayonnage" icon="terp-partner" domain="[]" context="{'group_by':'date_rayonnage'}"/>
+					
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+
+	<record model="ir.ui.view" id="notariat_rayonnage_form">
+		<field name="name">Rayonnage</field>
+		<field name="model">notariat.rayonnage</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Rayonnage">
+				<group>
+					<field name="date_rayonnage" select="1"/>
+					<field name="dossier_id" select="1"/>
+					<field name="rayon_id" select="1"/>
+					<field name="user_id" select="1"/>
+					<field name="observation" select="1"/>
+				</group>
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="notariat_rayonnage_tree">
+		<field name="name">Rayonnage</field>
+		<field name="model">notariat.rayonnage</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Rayonnage" editable="bottom">
+				<field name="date_rayonnage" select="1" required="1"/>
+				<field name="dossier_id" select="1" required="1"/>
+				<field name="repertoire_name" select="1"/>
+				<field name="rayon_id" select="1" required="1"/>
+				<field name="user_id" select="1" required="1"/>
+				<field name="observation" select="1"/>
+
+
+	
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_rayonnage_action">
+		<field name="name">Rayonnage</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.rayonnage</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	
+
+<!-- DOSSIERS -->
+
+
+
+	<record id="notariat_dossier_filter" model="ir.ui.view">
+		<field name="name">Dossier</field>
+		<field name="model">notariat.dossier</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Dossier">
+				<field name="name"/>
+				<field name="type_affaire_id"/>
+				<field name="rayon_id"/>
+				<field name="name_repertoire"/>
+				<field name="montant_transaction"/>
+				<field name="montant_vue"/>
+				<field name="date_creation_dossier"/>
+				<field name="observation"/>
+				<field name="partie1"/>
+				<field name="partie2"/>
+				<field name="partie3"/>
+				<field name="tf_objet"/>
+				<field name="lot_objet"/>
+				<field name="lieu_objet"/>									
+				<field name="user_id" string="User"/>
+				<field name="dernier_utilisateur" string="Dern. User" />
+				<field name="dernier_date_modification" string="Dern.Date"/>
+				<field name="state"/>
+
+				<field name="date_creation_dossier" string="De" filter_domain="[('date_creation_dossier','&gt;=',self)]" />
+				<field name="date_creation_dossier"  string="A" filter_domain="[('date_creation_dossier','&lt;=',self)]" />
+
+                        	<filter name="today" icon="terp-go-today" domain="[('date_creation_dossier', '&lt;=', time.strftime('%%Y-%%m-%%d 23:59:59')),('date_creation_dossier', '&gt;=', time.strftime('%%Y-%%m-%%d 00:00:01'))]" string="Dossier crée Aujourd'hui"/>
+                        	<filter name="today" icon="terp-go-today" domain="[('dernier_date_modification', '&lt;=', time.strftime('%%Y-%%m-%%d 23:59:59')),('dernier_date_modification', '&gt;=', time.strftime('%%Y-%%m-%%d 00:00:01'))]" string="Dossier modifié Aujourd'hui"/>
+				<separator/>	
+                        	<filter name="brouillon" icon="terp-go-today" domain="[('state', '=', 'draft')]" string="Brouillon"/>
+                        	<filter name="preparation" icon="terp-go-today" domain="[('state', '=', 'prepare')]" string="En préparation"/> 
+                        	<filter name="repertorie" icon="terp-go-today" domain="[('state', '=', 'Valide')]" string="Répertorié"/>
+                        	<filter name="Cloturé" icon="terp-go-today" domain="[('state', '=', 'cloture')]" string="Cloturé"/>
+                        	<filter name="Annulé" icon="terp-go-today" domain="[('state', '=', 'cancel')]" string="Annulé"/>
+			
+				<group expand="0" string="Group By...">
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'name'}"/>
+					<filter string="Affaire" icon="terp-partner" domain="[]" context="{'group_by':'type_affaire_id'}"/>
+					<filter string="Utilisateur" icon="terp-partner" domain="[]" context="{'group_by':'user_id'}"/>
+					<filter string="Rayon" icon="terp-partner" domain="[]" context="{'group_by':'rayon_id'}"/>
+					<filter string="Date création dossier" icon="terp-partner" domain="[]" context="{'group_by':'date_creation_dossier'}"/>
+
+					
+					<filter string="State" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+					<filter string="PARTIE 1" icon="terp-partner" domain="[]" context="{'group_by':'partie1'}"/>
+					<filter string="PARTIE 2" icon="terp-partner" domain="[]" context="{'group_by':'partie2'}"/>
+					<filter string="PARTIE 3" icon="terp-partner" domain="[]" context="{'group_by':'partie3'}"/>
+					<filter string="T.F" icon="terp-partner" domain="[]" context="{'group_by':'tf_objet'}"/>
+					<filter string="Lieu C.F" icon="terp-partner" domain="[]" context="{'group_by':'lieu_objet'}"/>
+					<filter string="Lôt" icon="terp-partner" domain="[]" context="{'group_by':'lot_objet'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+
+
+        <record id="act_task_all" model="ir.actions.act_window">
+            <field name="name">Tâches</field>
+            <field name="res_model">travail.effectue</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_dossier_id': [active_id], 'default_dossier_id': active_id}</field>
+
+        </record>
+
+
+        <record id="act_contrat_all" model="ir.actions.act_window">
+            <field name="name">Contrats</field>
+            <field name="res_model">notariat.repertoire</field>
+            <field name="view_mode">tree,form</field>
+		<field name="view_type">form</field>
+            <field name="context">{'search_default_dossier_id': [active_id], 'default_dossier_id': active_id,'search_default_brouillon':0, 'search_default_preparation':0}</field>
+
+        </record>
+
+
+
+
+	<record model="ir.ui.view" id="notariat_dossier_form">
+		<field name="name">Dossier</field>
+		<field name="model">notariat.dossier</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Dossier">
+			<header>
+                    <button name="button_preparer" states="draft" string="Préparer dossier" icon="gtk-ok" class="oe_highlight" />
+                    <button name="button_valider" states="prepare" string="Répertorier dossier" icon="gtk-ok" class="oe_highlight" />
+                    <button name="button_cancel" states="draft,Valide" string="Annuler dossier" icon="gtk-cancel" />
+                    <button name="button_cloturer" states="Valide" string="Clôturer dossier" icon="gtk-convert" />
+                    <button name="button_draft" states="cancel" string="Mettre en Brouillon le Dossier" icon="gtk-ok" class="oe_highlight" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,Valide,cancel,cloture" statusbar_colors='{"Valide":"blue","cancel":"red"}'/>
+               			 </header>
+				<sheet string="Dossiers">
+				    <div class="oe_right oe_button_box">
+                       		 <button name="attachment_tree_view" string="Documents" type="object"/>
+                       		 <button name="%(act_task_all)d" string="Tâches" type="action"/>
+	                        <button name="%(act_contrat_all)d" string="Contrats" type="action"/>
+				    </div>
+                   		<group col="4"  colspan="1">
+					<field name="name" select="1"/>
+					<field name="type_affaire_id" select="1" on_change="onchange_type_affaire(type_affaire_id)" required="1" attrs="{'readonly':[('state','=','cancel')]}"/>
+					<field name="rayon_id" select="1" attrs="{'readonly':[('state','=','cancel')]}"/>
+					<field name="name_repertoire" select="1" attrs="{'readonly':[('state','=','cancel')]}"/>
+					<newline/>
+					<field name="montant_transaction" select="1" required="1" attrs="{'readonly':[('state','=','cancel')]}"/>
+					<field name="montant_vue" select="1" attrs="{'readonly':[('state','=','cancel')]}"/>
+					<field name="date_creation_dossier" select="1" />
+					<field name="observation" select="1" attrs="{'readonly':[('state','=','cancel')]}"/>
+
+                   		</group>
+			<notebook colspan="8">
+		
+		               <page string="Parties">
+                			<field name="partie_id" nolabel="1" attrs="{'readonly':[('state','=','cancel')]}">
+                                		<tree string="Parties"  nolabel="1">
+                                    			<field name="partie_id" on_change="onchange_dossier_partie_id(partie_id)"/>
+							<field name="nom_partie" select="1"/>
+							<field name="client_liste" select="1"/>
+							<field name="client_quote" select="1"/>
+							<field name="client_qualite" select="1"/>
+
+                                		</tree>
+                			</field>
+                	        </page>
+               <page string="Préparation dossier">
+                   		<group col="4"  colspan="1">
+                			<field name="prepa_consultation_ok"/>
+                			<field name="executeur_prepa_consultation" attrs="{'required':[('prepa_consultation_ok','=',True)],'invisible':[('prepa_consultation_ok','!=',True)]}"/>
+
+
+                			<field name="prepa_certification_ok"/>
+                			<field name="executeur_prepa_certification" attrs="{'required':[('prepa_certification_ok','=',True)],'invisible':[('prepa_certification_ok','!=',True)]}"/>
+
+
+                			<field name="prepa_complement_ok"/>
+
+                			<field name="executeur_prepa_complement" attrs="{'required':[('prepa_complement_ok','=',True)],'invisible':[('prepa_complement_ok','!=',True)]}"/>
+
+                			<field name="prepa_mletat_ok"/>
+
+                			<field name="executeur_prepa_mletat" attrs="{'required':[('prepa_mletat_ok','=',True)],'invisible':[('prepa_mletat_ok','!=',True)]}"/>
+
+
+                			<field name="prepa_mlbanque_ok"/>
+                			<field name="executeur_prepa_mlbanque" attrs="{'required':[('prepa_mlbanque_ok','=',True)],'invisible':[('prepa_mlbanque_ok','!=',True)]}"/>
+
+
+
+                			<field name="prepa_certifnegatif_ok"/>
+
+                			<field name="executeur_prepa_certifnegatif" attrs="{'required':[('prepa_certifnegatif_ok','=',True)],'invisible':[('prepa_certifnegatif_ok','!=',True)]}"/>
+
+                			<field name="prepa_copieachat_ok"/>
+
+                			<field name="executeur_prepa_copieachat" attrs="{'required':[('prepa_copieachat_ok','=',True)],'invisible':[('prepa_copieachat_ok','!=',True)]}"/>
+
+
+                			<field name="prepa_origineprop_ok"/>
+
+                			<field name="executeur_prepa_origineprop" attrs="{'required':[('prepa_origineprop_ok','=',True)],'invisible':[('prepa_origineprop_ok','!=',True)]}"/>
+
+                			<field name="prepa_demande_decompte_ok"/>
+
+                			<field name="executeur_prepa_demande_decompte" attrs="{'required':[('prepa_demande_decompte_ok','=',True)],'invisible':[('prepa_demande_decompte_ok','!=',True)]}"/>
+
+                			<field name="prepa_plan_topogra_ok"/>
+
+                			<field name="executeur_prepa_plan_topogra" attrs="{'required':[('prepa_plan_topogra_ok','=',True)],'invisible':[('prepa_plan_topogra_ok','!=',True)]}"/>
+
+                			<field name="prepa_note_rens_ok"/>
+                			<field name="executeur_prepa_note_rens" attrs="{'required':[('prepa_note_rens_ok','=',True)],'invisible':[('prepa_note_rens_ok','!=',True)]}"/>
+
+
+
+                			<field name="prepa_patente_ok"/>
+                			<field name="executeur_prepa_patente" attrs="{'required':[('prepa_patente_ok','=',True)],'invisible':[('prepa_patente_ok','!=',True)]}"/>
+
+
+                			<field name="prepa_rc_ok"/>
+                			<field name="executeur_prepa_rc" attrs="{'required':[('prepa_rc_ok','=',True)],'invisible':[('prepa_rc_ok','!=',True)]}"/>
+
+
+
+                			<field name="prepa_bulletin_officiel_ok"/>
+                			<field name="executeur_prepa_bulletin_officiel" attrs="{'required':[('prepa_bulletin_officiel_ok','=',True)],'invisible':[('prepa_bulletin_officiel_ok','!=',True)]}"/>
+
+
+                			<field name="prepa_journal_local_ok"/>
+                			<field name="executeur_prepa_journal_local" attrs="{'required':[('prepa_journal_local_ok','=',True)],'invisible':[('prepa_journal_local_ok','!=',True)]}"/>
+
+
+
+                			<field name="prepa_cnss_ok"/>
+                			<field name="executeur_prepa_cnss" attrs="{'required':[('prepa_cnss_ok','=',True)],'invisible':[('prepa_cnss_ok','!=',True)]}"/>
+
+
+                			<field name="prepa_autre_ok"/>
+                			<field name="executeur_prepa_autre" attrs="{'required':[('prepa_autre_ok','=',True)],'invisible':[('prepa_autre_ok','!=',True)]}"/>
+                			<field name="observations_autre" attrs="{'required':[('prepa_autre_ok','=',True)],'invisible':[('prepa_autre_ok','!=',True)]}"/>
+
+                			<separator string="Générer les travaux" colspan="4"/>
+
+                					<button name="dos_preparer" string="Générer les travaux" type="object" icon="terp-stock_format-scientific"/>
+
+
+
+
+
+
+
+
+                   		</group>
+
+
+                	       </page>
+
+		               <page string="Biens">
+                			<field name="biens_ids" nolabel="1" attrs="{'readonly':[('state','=','cancel')]}"/>
+
+                	        </page>
+
+
+
+
+
+		               <page string="Contrats">
+	                			<field name="repertoire_id" nolabel="1" attrs="{'readonly':[('state','=','cancel')]}" colspan="8">
+	                                		<tree string="Répertoires" editable="bottom" nolabel="1">
+	                                    			<field name="name" readonly="1"/>
+													<field name="libelle_id" select="1" on_change="onchange_type_repertoire_id(libelle_id)"/>
+													<field name="date_signature_repertoire" select="1"/>
+													<field name="enregistrement_ok" select="1"/>
+													<field name="delai_enregistrement" select="1"/>
+													<field name="type_enregistrement" select="1"/>
+													<field name="taux_enregistrement" select="1"/>
+													<field name="fixe_enregistrement" select="1"/>
+													<field name="conservation_ok" select="1"/>
+													<field name="delai_conservation" select="1"/>
+													<field name="type_conservation" select="1"/>
+													<field name="taux_cons" select="1"/>
+													<field name="fixe_cons" select="1"/>
+													<field name="certification_ok" select="1"/>
+													<field name="executeur_certificat_id" select="1"/>
+													<field name="banque_ok" select="1"/>
+													<field name="impot_tpi_ok" select="1"/>
+													<field name="type_tpi" invisible="1"/>
+													<field name="impot_tnb_ok" select="1"/>
+													<field name="type_tnb" invisible="1"/>
+													<field name="impot_te_ok" select="1"/>
+													<field name="type_te" invisible="1"/>
+													<field name="quitus_ok" select="1"/>
+													<field name="date_creation_repertoire" select="1" readonly="1"/>
+													<field name="date_validation" readonly="1"/>
+													<field name="user_id" select="1" readonly="1"/>
+													<field name="state" readonly="1"/>
+													<field name="delai_tpi" invisible="1"/>
+													<field name="delai_tnb" invisible="1"/>
+													<field name="delai_te" invisible="1"/>
+
+													
+
+                                		</tree>
+                				</field>
+                	       </page>
+
+
+
+		               <page string="Montants">
+                			<field name="montant_id" nolabel="1" attrs="{'readonly':[('state','=','cancel')]}">
+                                		<tree string="Objets" editable="bottom" nolabel="1">
+                                    			<field name="montant"/>
+                                    			<field name="type_montant"/>
+                                    			<field name="observation"/>
+                                		</tree>
+                			</field>
+                	        </page>
+		               <page string="Historiques">
+		               		<label string="Visites" />
+                			<field name="visites_id"  readonly="1"/>
+                			<label string="travaux" />
+                			<field name="travaux_id"   readonly="1"/>
+                			<label string="Appels entrants" />
+                			<field name="entrants_id"  readonly="1"/>
+                			<label string="Appels sortants" />
+                			<field name="sortants_id"   readonly="1"/>
+
+
+                	        </page>
+
+		               <page string="Rayonnage">
+
+
+                			<field name="rayonnages_id" nolabel="1">
+                                		<tree string="Rayonnages" editable="bottom" nolabel="1">
+							<field name="date_rayonnage"/>
+							<field name="repertoire_name" readonly="1"/>
+							<field name="rayon_id"/>
+							<field name="user_id"/>
+							<field name="observation"/>
+
+                                		</tree>
+                			</field>
+
+
+                	        </page>
+
+
+
+
+			</notebook>
+		</sheet>
+
+
+			</form>
+		</field>
+	</record>
+
+
+
+
+	<record model="ir.ui.view" id="notariat_dossier_tree">
+		<field name="name">Dossier</field>
+		<field name="model">notariat.dossier</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Dossier" colors="red:state=='draft';blue:state=='prepare';grey:state=='cancel';green:state=='Valide';black:state=='cloture'">
+				<field name="name" select="1"/>
+				<field name="name_repertoire" select="1"/>	
+				<field name="type_affaire_id" select="1"/>
+				<field name="partie1"/>
+				<field name="partie2"/>
+				<field name="partie3"/>
+				<field name="tf_objet"/>
+				<field name="lot_objet"/>
+				<field name="etage_objet"/>
+				<field name="lieu_objet"/>
+				<field name="observation"/>
+				<field name="rayon_id"/>			
+				<field name="user_id" string="User"/>
+				<field name="dernier_utilisateur" string="Dern. User" />
+				<field name="dernier_date_modification" string="Dern.Date"/>
+				<field name="state"/>
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_dossier_action">
+		<field name="name">Dossier</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.dossier</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'search_default_brouillon':1, 'search_default_preparation':1}</field>
+
+	</record>
+
+	
+
+
+
+<!-- type Repetoire -->
+
+	<record id="type_repertoire_search" model="ir.ui.view">
+		<field name="name">Configuration type contrat</field>
+		<field name="model">type.repertoire</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Type Répertoire">
+				<field name="name"/>
+				<separator/>
+				<group expand="0" string="Group By...">
+					<filter string="Exécuteur" icon="terp-partner" domain="[]" context="{'group_by':'executeur_certificat_id'}"/>
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="type_repertoire_form">
+		<field name="name">Configuration type contrat</field>
+		<field name="model">type.repertoire</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Type Répertoire"  version="7.0">
+				<sheet string="Type Contrat">
+                   		<group col="4"  colspan="1">
+					<field name="name" select="1" required="1"/>
+
+
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Enregistrement" colspan="4"/>
+					<field name="enregistrement_ok"/>
+					<field name="delai_enregistrement" attrs="{'invisible':[('enregistrement_ok','=',False)]}"/>
+					<field name="type_enregistrement" attrs="{'required':[('enregistrement_ok','=',True)],'invisible':[('enregistrement_ok','=',False)]}"/>
+
+					<field name="taux_enregistrement" attrs="{'required':[('type_enregistrement','=','taux')],'invisible':[('type_enregistrement','!=','taux')], 'invisible':[('enregistrement_ok','=',False)]}"/>
+					<field name="fixe_enregistrement"  attrs="{'required':[('type_enregistrement','=','fixe')],'invisible':[('type_enregistrement','!=','fixe')], 'invisible':[('enregistrement_ok','=',False)]}"/>
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Conservation foncière" colspan="4"/>
+					<field name="conservation_ok" select="1"/>
+					<field name="delai_conservation" attrs="{'invisible':[('conservation_ok','=',False)]}"/>
+					<field name="type_conservation" attrs="{'required':[('conservation_ok','=',True)], 'invisible':[('conservation_ok','=',False)]}"/>
+
+
+					<field name="taux_cons" attrs="{'required':[('type_conservation','=','taux')],'invisible':[('type_conservation','!=','taux')], 'invisible':[('conservation_ok','=',False)],}"/>
+					<field name="fixe_cons"  attrs="{'required':[('type_conservation','=','fixe')],'invisible':[('type_conservation','!=','fixe')], 'invisible':[('conservation_ok','=',False)]}"/>
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Certificat de propriété" colspan="4"/>
+					<field name="certification_ok" select="1"/>
+					<field name="executeur_certificat_id" attrs="{'invisible':[('certification_ok','=',False)], 'required':[('certification_ok','=',True)]}"/>
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Suivi Banque" colspan="4"/>
+					<field name="banque_ok" select="1"/>
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Impôt TPI" colspan="4"/>
+					<field name="impot_tpi_ok" select="1"/>
+					<field name="delai_tpi" select="1" attrs="{'required':[('impot_tpi_ok','=',True)],'invisible':[('impot_tpi_ok','=',False)]}"/>
+					
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Impôt TE" colspan="4"/>
+					<field name="impot_te_ok" select="1"/>
+					<field name="delai_te" select="1" attrs="{'required':[('impot_te_ok','=',True)],'invisible':[('impot_te_ok','=',False)]}"/>
+					
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Impôt TNB" colspan="4"/>
+					<field name="impot_tnb_ok" select="1"/>
+					<field name="delai_tnb" select="1" attrs="{'required':[('impot_tnb_ok','=',True)],'invisible':[('impot_tnb_ok','=',False)]}"/>
+					
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Quitus" colspan="4"/>
+					<field name="quitus_ok" select="1"/>
+                   		</group>
+
+
+				</sheet>
+
+
+
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="type_repertoire_tree">
+		<field name="name">Configuration type contrat</field>
+		<field name="model">type.repertoire</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Type Répertoire">
+				<field name="name" select="1"/>
+				<field name="enregistrement_ok" select="1"/>
+				<field name="conservation_ok" select="1"/>
+				<field name="certification_ok" select="1"/>
+				<field name="executeur_certificat_id" select="1"/>
+				<field name="banque_ok" select="1"/>
+				<field name="impot_tpi_ok" select="1"/>
+				<field name="impot_te_ok" select="1"/>
+				<field name="impot_tnb_ok" select="1"/>
+				<field name="quitus_ok" select="1"/>
+
+	
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="type_repertoire_action">
+		<field name="name">Configuration type contrat</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">type.repertoire</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	
+
+
+
+<!--  Repetoire -->
+
+	<record id="notariat_repertoire_filter" model="ir.ui.view">
+		<field name="name">Contrat</field>
+		<field name="model">notariat.repertoire</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Contrat">
+				<field name="dossier_id"/>
+				<field name="code"/>
+				<field name="name"/>
+				<field name="libelle_id"/>
+				<field name="date_creation_repertoire"/>
+				<field name="date_validation"/>
+				<field name="user_id"/>
+				<field name="date_creation_repertoire" string="De" filter_domain="[('date_creation_repertoire','&gt;=',self)]" />
+				<field name="date_creation_repertoire"  string="A" filter_domain="[('date_creation_repertoire','&lt;=',self)]" />
+
+				<field name="state"/>
+                        	<filter name="brouillon" icon="terp-go-today" domain="[('state', '=', 'draft')]" string="Brouillon"/>
+                        	<filter name="repertorie" icon="terp-go-today" domain="[('state', '=', 'repertorie')]" string="Répertorié"/>
+                        	<filter name="valide" icon="terp-go-today" domain="[('state', '=', 'valide')]" string="Initialisé"/>
+                        	<filter name="Annulé" icon="terp-go-today" domain="[('state', '=', 'cancel')]" string="Annulé"/>
+			
+
+                        	<filter name="today" icon="terp-go-today" domain="[('date_creation_repertoire', '&lt;=', time.strftime('%%Y-%%m-%%d 23:59:59')),('date_creation_repertoire', '&gt;=', time.strftime('%%Y-%%m-%%d 00:00:01'))]" string="Dossier crée Aujourd'hui"/>
+                        	
+				<separator/>	
+			
+				<group expand="0" string="Group By...">
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="State" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+					<filter string="Libellé" icon="terp-partner" domain="[]" context="{'group_by':'Libellé'}"/>
+
+					
+
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+
+	<record model="ir.ui.view" id="notariat_repertoire_form">
+		<field name="name">Répertoire</field>
+		<field name="model">notariat.repertoire</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Répertoire" version="7.0">
+				<header>
+                    <button name="button_valide" states="draft" string="A Répertorier" class="oe_highlight" />
+                    <button name="button_repertoire" states="draft,valide" string="Répertorier" class="oe_highlight" />
+                    <button name="button_cancel" states="draft" string="Annuler" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,valide,repertorie,cancel" statusbar_colors='{"valide":"blue","cancel":"red","repertorie":"green"}'/>
+                </header>
+				<sheet string="Contrats">
+
+				    <div class="oe_right oe_button_box">
+                       		 <button name="attachment_tree_view" string="Documents" type="object"/>
+				    </div>
+                   		<group col="4"  colspan="1">
+					<field name="dossier_id" select="1" readonly="1"/>
+					<field name="name" select="1" attrs="{'readonly':[('state','in',('valide','cancel'))]}"/>
+					<field name="code" string="Code" required="1"/>
+					<field name="date_creation_repertoire" select="1" readonly="1"/>
+					<field name="libelle_id" select="1" readonly="1"/>
+					<field name="date_validation" select="1" readonly="1"/>
+					<field name="user_id" select="1" readonly="1"/>
+					<field name="date_signature_repertoire" select="1"/>
+					<field name="tf_objet" readonly="1"/>
+					<field name="lot_objet" readonly="1"/>
+					<field name="lieu_objet" readonly="1"/>
+
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Enregistrement" colspan="4"/>
+					<field name="enregistrement_ok"/>
+					<field name="delai_enregistrement" attrs="{'readonly':[('state','in',('valide','cancel'))], 'invisible':[('enregistrement_ok','=',False)]}"/>
+					<field name="type_enregistrement" attrs="{'required':[('enregistrement_ok','=',True)],'readonly':[('state','in',('valide','cancel'))], 'invisible':[('enregistrement_ok','=',False)]}"/>
+
+					<field name="taux_enregistrement" attrs="{'required':[('type_enregistrement','=','taux')],'invisible':[('type_enregistrement','!=','taux')], 'invisible':[('enregistrement_ok','=',False)], 'readonly':[('state','in',('valide','cancel'))]}"
+/>
+					<field name="fixe_enregistrement"  attrs="{'required':[('type_enregistrement','=','fixe')],'invisible':[('type_enregistrement','!=','fixe')], 'invisible':[('enregistrement_ok','=',False)], 'readonly':[('state','in',('valide','cancel'))]}"
+/>
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Conservation foncière" colspan="4"/>
+					<field name="conservation_ok" select="1" attrs="{'readonly':[('state','in',('valide','cancel'))]}"/>
+					<field name="delai_conservation" attrs="{'readonly':[('state','in',('valide','cancel'))], 'invisible':[('conservation_ok','=',False)]}"/>
+					<field name="type_conservation" attrs="{'required':[('conservation_ok','=',True)],'readonly':[('state','in',('valide','cancel'))], 'invisible':[('conservation_ok','=',False)]}"/>
+
+
+					<field name="taux_cons" attrs="{'required':[('type_conservation','=','taux')],'invisible':[('type_conservation','!=','taux')], 'invisible':[('conservation_ok','=',False)], 'readonly':[('state','in',('valide','cancel'))]}"
+/>
+					<field name="fixe_cons"  attrs="{'required':[('type_conservation','=','fixe')],'invisible':[('type_conservation','!=','fixe')], 'invisible':[('conservation_ok','=',False)], 'readonly':[('state','in',('valide','cancel'))]}"
+/>
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Certificat de propriété" colspan="4"/>
+					<field name="certification_ok" select="1" attrs="{'readonly':[('state','in',('valide','cancel'))]}"/>
+					<field name="executeur_certificat_id" attrs="{'readonly':[('state','in',('valide','cancel'))], 'invisible':[('certification_ok','=',False)], 'required':[('certification_ok','=',True)]}"/>
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Suivi Banque" colspan="4"/>
+					<field name="banque_ok" select="1" attrs="{'readonly':[('state','in',('valide','cancel'))]}"/>
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Impôt TPI" colspan="4"/>
+					<field name="impot_tpi_ok" select="1" attrs="{'readonly':[('state','in',('valide','cancel'))]}"/>
+					<field name="delai_tpi" select="1" attrs="{'readonly':[('state','in',('valide','cancel'))],'required':[('impot_tpi_ok','=',True)],'invisible':[('impot_tpi_ok','=',False)]}"/>
+					<field name="type_tpi" select="1"  attrs="{'readonly':[('state','in',('valide','cancel'))],'required':[('impot_tpi_ok','=',True)],'invisible':[('impot_tpi_ok','=',False)]}"/>
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Impôt TE" colspan="4"/>
+					<field name="impot_te_ok" select="1" attrs="{'readonly':[('state','in',('valide','cancel'))]}"/>
+					<field name="delai_te" select="1" attrs="{'readonly':[('state','in',('valide','cancel'))],'required':[('impot_te_ok','=',True)],'invisible':[('impot_te_ok','=',False)]}"/>
+					<field name="type_te" select="1" attrs="{'readonly':[('state','in',('valide','cancel'))],'required':[('impot_te_ok','=',True)],'invisible':[('impot_te_ok','=',False)]}"/>
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Impôt TNB" colspan="4"/>
+					<field name="impot_tnb_ok" select="1" attrs="{'readonly':[('state','in',('valide','cancel'))]}"/>
+					<field name="delai_tnb" select="1" attrs="{'readonly':[('state','in',('valide','cancel'))],'required':[('impot_tnb_ok','=',True)],'invisible':[('impot_tnb_ok','=',False)]}"/>
+					<field name="type_tnb" select="1"  attrs="{'readonly':[('state','in',('valide','cancel'))],'required':[('impot_tnb_ok','=',True)],'invisible':[('impot_tnb_ok','=',False)]}"/>
+                   		</group>
+                   		<group col="4"  colspan="1">
+                			<separator string="Quitus" colspan="4"/>
+					<field name="quitus_ok" select="1" attrs="{'readonly':[('state','in',('valide','cancel'))]}"/>
+                   		</group>
+
+
+				</sheet>
+				<div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+
+
+
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="notariat_repertoire_tree">
+		<field name="name">Répertoire</field>
+		<field name="model">notariat.repertoire</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Répertoire" colors="red:state=='draft';grey:state=='cancel';blue:state=='valide';green:state=='repertorie'">
+				<field name="dossier_id" select="1"/>
+				<field name="name" select="1"/>
+				<field name="date_creation_repertoire" select="1"/>
+				<field name="libelle_id" select="1"/>
+				<field name="partie1"/>
+				<field name="partie2"/>
+				<field name="partie3"/>
+				<field name="tf_objet"/>
+				<field name="lot_objet"/>
+				<field name="lieu_objet"/>
+				<field name="date_validation" select="1"/>
+				<field name="date_signature_repertoire" select="1"/>
+				<field name="state" select="1"/>
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_repertoire_action">
+		<field name="name">Contrat</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.repertoire</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'search_default_brouillon':1, 'search_default_valide':1}</field>
+	</record>
+
+	
+<!-- LIGNE DOSSIER PARTIE CLIENT -->
+
+
+	<record model="ir.ui.view" id="dossier_partie_form">
+		<field name="name">Partie Dossier</field>
+		<field name="model">dossier.partie</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Partie Dossier">
+					<group>
+						<field name="partie_id" select="1" on_change="onchange_dossier_partie_id(partie_id)"/>
+						<field name="nom_partie" select="1"/>
+					</group>
+					<notebook colspan="4">
+					       <page string="Clients">
+							<field name="partie_client_id" nolabel="1">
+				                		<tree string="Clients" nolabel="1" editable="bottom">
+				                    			<field name="customer_id" required="1"/>
+				                    			<field name="quote" required="1"/>
+				                    			<field name="qualite" required="1"/>
+
+
+				                		</tree>
+				                		<form string="Clients" nolabel="1">
+				                			<group>
+				                    			<field name="customer_id" required="1"/>
+				                    			<field name="quote" required="1"/>
+				                    			<field name="qualite" required="1"/>
+				                    		</group>
+
+				                		</form>
+							</field>
+					        </page>
+					</notebook>	
+
+
+
+			</form>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="dossier_partie_tree">
+		<field name="name">Partie dossier</field>
+		<field name="model">dossier.partie</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Partie dossier">
+				<field name="partie_id" select="1"/>
+				<field name="nom_partie" select="1"/>
+				<field name="client_liste" select="1"/>
+
+	
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="dossier_partie_action">
+		<field name="name">Partie Dossier</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">dossier.partie</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+
+
+
+
+
+<!-- QUITUS -->
+
+	<record id="notariat_quitus_filter" model="ir.ui.view">
+		<field name="name">Quitus</field>
+		<field name="model">notariat.quitus</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Quitus">
+				<field name="dossier_id"/>
+				<field name="date_creation_repertoire"/>
+				<field name="tf_objet"/>
+				<field name="repertoire_id"/>
+				<field name="date_demande_quitus"/>
+				<field name="reference_quitus"/>
+				<field name="demandeur_id"/>
+				<field name="date_quitus"/>
+				<field name="executeur_id"/>
+				<field name="partie1" select="1"/>
+				<field name="partie2" select="1"/>
+				<field name="partie3" select="1"/>
+		           	<field name="state"/>
+
+                        	<filter name="brouillon" icon="terp-go-today" domain="[('state', '=', 'draft')]" string="Brouillon"/> 
+                        	<filter name="Validé" icon="terp-go-today" domain="[('state', '=', 'Valide')]" string="Validé"/>
+                        	<filter name="Annulé" icon="terp-go-today" domain="[('state', '=', 'cancel')]" string="Annulé"/>                         			                       					
+				<group expand="0" string="Group By...">
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Date création Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'date_creation_repertoire'}"/>
+					<filter string="T.F" icon="terp-partner" domain="[]" context="{'group_by':'tf_objet'}"/>
+					<filter string="Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'repertoire_id'}"/>
+					<filter string="Date demande quitus" icon="terp-partner" domain="[]" context="{'group_by':'date_demande_quitus'}"/>
+					<filter string="Demandeur Quitus" icon="terp-partner" domain="[]" context="{'group_by':'demandeur_id'}"/>
+					<filter string="Date Quitus" icon="terp-partner" domain="[]" context="{'group_by':'date_quitus'}"/>
+					<filter string="Exécuteur" icon="terp-partner" domain="[]" context="{'group_by':'executeur_id'}"/>
+					<filter string="State" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="notariat_quitus_form">
+		<field name="name">Quitus</field>
+		<field name="model">notariat.quitus</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Quitus"  version="7.0">
+				<header>
+                    <button name="button_valider" states="draft" string="Valider" class="oe_highlight" />
+                    <button name="button_cancel" states="draft" string="Annuler" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,Valide,cancel" statusbar_colors='{"Valide":"blue","cancel":"red"}'/>
+                </header>
+				<sheet string="Quitus">
+                     	<group col="4" colspan="2">
+				<field name="dossier_id" select="1" readonly="1"/>
+				<field name="date_creation_repertoire" select="1" readonly="1"/>
+				<field name="tf_objet" select="1" readonly="1"/>
+				<field name="repertoire_id" select="1" readonly="1"/>
+				<field name="date_demande_quitus" select="1" readonly="1"/>
+				<field name="reference_quitus" required="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+				<field name="demandeur_id" select="1" readonly="1"/>
+				<field name="date_quitus" required="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+				<field name="executeur_id" required="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+				<field name="date_signature_quitus" required="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+
+                   		</group>
+				</sheet>
+				<div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+			</form>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="notariat_quitus_tree">
+		<field name="name">Quitus</field>
+		<field name="model">notariat.quitus</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Quitus" colors="red:state=='draft';grey:state=='cancel';green:state=='Valide'">
+				<field name="dossier_id" select="1"/>
+				<field name="repertoire_id" select="1"/>
+				<field name="date_creation_repertoire" select="1"/>
+				<field name="partie1" select="1"/>
+				<field name="partie2" select="1"/>
+				<field name="partie3" select="1"/>
+				<field name="date_demande_quitus" select="1"/>
+				<field name="demandeur_id" select="1"/>
+				<field name="date_quitus" select="1"/>
+				<field name="reference_quitus" select="1"/>
+				<field name="executeur_id" select="1"/>
+				<field name="tf_objet" select="1"/>
+		           	<field name="state" context="{'state':'draft'}"/>
+				<field name="date_signature_quitus" select="1"/>
+		           	<button name="button_valider" states="draft" string="Valider" icon="STOCK_YES"/>
+		           	<button name="button_cancel" states="draft" string="Annuler" icon="STOCK_NO"/>
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_quitus_action">
+		<field name="name">Quitus</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.quitus</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="notariat_quitus_tree"/>
+		<field name="search_view_id" ref="notariat_quitus_filter"/>
+		<field name="context">{'search_default_brouillon':1}</field>
+
+
+	</record>
+
+	
+
+
+
+			<!-- ENREGISTREMENT -->
+
+
+	<record id="notariat_enregistrement_filter" model="ir.ui.view">
+		<field name="name">Enregistrement</field>
+		<field name="model">notariat.enregistrement</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Enregistrement">
+				<field name="dossier_id"/>
+				<field name="repertoire_id"/>
+				<field name="numero_depot"/>
+				<field name="name"/>
+				<field name="libelle"/>
+				<field name="date_depot"/>
+				<field name="numero_depot"/>
+				<field name="date_demande_enregistrement"/>
+				<field name="date_enregistrement"/>
+				<field name="dv_enregistrement"/>
+				<field name="or_enregistrement"/>
+				<field name="re_enregistrement"/>
+				<field name="e17b_enregistrement"/>
+				<field name="montant_paye"/>
+				<field name="montant_systeme"/>
+				<field name="ref_paiement_enregistrement"/>
+				<field name="client_id"/>
+				<field name="state"/>
+
+                        	<filter name="brouillon" icon="terp-go-today" domain="[('state', '=', 'draft')]" string="Brouillon"/> 
+                        	<filter name="Validé" icon="terp-go-today" domain="[('state', '=', 'Valide')]" string="Validé"/>
+                        	<filter name="Annulé" icon="terp-go-today" domain="[('state', '=', 'cancel')]" string="Annulé"/>                         			                       					
+				<group expand="0" string="Group By...">
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Date création Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'date_demande_enregistrement'}"/>
+					<filter string="Date Depot" icon="terp-partner" domain="[]" context="{'group_by':'date_depot'}"/>
+					<filter string="Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'repertoire_id'}"/>
+					<filter string="State" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="notariat_enregistrement_form">
+		<field name="name">Enregistrement</field>
+		<field name="model">notariat.enregistrement</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Enregistrement" version="7.0">
+			<header>
+                    <button name="button_valider" states="draft" string="Valider Enregistrement" class="oe_highlight" />
+                    <button name="button_cancel" states="draft" string="Annuler Enregistrement" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,Valide,cancel" statusbar_colors='{"Valide":"blue","cancel":"red"}'/>
+                </header>
+
+				<sheet string="Enregistrement">
+                     	<group col="4" colspan="1">
+
+				<field name="name" select="1" readonly="1"/>
+				<field name="libelle" select="1" readonly="1"/>
+				<field name="dossier_id" select="1" readonly="1"/>
+				<field name="repertoire_id" select="1" readonly="1"/>
+				<field name="numero_depot" select="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+				<field name="date_depot" select="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+				<field name="date_demande_enregistrement" readonly="1"/>
+				<field name="date_enregistrement" select="1"  attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+				<field name="date_signature_enregistrement"/>
+				<field name="client_id"  attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+
+                     	</group>
+                     	<group>
+				<notebook colspan="4">
+
+
+					       <page string="Montants">
+                   		<group col="4"  colspan="1">
+
+				                    			<field name="base_enregistrement"/>
+				                    			<field name="taux_enregistrement"/>
+				                    			
+				                    			<field name="montant_systeme" readonly="1" />
+				                    			<field name="montant_timbre" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+				                    			<field name="montant_taxe" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+				                    			<field name="ref_paiement_enregistrement" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+									<field name="montant_total" readonly="1"/>
+									<field name="montant_paye" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+
+                   		</group>
+
+					        </page>
+					       <page string="Données Enregistrement">
+                   		<group col="4"  colspan="1">
+
+
+				                    			<field name="dv_enregistrement" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+				                    			<field name="or_enregistrement" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+				                    			<field name="re_enregistrement" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+				                    			<field name="e17b_enregistrement" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+
+                   		</group>
+					        </page>
+
+					</notebook>
+
+                     	</group>
+				</sheet>
+
+				<div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="notariat_enregistrement_tree">
+		<field name="name">Enregistrement</field>
+		<field name="model">notariat.enregistrement</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Enregistrement" colors="red:state=='draft';grey:state=='cancel';green:state=='Valide'">
+				<field name="dossier_id" select="1"/>
+				<field name="repertoire_id" select="1"/>
+				<field name="numero_depot" select="1"/>
+				<field name="name" select="1"/>
+				<field name="libelle" select="1"/>
+				<field name="partie1" select="1"/>
+				<field name="partie2" select="1"/>
+				<field name="partie3" select="1"/>
+				<field name="date_depot" select="1"/>
+				<field name="numero_depot"/>
+				<field name="date_demande_enregistrement" select="1"/>
+				<field name="date_enregistrement" select="1"/>
+				<field name="dv_enregistrement" select="1"/>
+				<field name="or_enregistrement" select="1"/>
+				<field name="re_enregistrement" select="1"/>
+				<field name="e17b_enregistrement" select="1"/>
+				<field name="montant_systeme" sum="Total Montant enregistrement système" />
+                                <field name="montant_taxe" sum="Total Montant Taxe"/>
+                                <field name="montant_timbre" sum="Total Montant timbre"/>
+                                <field name="montant_total" sum="Total Montant Total Système"/>
+                                <field name="montant_paye" sum="Total Montant payé"/>
+
+				<field name="ref_paiement_enregistrement" select="1"/>
+				<field name="client_id" select="1"/>
+				<field name="date_signature_enregistrement" select="1"/>
+				<field name="state" select="1"/>
+				<button name="button_valider" states="draft" string="Valider enregistrement" icon="STOCK_YES"/>
+				<button name="button_cancel" states="draft" string="Annuler enregistrement" icon="STOCK_NO"/>
+
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_enregistrement_action">
+		<field name="name">Enregistrement</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.enregistrement</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="search_view_id" ref="notariat_enregistrement_filter"/>
+		<field name="context">{'search_default_brouillon':1}</field>
+
+
+	</record>
+
+	
+
+
+
+
+			<!-- CONSERVATION FONCIERE -->
+
+
+
+	<record id="conservation_fonciere_filter" model="ir.ui.view">
+		<field name="name">Conservation foncière</field>
+		<field name="model">conservation.fonciere</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Conservation foncière">
+				<field name="dossier_id" select="1"/>
+				<field name="repertoire_id" select="1"/>
+				<field name="date_cf" select="1"/>
+				<field name="tf_objet" select="1"/>
+				<field name="lieu_con_id" select="1"/>
+				<field name="libelle" select="1"/>
+				<field name="partie1" select="1"/>
+				<field name="partie2" select="1"/>
+				<field name="partie3" select="1"/>
+				<field name="montant_systeme" select="1"/>
+				<field name="montant_paye" select="1"/>
+				<field name="state" select="1"/>
+				<field name="delai_cf" select="1"/>
+				<field name="compteur" select="1"/>
+				<field name="numero_recette" select="1"/>
+				<field name="premier_depot" select="1"/>
+				<field name="last_retour" select="1"/>
+				<field name="state" select="1"/>
+
+
+
+                        	<filter name="brouillon" icon="terp-go-today" domain="[('state', '=', 'draft')]" string="Brouillon"/> 
+                        	<filter name="Validé" icon="terp-go-today" domain="[('state', '=', 'Valide')]" string="Validé"/>
+                        	<filter name="Annulé" icon="terp-go-today" domain="[('state', '=', 'cancel')]" string="Annulé"/>                         			                       					
+				<group expand="0" string="Group By...">
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Date Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'date_cf'}"/>
+					<filter string="T.F" icon="terp-partner" domain="[]" context="{'group_by':'tf_objet'}"/>
+					<filter string="Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'repertoire_id'}"/>
+					<filter string="State" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+
+
+
+	<record model="ir.ui.view" id="conservation_fonciere_form">
+		<field name="name">Conservation foncière</field>
+		<field name="model">conservation.fonciere</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Conservation foncière" version="7.0">
+				<header>
+                    <button name="button_valider" states="draft" string="Valider" class="oe_highlight" />
+                    <button name="button_cancel" states="draft" string="Annuler" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,Valide,cancel" statusbar_colors='{"Valide":"blue","cancel":"red"}'/>
+                </header>
+				<sheet string="Conservation foncière">
+
+                     	<group col="4" colspan="2">
+					<field name="dossier_id" select="1" readonly="1"/>
+					<field name="client_id" select="1"/>
+					<field name="repertoire_id" select="1" readonly="1"/>
+					<field name="date_cf" select="1" readonly="1"/>
+					<field name="date_signature_cf" select="1"/>
+					<field name="montant_systeme" select="1" readonly="1"/>
+					<field name="montant_paye" select="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+					<field name="delai_cf" select="1" readonly="1"/>
+
+					<field name="compteur" select="1" readonly="1"/>
+
+					<field name="numero_recette" select="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+
+					<field name="base_conservation" readonly="1"/>
+					<field name="taux_conservation" readonly="1"/>
+				                    			
+					<field name="montant_systeme" readonly="1" />
+					<field name="montant_timbre" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+					<field name="montant_taxe" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+					<field name="montant_total" readonly="1"/>
+					<field name="montant_paye" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+
+					<notebook colspan="4">
+					       <page string="M.A.J Historique de la conservation">
+							<field name="retour_id" nolabel="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}">
+				                		<tree string="M.A.J Historique de la conservation" nolabel="1" editable="bottom">
+				                    			<field name="depose_le" required="1"/>
+				                    			<field name="retourne_le"/>
+				                    			<field name="observation"/>
+
+
+				                		</tree>
+				                		<form string="M.A.J Historique de la conservation" nolabel="1">
+				                			<group>
+				                    			<field name="depose_le" required="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+				                    			<field name="retourne_le" required="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+				                    			<field name="observation" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+											</group>
+				                		</form>
+							</field>
+					        </page>
+					</notebook>
+
+                   		</group>
+				</sheet>
+				<div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="conservation_fonciere_tree">
+		<field name="name">Conservation foncière</field>
+		<field name="model">conservation.fonciere</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Conservation foncière" colors="red:delai_cf&lt;compteur and state=='draft';blue:delai_cf&gt;=compteur and state=='draft';grey:state=='cancel';green:state=='Valide';grey:state=='pas_conservation'">
+				<field name="dossier_id" select="1"/>
+				<field name="repertoire_id" select="1"/>
+				<field name="date_cf" select="1"/>
+				<field name="tf_objet" select="1"/>
+				<field name="lieu_con_id" select="1"/>
+				<field name="libelle" select="1"/>
+				<field name="partie1" select="1"/>
+				<field name="partie2" select="1"/>
+				<field name="partie3" select="1"/>
+				<field name="date_enregistrement" select="1"/>
+				<field name="montant_systeme" sum="Total Montant conservation système" />
+                                <field name="montant_taxe" sum="Total Montant Taxe"/>
+                                <field name="montant_timbre" sum="Total Montant timbre"/>
+                                <field name="montant_total" sum="Total Montant Total Système"/>
+                                <field name="montant_paye" sum="Total Montant payé"/>
+				<field name="delai_cf" select="1"/>
+				<field name="compteur" select="1" />
+				<field name="numero_recette" select="1"/>
+				<field name="premier_depot" select="1"/>
+				<field name="last_retour" select="1"/>
+				<field name="date_signature_cf" select="1"/>					
+				<field name="state" select="1"/>
+				<button name="button_valider" states="draft" string="Valider CF" icon="STOCK_YES"/>
+				<button name="button_cancel" states="draft" string="Annuler CF" icon="STOCK_NO"/>
+
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="conservation_fonciere_action">
+		<field name="name">Conservation foncière</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">conservation.fonciere</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'search_default_brouillon':1}</field>
+	</record>
+
+	
+
+
+			<!-- IMPOT TPI -->
+
+
+
+	<record id="notariat_impot_tpi_filter" model="ir.ui.view">
+		<field name="name">Impôt TPI</field>
+		<field name="model">impot.tpi</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Impôt TPI">
+					<field name="dossier_id"/>
+					<field name="date_creation_repertoire"/>
+					<field name="repertoire_id"/>
+					<field name="tf_objet"/>
+					<field name="date_decharge_client"/>
+					<field name="partie1" select="1"/>
+					<field name="partie2" select="1"/>
+					<field name="partie3" select="1"/>
+					<field name="delai_tpi"/>
+					<field name="delai_realisation"/>
+					<field name="client_id"/>
+					<field name="reference_paiement" />
+					<field name="date_paiement"/>
+					<field name="montant_paye"/>
+		           		<field name="state"/>
+
+                        	<filter name="brouillon" icon="terp-go-today" domain="[('state', '=', 'draft')]" string="Brouillon"/> 
+                        	<filter name="Validé" icon="terp-go-today" domain="[('state', '=', 'Valide')]" string="Validé"/>
+                        	<filter name="Annulé" icon="terp-go-today" domain="[('state', '=', 'cancel')]" string="Annulé"/>                         			                       					
+				<group expand="0" string="Group By...">
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Date création Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'date_creation_repertoire'}"/>
+					<filter string="T.F" icon="terp-partner" domain="[]" context="{'group_by':'tf_objet'}"/>
+					<filter string="Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'repertoire_id'}"/>
+					<filter string="Type TPI" icon="terp-partner" domain="[]" context="{'group_by':'type_tpi'}"/>
+					<filter string="State" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+
+
+	<record model="ir.ui.view" id="notariat_impot_tpi_form">
+		<field name="name">Impôt TPI</field>
+		<field name="model">impot.tpi</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Impôt TPI" version="7.0">
+				<header>
+                    <button name="button_valider" states="draft" string="Valider Impôt TPI" class="oe_highlight" />
+                    <button name="button_cancel" states="draft" string="Annuler Impôt TPI" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,Valide,cancel" statusbar_colors='{"Valide":"blue","cancel":"red"}'/>
+
+
+               			 </header>
+
+
+				<sheet string="Impôt TPI">
+
+				   	<group col="4" colspan="1">
+					<field name="dossier_id" readonly ="1"/>
+					<field name="date_creation_repertoire" readonly ="1"/>
+					<field name="repertoire_id" readonly ="1"/>
+					<field name="tf_objet" select="1" readonly ="1"/>
+					<field name="date_decharge_client" select="1" />
+					<field name="client_id"/>
+					<field name="partie1" select="1" readonly ="1"/>
+					<field name="delai_tpi" select="1" readonly ="1"/>
+					<field name="delai_realisation" select="1" readonly="1"/>
+					<field name="reference_paiement" select="1"/>
+					<field name="date_paiement" select="1"/>
+					<field name="montant_paye" select="1" sum="Total Montant Payé"/>
+					<field name="date_signature_tpi"/>
+
+				   	</group>
+				<notebook colspan="4">
+					       <page string="Données Impôt TPI">
+                   		<group col="4"  colspan="1">
+
+					<field name="prix_vente_tpi"/>
+					<field name="prix_achat_tpi"/>
+					<field name="annee_achat_tpi"/>
+					<field name="coeff_tpi"/>
+					<field name="benifice_suppose"/>
+					<field name="pourcentage_impot"/>
+					<field name="impot_benifice_suppose"/>
+					<field name="coeff_cotisation_minimale"/>
+					<field name="cotisation_minimale"/>
+					<field name="impot_payer"/>
+                   		</group>
+					        </page>
+
+					</notebook>
+
+
+
+				</sheet>
+				<div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>	
+
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="notariat_impot_tpi_tree">
+		<field name="name">Impôt TPI</field>
+		<field name="model">impot.tpi</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Impôt TPI" colors="red:state=='draft';green:state=='Valide';gray:state=='cancel'">
+				<field name="dossier_id" select="1"/>
+				<field name="repertoire_id" select="1"/>
+				<field name="date_creation_repertoire" select="1"/>
+				<field name="partie1" select="1"/>
+				<field name="partie2" select="1"/>
+				<field name="partie3" select="1"/>
+				<field name="tf_objet" select="1"/>
+				<field name="type_tpi" select="1"/>
+				<field name="date_decharge_client" select="1"/>
+				<field name="delai_tpi" select="1"/>
+				<field name="delai_realisation" select="1"/>
+				<field name="date_paiement" select="1"/>
+				<field name="impot_payer" sum="Total Montant Payé" select="1"/>
+				<field name="montant_paye" sum="Total Montant Payé" select="1"/>
+				<field name="date_signature_tpi"/>
+				<field name="state" select="1"/>
+				<button name="button_valider" states="draft" string="Valider Impôt TPI" icon="STOCK_YES"/>
+				<button name="button_cancel" states="draft" string="Annuler Impôt TPI" icon="STOCK_NO"/>
+
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_impot_tpi_action">
+		<field name="name">Impôt TPI</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">impot.tpi</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'search_default_brouillon':1}</field>
+	</record>
+
+	
+
+
+			<!-- CERTIFICAT PROPRIETE -->
+
+
+
+	<record id="notariat_propriete_search" model="ir.ui.view">
+		<field name="name">Certificat Propriété</field>
+		<field name="model">notariat.propriete</field>
+		<field name="arch" type="xml">
+			<search string="Recherche CP">
+				<field name="name"/>
+				<field name="dossier_id"/>
+				<field name="repertoire_id"/>
+				<field name="libelle"/>
+				<field name="partie1" select="1"/>
+				<field name="partie2" select="1"/>
+				<field name="partie3" select="1"/>
+				<field name="executeur_certificat_id"/>
+				<field name="date_creation_repertoire"/>
+				<field name="date_cp"/>
+				<field name="date_reception_propriete"/>
+				<field name="compteur"/>
+				<field name="state"/>
+				<field name="bien_id"/>
+				<field name="lieu_con_id"/>
+				<filter icon="terp-mail-message-new" string="Brouillon" name="brouillon" domain="[('state','=','draft')]"/>
+				<filter icon="terp-mail-message-new" string="Valide" name="Valide" domain="[('state','=','Valide')]"/>
+				<filter icon="terp-mail-message-new" string="Annulé" name="Annulé" domain="[('state','=','cancel')]"/>
+				<separator/>
+				<group expand="0" string="Group By...">
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Exécuteur" icon="terp-partner" domain="[]" context="{'group_by':'executeur_certificat_id'}"/>
+					<filter string="Etat CP" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="notariat_propriete_form">
+		<field name="name">Certificat Propriété</field>
+		<field name="model">notariat.propriete</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Certificat Propriété" version="7.0">
+				<header>
+                    <button name="button_valider" states="draft" string="Valider Certificat de propriété" class="oe_highlight" />
+                    <button name="button_cancel" states="draft" string="Annuler Certificat de propriété" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,Valide,cancel" statusbar_colors='{"Valide":"blue","cancel":"red"}'/>
+                </header>
+				<sheet string="Certificat Propriété">
+		           	<group col="4" colspan="1">
+				<field name="dossier_id" select="1" readonly="1"/>
+				<field name="date_creation_repertoire" readonly="1"/>
+				<field name="date_signature_cp"/>
+				<field name="date_cp" select="1" readonly="1"/>
+				<field name="bien_id" select="1" readonly="1"/>
+				<field name="repertoire_id" select="1" readonly="1"/>
+                		<separator string="Certificat de propriété" colspan="4"/>
+				<field name="compteur" select="1" readonly="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+				<field name="date_reception_propriete" select="1" required="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+		           	</group>
+				</sheet>
+				<div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="notariat_propriete_tree">
+		<field name="name">Certificat Propriété</field>
+		<field name="model">notariat.propriete</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Certificat Propriété" colors="red:state=='draft';green:state=='Valide';gray:state=='cancel'">
+				<field name="dossier_id" select="1"/>
+				<field name="repertoire_id" select="1"/>
+				<field name="date_creation_repertoire"/>
+				<field name="libelle" select="1"/>
+				<field name="partie1" select="1"/>
+				<field name="partie2" select="1"/>
+				<field name="partie3" select="1"/>
+				<field name="bien_id" select="1"/>
+				<field name="lieu_con_id" select="1"/>
+				<field name="executeur_certificat_id" select="1"/>
+				<field name="date_cp" select="1"/>
+				<field name="date_reception_propriete" select="1"/>
+				<field name="compteur" select="1"/>
+				<field name="state" select="1"/>
+				<button name="button_valider" states="draft" string="Valider CP" icon="STOCK_YES"/>
+				<button name="button_cancel" states="draft" string="Annuler CP" icon="STOCK_NO"/>
+
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_propriete_action">
+		<field name="name">Certificat Propriété</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.propriete</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'search_default_brouillon':1}</field>
+	</record>
+
+	
+
+
+<!-- DEPOT ENREGISTREMENT -->
+
+	<record id="depot_enregistrement_filter" model="ir.ui.view">
+		<field name="name">Dépôt Enregistrement</field>
+		<field name="model">depot.enregistrement</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Dépôt Enregistrement">
+
+				<field name="name"/>
+				<field name="date_depot"/>
+				<field name="name_depot"/>
+				<field name="dv_enregistrement"/>
+				<field name="or_enregistrement"/>
+				<field name="re_enregistrement"/>
+				<field name="e17b_enregistrement"/>
+				<field name="montant_depot"/>
+				<field name="observation"/>
+				<field name="state"/>
+
+				<separator/>	
+
+                        	<filter name="brouillon" icon="terp-go-today" domain="[('state', '=', 'draft')]" string="Brouillon"/> 
+                        	<filter name="Validé" icon="terp-go-today" domain="[('state', '=', 'Valide')]" string="Validé"/>
+                        	<filter name="Annulé" icon="terp-go-today" domain="[('state', '=', 'cancel')]" string="Annulé"/>                         						
+				<group expand="0" string="Group By...">
+
+					<filter string="State" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+
+
+	<record model="ir.ui.view" id="depot_enregistrement_form">
+		<field name="name">Dépôt Enregistrement</field>
+		<field name="model">depot.enregistrement</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Dépôt Enregistrement" version="7.0">
+			<header>
+                    <button name="button_valider" states="draft" string="Valider Dépôt Enregistrement" class="oe_highlight" />
+                    <button name="button_cancel" states="draft" string="Annuler Dépôt Enregistrement" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,Valide,cancel" statusbar_colors='{"Valide":"blue","cancel":"red"}'/>
+                </header>
+
+				<sheet string="Enregistrement">
+                     	<group col="4" colspan="1">
+
+				<field name="name" select="1" readonly="1"/>
+				<field name="date_depot" select="1"  attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+				<field name="name_depot" select="1" required="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+				<field name="dv_enregistrement"  attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+				<field name="or_enregistrement"  attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+				<field name="re_enregistrement"  attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+				<field name="e17b_enregistrement"  attrs="{'readonly':[('state','in',('Valide','cancel'))]}"/>
+				<field name="observation" select="1" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" />
+				<field name="montant_depot"/>
+                     	</group>
+                     	<group >
+			<notebook>
+		               <page string="Enregistrements">
+                   		<group col="4"  colspan="1">
+
+                			<field name="enregistrements_id" nolabel="1" domain="[('depot_id','=', False)]" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" context="{'form_view_ref':'nextma_notariat_ma.notariat_enregistrement_form', 'tree_view_ref': 'nextma_notariat_ma.notariat_enregistrement_tree'}" widget="many2many">
+                                		<tree string="Enregistrements" colors="red:state=='draft';green:state=='Valide';gray:state=='cancel'">
+
+							<field name="dossier_id" select="1"/>
+							<field name="repertoire_id" select="1"/>
+							<field name="numero_depot" select="1"/>
+							<field name="name" select="1"/>
+							<field name="libelle"/>
+							<field name="date_depot" select="1"/>
+							<field name="date_demande_enregistrement" select="1"/>
+							<field name="date_enregistrement" select="1"/>
+							<field name="dv_enregistrement" select="1"/>
+							<field name="or_enregistrement" select="1"/>
+							<field name="re_enregistrement" select="1"/>
+							<field name="e17b_enregistrement" select="1"/>
+							<field name="montant_systeme" sum="Total Montant enregistrement système" />
+						        <field name="montant_taxe" sum="Total Montant Taxe"/>
+						        <field name="montant_timbre" sum="Total Montant timbre"/>
+						        <field name="montant_total" sum="Total Montant Total Système"/>
+						        <field name="montant_paye" sum="Total Montant payé"/>
+							<field name="ref_paiement_enregistrement" select="1"/>
+							<field name="state" select="1"/>
+
+
+                                		</tree>
+
+                			</field>
+                   		</group>
+                	        </page>
+			</notebook>
+                   		</group>
+				</sheet>			
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="depot_enregistrement_tree">
+		<field name="name">Dépôt enregistrement</field>
+		<field name="model">depot.enregistrement</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Dépôt enregistrement" colors="red:state=='draft';green:state=='Valide';gray:state=='cancel'">
+				<field name="name"/>
+				<field name="date_depot"/>
+				<field name="name_depot"/>
+				<field name="dv_enregistrement"/>
+				<field name="or_enregistrement"/>
+				<field name="re_enregistrement"/>
+				<field name="e17b_enregistrement"/>
+				<field name="montant_depot" sum="Total montant dépôt"/>
+				<field name="observation"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="depot_enregistrement_action">
+		<field name="name">Dépôt enregistrement</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">depot.enregistrement</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'search_default_brouillon':1}</field>
+	</record>
+
+	 
+
+
+
+
+<!--RECETTE CONSERVATION FONCIERE -->
+
+
+
+	<record id="recette_conservation_filter" model="ir.ui.view">
+		<field name="name">Recette conservation</field>
+		<field name="model">recette.conservation</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Recette conservation">
+
+				<field name="name"/>
+				<field name="state"/>
+
+				<separator/>	
+
+                        	<filter name="brouillon" icon="terp-go-today" domain="[('state', '=', 'draft')]" string="Brouillon"/> 
+                        	<filter name="Validé" icon="terp-go-today" domain="[('state', '=', 'Valide')]" string="Validé"/>
+                        	<filter name="Annulé" icon="terp-go-today" domain="[('state', '=', 'cancel')]" string="Annulé"/>                         						
+				<group expand="0" string="Group By...">
+
+					<filter string="State" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+
+
+	<record model="ir.ui.view" id="recette_conservation_form">
+		<field name="name">Recette conservation</field>
+		<field name="model">recette.conservation</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Recette conservation" version="7.0">
+			<header>
+                    <button name="button_valider" states="draft" string="Valider Recette C.F" class="oe_highlight" />
+                    <button name="button_cancel" states="draft" string="Annuler Recette C.F" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,Valide,cancel" statusbar_colors='{"Valide":"blue","cancel":"red"}'/>
+                </header>
+
+				<sheet string="Recette C.F">
+                     	<group col="4" colspan="1">
+
+				<field name="name" select="1" required="1"/>
+				<field name="client_id" select="1"/>
+				<field name="numero_serie" select="1" required="1"/>
+				<field name="date_recette" select="1" required="1"/>
+				<field name="montant_recette" select="1" required="1"/>
+				<field name="observation" select="1"/>
+
+                     	</group>
+                     	<group >
+			<notebook colspan="4"  >
+		               <page string="Conservations">
+                   		<group col="4"  colspan="1">
+                			<field name="conservations_id" widget="many2many"  nolabel="1" domain="[('state','=','draft')]" attrs="{'readonly':[('state','in',('Valide','cancel'))]}" >
+                                		<tree string="Conservations" >
+
+
+
+							<field name="dossier_id" select="1"/>
+							<field name="repertoire_id" select="1"/>
+							<field name="date_cf" select="1"/>
+							<field name="tf_objet" select="1"/>
+							<field name="lieu_con_id" select="1"/>
+							<field name="libelle" select="1"/>
+							<field name="partie1" select="1"/>
+							<field name="partie2" select="1"/>
+							<field name="date_enregistrement" select="1"/>
+							<field name="montant_systeme" sum="Total Montant conservation système" />
+						        <field name="montant_taxe" sum="Total Montant Taxe"/>
+						        <field name="montant_timbre" sum="Total Montant timbre"/>
+						        <field name="montant_total" sum="Total Montant Total Système"/>
+						        <field name="montant_paye" sum="Total Montant payé"/>
+							<field name="delai_cf" select="1"/>
+							<field name="compteur" select="1"/>
+							<field name="numero_recette" select="1"/>
+							<field name="last_retour" select="1"/>
+							<field name="state" select="1"/>
+
+
+                                		</tree>
+
+                			</field>
+
+                   		</group>
+                	        </page>
+			</notebook>
+                   		</group>
+				</sheet>			
+			</form>
+		</field>
+	</record>
+
+
+
+	<record model="ir.ui.view" id="recette_conservation_tree">
+		<field name="name">Recette C.F</field>
+		<field name="model">recette.conservation</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Recette C.F" colors="red:state=='draft';green:state=='Valide';gray:state=='cancel'">
+
+				<field name="name" select="1" required="1"/>
+				<field name="numero_serie" select="1" required="1"/>
+				<field name="date_recette" select="1" required="1"/>
+				<field name="montant_recette" select="1" required="1"/>
+				<field name="state"/>
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="recette_conservation_action">
+		<field name="name">Recette CF</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">recette.conservation</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'state':'draft'}</field>
+	</record>
+
+	 
+
+
+
+
+
+
+
+			<!-- SUIVI BANQUE -->
+
+
+	<record id="notariat_banque_filter" model="ir.ui.view">
+		<field name="name">Suivi Banque</field>
+		<field name="model">notariat.banque</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Banque">
+
+				<field name="dossier_id"/>
+				<field name="repertoire_id"/>
+				<field name="date_creation_repertoire"/>
+				<field name="banque_id"/>
+				<field name="date_remis_doc"/>
+				<field name="partie2"/>
+				<field name="date_recus_doc"/>
+				<field name="date_redaction_contrat"/>
+				<field name="date_envoi_contrat"/>
+				<field name="date_signature_contrat"/>
+				<field name="date_encaissement_recu"/>
+				<field name="date_debut_delai"/>
+				<field name="date_doc_definitif"/>
+				<field name="client_id"/>
+
+
+				<field name="montant_demande"/>
+				<field name="delai"/>
+				<field name="state"/>
+
+				<separator/>	
+
+                        	<filter name="brouillon" icon="terp-go-today" domain="[('state', '=', 'draft')]" string="Brouillon"/> 
+                        	<filter name="Validé" icon="terp-go-today" domain="[('state', '=', 'Valide')]" string="Validé"/>
+                        	<filter name="Annulé" icon="terp-go-today" domain="[('state', '=', 'cancel')]" string="Annulé"/>                         						
+				<group expand="0" string="Group By...">
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Date création Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'date_creation_repertoire'}"/>
+					<filter string="T.F" icon="terp-partner" domain="[]" context="{'group_by':'tf_objet'}"/>
+					<filter string="Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'repertoire_id'}"/>
+
+					<filter string="Banque" icon="terp-partner" domain="[]" context="{'group_by':'banque_id'}"/>
+					<filter string="Partie 2" icon="terp-partner" domain="[]" context="{'group_by':'partie2'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="notariat_banque_form">
+		<field name="name">Banque</field>
+		<field name="model">notariat.banque</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Banque" version="7.0">
+				<header>
+                    <button name="button_valider" states="draft" string="Valider" class="oe_highlight" />
+                    <button name="button_cancel" states="draft" string="Annuler" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,Valide,cancel" statusbar_colors='{"Valide":"blue","cancel":"red"}'/>
+                </header>
+				<sheet string="Banque">
+		           	<group col="4" colspan="1">
+		           	<group col="4" colspan="1">
+				<field name="dossier_id" readonly="1"/>
+				<field name="date_creation_repertoire" readonly="1"/>
+				<field name="repertoire_id" readonly="1"/>
+				<field name="banque_id" select="1"/>
+				<field name="tf_objet" select="1" readonly="1"/>
+		           	<field name="montant_demande"/>
+				<field name="client_id"/>
+
+		           	</group>
+				<newline/>								
+		           	<group col="4" colspan="1">
+		           	   	<field name="date_remis_doc"/>
+		           	   	<field name="partie2" readonly="1"/>
+		           	   	<field name="date_recus_doc"/>
+		           	   	<field name="reference_doc_recu"/>
+		           	   	<field name="date_redaction_contrat"/>
+		           	   	<field name="reference_redaction_contrat"/>
+		           	   	<field name="date_envoi_contrat"/>
+		           	   	<field name="reference_envoi_contrat"/>
+		           	   	<field name="date_signature_contrat"/>
+		           	   	<field name="reference_signature_contrat"/>
+		           	   	<field name="date_encaissement_recu"/>
+		           	   	<field name="reference_encaissement_recu"/>
+		           	   	<field name="date_debut_delai"/>
+		           	   	<field name="delai"/>
+		           	   	<field name="date_doc_definitif"/>
+
+
+
+		           	</group>
+		           	</group>
+				</sheet>
+				<div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+								
+				
+
+
+			</form>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="notariat_banque_tree">
+		<field name="name">Banque</field>
+		<field name="model">notariat.banque</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Banque" colors="red:state=='draft';green:state=='Valide';gray:state=='cancel'">
+				<field name="dossier_id" select="1"/>
+				<field name="repertoire_id" select="1"/>
+				<field name="date_creation_repertoire"/>
+				<field name="banque_id" select="1"/>
+				<field name="date_remis_doc"/>
+				<field name="partie1" select="1"/>
+				<field name="partie2" select="1"/>
+				<field name="partie3" select="1"/>
+				<field name="tf_objet" select="1"/>
+				<field name="date_recus_doc"/>
+				<field name="date_redaction_contrat"/>
+				<field name="date_envoi_contrat"/>
+				<field name="date_signature_contrat"/>
+				<field name="date_encaissement_recu"/>
+				<field name="date_debut_delai"/>
+				<field name="date_doc_definitif"/>
+
+				<field name="montant_demande"/>
+				<field name="delai" select="1"/>
+				<field name="state" select="1"/>
+				<button name="button_valider" states="draft" string="Valider" icon="STOCK_YES"/>
+				<button name="button_cancel" states="draft" string="Annuler" icon="STOCK_NO"/>
+
+
+
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_banque_action">
+		<field name="name">Suivi Banque</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">notariat.banque</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'search_default_brouillon':1}</field>
+	</record>
+
+	
+
+
+
+
+			<!-- IMPOT TE -->
+
+	<record id="notariat_impot_te_filter" model="ir.ui.view">
+		<field name="name">Impôt TE</field>
+		<field name="model">impot.te</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Impôt TE">
+					<field name="dossier_id"/>
+					<field name="date_creation_repertoire"/>
+					<field name="repertoire_id"/>
+					<field name="tf_objet"/>
+					<field name="date_decharge_client"/>
+					<field name="partie1" select="1"/>
+					<field name="partie2" select="1"/>
+					<field name="partie3" select="1"/>
+					<field name="delai_te"/>
+					<field name="delai_realisation"/>
+					<field name="reference_paiement" />
+					<field name="date_paiement"/>
+					<field name="montant_paye"/>
+		           		<field name="state"/>
+					<field name="client_id"/>
+
+                        	<filter name="brouillon" icon="terp-go-today" domain="[('state', '=', 'draft')]" string="Brouillon"/> 
+                        	<filter name="Validé" icon="terp-go-today" domain="[('state', '=', 'Valide')]" string="Validé"/>
+                        	<filter name="Annulé" icon="terp-go-today" domain="[('state', '=', 'cancel')]" string="Annulé"/>                         			                       					
+				<group expand="0" string="Group By...">
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Date création Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'date_creation_repertoire'}"/>
+					<filter string="T.F" icon="terp-partner" domain="[]" context="{'group_by':'tf_objet'}"/>
+					<filter string="Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'repertoire_id'}"/>
+					<filter string="Type TE" icon="terp-partner" domain="[]" context="{'group_by':'type_te'}"/>
+					<filter string="State" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="notariat_impot_te_form">
+		<field name="name">Impôt TE</field>
+		<field name="model">impot.te</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Impôt TE" version="7.0">
+				<header>
+                    <button name="button_valider" states="draft" string="Valider Impôt TE" class="oe_highlight" />
+                    <button name="button_cancel" states="draft" string="Annuler Impôt TE" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,Valide,cancel" statusbar_colors='{"Valide":"blue","cancel":"red"}'/>
+
+
+               			 </header>
+
+
+				<sheet string="Impôt TE">
+
+				   	<group col="4" colspan="1">
+					<field name="dossier_id" readonly ="1"/>
+					<field name="date_creation_repertoire" readonly ="1"/>
+					<field name="repertoire_id" readonly ="1"/>
+					<field name="tf_objet" select="1" readonly ="1"/>
+					<field name="date_decharge_client" select="1"/>
+					<field name="client_id"/>
+					<field name="partie1" select="1" readonly ="1"/>
+					<field name="delai_te" select="1" readonly ="1"/>
+					<field name="delai_realisation" select="1" readonly="1"/>
+					<field name="reference_paiement" select="1"/>
+					<field name="date_paiement" select="1"/>
+					<field name="montant_paye" select="1"/>
+					<field name="date_signature_te" select="1"/>
+
+				   	</group>
+
+
+				</sheet>
+				<div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>	
+
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="notariat_impot_te_tree">
+		<field name="name">Impôt TE</field>
+		<field name="model">impot.te</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Impôt TE" colors="red:state=='draft';green:state=='Valide';gray:state=='cancel'">
+				<field name="dossier_id" select="1"/>
+				<field name="repertoire_id" select="1"/>
+				<field name="date_creation_repertoire" select="1"/>
+				<field name="partie1" select="1"/>
+				<field name="partie2" select="1"/>
+				<field name="partie3" select="1"/>
+				<field name="tf_objet" select="1"/>
+				<field name="type_te" select="1"/>
+				<field name="date_decharge_client" select="1"/>
+				<field name="delai_te" select="1"/>
+				<field name="delai_realisation" select="1"/>
+				<field name="date_paiement" select="1"/>
+				<field name="montant_paye" select="1" sum="Total Montant Payé"/>
+				<field name="date_signature_te" select="1"/>
+				<field name="state" select="1"/>
+				<button name="button_valider" states="draft" string="Valider Impôt TE" icon="STOCK_YES"/>
+				<button name="button_cancel" states="draft" string="Annuler Impôt TE" icon="STOCK_NO"/>
+
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_impot_te_action">
+		<field name="name">Impôt TE</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">impot.te</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'search_default_brouillon':1}</field>
+	</record>
+
+	
+
+
+
+
+
+			<!-- IMPOT TNB -->
+
+	<record id="notariat_impot_tnb_filter" model="ir.ui.view">
+		<field name="name">Impôt TNB</field>
+		<field name="model">impot.tnb</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Impôt TNB">
+					<field name="dossier_id"/>
+					<field name="date_creation_repertoire"/>
+					<field name="repertoire_id"/>
+					<field name="tf_objet"/>
+					<field name="date_decharge_client"/>
+					<field name="partie1" select="1"/>
+					<field name="partie2" select="1"/>
+					<field name="partie3" select="1"/>
+					<field name="client_id"/>
+					<field name="delai_tnb"/>
+					<field name="delai_realisation"/>
+					<field name="reference_paiement" />
+					<field name="date_paiement"/>
+					<field name="montant_paye"/>
+		           		<field name="state"/>
+
+                        	<filter name="brouillon" icon="terp-go-today" domain="[('state', '=', 'draft')]" string="Brouillon"/> 
+                        	<filter name="Validé" icon="terp-go-today" domain="[('state', '=', 'Valide')]" string="Validé"/>
+                        	<filter name="Annulé" icon="terp-go-today" domain="[('state', '=', 'cancel')]" string="Annulé"/>                         			                       					
+				<group expand="0" string="Group By...">
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+					<filter string="Date création Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'date_creation_repertoire'}"/>
+					<filter string="T.F" icon="terp-partner" domain="[]" context="{'group_by':'tf_objet'}"/>
+					<filter string="Répertoire" icon="terp-partner" domain="[]" context="{'group_by':'repertoire_id'}"/>
+					<filter string="Type TNB" icon="terp-partner" domain="[]" context="{'group_by':'type_tnb'}"/>
+					<filter string="State" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+
+
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+
+	<record model="ir.ui.view" id="notariat_impot_tnb_form">
+		<field name="name">Impôt TNB</field>
+		<field name="model">impot.tnb</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Impôt TNB" version="7.0">
+				<header>
+                    <button name="button_valider" states="draft" string="Valider Impôt TNB" class="oe_highlight" />
+                    <button name="button_cancel" states="draft" string="Annuler Impôt TNB" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,Valide,cancel" statusbar_colors='{"Valide":"blue","cancel":"red"}'/>
+
+
+               			 </header>
+
+
+				<sheet string="Impôt TNB">
+
+				   	<group col="4" colspan="1">
+					<field name="dossier_id" readonly ="1"/>
+					<field name="date_creation_repertoire" readonly ="1"/>
+					<field name="repertoire_id" readonly ="1"/>
+					<field name="tf_objet" select="1" readonly ="1"/>
+					<field name="date_decharge_client" select="1"/>
+					<field name="client_id"/>
+					<field name="partie1" select="1" readonly ="1"/>
+					<field name="delai_tnb" select="1" readonly ="1"/>
+					<field name="delai_realisation" select="1" readonly="1"/>
+					<field name="reference_paiement" select="1"/>
+					<field name="date_paiement" select="1"/>
+					<field name="montant_paye" select="1"/>
+					<field name="date_signature_tnb" select="1"/>
+
+				   	</group>
+
+
+				</sheet>
+				<div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>	
+
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="notariat_impot_tnb_tree">
+		<field name="name">Impôt TNB</field>
+		<field name="model">impot.tnb</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Impôt TNB" colors="red:state=='draft';green:state=='Valide';gray:state=='cancel'">
+				<field name="dossier_id" select="1"/>
+				<field name="repertoire_id" select="1"/>
+				<field name="date_creation_repertoire" select="1"/>
+				<field name="partie1" select="1"/>
+				<field name="partie2" select="1"/>
+				<field name="partie3" select="1"/>
+				<field name="tf_objet" select="1"/>
+				<field name="type_tnb" select="1"/>
+				<field name="date_decharge_client" select="1"/>
+				<field name="delai_tnb" select="1"/>
+				<field name="delai_realisation" select="1"/>
+				<field name="date_paiement" select="1"/>
+				<field name="montant_paye" select="1" sum="Total Montant Payé"/>
+				<field name="date_signature_tnb" select="1"/>
+				<field name="state" select="1"/>
+				<button name="button_valider" states="draft" string="Valider Impôt TNB" icon="STOCK_YES"/>
+				<button name="button_cancel" states="draft" string="Annuler Impôt TNB" icon="STOCK_NO"/>
+
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="notariat_impot_tnb_action">
+		<field name="name">Impôt TNB</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">impot.tnb</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{'search_default_brouillon':1}</field>
+	</record>
+
+
+
+
+
+
+
+<!-- ETAT CONSERVATION FONCIERE SELON LES DATES RETOURS ET DEPOT DE LA CF-->
+
+
+
+
+	<record id="retour_conservation_search" model="ir.ui.view">
+		<field name="name">Suivi Etat Retour Conservation Foncière</field>
+		<field name="model">retour.conservation</field>
+		<field name="arch" type="xml">
+			<search string="Recherche Suivi Etat Retour Conservation Foncière">
+				<field name="depose_le"/>
+				<field name="retourne_le"/>
+				<field name="cf_id"/>
+				<separator/>
+				<group expand="0" string="Group By...">
+
+
+					<filter string="Dossier" icon="terp-partner" domain="[]" context="{'group_by':'dossier_id'}"/>
+				</group>
+
+			</search>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="retour_conservation_form">
+		<field name="name">Suivi Etat Retour Conservation Foncière</field>
+		<field name="model">retour.conservation</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Suivi Etat Retour Conservation Foncière">
+				<group>
+				<field name="dossier_id"/>				
+				<field name="depose_le" readonly="1"/>
+				<field name="retourne_le" readonly="1"/>		
+				</group>
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="retour_conservation_tree">
+		<field name="name">Suivi Etat Retour Conservation Foncière</field>
+		<field name="model">retour.conservation</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Suivi Etat Retour Conservation Foncière" editable="bottom">
+				<field name="dossier_id"/>				
+				<field name="depose_le"/>
+				<field name="retourne_le"/>
+
+			</tree>
+		</field>
+	</record>
+
+
+	<record model="ir.actions.act_window" id="retour_conservation_action">
+		<field name="name">Suivi Etat Retour Conservation Foncière</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">retour.conservation</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+
+
+
+</data>
+</openerp>

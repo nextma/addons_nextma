@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    
+    	<menuitem name="Activités notaires" id="menu_notaire_root" web_icon="images/logo-notaire.png" web_icon_hover="images/logo-notaire2.png" sequence="11" />
+		
+			
+			<menuitem name="Affaires" parent="menu_notaire_root" id="menu_notaire_affaire" sequence="1"/>
+			
+				<menuitem name="Dossiers" parent="menu_notaire_affaire" id="menu_notariat_dossier_action" action="notariat_dossier_action" sequence="1"/>
+				
+				<menuitem name="Contrats" parent="menu_notaire_affaire" id="menu_notariat_repertoire_action" action="notariat_repertoire_action" sequence="2"/>
+				
+				<menuitem name="Biens" parent="menu_notaire_affaire" id="menu_bien_action" action="notariat_bien_action" sequence="3"/>
+				
+				<menuitem name="Clients" parent="menu_notaire_affaire" id="menu_notariat_custmor" action="res_partner_inherit_notariat_action" sequence="4"/>
+				
+			<menuitem name="Démarches" parent="menu_notaire_root" id="menu_notaire_demarche" sequence="2"/>	
+			
+
+				<menuitem name="Enregistrements" parent="menu_notaire_demarche" id="menu_notariat_enregistrement_root"  sequence="1"/>
+				
+					<menuitem name="Enregistrement" parent="menu_notariat_enregistrement_root" id="menu_notariat_enregistrement_action" action="notariat_enregistrement_action" sequence="1" />
+				
+					<menuitem name="Dépôt enregistrement" parent="menu_notariat_enregistrement_root" id="menu_depot_enregistrement_action" action="depot_enregistrement_action" sequence="2" />
+				
+				<menuitem name="Conservations foncières" parent="menu_notaire_demarche" id="menu_notariat_cf_root"  sequence="2"/>
+					
+					<menuitem name="C.F" parent="menu_notariat_cf_root" id="menu_conservation_fonciere_action" action="conservation_fonciere_action" sequence="3"/>
+
+					<menuitem name="Suivi Retour C.F" parent="menu_notariat_cf_root" id="menu_retour_conservation_action" action="retour_conservation_action"/>
+					
+					
+					<menuitem name="Recette C.F" parent="menu_notariat_cf_root" id="menu_recette_conservation_action" action="recette_conservation_action"/>
+					
+				<menuitem name="Impôts" parent="menu_notaire_demarche" id="menu_notariat_impot_root"  sequence="3"/>
+					
+					<menuitem name="TNB" parent="menu_notariat_impot_root" id="menu_notariat_impot_tnb_action" action="notariat_impot_tnb_action" sequence="1"/>
+		
+					<menuitem name="TE" parent="menu_notariat_impot_root" id="menu_notariat_impot_te_action" action="notariat_impot_te_action" sequence="2"/>
+			
+					<menuitem name="TPI" parent="menu_notariat_impot_root" id="menu_notariat_impot_tpi_action" action="notariat_impot_tpi_action" sequence="3"/>
+					
+				<menuitem name="Suivi Banques" parent="menu_notaire_demarche" id="menu_notariat_banque_action" action="notariat_banque_action" sequence="4"/>
+				
+				<menuitem name="Certificat Propriété" parent="menu_notaire_demarche" id="menu_notariat_propriete_action" action="notariat_propriete_action" sequence="5"/>
+				
+				<menuitem name="Quitus" parent="menu_notaire_demarche" id="menu_notariat_quitus_action" action="notariat_quitus_action" sequence="6"/>
+			
+			
+			<menuitem name="Configuration" parent="menu_notaire_root" id="menu_notaire_config" sequence="3"/>
+		
+				<menuitem name="Type d'affaire" parent="menu_notaire_config" id="menu_notariat_affaire_action" action="notariat_affaire_action"/>
+				
+				<menuitem name="Unité de mesure" parent="menu_notaire_config" id="menu_notariat_unite_action" action="notariat_unite_action"/>
+				<menuitem name="Désignation Bien" parent="menu_notaire_config" id="menu_designation_bien_action" action="designation_bien_action"/>
+				
+				<menuitem name="Ville" parent="menu_notaire_config" id="menu_notariat_ville_action" action="notariat_ville_action"/>
+				
+				<menuitem name="Parties" parent="menu_notaire_config" id="menu_notariat_partie_action" action="notariat_partie_action"/>	
+				
+				<menuitem name="Lieu conservation" parent="menu_notaire_config" id="menu_lieu_conservation_action" action="lieu_conservation_action"/>
+							
+							
+				<menuitem name="Configuration Type Contrat" parent="menu_notaire_config" id="menu_type_repertoire_action" action="type_repertoire_action" sequence="7"/>
+			
+			
+						
+		<menuitem name="Organisation"  id="menu_notaire_organisation" sequence="12"/>
+		
+			<menuitem name="Appels" parent="menu_notaire_organisation" id="menu_notariat_appels"  sequence="1"/>
+		
+				<menuitem name="Entrants" parent="menu_notariat_appels" id="menu_notariat_appel_client_entrant" action="appel_client_entrant_action" sequence="1"/>
+								
+				<menuitem name="Sortants" parent="menu_notariat_appels" id="menu_notariat_appel_client_sortant" action="appel_client_sortant_action" sequence="2"/>
+			
+			<menuitem name="Visites" parent="menu_notaire_organisation" id="menu_notariat_visites" sequence="2"/>
+			
+				<menuitem name="Clients" parent="menu_notariat_visites" id="menu_notariat_visite_client" action="visite_client_action" sequence="1"/>
+				
+		
+			<menuitem name="Travail" parent="menu_notaire_organisation" id="menu_notariat_travail"  sequence="3"/>
+		
+				<menuitem name="Tâches" parent="menu_notariat_travail" id="menu_notariat_tache" action="notariat_travail_action" sequence="1"/>
+		
+				<menuitem name="Rayonnage des dossiers" parent="menu_notariat_travail" id="menu_notariat_rayonnage_action" action="notariat_rayonnage_action" sequence="2"/>
+				
+				
+			<menuitem name="Configuration" parent="menu_notaire_organisation" id="menu_notaire_travail_config" sequence="4"/>
+		
+				<menuitem name="Rayon" parent="menu_notaire_travail_config" id="menu_notariat_rayon_action" action="notariat_rayon_action" sequence="1"/>
+						 
+				<menuitem name="Libellé travail" parent="menu_notaire_travail_config" id="menu_libelle_travail_action" action="libelle_travail_action" sequence="2"/>
+				
+				
+			
+		 
+						 
+		
+    </data>
+</openerp>

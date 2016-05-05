@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data>
+		<record id="libelle_travail_pourconsultation0" model="libelle.travail">
+			<field name="code">001</field>
+			<field name="name">POUR CONSULTATION</field>
+		</record>
+	</data>
+	<data>
+		<record id="libelle_travail_pourcertificationpropriete0" model="libelle.travail">
+			<field name="code">002</field>
+			<field name="name">POUR CERTIFICAT DE PROPRIETE</field>
+		</record>
+	</data>
+	<data>
+		<record id="libelle_travail_demandecomplmentenregistrement0" model="libelle.travail">
+			<field name="code">003</field>
+			<field name="name">DEMANDE COMPLÉMENT ENREGISTREMENT</field>
+		</record>
+	</data>
+	<data>
+		<record id="libelle_travail_mletat0" model="libelle.travail">
+			<field name="code">004</field>
+			<field name="name">ML ETAT</field>
+		</record>
+	</data>
+	<data>
+		<record id="libelle_travail_mlbanque0" model="libelle.travail">
+			<field name="code">005</field>
+			<field name="name">ML BANQUE</field>
+		</record>
+	</data>
+	<data>
+		<record id="libelle_travail_demandededcompte0" model="libelle.travail">
+			<field name="code">006</field>
+			<field name="name">DEMANDE DE DÉCOMPTE</field>
+		</record>
+	</data>
+	<data>
+		<record id="libelle_travail_certificationnegatif0" model="libelle.travail">
+			<field name="code">007</field>
+			<field name="name">CERTIFICATION NEGATIF</field>
+		</record>
+	</data>
+	<data>
+		<record id="libelle_travail_copiecontratachat0" model="libelle.travail">
+			<field name="code">008</field>
+			<field name="name">COPIE CONTRAT ACHAT</field>
+		</record>
+	</data>
+	<data>
+		<record id="libelle_travail_originepropriete0" model="libelle.travail">
+			<field name="code">009</field>
+			<field name="name">ORIGINE PROPRIETE</field>
+		</record>
+	</data>
+	<data>
+		<record id="libelle_travail_plantopopgraphique0" model="libelle.travail">
+			<field name="code">010</field>
+			<field name="name">PLAN TOPOPGRAPHIQUE</field>
+		</record>
+	</data>
+	<data>
+		<record id="libelle_travail_notederenseignement0" model="libelle.travail">
+			<field name="code">011</field>
+			<field name="name">NOTE DE RENSEIGNEMENT</field>
+		</record>
+	</data>
+	<data>
+		<record id="libelle_travail_patente0" model="libelle.travail">
+			<field name="code">012</field>
+			<field name="name">PATENTE</field>
+		</record>
+	</data>
+
+
+	<data>
+		<record id="libelle_travail_rc0" model="libelle.travail">
+			<field name="code">013</field>
+			<field name="name">RC</field>
+		</record>
+	</data>
+
+
+	<data>
+		<record id="libelle_travail_bulletin_officiel0" model="libelle.travail">
+			<field name="code">014</field>
+			<field name="name">BULLETIN OFFICIEL</field>
+		</record>
+	</data>
+
+
+	<data>
+		<record id="libelle_travail_journal_local0" model="libelle.travail">
+			<field name="code">015</field>
+			<field name="name">JOURNAL LOCAL</field>
+		</record>
+	</data>
+
+	<data>
+		<record id="libelle_travail_journal_cnss0" model="libelle.travail">
+			<field name="code">016</field>
+			<field name="name">CNSS</field>
+		</record>
+	</data>
+
+	<data>
+		<record id="libelle_travail_journal_autre" model="libelle.travail">
+			<field name="code">017</field>
+			<field name="name">AUTRE</field>
+		</record>
+	</data>
+</openerp>

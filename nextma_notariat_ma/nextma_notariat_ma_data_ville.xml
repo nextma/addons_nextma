@@ -1,0 +1,368 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data noupdate="1">
+		<record id="notariat_ville_0" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Casablanca</field>
+			<field name="name">الدار البيضاء</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_1" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Rabat</field>
+			<field name="name">الرباط</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_2" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Fès</field>
+			<field name="name">فاس</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_3" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Marrakech</field>
+			<field name="name">مراكش</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_4" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Agadir</field>
+			<field name="name">أكادير</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_5" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Tanger</field>
+			<field name="name">طنجة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_6" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Meknès</field>
+			<field name="name">مكناس</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_7" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Oujda</field>
+			<field name="name">وجدة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_8" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Kénitra</field>
+			<field name="name">القنيطرة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_9" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Tétouan</field>
+			<field name="name">تطوان</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_10" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Safi</field>
+			<field name="name">آسفي</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_11" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Témara</field>
+			<field name="name">تمارة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_12" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Mohammedia</field>
+			<field name="name">المحمدية</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_13" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Laayoune</field>
+			<field name="name">العيون</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_14" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville"> Khouribga</field>
+			<field name="name">خريبكة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_15" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Beni Mellal</field>
+			<field name="name">بني ملال</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_16" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">El Jadida</field>
+			<field name="name">الجديدة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_17" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Taza</field>
+			<field name="name">تازة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_18" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Nador</field>
+			<field name="name">الناظور</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_19" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Settat</field>
+			<field name="name">سطات</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_20" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Ksar El Kébir</field>
+			<field name="name">القصر الكبير</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_21" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Larache</field>
+			<field name="name">العرائش</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_22" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Khémisset </field>
+			<field name="name">الخميسات</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_23" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Tiznit</field>
+			<field name="name">تزنيت</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_24" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Berrechid</field>
+			<field name="name">برشيد</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_25" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Oued Zem </field>
+			<field name="name">وادي زم</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_26" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Fquih Ben Salah</field>
+			<field name="name">الفقيه بنصالح</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_27" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Taourirt</field>
+			<field name="name">تاوريرت</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_28" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Berkane</field>
+			<field name="name">بركان</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_29" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Sidi Slimane</field>
+			<field name="name">سيدي سليمان</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_30" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Errachidia</field>
+			<field name="name">الراشيدية</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_31" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Sidi Kacem</field>
+			<field name="name">سيدي قاسم</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_32" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Khénifra</field>
+			<field name="name">خنيفرة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_33" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Tiflet </field>
+			<field name="name">تيفلت</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_34" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Essaouira</field>
+			<field name="name">الصويرة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_35" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Taroudannt</field>
+			<field name="name">تارودانت</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_36" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">El Kelaa des Sraghna</field>
+			<field name="name">قلعة السراغنة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_37" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Oulad Teïma</field>
+			<field name="name">اولاد التايمة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_38" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Youssoufia</field>
+			<field name="name">اليوسفية</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_39" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Sefrou</field>
+			<field name="name">صفرو</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_40" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Ben Guerir</field>
+			<field name="name">بنجرير</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_41" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Tan-Tan</field>
+			<field name="name">طانطان</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_42" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Ouezzane</field>
+			<field name="name">وزان</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_43" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Guercif</field>
+			<field name="name">جرسيف</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_44" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Ouarzazate</field>
+			<field name="name">ورزازات</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_45" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Al Hoceïma</field>
+			<field name="name">الحسيمة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_46" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Jerada</field>
+			<field name="name">جرادة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_47" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Chefchaouen</field>
+			<field name="name">شفشاون</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_48" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Fnideq</field>
+			<field name="name">الفنيدق</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_49" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Souk Sebt Oulad Nemma </field>
+			<field name="name">سوق السبت أولاد النمة</field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_50" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Salé</field>
+			<field name="name">سلا </field>
+		</record>
+	</data>
+	<data noupdate="1">
+		<record id="notariat_ville_51" model="notariat.ville">
+			<field name="pays_id" ref="base.ma"/>
+			<field name="name_ville">Tahla</field>
+			<field name="name">تاهلة</field>
+		</record>
+	</data>
+</openerp>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+<!--
+        <report 
+            string="Compromis vente" 
+            name="notariat.compromis"
+            model="notariat.repertoire"
+            id="compromis_vente"
+            rml="nextma_notariat_ma/report/nextma_compromis_vente.rml"
+            header="False"
+            />
+
+
+-->
+
+        <report 
+            string="Dépôt Enregistrement" 
+            name="depot.enregistrement"
+            model="depot.enregistrement"
+            id="depot_enregistrement"
+            rml="nextma_notariat_ma/report/depot_enregistrement.rml"
+            header="False"
+            />
+
+
+
+    </data>
+</openerp>

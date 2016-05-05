@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+
+	<record model="ir.sequence.type" id="seq_type_dossier">
+		<field name="name">Dossier</field>
+		<field name="code">notariat.dossier</field>
+	</record>
+	<record model="ir.sequence" id="seq_dossier">
+		<field name="name">Dossier</field>
+		<field name="code">notariat.dossier</field>
+		<field name="padding">5</field>
+	</record>
+	
+
+
+
+	<record model="ir.sequence.type" id="seq_type_res_partner">
+		<field name="name">Partenaire</field>
+		<field name="code">res.partner</field>
+	</record>
+	<record model="ir.sequence" id="seq_res_partner">
+		<field name="name">Partenaire</field>
+		<field name="code">res.partner</field>
+		<field name="padding">5</field>
+	</record>
+	
+
+
+
+	<record model="ir.sequence.type" id="seq_type_travail_effectue">
+		<field name="name">Travail</field>
+		<field name="code">travail.effectue</field>
+	</record>
+	<record model="ir.sequence" id="seq_travail_effectue">
+		<field name="name">Travail</field>
+		<field name="code">travail.effectue</field>
+		<field name="padding">5</field>
+	</record>
+
+
+	<record model="ir.sequence.type" id="seq_type_notariat_repertoire">
+		<field name="name">Répertoire</field>
+		<field name="code">notariat.repertoire</field>
+	</record>
+	<record model="ir.sequence" id="seq_notariat_repertoire">
+		<field name="name">Répertoire</field>
+		<field name="code">notariat.repertoire</field>
+		<field name="padding">5</field>
+ 		<field name="suffix">/%(year)s</field>
+
+	</record>
+
+
+
+	<record model="ir.sequence.type" id="seq_type_notariat_repertoire_code">
+		<field name="name">Code Répertoire</field>
+		<field name="code">notariat.repertoire.code</field>
+	</record>
+	<record model="ir.sequence" id="seq_notariat_repertoire_code">
+		<field name="name">Code Répertoire</field>
+		<field name="code">notariat.repertoire.code</field>
+		<field name="padding">5</field>
+
+	</record>
+
+
+
+	<record model="ir.sequence.type" id="seq_type_notariat_enregistrement">
+		<field name="name">Enregistrement</field>
+		<field name="code">notariat.enregistrement</field>
+	</record>
+	<record model="ir.sequence" id="seq_notariat_enregistrement">
+		<field name="name">Enregistrement</field>
+		<field name="code">notariat.enregistrement</field>
+		<field name="padding">5</field>
+
+	</record>
+
+
+
+	<record model="ir.sequence.type" id="seq_type_depot_enregistrement">
+		<field name="name">Dépôt Enregistrement</field>
+		<field name="code">depot.enregistrement</field>
+	</record>
+	<record model="ir.sequence" id="seq_depot_enregistrement">
+		<field name="name">Dépôt Enregistrement</field>
+		<field name="code">depot.enregistrement</field>
+		<field name="padding">5</field>
+
+	</record>
+
+
+	<record model="ir.sequence.type" id="seq_type_conservation_fonciere">
+		<field name="name">Conservation foncière</field>
+		<field name="code">conservation.fonciere</field>
+	</record>
+	<record model="ir.sequence" id="seq_conservation_fonciere">
+		<field name="name">Conservation foncière</field>
+		<field name="code">conservation.fonciere</field>
+		<field name="padding">5</field>
+
+	</record>
+
+
+
+	<record model="ir.sequence.type" id="seq_type_notariat_quitus">
+		<field name="name">Quitus</field>
+		<field name="code">notariat.quitus</field>
+	</record>
+	<record model="ir.sequence" id="seq_notariat_quitus">
+		<field name="name">Quitus</field>
+		<field name="code">notariat.quitus</field>
+		<field name="padding">5</field>
+
+	</record>
+
+
+	<record model="ir.sequence.type" id="seq_type_notariat_propriete">
+		<field name="name">Certificat de propriété</field>
+		<field name="code">notariat.propriete</field>
+	</record>
+	<record model="ir.sequence" id="seq_notariat_propriete">
+		<field name="name">Certificat de propriété</field>
+		<field name="code">notariat.propriete</field>
+		<field name="padding">5</field>
+
+	</record>
+
+
+
+	<record model="ir.sequence.type" id="seq_type_impot_tpi">
+		<field name="name">Impôt TPI</field>
+		<field name="code">impot.tpi</field>
+	</record>
+	<record model="ir.sequence" id="seq_impot_tpi">
+		<field name="name">Impôt TPI</field>
+		<field name="code">impot.tpi</field>
+		<field name="padding">5</field>
+
+	</record>
+
+	<record model="ir.sequence.type" id="seq_type_impot_te">
+		<field name="name">Impôt TE</field>
+		<field name="code">impot.te</field>
+	</record>
+	<record model="ir.sequence" id="seq_impot_te">
+		<field name="name">Impôt TE</field>
+		<field name="code">impot.te</field>
+		<field name="padding">5</field>
+
+	</record>
+
+
+
+	<record model="ir.sequence.type" id="seq_type_impot_tnb">
+		<field name="name">Impôt TNB</field>
+		<field name="code">impot.tnb</field>
+	</record>
+	<record model="ir.sequence" id="seq_impot_tnb">
+		<field name="name">Impôt TNB</field>
+		<field name="code">impot.tnb</field>
+		<field name="padding">5</field>
+
+	</record>
+
+
+	<record model="ir.sequence.type" id="seq_type_notariat_banque">
+		<field name="name">Banque</field>
+		<field name="code">notariat.banque</field>
+	</record>
+	<record model="ir.sequence" id="seq_notariat_banque">
+		<field name="name">Banque</field>
+		<field name="code">notariat.banque</field>
+		<field name="padding">5</field>
+
+	</record>
+
+
+	<record model="ir.sequence.type" id="seq_type_notariat_propriete">
+		<field name="name">Propriété Bien</field>
+		<field name="code">proprietaire.bien</field>
+	</record>
+	<record model="ir.sequence" id="seq_notariat_propriete">
+		<field name="name">Propriété Bien</field>
+		<field name="code">proprietaire.bien</field>
+		<field name="padding">5</field>
+
+	</record>
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+    </data>
+</openerp>
