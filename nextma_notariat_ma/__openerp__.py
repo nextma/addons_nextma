@@ -21,10 +21,11 @@
 {
     'name': 'GESTION CABINET NOTAIRE MAROC ',
     'version': '1.0',
-    'summary': 'GESTION CABINET NOTAIRE MAROC SOUS ODOO 8 - Module de Base',
+    'summary': 'GESTION CABINET NOTAIRE MAROC  - Module de Base',
     'description': """
-GESTION CABINET NOTAIRE SOUS ODOO 8 
+GESTION CABINET NOTAIRE 
 =====================================================
+suggestions, propositions,remarquess welcome at info@nextma.com
 
 """,
     'author': 'NEXTMA SARL',
