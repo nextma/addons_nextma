@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<record id="timetable.student_rule_timetable_record" model="ir.rule">
+			<field name="name">TimeTable Record</field>
+			<field ref="timetable.model_time_table" name="model_id"/>
+			<field name="domain_force">[('standard_id.student_ids.user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4, ref('school.group_school_student'))]"/>
+		</record>
+
+		<record id="parent_rule_timetable_record" model="ir.rule">
+			<field name="name">TimeTable Record</field>
+			<field ref="timetable.model_time_table" name="model_id"/>
+			<field name="domain_force">[('standard_id.student_ids.student_parent_user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4, ref('school.group_school_parent'))]"/>
+		</record>
+
+		<record id="student_rule_timetable_line_record" model="ir.rule">
+			<field name="name">TimeTable Line Record For Student</field>
+			<field ref="timetable.model_time_table_line" name="model_id"/>
+			<field name="domain_force">[('standard_id.student_ids.user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4, ref('school.group_school_student'))]"/>
+		</record>
+
+		<!-- Timetable Record rule for Teacher -->
+		<record id="teacher_rule_timetable_line_record" model="ir.rule">
+			<field name="name">TimeTable Line Record for Teacher</field>
+			<field ref="timetable.model_time_table_line" name="model_id"/>
+			<field name="domain_force">[('teacher_id.user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4, ref('school.group_school_teacher'))]"/>
+		</record>
+
+		<record id="parent_rule_timetable_line_record" model="ir.rule">
+			<field name="name">TimeTable Line Record for Parent</field>
+			<field ref="timetable.model_time_table_line" name="model_id"/>
+			<field name="domain_force">[('standard_id.student_ids.student_parent_user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4, ref('school.group_school_parent'))]"/>
+		</record>
+
+		<record id="rule_student_payslip_record" model="ir.rule">
+			<field name="name">Payslip rule</field>
+			<field ref="school_fees.model_student_payslip" name="model_id"/>
+			<field name="domain_force">['|',('student_id.user_id','=',user.id),('student_id.student_parent_user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4, ref('school.group_school_student')),
+										(4, ref('school.group_school_parent')),
+										(4, ref('school.group_school_teacher'))]"/>
+		</record>
+
+		<record id="rule_student_student_record" model="ir.rule">
+			<field name="name">Student Student rule</field>
+			<field ref="school.model_student_student" name="model_id"/>
+			<field name="domain_force">['|',('user_id','=',user.id),('student_parent_user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4, ref('school.group_school_student')),
+										(4, ref('school.group_school_parent'))
+										]"/>
+					
+		</record>
+
+		<record id="rule_exam_result_record" model="ir.rule">
+			<field name="name">Exam rule</field>
+			<field ref="exam.model_exam_result" name="model_id"/>
+			<field name="domain_force">['|',('student_id.user_id','=',user.id),('student_id.student_parent_user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4, ref('school.group_school_student')),
+										(4, ref('school.group_school_parent'))
+										]"/>
+		</record>
+		<record id="rule_res_partner_record" model="ir.rule">
+			<field name="name">ResPartner rule</field>
+			<field ref="base.model_res_partner" name="model_id"/>
+			<field name="domain_force">[('id','=',user.id)]</field>
+			<field name="groups" eval="[(4, ref('school.group_school_student')),
+										(4, ref('school.group_school_parent'))
+										]"/>
+        	<field name="perm_read" eval="False"/>
+        	<field name="perm_write" eval="True"/>
+        	<field name="perm_unlink" eval="True"/>
+        	<field name="perm_create" eval="True"/>
+									
+					
+		</record>
+
+	</data>
+</openerp>
