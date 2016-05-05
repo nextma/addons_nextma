@@ -21,7 +21,7 @@
 ##############################################################################
 
 {
-    "name" : "OpenMadrasa Base",
+    "name" : "OpenMadrassa Base",
     "version" : "2.2.0",
     "author" : "NEXTMA S.A.R.L",
     "website" : "http://www.nextma.com",
