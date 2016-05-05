@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="view_res_partner_form">
+			<field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="arch" type="xml">
+				<label for="is_company" position="replace">
+					<label for="is_company" string="Est un parent?"/>)
+				</label>
+ 			</field>
+		</record>
+		
+        <record id="action_parent_form" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{"default_customer":True,'default_is_company':True}</field>
+            <field name="domain">[('is_company','=',True)]</field>
+            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a contact in your address book.
+              </p><p>
+                Odoo helps you easily track all activities related to
+                a customer; discussions, history of business opportunities,
+                documents, etc.
+              </p>
+            </field>
+        </record>
+		<menuitem name="Parents Details" parent="school.menu_student_profile"
+			id="school.menu_res_partner_form" action="action_parent_form"
+			groups="school.group_school_administration,school.group_school_student,school.group_school_teacher,school.group_school_parent"/>
+	</data>
+</openerp>

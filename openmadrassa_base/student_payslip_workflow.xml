@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <!-- Confirm to Draft -->
+    <record model="workflow.transition" id="trans_confirm_draft">
+        <field name="act_from" ref="school_fees.act_confirm" />
+        <field name="act_to" ref="school_fees.act_draft" />
+        <field name="signal">payslip_draft</field>
+    </record>
+</data>
+</openerp>
+

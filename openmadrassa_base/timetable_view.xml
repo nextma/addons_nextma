@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+        <record model="ir.ui.view" id="view_time_table_line_kanban">
+            <field name="name">time.table.line.kanban</field>
+            <field name="model">time.table.line</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="week_day" class="o_kanban_small_column" default_order="sequence,start_time asc">
+                    <field name="week_day"/>
+                    <field name="color"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown">
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#" >
+                                        <span class="fa fa-bars fa-lg"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <t t-if="widget.editable"><li><a type="edit">Edit</a></li></t>
+	                                    <t t-if="widget.deletable"><li><a type="delete">Delete</a></li></t>
+	                                    <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                            <div class="oe_kanban_content">
+                                <div>
+                                    <strong>De: <field name="start_time"/> à: <field name="end_time"/></strong>
+                                </div>
+                                <div class="oe_kanban_left">
+                                    <li t-if="record.subject_id.raw_value">
+                                        Subject:
+                                        <field name="subject_id"/>
+                                    </li>
+                                    <li t-if="record.teacher_id.raw_value">
+                                        Teacher:
+                                        <field name="teacher_id"/>
+                                    </li>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <img t-att-src="kanban_image('hr.employee', 'image_medium', record.teacher_id.raw_value)" t-att-title="record.teacher_id.value" width="24" height="24" class="oe_kanban_avatar"/>
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                        </div>
+                    </t>
+                    </templates>
+                </kanban>
+            </field>
+         </record>
+
+        <record id="view_time_table_line_search" model="ir.ui.view">
+            <field name="name">time.table.line.search</field>
+            <field name="model">time.table.line</field>
+            <field name="arch" type="xml">
+                <search string="TimeTables">
+                    <field name="year_id" select="True" />
+                   	<field name="teacher_id" />
+                    <field name="standard_id" select="True" />
+                    <field name="subject_id" select="True" />
+                    <field name="week_day" select="True" />
+                    <field name="start_time" select="True" />
+                    <field name="end_time" select="True" />
+<!--                     <newline />
+                    <filter string="Today" domain="[('start_datetime', '&gt;=', time.strftime('%%Y-%%m-%%d 00:00:00')),('start_datetime', '&lt;=', time.strftime('%%Y-%%m-%%d 23:59:59'))]" /> -->
+                    <group expand="0" string="Group By...">
+                        <filter string="Year" domain="[]"
+                            context="{'group_by':'year_id'}" />
+                        <filter string="Nom de matière" domain="[]"
+                            context="{'group_by':'subject_id'}" />
+                        <filter string="Nom superviseur" domain="[]"
+                            context="{'group_by':'teacher_id'}" />
+                        <filter string="Academic Class" domain="[]"
+                            context="{'group_by':'standard_id'}" />
+                        <filter string="Jour de la semaine" domain="[]"
+                            context="{'group_by':'week_day'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_time_table_line_tree" model="ir.ui.view">
+            <field name="name">time.table.line.tree</field>
+            <field name="model">time.table.line</field>
+            <field name="arch" type="xml">
+                <tree string="TimeTables" delete="false">
+                	<field name="week_day" />
+                	<field name="start_time" />
+                	<field name="end_time" />
+                	<field name="teacher_id" />
+                    <field name="subject_id" />
+                    <field name="standard_id" />
+                    <field name="year_id" />
+                    <field name="timetable_type" />
+                    <field name="sequence" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_time_table_line_form" model="ir.ui.view">
+            <field name="name">time.table.line.form</field>
+            <field name="model">time.table.line</field>
+            <field name="arch" type="xml">
+                <form string="TimeTables" create="false" delete="false"  edit="false">
+                	<group>
+                		<group>
+                			<field name="year_id" />
+                			<field name="standard_id" />
+                			<field name="subject_id" />
+                			<field name="teacher_id" />
+                		</group>
+                		<group>
+                			<field name="week_day" />
+                			<field name="start_time" />
+                			<field name="end_time" />
+                			<field name="timetable_type" />
+                		</group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+		<record model="ir.actions.act_window" id="action_time_table_line">
+			<field name="name">Time Table Lines</field>
+			<field name="res_model">time.table.line</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+		</record>
+		<menuitem name="TimeTable line" parent="timetable.menu_timetable_1" id="menu_time_table_line"
+			action="action_time_table_line"/>
+			
+
+	</data>
+</openerp>

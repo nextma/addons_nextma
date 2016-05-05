@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="view_student_parent_tree" model="ir.ui.view">
+			<field name="name">student.parent.tree</field>
+			<field name="model">student.parent</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<tree string="Parent">
+					<field name="name" />
+					<field name="student_ids" />
+				</tree>
+			</field>
+		</record>
+		<record id="view_student_parent_form" model="ir.ui.view">
+			<field name="name">student.parent.form</field>
+			<field name="model">student.parent</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<form string="Parent">
+					<sheet>
+						<separator colspan="4" string="Parent" />
+						<field name="name" placeholder="Nom du parent" style="width: 30%%" />
+						<separator colspan="4" string="Enfants" />
+						<field name="student_ids" >
+							<tree>
+								<field name="student_code" />
+								<field name="last_name" />
+								<field name="roll_no" />
+								<field name="year" />
+								<field name="standard_id" />
+								<field name="state" />
+							</tree>
+						</field>
+						<!-- <field name="user_id" placeholder="User Id" style="width: 30%%" /> -->
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="view_student_parent_search" model="ir.ui.view">
+			<field name="name">student.parent.search</field>
+			<field name="model">student.parent</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<search string="Parent">
+					<field name="name" />
+					<field name="student_ids" />
+					<newline />
+					<group expand="0" string="Group By...">
+						<filter string="Name" domain="[]" context="{'group_by':'name'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_open_student_parent_view">
+			<field name="name">Parent</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">student.parent</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="context">{}</field>
+		</record>
+
+		
+		<menuitem name="Parenté" parent="school.menu_student_profile"
+			id="menu_res_partner_form_adaptation" action="act_open_student_parent_view"
+			groups="school.group_school_administration,school.group_school_teacher"/>
+
+	</data>
+</openerp>

@@ -1,0 +1,438 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		<record id="school.action_view_student_student_kanban_2" model="ir.actions.act_window.view">
+			<field name="view_mode">kanban</field>
+			<field eval="19" name="sequence" />
+			<field name="view_id" ref="school.student_student_kanban_view" />
+			<field name="act_window_id" ref="school.action_student_student_form_2"/>
+		</record>
+
+		<record model="ir.actions.act_window" id="school.action_parent_form">
+			<field name="name">Parents</field>
+			<field name="res_model">res.partner</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form,tree,kanban</field>
+			<field name="domain">[('is_company','=',True),('customer','=',True)]</field>
+			<field name="search_view_id" ref="school.view_res_partner_parent_filter"/>
+		</record>
+
+		<!-- Student Information Tree View -->
+		<record model="ir.ui.view" id="view_student_student_tree_3">
+			<field name="name">student.student.tree.3</field>
+			<field name="model">student.student</field>
+			<field name="inherit_id" ref="school.view_student_student_tree_1" />
+			<field name="arch" type="xml">
+
+				<field name="name" position="after">
+					<field name="nom_prenom_arab" />
+				</field>
+				<field name="year" position="after">
+					<field name="standard_id" />
+				</field>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_student_student_tree_4">
+			<field name="name">student.student.tree.4</field>
+			<field name="model">student.student</field>
+			<field name="inherit_id" ref="school.view_student_student_tree_2" />
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+					<field name="nom_prenom_arab" />
+				</field>
+			</field>
+		</record>
+
+		<!-- Admission Register Information Form View -->
+		<record model="ir.ui.view" id="view_student_student_form_3">
+			<field name="name">student.student.form.3</field>
+			<field name="model">student.student</field>
+			<field name="inherit_id" ref="school.view_student_student_form_2" />
+			<field name="arch" type="xml">
+			    <field name="medium_id" position="after">
+			           <field name="student_code" />
+			           <field name="partner_id" />
+			    </field>
+			    <field name="name" position="replace">
+			    	<field name="name" placeholder="Nom" />
+			    </field>			    
+			    <field name="last" position="replace">
+			    	<field name="last" required="0" />
+			    </field>
+			    <field name="middle" position="replace">
+			    	<field name="middle" required="0" />
+			    </field>
+			    <field name="state_id" position="replace">
+			         <field name="state_id" domain="[('country_id','=',country_id)]"
+										placeholder="État" required="0"/>
+			    </field>
+				<field name="last" nolabel="1" position="after">
+					<field name="nom_prenom_arab" placeholder="الإسم و النسب" />
+				</field>
+
+				<xpath expr="//field[@name='maritual_status']" position="after">
+
+
+					<tr>
+						<td width="15%%" style="text-align:right;vertical-align:middle;">
+							<b>
+								<label for="date_depart" />
+								:
+							</b>
+						</td>
+						<td width="35%%" style="padding-left:10px;">
+							<field name="date_depart" />
+						</td>
+						<td width="15%%" style="text-align:right;vertical-align:middle;">
+							<b>
+								<label for="birth_palce_arab" />
+								:
+							</b>
+						</td>
+						<td width="35%%" style="padding-left:10px;">
+							<field name="birth_palce_arab" placeholder="مكان الازدياد" />
+						</td>
+					</tr>
+				</xpath>
+				<xpath expr="//page[@string='General']" position="after">
+							<page string="Liste de prix">
+								<field name="pricelist_ids" nolabel="1">
+									<tree editable='bottom'>
+										<field name="fees_struct_line_id"/>
+										<field name="amount"/>
+									</tree>
+								</field>
+							</page>
+				</xpath>
+			</field>
+		</record>
+
+		<!-- Admission Register Information Form View -->
+		<record model="ir.ui.view" id="view_student_student_form_4">
+			<field name="name">student.student.form.4</field>
+			<field name="model">student.student</field>
+			<field name="inherit_id" ref="school.view_student_student_form_1" />
+			<field name="arch" type="xml">
+				<data>
+			    <field name="state_id" position="replace">
+			         <field name="state_id" domain="[('country_id','=',country_id)]"
+										placeholder="State" required="0"/>
+			    </field>
+			    <field name="name" position="replace">
+			    	<field name="name" placeholder="Nom" />
+			    </field>	
+			    <field name="last" position="replace">
+			    	<field name="last" required="0" />
+			    </field>
+			    <field name="middle" position="replace">
+			    	<field name="middle" required="0" />
+			    </field>
+					<field name="last" nolabel="1" position="after">
+						<field name="nom_prenom_arab" placeholder="الإسم و النسب" />
+					</field>
+
+
+					<field name="admission_date" position="after">
+						<label for="date_depart" />
+						<field name="date_depart" placeholder="Date de départ"
+							nolabel="1" />
+					</field>
+
+					<field name="date_of_birth" position="after">
+						<label for="birth_palce_arab" />
+						<field name="birth_palce_arab" placeholder="مكان الازدياد"
+							nolabel="1" />
+					</field>
+
+				<xpath expr="//page[@string='General']" position="after">
+							<page string="Liste de prix">
+								<field name="pricelist_ids" nolabel="1">
+									<tree editable='bottom'>
+										<field name="fees_struct_line_id"/>
+										<field name="amount"/>
+									</tree>
+								</field>
+							</page>
+				</xpath>
+
+				</data>
+			</field>
+		</record>
+
+		<!-- Teacher Information Form View -->
+		<record model="ir.ui.view" id="view_employee_form_2">
+			<field name="name">hr.employee.form_2</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_form" />
+			<field name="arch" type="xml">
+				<data>
+					<xpath expr="//div[@class = 'oe_title']" position="inside">
+
+						<label for="nom_prenom_arab" class="oe_edit_only" />
+						<field name="nom_prenom_arab" />
+
+					</xpath>
+
+					<xpath expr="//group[@string = 'Position']" position="inside">
+						<field name="date_embauche" position="after">
+							<field name="coach_id" />
+						</field>
+					</xpath>
+
+
+					<xpath expr="//group[@string = 'Citizenship &amp; Other Info']"
+						position="inside">
+						<field name="cin" position="after">
+							<field name="otherid" />
+						</field>
+						<field name="annees_experience" position="after">
+							<field name="otherid" />
+						</field>
+						<field name="personne_a_charge" position="after">
+							<field name="otherid" />
+						</field>
+						<field name="numero_rcp" position="after">
+							<field name="otherid" />
+
+						</field>
+
+					</xpath>
+				</data>
+			</field>
+		</record>
+        <record model="ir.ui.view"  id="view_student_payslip_form">
+            <field name="name">student.payslip.form</field>
+            <field name="model">student.payslip</field>
+            <field name="inherit_id" ref="school_fees.view_student_payslip_form" />
+            <field name="arch" type="xml">
+                <button name="student_pay_fees" position="replace">
+                   <field name="invoice_state" invisible="1" />
+                   <button name="create_invoice" string="Créer la facture" type="object" class="oe_highlight" groups="school.group_school_administration" attrs="{'invisible':['|',('invoice_state','!=','2binvoiced'),('state','!=','confirm')]}"/>
+                   <button name="action_view_invoice" string="Afficher la facture" type="object"  class="oe_highlight"
+                             groups="school.group_school_administration" attrs="{'invisible':['|',('invoice_state','!=','invoiced'),('state','=','draft')]}"/>
+                </button>
+                <field  name="student_id" position="replace">
+                	<field name="student_id" colspan="4" domain="[('partner_id.parent_id','=',partner_id)]" string="Étudiant"/>
+                </field>
+                <field name="move_id" position="before">
+                	<field name="invoice_id" />
+                	<field name="voucher_id" />
+                </field>
+                <field name="student_id" position="before">
+                	<separator  colspan="4"/>
+                	<field name="partner_id" colspan="4"/>
+                </field>
+                <page string="Other Information" position="after">
+                     <page string="Règlements">   
+                         <field name="payment_ids">
+                                <tree string="Payments">
+                                    <field name="date" string="Payment Date"/>
+                                    <field name="move_id" invisible="1"/>
+                                    <field name="ref"/>
+                                    <field name="name"/>
+                                    <field name="journal_id"/>
+                                    <field name="debit"/>
+                                    <field name="credit"/>
+                                    <field name="amount_currency" invisible="1"/>
+                                    <field name="currency_id" groups="base.group_multi_currency" />
+                                </tree>
+                         </field>
+                     </page>
+                </page>
+            </field>
+         </record>
+
+        <record model="ir.ui.view"  id="view_student_payslip_tree">
+            <field name="name">student.payslip.tree</field>
+            <field name="model">student.payslip</field>
+            <field name="inherit_id" ref="school_fees.view_student_payslip_tree" />
+            <field name="arch" type="xml">
+               <field name="state"  position="before">
+               		<field name="payment_ids" invisible="1" />
+               	   <field name="total" string="Paiement dû"/>
+                   <field name="paid_amount" />
+                   <field name="balance" />
+               </field>
+               <field name="state" position="after">
+                   <field name="invoice_state" />
+               </field>
+            </field>
+         </record>
+
+        <record model="ir.ui.view"  id="view_student_payslip_line_form">
+            <field name="name">student.payslip.line.form</field>
+            <field name="model">student.payslip.line</field>
+            <field name="inherit_id" ref="school_fees.view_student_payslip_line_form"/>
+            <field name="arch" type="xml">
+            	 <field name="name" position="replace">
+            	 	 <field name="product_id" placeholder="Name"/>
+            	 </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_student_payslip_line_tree">
+            <field name="name">student.payslip.line.tree</field>
+            <field name="model">student.payslip.line</field>
+            <field name="inherit_id" ref="school_fees.view_student_payslip_line_tree"/>
+            <field name="arch" type="xml">
+            	 <field name="name" position="replace">
+            	 	 <field name="product_id"/>
+            	 </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view"  id="view_student_fees_structure_line_form">
+            <field name="name">student.fees.structure.line.form</field>
+            <field name="model">student.fees.structure.line</field>
+            <field name="inherit_id" ref="school_fees.view_student_fees_structure_line_form"/>
+            <field name="arch" type="xml">
+                <field name="amount" position="replace">
+                	<field name="amount" string="Prix de base" />
+                </field>
+            	 <field name="name" position="replace">
+            	 	 <field name="product_id"/>
+            	 </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_student_fees_structure_line_tree">
+            <field name="name">student.fees.structure.line.tree</field>
+            <field name="model">student.fees.structure.line</field>
+            <field name="inherit_id" ref="school_fees.view_student_fees_structure_line_tree"/>
+            <field name="arch" type="xml">
+            	 <field name="name" position="replace">
+            	 	 <field name="product_id"/>
+            	 </field>
+            </field>
+        </record>
+
+		<record model="ir.actions.act_window" id="action_student_fees_structure_line_tree">
+            <field name="name">Ligne structure de frais</field>
+            <field name="res_model">student.fees.structure.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    <menuitem
+        name="Ligne structure de frais" parent="school_fees.menu_student_fees_structure_form"
+        id="menu_student_fees_structure_tree"
+        action="action_student_fees_structure_line_tree"
+        sequence="1"
+        />
+     
+
+        <record model="ir.ui.view" id="view_student_payslip_search">
+            <field name="name">student.payslip.search</field>
+            <field name="model">student.payslip</field>
+            <field name="inherit_id" ref="school_fees.view_student_payslip_search" />
+            <field name="arch" type="xml">
+            	  <field name="name" position="after">
+            	  	<field name="voucher_id" />
+            	  </field>
+                  <filter name="register_id" position="replace">
+                       <filter string="Mois" icon="terp-folder-yellow" name="register_id" context="{'group_by':'register_id'}"/>
+                       <filter string="Facturation" icon="terp-folder-yellow" context="{'group_by':'invoice_state'}"/>
+                  </filter>
+                  <filter name="student_id" position="after">
+                  		<filter string="Parent" icon="terp-folder-yellow" context="{'group_by':'partner_id'}"/>
+                  </filter>
+            </field>
+        </record>
+
+	 	<!-- Student Information Search View -->
+        <record model="ir.ui.view" id="school.view_student_student_search_1">
+            <field name="name">student.student.search.1</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <search string="Student Information">
+                         <field name="pid"/>
+                         <field name="name" />
+                         <field name="student_code" />
+                         <field name="year"/>
+                         <field name="standard_id" />
+                         <field name="gender"/>
+                         <field name="school_id"/>
+                    <group expand="0" string="Group By..." colspan="12" col="10">
+                        <filter icon="terp-project" string="Class" help="By Class" context="{'group_by':'standard_id'}"/>
+                        <filter icon="terp-project" string="Gender" help="By Gender" context="{'group_by':'gender'}"/>
+                        <filter icon="terp-project" string="Name" help="By Class" context="{'group_by':'student_name'}"/>
+                        <filter icon="terp-project" string="School" help="By School" context="{'group_by':'school_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record> 
+
+        <record model="ir.ui.view" id="school.view_student_student_search_2">
+            <field name="name">student.student.search.2</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <search string="Admission Register">
+                     <filter icon="terp-project"  string="Draft" domain="[('state','=', 'draft')]" help="Admission In Draft State"/>
+                     <filter icon="terp-project"  string="Alumni" domain="[('state','=', 'alumni')]" help="Admission In Confirm State"/>
+                     <filter icon="terp-project"  string="Terminated" domain="[('state','=', 'terminate')]" help="Admission In Pending State"/>
+                     <filter icon="terp-project"  string="Done" domain="[('state','=', 'done')]" help="Admission In Done State"/>
+                     <separator orientation="vertical"/>
+                     <field name="name"/>
+                     <field name="student_code"/>
+                     <field name="year"/>
+                     <field name="standard_id"/>
+                     <field name="gender"/>
+                     <field name="school_id"/>
+                    <group expand="0" string="Group By..." colspan="12" col="10">
+                        <filter icon="terp-project" string="Class"  domain="[]" help="By Class" context="{'group_by':'standard_id'}"/>
+                        <filter icon="terp-project" string="Gender" domain="[]" help="By Gender" context="{'group_by':'gender'}"/>
+                        <filter icon="terp-project" string="Name" domain="[]" help="By Class" context="{'group_by':'student_name'}"/>
+                        <filter icon="terp-project" string="School" help="By School"
+							context="{'group_by':'school_id'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+    	<menuitem name="Fees Registers" parent="school_fees.menu_fees" id="school_fees.menu_student_fees_register" action="school_fees.action_student_fees_register_form" groups="school.group_school_administration,-school.group_school_teacher,-school.group_school_student,-school.group_school_parent"/>
+        <menuitem name="Parents Details" parent="school.menu_student_profile"
+			                 id="school.menu_res_partner_form" action="school.action_parent_form"
+			groups="school.group_school_administration,-school.group_school_student,school.group_school_teacher,-school.group_school_parent"/>
+
+		<menuitem name="Students Profile" parent="school.menu_ems"
+			id="school.menu_student_profile" sequence="2" groups="school.group_school_administration"/>
+		<menuitem name="Reminders" parent="school.menu_ems" id="school.menu_reminders"
+			sequence="8" groups="school.group_school_administration,school.group_school_student,school.group_school_teacher"/>			
+		<menuitem name="Admission Register" parent="school.menu_ems"
+			id="school.menu_admission_form" sequence="1" groups="school.group_school_administration"/>
+	    <menuitem
+		    name="Event Information" parent="school.menu_ems"
+	    	id="school_event.menu_event_form_1" sequence="4" groups="school.group_school_administration,school.group_school_student,school.group_school_teacher"/>			
+        <menuitem
+            name="Transport" parent="school.menu_ems"
+            id="school_transport.menu_transport"
+            sequence="4" groups="school.group_school_administration"/>
+
+		<menuitem name="Attendance" parent="school.menu_ems"
+			id="school_attendance.menu_attendance" sequence="8" groups="school.group_school_administration,school.group_school_teacher"/>
+		<menuitem name="Student Evaluation" parent="school.menu_ems"
+			id="student_evaluation.menu_stu_eval" sequence="8" groups="school.group_school_administration,school.group_school_teacher"/>			
+
+<!--         <record model="ir.ui.view" id="view_student_code_tree">
+            <field name="name">student.code.tree</field>
+            <field name="model">student.code</field>
+            <field name="arch" type="xml">
+            	<tree>
+            		<field name="name"/>
+            		<field name="code"/>
+            	</tree>
+            </field>
+        </record>
+
+		<record model="ir.actions.act_window" id="action_student_code_tree">
+            <field name="name">Codes</field>
+            <field name="res_model">student.code</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+		<menuitem name="Code" parent="school.menu_student_profile"
+			id="11" action="action_student_code_tree"
+			groups="base.group_no_one"/> -->
+	</data>
+</openerp>
