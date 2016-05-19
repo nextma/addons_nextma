@@ -28,7 +28,7 @@ GESTION CABINET NOTAIRE
 suggestions, propositions,remarquess welcome at info@nextma.com
 
 """,
-    'author': 'NEXTMA SARL',
+    'author': 'NEXTMA, HORIYASOFT',
     'website': 'http://www.nextma.com',
     'category': 'Localization',
     'depends': [
