@@ -7,7 +7,7 @@
 {
     'name' : 'TMS Pneumatic management',
     'version': '1.0',
-    'author' : 'NEXTMA S.A.R.L',
+    'author' : 'NEXTMA',
     'sequence': '1',
     'category': 'Vertical functionality',
     'summary': 'Gestion de la pneumatique , montage/demontage des pneus',
