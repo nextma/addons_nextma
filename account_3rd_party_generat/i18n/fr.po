@@ -1,0 +1,302 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_3rd_party_generat
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-16 21:08+0000\n"
+"PO-Revision-Date: 2012-10-16 21:08+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_3rd_party_generat
+#: help:account.generator.type,account_template_id:0
+msgid "Account use to create the new one"
+msgstr "Compte utilisé comme modèle"
+
+#. module: account_3rd_party_generat
+#: view:wizard.install.third.part.accounts:0
+msgid "Account number"
+msgstr "Numéro de compte"
+
+#. module: account_3rd_party_generat
+#: help:account.generator.type,name:0
+msgid "Name appear on the partner form"
+msgstr "Nom qui apparait dans le formulaire des partenaires"
+
+#. module: account_3rd_party_generat
+#: help:account.generator.type,code:0
+msgid "Code use to store value in the database"
+msgstr "Code utilisé pour stocker la valeur dans la base de données"
+
+#. module: account_3rd_party_generat
+#: model:ir.actions.act_window,name:account_3rd_party_generat.action_third_part_account
+#: model:ir.actions.todo,note:account_3rd_party_generat.config_third_part_account
+msgid "Configure third party account rules"
+msgstr "Configurer la règle de création des comptes de tiers"
+
+#. module: account_3rd_party_generat
+#: field:res.partner,customer_type:0
+msgid "Customer type"
+msgstr "Type de client"
+
+#. module: account_3rd_party_generat
+#: model:ir.model,name:account_3rd_party_generat.model_account_generator_type
+msgid "Account generator customize per type"
+msgstr "Générateur de compte paramétrable par type"
+
+#. module: account_3rd_party_generat
+#: view:res.company:0
+msgid "Configure the account generator, for each type of partner"
+msgstr "Configuration du générateur de compte, pour chaque type de partenaires"
+
+#. module: account_3rd_party_generat
+#: help:account.generator.type,field_select:0
+msgid "Select the field where the code be generate"
+msgstr "Sélectionnez le champ dans lequel le code sera généré"
+
+#. module: account_3rd_party_generat
+#: selection:account.generator.type,partner_type:0
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,partner_type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: account_3rd_party_generat
+#: field:res.partner,force_create_customer_account:0
+#: field:res.partner,force_create_supplier_account:0
+msgid "Force create account"
+msgstr "Forcer la création du compte"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,code:0
+msgid "code"
+msgstr "code"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,lock_partner_name:0
+msgid "Lock partner name"
+msgstr "Verrouille le nom du partenaire"
+
+#. module: account_3rd_party_generat
+#: constraint:res.company:0
+msgid "Error! You can not create recursive companies."
+msgstr "Erreur ! Vous ne pouvez pas créer de sociétés récursives"
+
+#. module: account_3rd_party_generat
+#: field:wizard.install.third.part.accounts,payable_id:0
+msgid "Account payable"
+msgstr "Compte fournisseur"
+
+#. module: account_3rd_party_generat
+#: field:res.partner,supplier_type:0
+msgid "Supplier type"
+msgstr "Type de fournisseur"
+
+#. module: account_3rd_party_generat
+#: help:account.generator.type,default_value:0
+msgid "Default value for this type"
+msgstr "Valeur par défaut pour ce type"
+
+#. module: account_3rd_party_generat
+#: view:wizard.install.third.part.accounts:0
+msgid "Accounts Generate"
+msgstr "Génération des comptes de tiers"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,company_id:0
+#: field:wizard.install.third.part.accounts,company_id:0
+msgid "Company"
+msgstr "Société"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,account_parent_id:0
+msgid "Parent account"
+msgstr "Compte parent"
+
+#. module: account_3rd_party_generat
+#: view:wizard.install.third.part.accounts:0
+msgid "Update"
+msgstr "Mettre à jour"
+
+#. module: account_3rd_party_generat
+#: help:account.generator.type,partner_type:0
+msgid "Select the type of partner"
+msgstr "Sélectionner le type de partenaire"
+
+#. module: account_3rd_party_generat
+#: constraint:res.company:0
+msgid "Error msg is in raise"
+msgstr "Message d'erreur qui doit être levé."
+
+#. module: account_3rd_party_generat
+#: model:ir.model,name:account_3rd_party_generat.model_wizard_install_third_part_accounts
+msgid "wizard.install.third.part.accounts"
+msgstr "wizard.install.third.part.accounts"
+
+#. module: account_3rd_party_generat
+#: constraint:res.company:0
+msgid "The 'SIRET complement' should have exactly 5 digits."
+msgstr "Le 'Complément SIRET' doit être constitué de 5 chiffres."
+
+#. module: account_3rd_party_generat
+#: selection:account.generator.type,field_select:0
+msgid "ref"
+msgstr "ref"
+
+#. module: account_3rd_party_generat
+#: help:account.generator.type,company_id:0
+msgid "Company where this configuration is apply"
+msgstr "Société pour laquelle la configuration est appliquée"
+
+#. module: account_3rd_party_generat
+#: selection:account.generator.type,partner_type:0
+msgid "Customer"
+msgstr "Client"
+
+#. module: account_3rd_party_generat
+#: help:res.partner,force_create_customer_account:0
+msgid "If set, OpenERP will generate a new acount for this customer"
+msgstr "Si coché, OpenERP regénérera un nouveau compte pour ce client"
+
+#. module: account_3rd_party_generat
+#: sql_constraint:res.company:0
+msgid "The company name must be unique !"
+msgstr "Le nom de la société doit être unique !"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,account_reference_id:0
+msgid "Account reference"
+msgstr "Compte de référence"
+
+#. module: account_3rd_party_generat
+#: field:res.company,account_generator_type_ids:0
+msgid "Account generator type"
+msgstr "Type de générateur de compte"
+
+#. module: account_3rd_party_generat
+#: model:ir.model,name:account_3rd_party_generat.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: account_3rd_party_generat
+#: help:account.generator.type,account_parent_id:0
+msgid "Select the parent account of the new account generate"
+msgstr "Sélectionner le compte parent des nouveaux comptes générés"
+
+#. module: account_3rd_party_generat
+#: help:account.generator.type,account_reference_id:0
+msgid "If no sequence define, this account reference is choose all the time"
+msgstr "Si aucune séquence n'est définie, ce compte sera choisi à chaque fois"
+
+#. module: account_3rd_party_generat
+#: view:account.generator.type:0
+#: view:res.company:0
+msgid "Account generator"
+msgstr "Générateur de compte"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,account_template_id:0
+msgid "Account template"
+msgstr "Modèle de compte"
+
+#. module: account_3rd_party_generat
+#: help:res.partner,supplier_type:0
+msgid "Supplier account type"
+msgstr "Type de compte fournisseur"
+
+#. module: account_3rd_party_generat
+#: view:account.generator.type:0
+msgid "Reference template (no treatment)"
+msgstr "Modèle de référence (aucun traitement)"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,default_value:0
+msgid "Default value"
+msgstr "Valeur par défaut"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,code_pre:0
+msgid "Code Prefix"
+msgstr "Préfixe du code"
+
+#. module: account_3rd_party_generat
+#: help:account.generator.type,ir_sequence_id:0
+msgid "Sequence use to generate the code"
+msgstr "Séquence utilisée pour générer le code"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,field_select:0
+msgid "Select Field"
+msgstr "Choix du champ"
+
+#. module: account_3rd_party_generat
+#: selection:account.generator.type,field_select:0
+msgid "name"
+msgstr "nom"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,code_seq_id:0
+#: field:account.generator.type,ir_sequence_id:0
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: account_3rd_party_generat
+#: help:res.partner,force_create_supplier_account:0
+msgid "If set, OpenERP will generate a new acount for this supplier"
+msgstr "Si coché, OpenERP regénérera un nouveau compte pour ce fournisseur"
+
+#. module: account_3rd_party_generat
+#: help:account.generator.type,lock_partner_name:0
+msgid "Partner's name is locked when his account has at least one account move"
+msgstr "Le nom du partenaire est verrouillé si son compte a au moins une écriture"
+
+#. module: account_3rd_party_generat
+#: constraint:res.partner:0
+msgid "Error msg in raise"
+msgstr "Message d'erreur à lever"
+
+#. module: account_3rd_party_generat
+#: field:account.generator.type,code_suf:0
+msgid "Code Suffix"
+msgstr "Suffixe du code"
+
+#. module: account_3rd_party_generat
+#: view:wizard.install.third.part.accounts:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: account_3rd_party_generat
+#: model:ir.model,name:account_3rd_party_generat.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: account_3rd_party_generat
+#: field:wizard.install.third.part.accounts,receivable_id:0
+msgid "Account receivable"
+msgstr "Compte client"
+
+#. module: account_3rd_party_generat
+#: view:account.generator.type:0
+msgid "Generate template (with treatment)"
+msgstr "Modèle de génération (avec des traitements)"
+
+#. module: account_3rd_party_generat
+#: help:res.partner,customer_type:0
+msgid "Customer account type"
+msgstr "Type de compte client"
+
