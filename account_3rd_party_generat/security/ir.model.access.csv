@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_account_generator_type_user","account.generator.type User","model_account_generator_type","",1,0,0,0
+"access_account_generator_type_manager","account.generator.type Manager","model_account_generator_type","account.group_account_manager",1,1,1,1
