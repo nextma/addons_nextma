@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        ##############################################################################
+        #
+        #    account_3rd_party_generat module for OpenERP, Module to generate account
+        #              number for customer and supplier
+        #    Copyright (C) 2011 SYLEAM ([http://www.syleam.fr/])
+        #              Christophe CHAUVET [christophe.chauvet@syleam.fr]
+        #              Sebastien LANGE [sebastien.lange@syleam.fr]
+        #
+        #    This file is a part of account_3rd_party_generat
+        #
+        #    account_3rd_party_generat is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    account_3rd_party_generat is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU General Public License for more details.
+        #
+        #    You should have received a copy of the GNU General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <record id="view_res_partner_type_form_form" model="ir.ui.view">
+            <field name="name">res.partner.type.form</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="priority" eval="20"/>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='property_account_receivable']" position="after">
+                        <field name="customer_type" widget="selection" attrs="{'required': [('force_create_customer_account','=', True)]}"/>
+                        <field name="force_create_customer_account" attrs="{'invisible': [('customer','=', False)]}"/>
+                    </xpath>
+                    <xpath expr="//field[@name='property_account_payable']" position="after">
+                        <field name="supplier_type" widget="selection" attrs="{'required': [('force_create_supplier_account','=', True)]}"/>
+                        <field name="force_create_supplier_account" attrs="{'invisible': [('supplier','=', False)]}"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>

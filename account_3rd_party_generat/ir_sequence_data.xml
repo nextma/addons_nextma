@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+<!--
+	Sequences types for customers and suppliers accounts
+-->
+        <record model="ir.sequence.type" id="seq_type_partner_third_part">
+            <field name="name">Account third part</field>
+            <field name="code">account.partner.third_part</field>
+        </record>
+        
+<!--
+	Sequences for customers and suppliers accounts
+-->
+        <record model="ir.sequence" id="seq_supplier_account">
+            <field name="name">Supplier account</field>
+            <field name="code">account.partner.third_part</field>
+            <field name="prefix">401</field>
+            <field name="number_next" eval="1"/>
+            <field name="number_increment" eval="1"/>
+            <field name="padding" eval="6"/>
+            <!-- field name="suffix"></field -->
+        </record>
+        <record model="ir.sequence" id="seq_customer_account">
+            <field name="name">Customer account</field>
+            <field name="code">account.partner.third_part</field>
+            <field name="prefix">411</field>
+            <field name="number_next" eval="1"/>
+            <field name="number_increment" eval="1"/>
+            <field name="padding" eval="6"/>
+            <!-- field name="suffix"></field -->
+        </record>
+        
+    </data>
+</openerp>
