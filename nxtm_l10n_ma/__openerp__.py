@@ -22,7 +22,7 @@
 {
     'name' : 'Comptabilité - Maroc PCG',
     'version' : '1.0',
-    'author' : 'kazacube,nextma',
+    'author' : 'NEXTMA,kazacube',
     'category' : 'Localization/Account Charts',
     'description': """
 Module du Plan Comptable Générale (PCG) mise à jour meetup nextma
