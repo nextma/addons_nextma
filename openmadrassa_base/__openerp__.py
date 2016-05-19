@@ -23,7 +23,7 @@
 {
     "name" : "OpenMadrassa Base",
     "version" : "2.2.0",
-    "author" : "NEXTMA S.A.R.L",
+    "author" : "NEXTMA, HORIYASOFT",
     "website" : "http://www.nextma.com",
     "category": "School Management",
     "complexity": "easy",
