@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="style" inherit_id="report.layout">
+  <xpath expr="//style" position="after">
+    <style type="text/css">
+
+.border_visas{
+		border:1px solid black;
+		height:150px;
+		width:95%;
+		text-align:center;
+	}
+
+.table_somme{
+  margin-left:5%;
+  margin-right:5%;
+  width:90%;
+  height:80px;
+}
+
+.table_somme td{
+  text-align:center;
+  vertical-align:middle;
+  border: 2px solid black;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+}
+
+.table2 {
+	border: 1px solid black;
+	width:100%;
+}
+.table20 {
+	border: 1px solid black;
+	width:100%;
+	height: 750px;
+}
+	.table2 > tbody > tr > th,
+	.table2 > tfoot > tr > th,
+	.table2 > tbody > tr > td,
+	.table2 > tfoot > tr > td {
+  								border-left: 1px solid black;
+  								border-right: 1px solid black;
+							  }
+							  
+	.table2 > thead > tr > th,
+	.table2 > thead > tr > td{
+  								border: 1px solid black;
+							  }
+
+	.table20 > tbody > tr > th,
+	.table20 > tfoot > tr > th,
+	.table20 > tbody > tr > td,
+	.table20 > tfoot > tr > td {
+  								border-left: 1px solid black;
+  								border-right: 1px solid black;
+							  }
+							  
+	.table20 > thead > tr > th,
+	.table20 > thead > tr > td{
+  								border: 1px solid black;
+							  }							  
+    </style>
+  </xpath>
+</template>
+</data>
+</openerp>
