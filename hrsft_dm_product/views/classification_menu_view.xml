@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<odoo>
+
+  <data>
+    
+
+
+      <record id="action_123" model="ir.actions.act_window">
+          <field name="name">Classification de Produit </field>
+          <field name="res_model">product.classification</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Créer le premier enregistrement
+                </p>
+                 
+          </field>
+
+
+
+      </record>
+      
+      <menuitem action="action_123" name="Classification d'articles" groups="base.group_no_one" id="menu_product_classification_action_form" parent="sale.prod_config_main" sequence="3"/>
+
+      
+  </data>
+
+</odoo>
