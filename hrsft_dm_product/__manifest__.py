@@ -22,8 +22,11 @@
     'name': 'Dispositifs Medicaux',
     'version': '10.0.1.0.0',
     'author': "HORIYASOFT",
-    'category': 'Industries',
+    'category': 'Tools',
     'depends': ['product'],
+    'summary': """Gestion des Dispositifs medicaux""",
+    'license': 'AGPL-3',
+    'website': 'http://www.horiyasoft.com',
     'demo': [],
     'description': """
        
