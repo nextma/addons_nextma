@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<odoo>
+
+  <data>
+    
+<record id="first_classification_item" model="product.classification">
+    <field name="name">I</field>
+    <field name="text">I</field>
+</record>
+<record id="second_classification_item" model="product.classification">
+    <field name="name">IIa</field>
+    <field name="text">IIa</field>
+</record>
+<record id="third_classification_item" model="product.classification">
+    <field name="name">IIb</field>
+    <field name="text">IIb</field>
+</record>
+<record id="fourth_classification_item" model="product.classification">
+    <field name="name">III</field>
+    <field name="text">III</field>
+</record>
+
+      
+  </data>
+
+</odoo>
