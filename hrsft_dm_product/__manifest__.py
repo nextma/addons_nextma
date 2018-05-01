@@ -40,6 +40,7 @@
         'data/default_data.xml'
 
     ],
+    'images': ['static/description/banner.png'],
     'auto_install': False,
     'installable': True,
 }
