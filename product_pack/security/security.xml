@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <record id="group_manager" model="res.groups">
+            <field name="name">Product Pack</field>
+             <!--<field name="pro_ids" eval="[(4, ref('base.group_system')), (4,ref('sales_team.group_sale_manager'))]"/>-->
+
+        </record>
+
+        
+    </data>
+</odoo>
