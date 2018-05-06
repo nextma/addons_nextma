@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <record model="ir.ui.view" id="form_pack">
+        <field name="name">pack.pack.form</field>
+        <field name="model">product.template</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+        <field name="arch" type="xml">
+            <div name="options"  >
+                <div>
+                    <field name="pack" />
+                    <label for="pack" />
+                </div>
+            </div>
+            <notebook>
+                <page string="Produits" attrs="{'invisible':[('pack','=',False)]}">
+                    <group colspan="4">
+                        <field name="tip" />
+                    </group>
+                    <field name="pro_ids" groups="base.group_user">
+                        <tree string="Produits" editable="bottom">
+                            <field name="pack_pro_id" required="1" />
+                            <field name="qty" required="1 " />
+                            <field name="uni_med" required="1" />
+                        </tree>
+                    </field>
+                <group class="oe_subtotal_footer oe_rigth" colspan="2" name="grupo_product">
+                    <field name="pre_sale"  />
+                </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    </data>
+</openerp>
