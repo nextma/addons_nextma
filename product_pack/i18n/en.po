@@ -1,0 +1,184 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* odoo_pack
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-28 16:13+0000\n"
+"PO-Revision-Date: 2018-02-28 16:21+0000\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Language: fr\n"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product_create_uid
+msgid "Created by"
+msgstr "Created by"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product_create_date
+msgid "Created on"
+msgstr "Created on"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product_display_name
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: odoo_pack
+#: code:addons/odoo_pack/pack.py:148
+#, python-format
+msgid ""
+"ERREUR: le package ne doit pas contenir des produits declares en tant que "
+"pack"
+msgstr "ERROR: the package must not contain products declared as a package"
+
+#. module: odoo_pack
+#: code:addons/odoo_pack/pack.py:137
+#, python-format
+msgid ""
+"Erreur dans la quantite de produit:\n"
+" %s \n"
+" La quantite du produit ne doit pas avoir la valeur 0.\n"
+" Si vous le souhaitez,retirez le produit du package."
+msgstr ""
+"Error in the quantity of product:\n"
+" % s\n"
+" The quantity of the product must not have the value 0.\n"
+" If you wish, remove the product from the package"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product_id
+msgid "ID"
+msgstr "ID"
+
+#. module: odoo_pack
+#: code:addons/odoo_pack/pack.py:204
+#, python-format
+msgid ""
+"La categorie de l unite de mesure de produit:\n"
+" %s \n"
+" doit etre egal a la categorie de l unite du pack"
+msgstr ""
+"The category of unit of measure of the product:\n"
+" % s\n"
+" must be equal to the unit category of the pack"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product___last_update
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product_write_uid
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product_write_date
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: odoo_pack
+#: code:addons/odoo_pack/pack.py:194
+#, python-format
+msgid ""
+"Le pack ne doit pas avoir de valeur s il est base sur le prix de ses "
+"composants."
+msgstr ""
+"The pack should not have a value if it is based on the price of its "
+"components."
+
+#. module: odoo_pack
+#: code:addons/odoo_pack/pack.py:214
+#, python-format
+msgid "Le paquet doit contenir un certain produit"
+msgstr "The package must contain a product"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_delivery_carrier_mod_pro
+#: model:ir.model.fields,field_description:odoo_pack.field_product_product_mod_pro
+#: model:ir.model.fields,field_description:odoo_pack.field_product_template_mod_pro
+msgid "Mod"
+msgstr "Mod"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_delivery_carrier_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_product_product_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_product_template_pack
+msgid "Pack"
+msgstr "Pack"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product_subtotal_price
+msgid "Prix"
+msgstr "Prix"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_delivery_carrier_tip
+#: model:ir.model.fields,field_description:odoo_pack.field_product_product_tip
+#: model:ir.model.fields,field_description:odoo_pack.field_product_template_tip
+msgid "Prix base sur les composants"
+msgstr "Price based on components"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_delivery_carrier_pre_sale
+#: model:ir.model.fields,field_description:odoo_pack.field_product_product_pre_sale
+#: model:ir.model.fields,field_description:odoo_pack.field_product_template_pre_sale
+msgid "Prix du paquet"
+msgstr "Package price"
+
+#. module: odoo_pack
+#: model:ir.model,name:odoo_pack.model_product_template
+msgid "Product Template"
+msgstr "Product Template"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product_pack_pro_id
+msgid "Produit"
+msgstr "Product"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_delivery_carrier_pro_ids
+#: model:ir.model.fields,field_description:odoo_pack.field_product_product_pro_ids
+#: model:ir.model.fields,field_description:odoo_pack.field_product_template_pro_ids
+#: model:ir.ui.view,arch_db:odoo_pack.form_pack
+msgid "Produits"
+msgstr "Products"
+
+#. module: odoo_pack
+#: model:ir.model,name:odoo_pack.model_pack_product
+msgid "Produits du Pack"
+msgstr "Package Product"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product_qty
+msgid "Quantite"
+msgstr "Quantity"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product_pro_id
+msgid "Reference"
+msgstr "Reference"
+
+#. module: odoo_pack
+#: model:ir.model,name:odoo_pack.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Sales Order Line"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product_subtotal
+msgid "Sous Total"
+msgstr "Subtotal"
+
+#. module: odoo_pack
+#: model:ir.model.fields,field_description:odoo_pack.field_pack_product_uni_med
+msgid "Unite de Mesure"
+msgstr "Unit of Measure"
