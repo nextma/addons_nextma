@@ -22,6 +22,7 @@
     'version': '1.0',
     'author': 'HORIYASOFT',
     'category': 'Management',
+    'summary': """Fiche partenaire Maroc""",
     'license': 'AGPL-3',
     'website': 'www.horiyasoft.com',
     'description': """Ajouts des champs RC(Registre de Commerce, IF (Identifiant Fiscale), ICE (Identifiant ommun de l'Entreprise)
