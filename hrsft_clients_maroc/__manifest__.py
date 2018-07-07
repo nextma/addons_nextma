@@ -32,6 +32,7 @@ dans la fiche client en conformité aux normes Maroc
     'data': [
              'views/partner_view.xml',
              ],
+    'images': ['static/description/banner.png'],
     'installable': True,
     'application' : True,
 }
