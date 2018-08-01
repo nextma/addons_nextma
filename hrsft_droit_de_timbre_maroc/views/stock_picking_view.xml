@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_form_invoice_status" model="ir.ui.view">
+            <field name="name">account.invoice.status</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+
+                <field name="residual" position="after"> 
+
+                    <field name="timbre" attrs="{'invisible':[('state', '!=', 'paid')]}" />
+                    <field name="montant_avec_timbre" attrs="{'invisible':[('state', '!=', 'paid')]}"/>
+                
+                </field>
+            
+
+            </field>
+          </record>
+         
+           <record id="vpicktree12" model="ir.ui.view">
+            <field name="name">account.invoice.state</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+
+                 <xpath expr="//tree/field[@name='state']" position="after">
+                 	
+                    <field name="timbre" sum = "Total"/>
+                    <field name="montant_avec_timbre" />
+                </xpath>
+                
+                  
+              
+            </field>
+        </record>
+        
+        <record id="account_search_invoice_status" model="ir.ui.view">
+              <field name="name">search.invoice.status</field>
+              <field name="model">account.invoice</field>
+              <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+              <field name="arch" type="xml">
+
+                <filter name="unpaid" position="before">
+
+                
+                <filter name="avec_sans_timbre_1" string="Avec Timbre"  domain="[('test','=','avec_timbre')]" /> 
+                <filter name="avec_sans_timbre_2" string="Sans Timbre"  domain="[('test','=','sans_timbre')]" /> 
+                 
+                </filter>
+
+              </field>
+            </record>
+          
+
+    </data>
+</openerp>
