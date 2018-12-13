@@ -7,7 +7,8 @@
 {
     'name' : 'TMS Pneumatic management',
     'version': '1.0',
-    'author' : 'NEXTMA',
+    'author' : 'NEXTMA,HORIYASOFT',
+    'website': 'http://www.horiyasoft.com',
     'sequence': '1',
     'category': 'Vertical functionality',
     'summary': 'Gestion de la pneumatique , montage/demontage des pneus',
