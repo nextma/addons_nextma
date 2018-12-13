@@ -49,9 +49,9 @@ Maintenance for Transport Management System (TMS):
     - Alertes programmées
 info@nextma.com
 """,
-    'author': 'NEXTMA',
-    'maintainer': 'NEXTMA',
-    'website': 'http://www.nextma.com',
+    'author': 'NEXTMA,HORIYASOFT',
+    'maintainer': 'NEXTMA,HORIYASOFT',
+    'website': 'http://www.horiyasoft.com',
     'icon': '/tms_gmao/static/src/img/icon.png',
     'depends': ["tms","mro"],
     'data': [
