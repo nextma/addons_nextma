@@ -46,9 +46,9 @@ Transport Management System (TMS) for Odoo.
     - Gestion des chauffeurs \n
     - Gestion des commissions \n
 """,
-    'author': 'NEXTMA',
+    'author': 'NEXTMA,HORIYASOFT.com',
     'maintainer': 'NEXTMA',
-    'website': 'http://www.nextma.com',
+    'website': 'http://www.horiyasoft.com',
     'icon': '/tms/static/src/img/icon.png',
     'depends': ["base","sale","hr","stock","product","purchase","analytic","fleet","account"],
     'data': [
