@@ -1,0 +1,87 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="hrsft_mode_paiement.form">
+            <field name="name">mode de paiement </field>
+            <field name="model">hrsft_mode_paiement.mode_paiement</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hrsft_mode_paiement.list">
+            <field name="name">mode paiement liste</field>
+            <field name="model">hrsft_mode_paiement.mode_paiement</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="hrsft_mode_paiement.action_window">
+            <field name="name">hrsft_mode_paiement.mode_paiement.action</field>
+            <field name="res_model">hrsft_mode_paiement.mode_paiement</field>
+            <field name="view_type">form</field>
+             <field name="view_id" ref="hrsft_mode_paiement.list"/>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!--menu -->
+        <menuitem name="Simple payment mode " id="hrsft_mode_paiement.menu"
+                  parent="account.account_management_menu" action="hrsft_mode_paiement.action_window"/>
+
+
+         <!--update view form res.partner -->
+        <record id="partner_form_hrsft_mode_paiement_inherit" model="ir.ui.view">
+            <field name="name">hrsft_mode_paiement.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='currency_id']" position='after'>
+                    <field name="mode_payment"/>
+                </xpath>
+            </field>
+        </record>
+
+                 <!--update view form sale.order  -->
+        <record id="sale_form_hrsft_mode_paiement_inherit" model="ir.ui.view">
+            <field name="name">hrsft_mode_paiement.sale.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position='after'>
+                    <field name="mode_payment"/>
+                </xpath>
+            </field>
+        </record>
+
+                         <!--update view form purchase.order  -->
+        <record id="purchase_form_hrsft_mode_paiement_inherit" model="ir.ui.view">
+            <field name="name">hrsft_mode_paiement.purchase.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position='after'>
+                    <field name="mode_payment" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
