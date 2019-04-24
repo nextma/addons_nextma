@@ -19,6 +19,7 @@
     # for the full list
     'category': 'payment',
     'version': '1.0.0',
+    'images': ['static/description/banner.png'],
 
     # any module necessary for this one to work correctly
     'depends': ['base','account','sale','purchase'],
