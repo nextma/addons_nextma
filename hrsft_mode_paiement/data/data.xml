@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+
+        <record model="hrsft_mode_paiement.mode_paiement">
+            <field name="name">CHEQUE</field>
+            <field name="description">Payment by check</field>
+        </record>
+        <record model="hrsft_mode_paiement.mode_paiement">
+            <field name="name">VIREMENT BANCAIRE</field>
+            <field name="description">Payment by bank transfer</field>
+        </record>
+        <record model="hrsft_mode_paiement.mode_paiement">
+            <field name="name">EFFET</field>
+            <field name="description">Payment by BILL OF EXCHANGE</field>
+        </record>
+        <record model="hrsft_mode_paiement.mode_paiement">
+            <field name="name">CASH</field>
+            <field name="description">Payment by CASH</field>
+        </record>
+
+    </data>
+</odoo
