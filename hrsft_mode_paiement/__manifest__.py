@@ -32,3 +32,4 @@
     ],
     'application': True,
     'installable': True
+    }
