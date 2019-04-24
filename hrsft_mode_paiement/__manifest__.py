@@ -3,7 +3,7 @@
     'name': "simple payment method ",
 
     'summary': """
-       For simple payment method ;to add text like : check ; cash ; transfer to partner """,
+       For add simple payment method, Ajout du mode de paiement vente-achat-factures """,
 
     'description': """
         Ajoute le mode de paiement a configurer dans Comptabilte - Configuration - Mode de paiement simple , a parametrer dans la fiche client ou fournisseur et seras appliquer dans le flux vente et achat  . 
