@@ -1,0 +1,83 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* hrsft_mode_paiement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-22 14:00+0000\n"
+"PO-Revision-Date: 2019-04-22 14:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hrsft_mode_paiement
+#: model:ir.model.fields,field_description:hrsft_mode_paiement.field_hrsft_mode_paiement_mode_paiement_create_uid
+msgid "Created by"
+msgstr "Creé par "
+
+#. module: hrsft_mode_paiement
+#: model:ir.model.fields,field_description:hrsft_mode_paiement.field_hrsft_mode_paiement_mode_paiement_create_date
+msgid "Created on"
+msgstr "Créé sur"
+
+#. module: hrsft_mode_paiement
+#: model:ir.model.fields,field_description:hrsft_mode_paiement.field_hrsft_mode_paiement_mode_paiement_display_name
+msgid "Display Name"
+msgstr "Nom à Afficher"
+
+#. module: hrsft_mode_paiement
+#: model:ir.model.fields,field_description:hrsft_mode_paiement.field_hrsft_mode_paiement_mode_paiement_id
+msgid "ID"
+msgstr "ID"
+
+#. module: hrsft_mode_paiement
+#: model:ir.model.fields,field_description:hrsft_mode_paiement.field_hrsft_mode_paiement_mode_paiement___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: hrsft_mode_paiement
+#: model:ir.model.fields,field_description:hrsft_mode_paiement.field_hrsft_mode_paiement_mode_paiement_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: hrsft_mode_paiement
+#: model:ir.model.fields,field_description:hrsft_mode_paiement.field_hrsft_mode_paiement_mode_paiement_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour sur"
+
+#. module: hrsft_mode_paiement
+#: model:ir.model,name:hrsft_mode_paiement.model_res_partner
+msgid "Partner"
+msgstr "Partenaire(Client/Fournisseur)"
+
+#. module: hrsft_mode_paiement
+#: model:ir.ui.menu,name:hrsft_mode_paiement.menu
+msgid "Simple payment mode "
+msgstr "Mode de paiement simple"
+
+#. module: hrsft_mode_paiement
+#: model:ir.model.fields,field_description:hrsft_mode_paiement.field_hrsft_mode_paiement_mode_paiement_description
+msgid "description for payment mode"
+msgstr "description du mode de paiement"
+
+#. module: hrsft_mode_paiement
+#: model:ir.model,name:hrsft_mode_paiement.model_hrsft_mode_paiement_mode_paiement
+msgid "hrsft_mode_paiement.mode_paiement"
+msgstr "hrsft_mode_paiement.mode_paiement"
+
+#. module: hrsft_mode_paiement
+#: model:ir.actions.act_window,name:hrsft_mode_paiement.action_window
+msgid "hrsft_mode_paiement.mode_paiement.action"
+msgstr "hrsft_mode_paiement.mode_paiement.action"
+
+#. module: hrsft_mode_paiement
+#: model:ir.model.fields,field_description:hrsft_mode_paiement.field_hrsft_mode_paiement_mode_paiement_name
+#: model:ir.model.fields,field_description:hrsft_mode_paiement.field_res_partner_mode_payment
+#: model:ir.model.fields,field_description:hrsft_mode_paiement.field_res_users_mode_payment
+msgid "payment method"
+msgstr "mode de paiement"
