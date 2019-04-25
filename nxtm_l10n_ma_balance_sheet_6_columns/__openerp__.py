@@ -21,7 +21,7 @@
 {
     'name' : 'Balance sheet with 6 columns ',
     'version' : '1.1',
-    'author' : 'NEXTMA',
+    'author' : 'NEXTMA,HORIYASOFT',
     'category': 'Accounting & Finance',
     'description' : """
 Balance sheet with 6 columns ,Rapport sur la balance générale .
