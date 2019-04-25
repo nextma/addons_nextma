@@ -28,8 +28,8 @@
 {
     'name' : 'Shortcut Reception Delivery',
     'version': '1.0',
-    'author' : 'NEXTMA',
-    "website" : "http://www.nextma.com",
+    'author' : 'NEXTMA,HORIYASOFT',
+    "website" : "http://www.horiyasoft.com",
     'sequence': '1',
     'category': 'Menu',
     'summary': '',
