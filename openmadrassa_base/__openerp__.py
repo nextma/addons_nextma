@@ -24,7 +24,7 @@
     "name" : "OpenMadrassa Base",
     "version" : "2.2.0",
     "author" : "NEXTMA, HORIYASOFT",
-    "website" : "http://www.nextma.com",
+    "website" : "http://www.horiyasoft.com",
     "category": "School Management",
     "complexity": "easy",
     "description": "Gestion d'école selon le contexte marocain , suggestions,remarques welcom at info@nextma.com",
