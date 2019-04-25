@@ -29,7 +29,7 @@ suggestions, propositions,remarquess welcome at info@nextma.com
 
 """,
     'author': 'NEXTMA, HORIYASOFT',
-    'website': 'http://www.nextma.com',
+    'website': 'http://www.horiyasoft.com',
     'category': 'Localization',
     'depends': [
         'account',
