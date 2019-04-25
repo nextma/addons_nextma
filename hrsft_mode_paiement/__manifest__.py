@@ -9,7 +9,7 @@
         Ajoute le mode de paiement a configurer dans Comptabilte - Configuration - Mode de paiement simple , a parametrer dans la fiche client ou fournisseur et seras appliquer dans le flux vente et achat  . 
     """,
 
-    'author': "Horiyasoft",
+    'author': "HORIYASOFT",
     'website': "http://www.horiyasoft.com",
     'images': ['static/description/banner.png'],
     'license': 'AGPL-3',
