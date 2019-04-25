@@ -22,7 +22,7 @@
 {
     'name' : 'Comptabilité - Maroc PCG',
     'version' : '1.0',
-    'author' : 'NEXTMA,kazacube',
+    'author' : 'NEXTMA,HORIYASOFT',
     'category' : 'Localization/Account Charts',
     'description': """
 Module du Plan Comptable Générale (PCG) mise à jour meetup nextma
@@ -30,7 +30,7 @@ Module du Plan Comptable Générale (PCG) mise à jour meetup nextma
 
 Plan Comptable Générale Marocain avec des modifications apportées au module officiel suite au meetup Localisation maroc organisé 
 par la société NEXTMA avec la participation d'intégarteurs odoo marocains voir liste des modifications dans le fichier readme.""",
-    'website': 'http://www.kazacube.com,http://www.nextma.com',
+    'website': 'http://www.horiyasoft.com',
     'depends' : ['base', 'account','account_accountant'],
     'data' : [
         'security/ir.model.access.csv',
